@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #0D1B3E;
+  --color-navy-light: #142650;
+  --color-gold: #C9A84C;
+  --color-gold-light: #D4B96A;
+  --color-dark: #1A1A2E;
+  --color-dark-soft: #232342;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Playfair Display', Georgia, serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--color-navy);
+    color: #ffffff;
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: var(--color-gold);
+    color: var(--color-navy);
+  }
+}
+
+@layer components {
+  .btn-gold {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2.5rem;
+    background: linear-gradient(135deg, var(--color-gold), var(--color-gold-light));
+    color: var(--color-navy);
+    font-weight: 700;
+    font-size: 1.125rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+  }
+
+  .btn-gold:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(201, 168, 76, 0.4);
+  }
+
+  .section-padding {
+    padding: 6rem 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .section-padding {
+      padding: 8rem 2rem;
+    }
+  }
+
+  .gold-gradient-text {
+    background: linear-gradient(135deg, var(--color-gold), var(--color-gold-light), #E8D5A0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glass-card {
+    background: rgba(26, 26, 46, 0.6);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 1rem;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+}
