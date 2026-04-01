@@ -28,7 +28,7 @@ export default function Navbar() {
           <img
             src={LOGO}
             alt="Addendo Growth Partner"
-            className="max-w-[150px] max-h-[48px] md:max-w-[160px] md:max-h-[52px] w-auto h-auto object-contain"
+            className="max-w-[180px] max-h-[58px] md:max-w-[192px] md:max-h-[62px] w-auto h-auto object-contain"
             loading="eager"
           />
         </a>

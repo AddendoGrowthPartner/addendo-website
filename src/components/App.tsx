@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import { I18nProvider } from '../i18n/context';
 import Navbar from './Navbar';
 import Hero from './Hero';
+import HowItWorks from './HowItWorks';
 import StatsCounter from './StatsCounter';
 import TechAllies from './TechAllies';
 import ClientLogos from './ClientLogos';
@@ -14,6 +15,8 @@ import Footer from './Footer';
 import WhatsAppButton from './WhatsAppButton';
 import { useI18n } from '../i18n/context';
 
+const AIAgents = lazy(() => import('./AIAgents'));
+const ForWhom = lazy(() => import('./ForWhom'));
 const Industries = lazy(() => import('./Industries'));
 const Process = lazy(() => import('./Process'));
 const Infrastructure = lazy(() => import('./Infrastructure'));
@@ -21,6 +24,7 @@ const WhyAddendo = lazy(() => import('./WhyAddendo'));
 const Testimonials = lazy(() => import('./Testimonials'));
 const Blog = lazy(() => import('./Blog'));
 const CtaFinal = lazy(() => import('./CtaFinal'));
+const FAQ = lazy(() => import('./FAQ'));
 
 const LazyFallback = <div className="py-20" />;
 
@@ -31,6 +35,12 @@ function Content() {
     <>
       <Navbar />
       <Hero />
+      <SectionSeparator number="07" label={t.separators.s07} />
+      <HowItWorks />
+      <Suspense fallback={LazyFallback}>
+        <AIAgents />
+        <ForWhom />
+      </Suspense>
       <StatsCounter />
       <TechAllies />
       <ClientLogos />
@@ -56,6 +66,9 @@ function Content() {
       <Suspense fallback={LazyFallback}>
         <Blog />
         <CtaFinal />
+      </Suspense>
+      <Suspense fallback={LazyFallback}>
+        <FAQ />
       </Suspense>
       <SectionSeparator number="05" label={t.separators.s05} />
       <Contact />
