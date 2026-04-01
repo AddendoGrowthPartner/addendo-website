@@ -66,13 +66,13 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="hero-img opacity-0 relative hidden lg:block">
+          <div className="hero-img opacity-0 relative mx-auto max-w-[400px] lg:max-w-none">
             <div className="relative rounded-xl overflow-hidden border-2 border-gold/25 shadow-2xl shadow-gold/10">
-              <img src={HERO_IMG} alt={t.hero.imgAlt} className="w-full h-[520px] object-cover" loading="eager" />
+              <img src={HERO_IMG} alt={t.hero.imgAlt} className="w-full h-[300px] sm:h-[400px] lg:h-[520px] object-cover" loading="eager" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#080F24]/70 via-transparent to-transparent" />
             </div>
-            <div className="absolute -top-5 -right-5 w-28 h-28 border-2 border-gold/20 rounded-xl" />
-            <div className="absolute -bottom-5 -left-5 w-36 h-36 border-2 border-gold/10 rounded-xl" />
+            <div className="absolute -top-5 -right-5 w-28 h-28 border-2 border-gold/20 rounded-xl hidden lg:block" />
+            <div className="absolute -bottom-5 -left-5 w-36 h-36 border-2 border-gold/10 rounded-xl hidden lg:block" />
           </div>
         </div>
       </div>
