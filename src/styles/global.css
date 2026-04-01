@@ -50,6 +50,12 @@
     background-color: var(--color-gold);
     color: var(--color-navy);
   }
+
+  @media (max-width: 767px) {
+    .opacity-0 {
+      opacity: 1 !important;
+    }
+  }
 }
 
 @layer components {

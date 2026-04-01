@@ -73,7 +73,7 @@ export default function Services() {
   const [active, setActive] = useState(0);
   const ref = useRef<HTMLElement>(null);
 
-  useEffect(() => { import('gsap').then(({ gsap }) => { import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => { gsap.registerPlugin(ScrollTrigger); const el = ref.current; if (!el) return; gsap.fromTo(el.querySelector('.svc-t'), { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.8, scrollTrigger: { trigger: el, start: 'top 80%' } }); gsap.fromTo(el.querySelector('.svc-tabs'), { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, delay: 0.2, scrollTrigger: { trigger: el, start: 'top 75%' } }); gsap.fromTo(el.querySelector('.svc-c'), { opacity: 0 }, { opacity: 1, duration: 0.6, delay: 0.4, scrollTrigger: { trigger: el, start: 'top 70%' } }); }); }); }, []);
+  useEffect(() => { if (window.innerWidth < 768) return; import('gsap').then(({ gsap }) => { import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => { gsap.registerPlugin(ScrollTrigger); const el = ref.current; if (!el) return; gsap.fromTo(el.querySelector('.svc-t'), { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.8, scrollTrigger: { trigger: el, start: 'top 80%' } }); gsap.fromTo(el.querySelector('.svc-tabs'), { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, delay: 0.2, scrollTrigger: { trigger: el, start: 'top 75%' } }); gsap.fromTo(el.querySelector('.svc-c'), { opacity: 0 }, { opacity: 1, duration: 0.6, delay: 0.4, scrollTrigger: { trigger: el, start: 'top 70%' } }); }); }); }, []);
 
   const cats = t.services.categories;
   const cat = cats[active];

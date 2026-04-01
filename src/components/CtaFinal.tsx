@@ -4,7 +4,7 @@ import { useI18n } from '../i18n/context';
 export default function CtaFinal() {
   const { t } = useI18n();
   const ref = useRef<HTMLElement>(null);
-  useEffect(() => { import('gsap').then(({ gsap }) => { import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => { gsap.registerPlugin(ScrollTrigger); const el = ref.current; if (!el) return; gsap.fromTo(el.querySelectorAll('.cta-a'), { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.15, scrollTrigger: { trigger: el, start: 'top 80%' } }); }); }); }, []);
+  useEffect(() => { if (window.innerWidth < 768) return; import('gsap').then(({ gsap }) => { import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => { gsap.registerPlugin(ScrollTrigger); const el = ref.current; if (!el) return; gsap.fromTo(el.querySelectorAll('.cta-a'), { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.15, scrollTrigger: { trigger: el, start: 'top 80%' } }); }); }); }, []);
 
   return (
     <section ref={ref} className="section-pad relative overflow-hidden" style={{ background: '#080F24' }}>

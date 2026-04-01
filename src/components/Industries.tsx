@@ -17,7 +17,7 @@ const industryIcons: IconType[] = [
 export default function Industries() {
   const { t } = useI18n();
   const ref = useRef<HTMLElement>(null);
-  useEffect(() => { import('gsap').then(({ gsap }) => { import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => { gsap.registerPlugin(ScrollTrigger); const el = ref.current; if (!el) return; gsap.fromTo(el.querySelector('.ind-t'), { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, scrollTrigger: { trigger: el, start: 'top 80%' } }); el.querySelectorAll('.ind-c').forEach((c, i) => { gsap.fromTo(c, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.5, delay: i * 0.06, scrollTrigger: { trigger: el, start: 'top 70%' } }); }); }); }); }, []);
+  useEffect(() => { if (window.innerWidth < 768) return; import('gsap').then(({ gsap }) => { import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => { gsap.registerPlugin(ScrollTrigger); const el = ref.current; if (!el) return; gsap.fromTo(el.querySelector('.ind-t'), { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, scrollTrigger: { trigger: el, start: 'top 80%' } }); el.querySelectorAll('.ind-c').forEach((c, i) => { gsap.fromTo(c, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.5, delay: i * 0.06, scrollTrigger: { trigger: el, start: 'top 70%' } }); }); }); }); }, []);
 
   return (
     <section ref={ref} className="section-pad relative" style={{ background: '#0A1228' }}>

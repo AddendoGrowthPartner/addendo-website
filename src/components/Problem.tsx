@@ -13,7 +13,7 @@ const icons = [
 export default function Problem() {
   const { t } = useI18n();
   const ref = useRef<HTMLElement>(null);
-  useEffect(() => { import('gsap').then(({ gsap }) => { import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => { gsap.registerPlugin(ScrollTrigger); const el = ref.current; if (!el) return; gsap.fromTo(el.querySelector('.p-title'), { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.8, scrollTrigger: { trigger: el, start: 'top 80%' } }); gsap.fromTo(el.querySelector('.p-img'), { opacity: 0, x: 50 }, { opacity: 1, x: 0, duration: 1, scrollTrigger: { trigger: el, start: 'top 70%' } }); el.querySelectorAll('.p-card').forEach((c, i) => { gsap.fromTo(c, { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.5, delay: i * 0.1, scrollTrigger: { trigger: el, start: 'top 70%' } }); }); gsap.fromTo(el.querySelector('.p-close'), { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, scrollTrigger: { trigger: el.querySelector('.p-close'), start: 'top 88%' } }); }); }); }, []);
+  useEffect(() => { if (window.innerWidth < 768) return; import('gsap').then(({ gsap }) => { import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => { gsap.registerPlugin(ScrollTrigger); const el = ref.current; if (!el) return; gsap.fromTo(el.querySelector('.p-title'), { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.8, scrollTrigger: { trigger: el, start: 'top 80%' } }); gsap.fromTo(el.querySelector('.p-img'), { opacity: 0, x: 50 }, { opacity: 1, x: 0, duration: 1, scrollTrigger: { trigger: el, start: 'top 70%' } }); el.querySelectorAll('.p-card').forEach((c, i) => { gsap.fromTo(c, { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.5, delay: i * 0.1, scrollTrigger: { trigger: el, start: 'top 70%' } }); }); gsap.fromTo(el.querySelector('.p-close'), { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, scrollTrigger: { trigger: el.querySelector('.p-close'), start: 'top 88%' } }); }); }); }, []);
 
   return (
     <section ref={ref} className="section-pad relative overflow-hidden" style={{ background: '#0A1228' }}>
@@ -32,7 +32,7 @@ export default function Problem() {
           </div>
           <div className="p-img opacity-0">
             <div className="relative rounded-xl overflow-hidden border border-white/[0.08] max-w-[400px] mx-auto lg:max-w-none">
-              <img src={IMG} alt={t.problem.imgAlt} className="w-full h-[300px] sm:h-[380px] lg:h-[460px] object-cover grayscale hover:grayscale-0 transition-all duration-700" loading="lazy" />
+              <img src={IMG} alt={t.problem.imgAlt} className="w-full h-[300px] sm:h-[380px] lg:h-[460px] object-cover grayscale hover:grayscale-0 transition-all duration-700" loading="lazy" decoding="async" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0A1228] via-[#0A1228]/30 to-transparent" />
               <div className="absolute bottom-6 left-6 right-6"><p className="text-white/70 text-sm font-medium italic">{t.problem.imgQuote}</p></div>
             </div>

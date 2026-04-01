@@ -15,7 +15,7 @@ const icons = [
 export default function WhyAddendo() {
   const { t } = useI18n();
   const ref = useRef<HTMLElement>(null);
-  useEffect(() => { import('gsap').then(({ gsap }) => { import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => { gsap.registerPlugin(ScrollTrigger); const el = ref.current; if (!el) return; gsap.fromTo(el.querySelector('.w-t'), { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.8, scrollTrigger: { trigger: el, start: 'top 80%' } }); el.querySelectorAll('.w-c').forEach((c, i) => { gsap.fromTo(c, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, delay: i * 0.08, scrollTrigger: { trigger: c, start: 'top 92%' } }); }); gsap.fromTo(el.querySelector('.w-pr'), { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, scrollTrigger: { trigger: el.querySelector('.w-pr'), start: 'top 90%' } }); }); }); }, []);
+  useEffect(() => { if (window.innerWidth < 768) return; import('gsap').then(({ gsap }) => { import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => { gsap.registerPlugin(ScrollTrigger); const el = ref.current; if (!el) return; gsap.fromTo(el.querySelector('.w-t'), { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.8, scrollTrigger: { trigger: el, start: 'top 80%' } }); el.querySelectorAll('.w-c').forEach((c, i) => { gsap.fromTo(c, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, delay: i * 0.08, scrollTrigger: { trigger: c, start: 'top 92%' } }); }); gsap.fromTo(el.querySelector('.w-pr'), { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, scrollTrigger: { trigger: el.querySelector('.w-pr'), start: 'top 90%' } }); }); }); }, []);
 
   return (
     <section ref={ref} id="por-que" className="section-pad relative" style={{ background: '#080F24' }}>

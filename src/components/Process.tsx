@@ -4,7 +4,7 @@ import { useI18n } from '../i18n/context';
 export default function Process() {
   const { t } = useI18n();
   const ref = useRef<HTMLElement>(null);
-  useEffect(() => { import('gsap').then(({ gsap }) => { import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => { gsap.registerPlugin(ScrollTrigger); const el = ref.current; if (!el) return; gsap.fromTo(el.querySelector('.pr-t'), { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.8, scrollTrigger: { trigger: el, start: 'top 80%' } }); el.querySelectorAll('.pr-s').forEach((s, i) => { gsap.fromTo(s, { opacity: 0, x: i % 2 === 0 ? -40 : 40 }, { opacity: 1, x: 0, duration: 0.7, scrollTrigger: { trigger: s, start: 'top 85%' } }); }); }); }); }, []);
+  useEffect(() => { if (window.innerWidth < 768) return; import('gsap').then(({ gsap }) => { import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => { gsap.registerPlugin(ScrollTrigger); const el = ref.current; if (!el) return; gsap.fromTo(el.querySelector('.pr-t'), { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.8, scrollTrigger: { trigger: el, start: 'top 80%' } }); el.querySelectorAll('.pr-s').forEach((s, i) => { gsap.fromTo(s, { opacity: 0, x: i % 2 === 0 ? -40 : 40 }, { opacity: 1, x: 0, duration: 0.7, scrollTrigger: { trigger: s, start: 'top 85%' } }); }); }); }); }, []);
 
   return (
     <section ref={ref} id="proceso" className="section-pad relative" style={{ background: '#0A1228' }}>

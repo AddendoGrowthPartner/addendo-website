@@ -7,7 +7,7 @@ const MEET = 'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg
 export default function Solution() {
   const { t } = useI18n();
   const ref = useRef<HTMLElement>(null);
-  useEffect(() => { import('gsap').then(({ gsap }) => { import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => { gsap.registerPlugin(ScrollTrigger); const el = ref.current; if (!el) return; gsap.fromTo(el.querySelectorAll('.s-a'), { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.2, scrollTrigger: { trigger: el, start: 'top 75%' } }); gsap.fromTo(el.querySelector('.s-imgs'), { opacity: 0, scale: 0.92 }, { opacity: 1, scale: 1, duration: 1.1, scrollTrigger: { trigger: el.querySelector('.s-imgs'), start: 'top 80%' } }); }); }); }, []);
+  useEffect(() => { if (window.innerWidth < 768) return; import('gsap').then(({ gsap }) => { import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => { gsap.registerPlugin(ScrollTrigger); const el = ref.current; if (!el) return; gsap.fromTo(el.querySelectorAll('.s-a'), { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.2, scrollTrigger: { trigger: el, start: 'top 75%' } }); gsap.fromTo(el.querySelector('.s-imgs'), { opacity: 0, scale: 0.92 }, { opacity: 1, scale: 1, duration: 1.1, scrollTrigger: { trigger: el.querySelector('.s-imgs'), start: 'top 80%' } }); }); }); }, []);
 
   return (
     <section ref={ref} className="section-pad relative overflow-hidden" style={{ background: '#080F24' }}>
@@ -15,7 +15,7 @@ export default function Solution() {
       <div className="relative max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-16 items-center mb-16">
           <div className="s-imgs opacity-0 relative order-2 lg:order-none max-w-[400px] mx-auto lg:max-w-none">
-            <div className="rounded-xl overflow-hidden border-2 border-gold/20 shadow-2xl"><img src={TEAM} alt={t.solution.imgAlt1} className="w-full h-[260px] sm:h-[320px] lg:h-[360px] object-cover" loading="lazy" /></div>
+            <div className="rounded-xl overflow-hidden border-2 border-gold/20 shadow-2xl"><img src={TEAM} alt={t.solution.imgAlt1} className="w-full h-[260px] sm:h-[320px] lg:h-[360px] object-cover" loading="lazy" decoding="async" /></div>
             <div className="absolute -bottom-8 -right-8 w-52 h-52 rounded-xl overflow-hidden border-4 border-[#080F24] shadow-xl hidden lg:block"><img src={MEET} alt={t.solution.imgAlt2} className="w-full h-full object-cover" loading="lazy" /></div>
             <div className="absolute -top-4 -left-4 w-24 h-24 border-2 border-gold/25 rounded-xl hidden lg:block" />
           </div>
