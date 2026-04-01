@@ -1,84 +1,72 @@
 import { useEffect, useRef, useState } from 'react';
 import { useI18n } from '../i18n/context';
+import { FaGoogle, FaMeta, FaTiktok, FaLinkedin, FaYoutube, FaInstagram, FaFacebook, FaWhatsapp, FaStripe } from 'react-icons/fa6';
+import { SiGoogleads, SiGoogleanalytics, SiGoogletagmanager, SiGooglemaps, SiGmail, SiFigma, SiLooker, SiHubspot } from 'react-icons/si';
+import type { IconType } from 'react-icons';
 
-const catIcons = [
-  'https://cdn.simpleicons.org/googleads',
-  'https://cdn.simpleicons.org/google',
-  'https://cdn.simpleicons.org/instagram',
-  'https://cdn.simpleicons.org/figma',
-  'https://cdn.simpleicons.org/whatsapp',
-  'https://cdn.simpleicons.org/googleanalytics',
-  'https://cdn.simpleicons.org/google',
+// Category tab icons
+const catIcons: { icon: IconType; color: string }[] = [
+  { icon: SiGoogleads, color: '#4285F4' },
+  { icon: FaGoogle, color: '#4285F4' },
+  { icon: FaInstagram, color: '#E4405F' },
+  { icon: SiFigma, color: '#F24E1E' },
+  { icon: FaWhatsapp, color: '#25D366' },
+  { icon: SiGoogleanalytics, color: '#E37400' },
+  { icon: FaGoogle, color: '#4285F4' },
 ];
 
-// Per-service icons mapped by category index → service index
-const serviceIcons: Record<number, Record<number, string>> = {
-  // Publicidad Digital
-  0: {
-    0: 'https://cdn.simpleicons.org/googleads',
-    1: 'https://cdn.simpleicons.org/meta',
-    2: 'https://cdn.simpleicons.org/tiktok',
-    3: 'https://cdn.simpleicons.org/youtube',
-    4: 'https://cdn.simpleicons.org/linkedin',
-  },
-  // Presencia Orgánica
-  1: {
-    0: 'https://cdn.simpleicons.org/google',
-    1: 'https://cdn.simpleicons.org/google',
-    2: 'https://cdn.simpleicons.org/googlemybusiness',
-    3: 'https://cdn.simpleicons.org/googlesearchconsole',
-  },
-  // Redes Sociales
-  2: {
-    0: 'https://cdn.simpleicons.org/facebook',
-    1: 'https://cdn.simpleicons.org/instagram',
-    2: 'https://cdn.simpleicons.org/tiktok',
-    3: 'https://cdn.simpleicons.org/youtube',
-    4: 'https://cdn.simpleicons.org/linkedin',
-  },
-  // Contenido y Diseño
-  3: {
-    0: 'https://cdn.simpleicons.org/youtube',
-    1: 'https://cdn.simpleicons.org/figma',
-    2: 'https://cdn.simpleicons.org/figma',
-    3: 'https://cdn.simpleicons.org/google',
-    4: 'https://cdn.simpleicons.org/gmail',
-  },
-  // Ventas y CRM
-  4: {
-    0: 'https://cdn.simpleicons.org/hubspot',
-    1: 'https://cdn.simpleicons.org/hubspot',
-    2: 'https://cdn.simpleicons.org/hubspot',
-    3: 'https://cdn.simpleicons.org/whatsapp',
-    4: 'https://cdn.simpleicons.org/stripe',
-  },
-  // Estrategia y Analytics
-  5: {
-    0: 'https://cdn.simpleicons.org/googleanalytics',
-    1: 'https://cdn.simpleicons.org/googleanalytics',
-    2: 'https://cdn.simpleicons.org/looker',
-    3: 'https://cdn.simpleicons.org/googletagmanager',
-    4: 'https://cdn.simpleicons.org/googleanalytics',
-  },
-  // Reputación y PR
-  6: {
-    0: 'https://cdn.simpleicons.org/google',
-    1: 'https://cdn.simpleicons.org/google',
-    2: 'https://cdn.simpleicons.org/whatsapp',
-  },
+// Per-service icons: [catIndex][serviceIndex]
+const serviceIcons: Record<number, { icon: IconType; color: string }[]> = {
+  0: [ // Publicidad Digital
+    { icon: SiGoogleads, color: '#4285F4' },
+    { icon: FaMeta, color: '#0081FB' },
+    { icon: FaTiktok, color: '#ffffff' },
+    { icon: FaYoutube, color: '#FF0000' },
+    { icon: FaLinkedin, color: '#0A66C2' },
+    { icon: FaGoogle, color: '#4285F4' },
+  ],
+  1: [ // Presencia Orgánica
+    { icon: FaGoogle, color: '#4285F4' },
+    { icon: FaGoogle, color: '#34A853' },
+    { icon: SiGooglemaps, color: '#4285F4' },
+    { icon: FaGoogle, color: '#EA4335' },
+  ],
+  2: [ // Redes Sociales
+    { icon: FaFacebook, color: '#1877F2' },
+    { icon: FaInstagram, color: '#E4405F' },
+    { icon: FaTiktok, color: '#ffffff' },
+    { icon: FaYoutube, color: '#FF0000' },
+    { icon: FaLinkedin, color: '#0A66C2' },
+  ],
+  3: [ // Contenido y Diseño
+    { icon: FaYoutube, color: '#FF0000' },
+    { icon: SiFigma, color: '#F24E1E' },
+    { icon: SiFigma, color: '#A259FF' },
+    { icon: FaGoogle, color: '#4285F4' },
+    { icon: SiGmail, color: '#EA4335' },
+  ],
+  4: [ // Ventas y CRM
+    { icon: SiHubspot, color: '#FF7A59' },
+    { icon: SiHubspot, color: '#FF7A59' },
+    { icon: SiHubspot, color: '#FF7A59' },
+    { icon: FaWhatsapp, color: '#25D366' },
+    { icon: FaStripe, color: '#635BFF' },
+  ],
+  5: [ // Estrategia y Analytics
+    { icon: SiGoogleanalytics, color: '#E37400' },
+    { icon: SiGoogleanalytics, color: '#E37400' },
+    { icon: SiLooker, color: '#4285F4' },
+    { icon: SiGoogletagmanager, color: '#246FDB' },
+    { icon: SiGoogleanalytics, color: '#E37400' },
+  ],
+  6: [ // Reputación y PR
+    { icon: FaGoogle, color: '#4285F4' },
+    { icon: FaGoogle, color: '#4285F4' },
+    { icon: FaGoogle, color: '#34A853' },
+    { icon: FaWhatsapp, color: '#25D366' },
+    { icon: FaGoogle, color: '#EA4335' },
+  ],
 };
-
-function ServiceIcon({ src }: { src?: string }) {
-  const [failed, setFailed] = useState(false);
-  if (!src || failed) {
-    return (
-      <svg className="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
-      </svg>
-    );
-  }
-  return <img src={src} alt="" width={32} height={32} className="w-8 h-8 object-contain" onError={() => setFailed(true)} />;
-}
 
 export default function Services() {
   const { t } = useI18n();
@@ -98,28 +86,39 @@ export default function Services() {
           <p className="text-white/40 text-sm md:text-lg max-w-2xl mx-auto">{t.services.subtitle}</p>
         </div>
         <div className="svc-tabs opacity-0 flex flex-wrap justify-center gap-2 mb-12">
-          {cats.map((c: any, i: number) => (
-            <button key={i} onClick={() => setActive(i)} className={`flex items-center gap-2 px-3 md:px-4 py-2 md:py-2.5 rounded-lg text-xs md:text-sm font-semibold transition-all duration-300 ${active === i ? 'bg-gold text-[#080F24] shadow-lg shadow-gold/20' : 'bg-white/[0.04] text-white/50 hover:text-white/80 hover:bg-white/[0.08] border border-white/[0.06]'}`}>
-              <img src={catIcons[i]} alt="" className="w-4 h-4 md:w-5 md:h-5 object-contain" style={active === i ? { filter: 'brightness(0)' } : undefined} />
-              <span className="hidden sm:inline">{c.name}</span>
-            </button>
-          ))}
+          {cats.map((c: any, i: number) => {
+            const CatIcon = catIcons[i].icon;
+            return (
+              <button key={i} onClick={() => setActive(i)} className={`flex items-center gap-2 px-3 md:px-4 py-2 md:py-2.5 rounded-lg text-xs md:text-sm font-semibold transition-all duration-300 ${active === i ? 'bg-gold text-[#080F24] shadow-lg shadow-gold/20' : 'bg-white/[0.04] text-white/50 hover:text-white/80 hover:bg-white/[0.08] border border-white/[0.06]'}`}>
+                <CatIcon size={18} color={active === i ? '#080F24' : catIcons[i].color} />
+                <span className="hidden sm:inline">{c.name}</span>
+              </button>
+            );
+          })}
         </div>
         <div className="svc-c opacity-0">
           <div className="text-center mb-8"><h3 className="text-xl md:text-3xl font-bold text-white">{cat.name}</h3></div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {cat.services.map((s: any, i: number) => (
-              <div key={i} className="glass-card p-5 md:p-6 group">
-                <div className="flex items-start justify-between mb-3">
-                  <div className="group-hover:scale-110 transition-transform">
-                    <ServiceIcon src={serviceIcons[active]?.[i]} />
+            {cat.services.map((s: any, i: number) => {
+              const svcIcon = serviceIcons[active]?.[i];
+              const SvcIcon = svcIcon?.icon;
+              return (
+                <div key={i} className="glass-card p-5 md:p-6 group">
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="group-hover:scale-110 transition-transform">
+                      {SvcIcon ? <SvcIcon size={32} color={svcIcon.color} /> : (
+                        <svg className="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                      )}
+                    </div>
+                    <span className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full ${s.badge === 'Premium' ? 'bg-gold/15 text-gold' : 'bg-white/[0.06] text-white/40'}`}>{s.badge}</span>
                   </div>
-                  <span className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full ${s.badge === 'Premium' ? 'bg-gold/15 text-gold' : 'bg-white/[0.06] text-white/40'}`}>{s.badge}</span>
+                  <h4 className="text-sm md:text-base font-bold text-white mb-2">{s.name}</h4>
+                  <p className="text-white/45 text-xs md:text-sm leading-relaxed">{s.desc}</p>
                 </div>
-                <h4 className="text-sm md:text-base font-bold text-white mb-2">{s.name}</h4>
-                <p className="text-white/45 text-xs md:text-sm leading-relaxed">{s.desc}</p>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
