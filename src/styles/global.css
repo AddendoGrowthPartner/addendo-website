@@ -9,7 +9,7 @@
   --color-dark: #0F1629;
   --color-dark-card: #111827;
   --font-sans: 'Inter', system-ui, sans-serif;
-  --font-display: 'Instrument Serif', serif;
+  --font-display: 'Fraunces', serif;
   --font-label: 'Inter', system-ui, sans-serif;
 }
 
@@ -50,7 +50,7 @@
 
   h1, h2 {
     font-family: var(--font-display);
-    font-weight: 400;
+    font-weight: 300;
     letter-spacing: 0.01em;
     line-height: 1.1;
   }
