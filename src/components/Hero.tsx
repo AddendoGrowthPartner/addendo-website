@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-const HERO_IMAGE = 'https://images.pexels.com/photos/7129717/pexels-photo-7129717.jpeg?auto=compress&cs=tinysrgb&w=1260';
+const HERO_IMG = 'https://images.pexels.com/photos/7129717/pexels-photo-7129717.jpeg?auto=compress&cs=tinysrgb&w=1260';
 
 export default function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -11,117 +11,91 @@ export default function Hero() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    let animationId: number;
-    const particles: Array<{ x: number; y: number; vx: number; vy: number; size: number; alpha: number }> = [];
+    let raf: number;
+    const P: Array<{ x: number; y: number; vx: number; vy: number; s: number; a: number }> = [];
 
     const resize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
     resize();
     window.addEventListener('resize', resize);
 
-    for (let i = 0; i < 60; i++) {
-      particles.push({
-        x: Math.random() * canvas.width, y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3,
-        size: Math.random() * 2 + 0.5, alpha: Math.random() * 0.5 + 0.1,
-      });
-    }
+    for (let i = 0; i < 70; i++) P.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4, s: Math.random() * 2.5 + 0.5, a: Math.random() * 0.5 + 0.1 });
 
-    const animate = () => {
+    const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach((p) => {
+      P.forEach(p => {
         p.x += p.vx; p.y += p.vy;
         if (p.x < 0) p.x = canvas.width; if (p.x > canvas.width) p.x = 0;
         if (p.y < 0) p.y = canvas.height; if (p.y > canvas.height) p.y = 0;
-        ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(201, 168, 76, ${p.alpha})`; ctx.fill();
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.s, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(201,168,76,${p.a})`; ctx.fill();
       });
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x; const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 150) {
-            ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(201, 168, 76, ${0.08 * (1 - dist / 150)})`; ctx.lineWidth = 0.5; ctx.stroke();
-          }
-        }
+      for (let i = 0; i < P.length; i++) for (let j = i + 1; j < P.length; j++) {
+        const d = Math.hypot(P[i].x - P[j].x, P[i].y - P[j].y);
+        if (d < 140) { ctx.beginPath(); ctx.moveTo(P[i].x, P[i].y); ctx.lineTo(P[j].x, P[j].y); ctx.strokeStyle = `rgba(201,168,76,${0.06 * (1 - d / 140)})`; ctx.lineWidth = 0.5; ctx.stroke(); }
       }
-      animationId = requestAnimationFrame(animate);
+      raf = requestAnimationFrame(draw);
     };
-    animate();
+    draw();
 
     import('gsap').then(({ gsap }) => {
-      gsap.fromTo('.hero-title', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 1, delay: 0.3, ease: 'power3.out' });
-      gsap.fromTo('.hero-subtitle', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 1, delay: 0.6, ease: 'power3.out' });
+      gsap.fromTo('.hero-badge', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, delay: 0.1 });
+      gsap.fromTo('.hero-h1', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 1.1, delay: 0.3, ease: 'power3.out' });
+      gsap.fromTo('.hero-p', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 1, delay: 0.6, ease: 'power3.out' });
       gsap.fromTo('.hero-cta', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1, delay: 0.9, ease: 'power3.out' });
-      gsap.fromTo('.hero-image', { opacity: 0, scale: 0.9, x: 40 }, { opacity: 1, scale: 1, x: 0, duration: 1.2, delay: 0.5, ease: 'power3.out' });
-      gsap.fromTo('.hero-stats .stat-item', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.15, delay: 1.3, ease: 'power3.out' });
+      gsap.fromTo('.hero-img', { opacity: 0, scale: 0.88, x: 60 }, { opacity: 1, scale: 1, x: 0, duration: 1.3, delay: 0.5, ease: 'power3.out' });
     });
 
-    return () => { cancelAnimationFrame(animationId); window.removeEventListener('resize', resize); };
+    return () => { cancelAnimationFrame(raf); window.removeEventListener('resize', resize); };
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center overflow-hidden" style={{ background: '#080F24' }}>
       <canvas ref={canvasRef} className="absolute inset-0 z-0" />
-      <div className="absolute inset-0 bg-gradient-to-b from-navy via-navy/90 to-navy z-[1]" />
-      <div className="absolute top-1/4 left-1/3 w-[600px] h-[600px] bg-gold/5 rounded-full blur-[120px] z-[1]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#080F24] via-[#080F24]/85 to-[#080F24] z-[1]" />
+      <div className="absolute top-1/4 left-1/3 w-[700px] h-[700px] bg-gold/[0.04] rounded-full blur-[160px] z-[1]" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 w-full pt-28 pb-12">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 w-full pt-32 pb-16">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div>
-            <h1 className="hero-title opacity-0 font-display text-4xl sm:text-5xl md:text-6xl font-black leading-[1.1] mb-8">
+            <div className="hero-badge opacity-0 inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold/20 bg-gold/5 mb-8">
+              <span className="w-2 h-2 rounded-full bg-gold animate-pulse" />
+              <span className="text-gold text-xs font-semibold uppercase tracking-wider">Sistema de crecimiento 24/7</span>
+            </div>
+
+            <h1 className="hero-h1 opacity-0 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.05] mb-8">
               Tu negocio merece{' '}
               <span className="gold-gradient-text">crecer sin limites.</span>
-              <br />
-              Nosotros lo hacemos realidad.
+              <br className="hidden sm:block" />
+              <span className="text-white/90">Nosotros lo hacemos realidad.</span>
             </h1>
-            <p className="hero-subtitle opacity-0 text-lg sm:text-xl text-white/65 max-w-xl mb-10 leading-relaxed">
+
+            <p className="hero-p opacity-0 text-lg sm:text-xl text-white/55 max-w-xl mb-10 leading-relaxed">
               Addendo es el sistema completo que convierte tu negocio en una
               maquina de ventas — presencia digital, campanas, contenido,
-              reputacion y clientes nuevos cada semana. Todo resuelto. Todo
-              funcionando. 24/7.
+              reputacion y clientes nuevos cada semana.
             </p>
+
             <div className="hero-cta opacity-0 flex flex-col sm:flex-row items-start gap-4">
               <a href="#contacto" className="btn-gold text-lg">
                 Agenda tu llamada estrategica gratis
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
               </a>
-              <p className="text-white/35 text-sm max-w-xs pt-2">
-                Sin compromiso. Sin presion. Solo una conversacion sobre como llevar tu negocio al siguiente nivel.
-              </p>
+              <p className="text-white/30 text-sm max-w-xs pt-2">Sin compromiso. Sin presion. Solo resultados.</p>
             </div>
           </div>
 
-          <div className="hero-image opacity-0 relative hidden lg:block">
-            <div className="relative rounded-2xl overflow-hidden border border-gold/20 shadow-2xl shadow-gold/10">
-              <img src={HERO_IMAGE} alt="Empresario latino exitoso" className="w-full h-[500px] object-cover" loading="eager" />
-              <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-transparent to-transparent" />
+          <div className="hero-img opacity-0 relative hidden lg:block">
+            <div className="relative rounded-xl overflow-hidden border-2 border-gold/25 shadow-2xl shadow-gold/10">
+              <img src={HERO_IMG} alt="Empresario latino exitoso" className="w-full h-[520px] object-cover" loading="eager" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#080F24]/70 via-transparent to-transparent" />
             </div>
-            <div className="absolute -top-4 -right-4 w-24 h-24 border-2 border-gold/20 rounded-2xl" />
-            <div className="absolute -bottom-4 -left-4 w-32 h-32 border-2 border-gold/10 rounded-2xl" />
-          </div>
-        </div>
-
-        {/* Stats strip */}
-        <div className="hero-stats mt-16 pt-10 border-t border-white/5">
-          <div className="grid grid-cols-3 gap-8 max-w-3xl mx-auto text-center">
-            <div className="stat-item opacity-0">
-              <p className="text-3xl md:text-4xl font-black gold-gradient-text">+150</p>
-              <p className="text-white/40 text-sm mt-1">Negocios activos</p>
-            </div>
-            <div className="stat-item opacity-0">
-              <p className="text-3xl md:text-4xl font-black gold-gradient-text">24/7</p>
-              <p className="text-white/40 text-sm mt-1">Siempre activo</p>
-            </div>
-            <div className="stat-item opacity-0">
-              <p className="text-3xl md:text-4xl font-black gold-gradient-text">$2M+</p>
-              <p className="text-white/40 text-sm mt-1">Revenue generado</p>
-            </div>
+            <div className="absolute -top-5 -right-5 w-28 h-28 border-2 border-gold/20 rounded-xl" />
+            <div className="absolute -bottom-5 -left-5 w-36 h-36 border-2 border-gold/10 rounded-xl" />
           </div>
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-navy to-transparent z-10" />
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#080F24] to-transparent z-10" />
     </section>
   );
 }

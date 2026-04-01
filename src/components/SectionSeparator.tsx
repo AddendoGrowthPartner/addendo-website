@@ -4,9 +4,5 @@ interface Props {
 }
 
 export default function SectionSeparator({ number, label }: Props) {
-  return (
-    <div className="section-separator">
-      <span>Addendo / {number} / {label}</span>
-    </div>
-  );
+  return <div className="section-sep"><span>Addendo / {number} / {label}</span></div>;
 }
