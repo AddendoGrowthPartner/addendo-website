@@ -54,7 +54,7 @@ export default function Hero() {
               <span className="text-gold text-xs font-semibold uppercase tracking-wider">{t.hero.badge}</span>
             </div>
 
-            <h1 className="hero-h1 font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.05] mb-6 md:mb-8">
+            <h1 className="hero-h1 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold leading-[1.15] mb-6 md:mb-8">
               {t.hero.title1}
               <span className="gold-gradient-text">{t.hero.titleGold}</span>
               <br className="hidden sm:block" />

@@ -82,7 +82,7 @@ export default function Services() {
     <section ref={ref} id="servicios" className="section-pad relative" style={{ background: '#080F24' }}>
       <div className="max-w-7xl mx-auto">
         <div className="svc-t opacity-0 text-center mb-14">
-          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold mb-4">{t.services.title1}<span className="gold-gradient-text">{t.services.titleGold}</span></h2>
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold mb-4">{t.services.title1}<span className="gold-gradient-text">{t.services.titleGold}</span></h2>
           <p className="text-white/40 text-sm md:text-lg max-w-2xl mx-auto">{t.services.subtitle}</p>
         </div>
         <div className="svc-tabs opacity-0 flex flex-wrap justify-center gap-2 mb-12">
