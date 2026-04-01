@@ -13,11 +13,17 @@
 }
 
 @layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 80px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    max-width: 100vw;
   }
 
   body {
@@ -25,6 +31,13 @@
     color: #ffffff;
     font-family: var(--font-sans);
     overflow-x: hidden;
+    max-width: 100vw;
+    word-break: break-word;
+  }
+
+  img, video, svg, canvas {
+    max-width: 100%;
+    height: auto;
   }
 
   ::selection {

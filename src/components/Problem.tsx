@@ -16,7 +16,7 @@ export default function Problem() {
   useEffect(() => { import('gsap').then(({ gsap }) => { import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => { gsap.registerPlugin(ScrollTrigger); const el = ref.current; if (!el) return; gsap.fromTo(el.querySelector('.p-title'), { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.8, scrollTrigger: { trigger: el, start: 'top 80%' } }); gsap.fromTo(el.querySelector('.p-img'), { opacity: 0, x: 50 }, { opacity: 1, x: 0, duration: 1, scrollTrigger: { trigger: el, start: 'top 70%' } }); el.querySelectorAll('.p-card').forEach((c, i) => { gsap.fromTo(c, { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.5, delay: i * 0.1, scrollTrigger: { trigger: el, start: 'top 70%' } }); }); gsap.fromTo(el.querySelector('.p-close'), { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, scrollTrigger: { trigger: el.querySelector('.p-close'), start: 'top 88%' } }); }); }); }, []);
 
   return (
-    <section ref={ref} className="section-pad relative" style={{ background: '#0A1228' }}>
+    <section ref={ref} className="section-pad relative overflow-hidden" style={{ background: '#0A1228' }}>
       <div className="max-w-7xl mx-auto">
         <h2 className="p-title opacity-0 font-display text-2xl sm:text-4xl md:text-5xl font-bold text-center mb-12 md:mb-16 leading-tight">
           {t.problem.title1}<br /><span className="text-white/40">{t.problem.title2}</span>

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { useI18n } from '../i18n/context';
 
 const allies = [
@@ -43,7 +43,7 @@ function AllyLogo({ ally }: { ally: typeof allies[0] }) {
 
   if (failed) {
     return (
-      <span className="text-gold text-xs md:text-sm font-semibold whitespace-nowrap">{ally.name}</span>
+      <span className="text-gold text-xs font-semibold whitespace-nowrap text-center leading-tight">{ally.name}</span>
     );
   }
 
@@ -60,31 +60,6 @@ function AllyLogo({ ally }: { ally: typeof allies[0] }) {
 
 export default function TechAllies() {
   const { t } = useI18n();
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el || window.innerWidth >= 768) return;
-    let pos = 0;
-    let raf: number;
-    const scroll = () => {
-      pos += 0.5;
-      if (pos >= el.scrollWidth / 2) pos = 0;
-      el.scrollLeft = pos;
-      raf = requestAnimationFrame(scroll);
-    };
-    raf = requestAnimationFrame(scroll);
-    return () => cancelAnimationFrame(raf);
-  }, []);
-
-  const renderLogo = (ally: typeof allies[0], i: number) => (
-    <div
-      key={`${ally.name}-${i}`}
-      className="flex items-center justify-center h-14 md:h-16 px-4 md:px-6 shrink-0 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
-    >
-      <AllyLogo ally={ally} />
-    </div>
-  );
 
   return (
     <section className="py-12 md:py-16 relative" style={{ background: '#080F24' }}>
@@ -99,14 +74,15 @@ export default function TechAllies() {
           <p className="text-white/40 text-sm md:text-base max-w-xl mx-auto">{t.allies.subtitle}</p>
         </div>
 
-        {/* Desktop grid */}
-        <div className="hidden md:grid grid-cols-5 lg:grid-cols-6 gap-4 max-w-5xl mx-auto">
-          {allies.map((ally, i) => renderLogo(ally, i))}
-        </div>
-
-        {/* Mobile auto-scroll carousel */}
-        <div ref={scrollRef} className="md:hidden flex overflow-x-hidden gap-6" style={{ width: '100%' }}>
-          {[...allies, ...allies].map((ally, i) => renderLogo(ally, i))}
+        <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3 max-w-5xl mx-auto">
+          {allies.map((ally, i) => (
+            <div
+              key={ally.name}
+              className="flex items-center justify-center h-14 md:h-16 px-2 opacity-70 hover:opacity-100 transition-opacity duration-300"
+            >
+              <AllyLogo ally={ally} />
+            </div>
+          ))}
         </div>
       </div>
     </section>
