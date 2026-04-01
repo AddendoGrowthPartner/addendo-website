@@ -28,7 +28,6 @@ export default function CtaFinal() {
   return (
     <section
       ref={sectionRef}
-      id="contacto"
       className="section-padding relative overflow-hidden"
     >
       {/* Background */}
@@ -48,10 +47,9 @@ export default function CtaFinal() {
         </p>
 
         <div className="cta-animate opacity-0 mb-6">
+          {/* PENDIENTE: reemplazar con Calendar link de GHL */}
           <a
-            href="https://api.leadconnectorhq.com/widget/booking/YOUR_CALENDAR_ID"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#contacto"
             className="btn-gold text-lg md:text-xl inline-flex"
           >
             Quiero mi llamada estrategica gratis
