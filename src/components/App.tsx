@@ -40,11 +40,11 @@ function Content() {
       <SectionSeparator number="04" label={t.separators.s04} />
       <WhyAddendo />
       <Testimonials />
+      <SectionSeparator number="06" label={t.separators.s06} />
+      <Blog />
       <CtaFinal />
       <SectionSeparator number="05" label={t.separators.s05} />
       <Contact />
-      <SectionSeparator number="06" label={t.separators.s06} />
-      <Blog />
       <Footer />
       <WhatsAppButton />
     </>
