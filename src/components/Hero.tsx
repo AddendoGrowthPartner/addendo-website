@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useI18n } from '../i18n/context';
 
-const LOGO = 'https://res.cloudinary.com/dokzw376u/image/upload/v1774995924/VECTOR_ADDENDO_FINAL_zuw6te.jpg';
+const LOGO = 'https://res.cloudinary.com/dokzw376u/image/upload/v1775016113/VECTOR_ADDENDO_FINAL-removebg-preview_w97pwl.png';
 const HERO_IMG = 'https://images.pexels.com/photos/7129717/pexels-photo-7129717.jpeg?auto=compress&cs=tinysrgb&w=1260';
 
 export default function Hero() {
@@ -50,7 +50,7 @@ export default function Hero() {
               <img
                 src={LOGO}
                 alt="Addendo Growth Partner"
-                className="rounded"
+                className=""
                 style={{ minWidth: '280px', maxWidth: '340px', height: 'auto', filter: 'drop-shadow(0 0 20px rgba(201,168,76,0.6))' }}
                 loading="eager"
               />

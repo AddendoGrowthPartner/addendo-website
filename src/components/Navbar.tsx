@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useI18n } from '../i18n/context';
 
-const LOGO = 'https://res.cloudinary.com/dokzw376u/image/upload/v1774995924/VECTOR_ADDENDO_FINAL_zuw6te.jpg';
+const LOGO = 'https://res.cloudinary.com/dokzw376u/image/upload/v1775016113/VECTOR_ADDENDO_FINAL-removebg-preview_w97pwl.png';
 
 export default function Navbar() {
   const { t, lang, setLang } = useI18n();
@@ -28,7 +28,7 @@ export default function Navbar() {
           <img
             src={LOGO}
             alt="Addendo Growth Partner"
-            className="h-auto rounded"
+            className="h-auto"
             style={{ minWidth: '220px', maxHeight: '56px', objectFit: 'contain', filter: 'drop-shadow(0 0 15px rgba(201,168,76,0.4)) brightness(1.1)' }}
             loading="eager"
           />
