@@ -12,6 +12,7 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [lang, setLang] = useState<'es' | 'en'>('es');
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -29,12 +30,7 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
         <a href="#" className="flex items-center gap-3">
-          <img
-            src={LOGO_URL}
-            alt="Addendo"
-            className="h-10 w-auto rounded"
-            loading="eager"
-          />
+          <img src={LOGO_URL} alt="Addendo" className="h-10 w-auto rounded" loading="eager" />
         </a>
 
         {/* Desktop nav */}
@@ -48,10 +44,28 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
-          <a
-            href="#contacto"
-            className="btn-gold !py-2.5 !px-6 !text-sm"
-          >
+
+          {/* Language switcher */}
+          <div className="flex items-center gap-1 border border-white/10 rounded-full px-1 py-0.5">
+            <button
+              onClick={() => setLang('es')}
+              className={`text-xs font-semibold px-2.5 py-1 rounded-full transition-all ${
+                lang === 'es' ? 'bg-gold text-navy' : 'text-white/50 hover:text-white'
+              }`}
+            >
+              ES
+            </button>
+            <button
+              onClick={() => setLang('en')}
+              className={`text-xs font-semibold px-2.5 py-1 rounded-full transition-all ${
+                lang === 'en' ? 'bg-gold text-navy' : 'text-white/50 hover:text-white'
+              }`}
+            >
+              EN
+            </button>
+          </div>
+
+          <a href="#contacto" className="btn-gold !py-2.5 !px-6 !text-sm">
             Agenda tu llamada
           </a>
         </div>
@@ -62,30 +76,14 @@ export default function Navbar() {
           className="md:hidden flex flex-col gap-1.5 p-2"
           aria-label="Menu"
         >
-          <span
-            className={`block w-6 h-0.5 bg-white transition-all duration-300 ${
-              menuOpen ? 'rotate-45 translate-y-2' : ''
-            }`}
-          />
-          <span
-            className={`block w-6 h-0.5 bg-white transition-all duration-300 ${
-              menuOpen ? 'opacity-0' : ''
-            }`}
-          />
-          <span
-            className={`block w-6 h-0.5 bg-white transition-all duration-300 ${
-              menuOpen ? '-rotate-45 -translate-y-2' : ''
-            }`}
-          />
+          <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${menuOpen ? 'rotate-45 translate-y-2' : ''}`} />
+          <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${menuOpen ? 'opacity-0' : ''}`} />
+          <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
         </button>
       </div>
 
       {/* Mobile menu */}
-      <div
-        className={`md:hidden overflow-hidden transition-all duration-300 ${
-          menuOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'
-        }`}
-      >
+      <div className={`md:hidden overflow-hidden transition-all duration-300 ${menuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
         <div className="bg-navy/98 backdrop-blur-md px-6 py-6 space-y-4 border-t border-white/10">
           {navLinks.map((link) => (
             <a
@@ -97,11 +95,21 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
-          <a
-            href="#contacto"
-            onClick={() => setMenuOpen(false)}
-            className="btn-gold !text-sm block text-center mt-4"
-          >
+          <div className="flex items-center gap-3 pt-2">
+            <button
+              onClick={() => setLang('es')}
+              className={`text-sm font-semibold px-4 py-2 rounded-full transition-all ${lang === 'es' ? 'bg-gold text-navy' : 'border border-white/20 text-white/50'}`}
+            >
+              ES
+            </button>
+            <button
+              onClick={() => setLang('en')}
+              className={`text-sm font-semibold px-4 py-2 rounded-full transition-all ${lang === 'en' ? 'bg-gold text-navy' : 'border border-white/20 text-white/50'}`}
+            >
+              EN
+            </button>
+          </div>
+          <a href="#contacto" onClick={() => setMenuOpen(false)} className="btn-gold !text-sm block text-center mt-4">
             Agenda tu llamada
           </a>
         </div>

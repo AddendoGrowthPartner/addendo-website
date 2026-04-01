@@ -2,6 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
+import ClientLogos from '../components/ClientLogos';
+import SectionSeparator from '../components/SectionSeparator';
 import Problem from '../components/Problem';
 import Solution from '../components/Solution';
 import Services from '../components/Services';
@@ -10,17 +12,25 @@ import WhyAddendo from '../components/WhyAddendo';
 import CtaFinal from '../components/CtaFinal';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
+import WhatsAppButton from '../components/WhatsAppButton';
 ---
 
 <Layout>
   <Navbar client:load />
   <Hero client:load />
+  <ClientLogos client:visible />
+  <SectionSeparator number="01" label="El problema" />
   <Problem client:visible />
   <Solution client:visible />
+  <SectionSeparator number="02" label="Nuestros servicios" />
   <Services client:visible />
+  <SectionSeparator number="03" label="Como trabajamos" />
   <Process client:visible />
+  <SectionSeparator number="04" label="Por que Addendo" />
   <WhyAddendo client:visible />
   <CtaFinal client:visible />
+  <SectionSeparator number="05" label="Contacto" />
   <Contact client:visible />
   <Footer client:load />
+  <WhatsAppButton client:load />
 </Layout>

@@ -1,26 +1,10 @@
 import { useEffect, useRef } from 'react';
 
 const steps = [
-  {
-    num: '01',
-    title: 'Escuchamos',
-    text: 'Nos sentamos contigo. Entendemos tu negocio, tu mercado, tus metas y tus frustraciones. No hay plantillas genericas — todo empieza por conocerte a fondo.',
-  },
-  {
-    num: '02',
-    title: 'Disenamos tu estrategia',
-    text: 'Creamos un plan de crecimiento a tu medida. Cada accion tiene un proposito, cada canal tiene una razon, y cada peso invertido tiene un destino claro.',
-  },
-  {
-    num: '03',
-    title: 'Ejecutamos sin parar',
-    text: 'Ponemos todo en marcha — sitio web, campanas, contenido, seguimiento de leads, reputacion — todo al mismo tiempo, todo coordinado.',
-  },
-  {
-    num: '04',
-    title: 'Medimos, optimizamos, escalamos',
-    text: 'Cada semana revisamos los resultados. Lo que funciona, lo potenciamos. Lo que no, lo ajustamos. Tu negocio crece mes tras mes.',
-  },
+  { num: '01', title: 'Escuchamos', text: 'Nos sentamos contigo. Entendemos tu negocio, tu mercado, tus metas y tus frustraciones. No hay plantillas genericas — todo empieza por conocerte a fondo.' },
+  { num: '02', title: 'Disenamos tu estrategia', text: 'Creamos un plan de crecimiento a tu medida. Cada accion tiene un proposito, cada canal tiene una razon, y cada peso invertido tiene un destino claro.' },
+  { num: '03', title: 'Ejecutamos sin parar', text: 'Ponemos todo en marcha — sitio web, campanas, contenido, seguimiento de leads, reputacion — todo al mismo tiempo, todo coordinado.' },
+  { num: '04', title: 'Medimos, optimizamos, escalamos', text: 'Cada semana revisamos los resultados. Lo que funciona, lo potenciamos. Lo que no, lo ajustamos. Tu negocio crece mes tras mes.' },
 ];
 
 export default function Process() {
@@ -33,28 +17,12 @@ export default function Process() {
         const el = sectionRef.current;
         if (!el) return;
 
-        gsap.fromTo(
-          el.querySelector('.process-title'),
-          { opacity: 0, y: 50 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            scrollTrigger: { trigger: el, start: 'top 80%' },
-          }
-        );
+        gsap.fromTo(el.querySelector('.process-title'), { opacity: 0, y: 50 },
+          { opacity: 1, y: 0, duration: 0.8, scrollTrigger: { trigger: el, start: 'top 80%' } });
 
         el.querySelectorAll('.process-step').forEach((step, i) => {
-          gsap.fromTo(
-            step,
-            { opacity: 0, x: i % 2 === 0 ? -50 : 50 },
-            {
-              opacity: 1,
-              x: 0,
-              duration: 0.7,
-              scrollTrigger: { trigger: step, start: 'top 85%' },
-            }
-          );
+          gsap.fromTo(step, { opacity: 0, x: i % 2 === 0 ? -50 : 50 },
+            { opacity: 1, x: 0, duration: 0.7, scrollTrigger: { trigger: step, start: 'top 85%' } });
         });
       });
     });
@@ -73,37 +41,19 @@ export default function Process() {
 
         <div className="relative">
           {/* Vertical line */}
-          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-gold/50 via-gold/20 to-transparent hidden sm:block" />
+          <div className="absolute left-8 sm:left-1/2 sm:-translate-x-px top-0 bottom-0 w-px bg-gradient-to-b from-gold/40 via-gold/20 to-transparent hidden sm:block" />
 
-          <div className="space-y-12 md:space-y-20">
+          <div className="space-y-16 md:space-y-20">
             {steps.map((step, i) => (
-              <div
-                key={i}
-                className={`process-step opacity-0 flex flex-col md:flex-row items-start gap-6 md:gap-12 ${
-                  i % 2 === 1 ? 'md:flex-row-reverse' : ''
-                }`}
-              >
-                {/* Number badge */}
-                <div className="md:w-1/2 flex items-start gap-5 md:justify-end">
-                  <div
-                    className={`flex flex-col ${
-                      i % 2 === 1 ? 'md:items-start md:text-left' : 'md:items-end md:text-right'
-                    }`}
-                  >
-                    <span className="text-gold font-display text-5xl md:text-6xl font-black opacity-30 leading-none">
-                      {step.num}
-                    </span>
-                    <h3 className="text-xl md:text-2xl font-bold text-white mt-2">
-                      {step.title}
-                    </h3>
-                    <p className="text-white/55 mt-3 leading-relaxed max-w-md">{step.text}</p>
-                  </div>
+              <div key={i} className={`process-step opacity-0 relative flex flex-col md:flex-row gap-6 md:gap-12 ${i % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
+                <div className={`md:w-1/2 ${i % 2 === 1 ? 'md:text-left' : 'md:text-right'}`}>
+                  <span className="text-gold font-display text-5xl md:text-6xl font-black opacity-25 leading-none block">{step.num}</span>
+                  <h3 className="text-xl md:text-2xl font-bold text-white mt-2">{step.title}</h3>
+                  <p className="text-white/50 mt-3 leading-relaxed max-w-md inline-block">{step.text}</p>
                 </div>
 
-                {/* Dot on the timeline */}
-                <div className="hidden md:flex items-center justify-center absolute left-1/2 -translate-x-1/2">
-                  <div className="w-4 h-4 bg-gold rounded-full ring-4 ring-dark" />
-                </div>
+                {/* Dot */}
+                <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 top-4 w-3 h-3 bg-gold rounded-full ring-4 ring-dark z-10" />
 
                 <div className="md:w-1/2" />
               </div>
