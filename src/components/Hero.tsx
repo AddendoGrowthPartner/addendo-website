@@ -48,7 +48,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-b from-[#080F24] via-[#080F24]/85 to-[#080F24] z-[1]" />
       <div className="absolute top-1/4 left-1/3 w-[700px] h-[700px] bg-gold/[0.04] rounded-full blur-[160px] z-[1]" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 w-full pt-20 sm:pt-24 md:pt-28 pb-16">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 w-full pt-24 md:pt-28 pb-16">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div>
             <div className="hero-badge inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold/20 bg-gold/5 mb-6 md:mb-8">
