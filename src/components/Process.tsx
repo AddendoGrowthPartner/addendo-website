@@ -9,7 +9,7 @@ export default function Process() {
   return (
     <section ref={ref} id="proceso" className="section-pad relative" style={{ background: '#0A1228' }}>
       <div className="max-w-5xl mx-auto">
-        <h2 className="pr-t opacity-0 font-display text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-20">{t.process.title1}<br /><span className="gold-gradient-text">{t.process.titleGold}</span></h2>
+        <h2 className="pr-t opacity-0 font-display text-4xl sm:text-5xl md:text-6xl font-bold text-center mb-20">{t.process.title1}<br /><span className="gold-gradient-text">{t.process.titleGold}</span></h2>
         <div className="relative">
           <div className="absolute left-8 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-px bg-gradient-to-b from-gold/30 via-gold/15 to-transparent hidden sm:block" />
           <div className="space-y-16 md:space-y-24">

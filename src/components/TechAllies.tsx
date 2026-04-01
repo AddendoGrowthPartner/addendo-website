@@ -48,7 +48,7 @@ export default function TechAllies() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-10">
-          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-3">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-3">
             <span className="gold-gradient-text">{t.allies.title}</span>
           </h2>
           <p className="text-white/40 text-sm md:text-base max-w-xl mx-auto">{t.allies.subtitle}</p>

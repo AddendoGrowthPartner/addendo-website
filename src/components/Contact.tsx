@@ -15,7 +15,7 @@ export default function Contact() {
   return (
     <section ref={ref} id="contacto" className="section-pad relative" style={{ background: '#0A1228' }}>
       <div className="relative max-w-2xl mx-auto">
-        <h2 className="ct-a opacity-0 font-display text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-4"><span className="gold-gradient-text">{t.contact.title}</span></h2>
+        <h2 className="ct-a opacity-0 font-display text-4xl sm:text-5xl md:text-6xl font-bold text-center mb-4"><span className="gold-gradient-text">{t.contact.title}</span></h2>
         <p className="ct-a opacity-0 text-white/40 text-center mb-12 text-lg">{t.contact.subtitle}</p>
         <form onSubmit={submit} className="ct-a opacity-0 space-y-5">
           <div className="grid sm:grid-cols-2 gap-5">

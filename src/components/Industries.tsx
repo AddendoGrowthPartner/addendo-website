@@ -23,7 +23,7 @@ export default function Industries() {
     <section ref={ref} className="section-pad relative" style={{ background: '#0A1228' }}>
       <div className="max-w-6xl mx-auto">
         <div className="ind-t opacity-0 text-center mb-14">
-          <h2 className="font-display text-2xl sm:text-4xl md:text-5xl font-bold mb-4">{t.industries.title1}<span className="gold-gradient-text">{t.industries.titleGold}</span></h2>
+          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold mb-4">{t.industries.title1}<span className="gold-gradient-text">{t.industries.titleGold}</span></h2>
           <p className="text-white/40 text-sm md:text-lg max-w-xl mx-auto">{t.industries.subtitle}</p>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
