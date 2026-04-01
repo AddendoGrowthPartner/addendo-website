@@ -28,14 +28,14 @@ export default function Navbar() {
           <img
             src={LOGO}
             alt="Addendo Growth Partner"
-            className="max-w-[110px] max-h-[40px] md:max-w-[160px] md:max-h-[52px] w-auto h-auto object-contain"
+            className="max-w-[150px] max-h-[48px] md:max-w-[160px] md:max-h-[52px] w-auto h-auto object-contain"
             loading="eager"
           />
         </a>
 
-        <div className="hidden lg:flex items-center gap-7">
+        <div className="hidden lg:flex items-center gap-8">
           {links.map(l => (
-            <a key={l.href} href={l.href} className="text-white/75 hover:text-gold transition-colors text-sm font-medium tracking-wide uppercase">{l.label}</a>
+            <a key={l.href} href={l.href} className="text-white/80 hover:text-white transition-colors text-base font-medium tracking-[0.05em] uppercase">{l.label}</a>
           ))}
           <div className="flex items-center border border-white/10 rounded-full px-1 py-0.5 ml-1">
             <button onClick={() => setLang('es')} className={`text-xs font-bold px-3 py-1 rounded-full transition-all ${lang === 'es' ? 'bg-gold text-[#080F24]' : 'text-white/40 hover:text-white'}`}>ES</button>
