@@ -21,7 +21,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
         <div className="grid md:grid-cols-3 gap-12 md:gap-8">
           <div>
-            <img src={LOGO} alt="Addendo" className="h-auto mb-5" style={{ minWidth: '220px', maxHeight: '60px', objectFit: 'contain', filter: 'drop-shadow(0 0 15px rgba(201,168,76,0.4)) brightness(1.1)' }} loading="lazy" />
+            <img src={LOGO} alt="Addendo" className="h-auto mb-5" style={{ minWidth: '160px', height: 'auto', objectFit: 'contain', filter: 'none' }} loading="lazy" />
             <p className="text-white/30 text-sm leading-relaxed max-w-xs">{t.footer.desc}</p>
           </div>
           <div>

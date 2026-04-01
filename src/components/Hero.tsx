@@ -51,7 +51,7 @@ export default function Hero() {
                 src={LOGO}
                 alt="Addendo Growth Partner"
                 className=""
-                style={{ minWidth: '280px', maxWidth: '340px', height: 'auto', filter: 'drop-shadow(0 0 20px rgba(201,168,76,0.6))' }}
+                style={{ maxWidth: '200px', height: 'auto', filter: 'none' }}
                 loading="eager"
               />
             </div>
