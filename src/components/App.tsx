@@ -2,6 +2,7 @@ import { I18nProvider } from '../i18n/context';
 import Navbar from './Navbar';
 import Hero from './Hero';
 import StatsCounter from './StatsCounter';
+import TechAllies from './TechAllies';
 import ClientLogos from './ClientLogos';
 import SectionSeparator from './SectionSeparator';
 import Problem from './Problem';
@@ -27,6 +28,7 @@ function Content() {
       <Navbar />
       <Hero />
       <StatsCounter />
+      <TechAllies />
       <ClientLogos />
       <SectionSeparator number="01" label={t.separators.s01} />
       <Problem />

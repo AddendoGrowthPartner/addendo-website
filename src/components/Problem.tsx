@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useI18n } from '../i18n/context';
 
-const IMG = 'https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg?auto=compress&cs=tinysrgb&w=800';
+const IMG = 'https://images.pexels.com/photos/4050315/pexels-photo-4050315.jpeg?auto=compress&cs=tinysrgb&w=800';
 const icons = [
   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>,
   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>,
@@ -18,7 +18,7 @@ export default function Problem() {
   return (
     <section ref={ref} className="section-pad relative" style={{ background: '#0A1228' }}>
       <div className="max-w-7xl mx-auto">
-        <h2 className="p-title opacity-0 font-display text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-16 leading-tight">
+        <h2 className="p-title opacity-0 font-display text-2xl sm:text-4xl md:text-5xl font-bold text-center mb-12 md:mb-16 leading-tight">
           {t.problem.title1}<br /><span className="text-white/40">{t.problem.title2}</span>
         </h2>
         <div className="grid lg:grid-cols-2 gap-12 items-center">

@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { useI18n } from '../i18n/context';
 
-const HERO_IMG = 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1200';
+const HERO_IMG_SM = 'https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg?auto=compress&cs=tinysrgb&w=600';
+const HERO_IMG_LG = 'https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg?auto=compress&cs=tinysrgb&w=1200';
 
 export default function Hero() {
   const { t } = useI18n();
@@ -13,24 +14,30 @@ export default function Hero() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
     let raf: number;
+    const isMobile = window.innerWidth < 768;
+    const particleCount = isMobile ? 20 : 70;
     const P: Array<{ x: number; y: number; vx: number; vy: number; s: number; a: number }> = [];
     const resize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
     resize(); window.addEventListener('resize', resize);
-    for (let i = 0; i < 70; i++) P.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4, s: Math.random() * 2.5 + 0.5, a: Math.random() * 0.5 + 0.1 });
+    for (let i = 0; i < particleCount; i++) P.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4, s: Math.random() * 2.5 + 0.5, a: Math.random() * 0.5 + 0.1 });
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       P.forEach(p => { p.x += p.vx; p.y += p.vy; if (p.x < 0) p.x = canvas.width; if (p.x > canvas.width) p.x = 0; if (p.y < 0) p.y = canvas.height; if (p.y > canvas.height) p.y = 0; ctx.beginPath(); ctx.arc(p.x, p.y, p.s, 0, Math.PI * 2); ctx.fillStyle = `rgba(201,168,76,${p.a})`; ctx.fill(); });
-      for (let i = 0; i < P.length; i++) for (let j = i + 1; j < P.length; j++) { const d = Math.hypot(P[i].x - P[j].x, P[i].y - P[j].y); if (d < 140) { ctx.beginPath(); ctx.moveTo(P[i].x, P[i].y); ctx.lineTo(P[j].x, P[j].y); ctx.strokeStyle = `rgba(201,168,76,${0.06 * (1 - d / 140)})`; ctx.lineWidth = 0.5; ctx.stroke(); } }
+      if (!isMobile) {
+        for (let i = 0; i < P.length; i++) for (let j = i + 1; j < P.length; j++) { const d = Math.hypot(P[i].x - P[j].x, P[i].y - P[j].y); if (d < 140) { ctx.beginPath(); ctx.moveTo(P[i].x, P[i].y); ctx.lineTo(P[j].x, P[j].y); ctx.strokeStyle = `rgba(201,168,76,${0.06 * (1 - d / 140)})`; ctx.lineWidth = 0.5; ctx.stroke(); } }
+      }
       raf = requestAnimationFrame(draw);
     };
     draw();
-    import('gsap').then(({ gsap }) => {
-      gsap.fromTo('.hero-badge', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, delay: 0.3 });
-      gsap.fromTo('.hero-h1', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 1.1, delay: 0.5, ease: 'power3.out' });
-      gsap.fromTo('.hero-p', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 1, delay: 0.7, ease: 'power3.out' });
-      gsap.fromTo('.hero-cta', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1, delay: 0.9, ease: 'power3.out' });
-      gsap.fromTo('.hero-img', { opacity: 0, scale: 0.88, x: 60 }, { opacity: 1, scale: 1, x: 0, duration: 1.3, delay: 0.5, ease: 'power3.out' });
-    });
+    if (!isMobile) {
+      import('gsap').then(({ gsap }) => {
+        gsap.fromTo('.hero-badge', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, delay: 0.3 });
+        gsap.fromTo('.hero-h1', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 1.1, delay: 0.5, ease: 'power3.out' });
+        gsap.fromTo('.hero-p', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 1, delay: 0.7, ease: 'power3.out' });
+        gsap.fromTo('.hero-cta', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1, delay: 0.9, ease: 'power3.out' });
+        gsap.fromTo('.hero-img', { opacity: 0, scale: 0.88, x: 60 }, { opacity: 1, scale: 1, x: 0, duration: 1.3, delay: 0.5, ease: 'power3.out' });
+      });
+    }
     return () => { cancelAnimationFrame(raf); window.removeEventListener('resize', resize); };
   }, []);
 
@@ -43,22 +50,22 @@ export default function Hero() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 w-full pt-36 sm:pt-40 pb-16">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div>
-            <div className="hero-badge opacity-0 inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold/20 bg-gold/5 mb-8">
+            <div className="hero-badge inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold/20 bg-gold/5 mb-6 md:mb-8">
               <span className="w-2 h-2 rounded-full bg-gold animate-pulse" />
               <span className="text-gold text-xs font-semibold uppercase tracking-wider">{t.hero.badge}</span>
             </div>
 
-            <h1 className="hero-h1 opacity-0 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.05] mb-8">
+            <h1 className="hero-h1 font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.05] mb-6 md:mb-8">
               {t.hero.title1}
               <span className="gold-gradient-text">{t.hero.titleGold}</span>
               <br className="hidden sm:block" />
               <span className="text-white/90">{t.hero.title2}</span>
             </h1>
 
-            <p className="hero-p opacity-0 text-lg sm:text-xl text-white/55 max-w-xl mb-10 leading-relaxed">{t.hero.subtitle}</p>
+            <p className="hero-p text-base sm:text-xl text-white/55 max-w-xl mb-8 md:mb-10 leading-relaxed">{t.hero.subtitle}</p>
 
-            <div className="hero-cta opacity-0 flex flex-col sm:flex-row items-start gap-4">
-              <a href="#contacto" className="btn-gold text-lg">
+            <div className="hero-cta flex flex-col sm:flex-row items-start gap-4">
+              <a href="#contacto" className="btn-gold text-base md:text-lg">
                 {t.hero.cta}
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
               </a>
@@ -66,9 +73,13 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="hero-img opacity-0 relative mx-auto max-w-[400px] lg:max-w-none">
+          <div className="hero-img relative mx-auto max-w-[400px] lg:max-w-none">
             <div className="relative rounded-xl overflow-hidden border-2 border-gold/25 shadow-2xl shadow-gold/10">
-              <img src={HERO_IMG} alt={t.hero.imgAlt} className="w-full h-[300px] sm:h-[400px] lg:h-[520px] object-cover" loading="eager" />
+              <picture>
+                <source media="(max-width: 767px)" srcSet={HERO_IMG_SM} />
+                <source media="(min-width: 768px)" srcSet={HERO_IMG_LG} />
+                <img src={HERO_IMG_LG} alt={t.hero.imgAlt} className="w-full h-[300px] sm:h-[400px] lg:h-[520px] object-cover" loading="eager" />
+              </picture>
               <div className="absolute inset-0 bg-gradient-to-t from-[#080F24]/70 via-transparent to-transparent" />
             </div>
             <div className="absolute -top-5 -right-5 w-28 h-28 border-2 border-gold/20 rounded-xl hidden lg:block" />

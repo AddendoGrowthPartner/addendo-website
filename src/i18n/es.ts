@@ -22,6 +22,10 @@ const es = {
     revenue: 'Revenue generado',
     operating: 'Operando sin parar',
   },
+  allies: {
+    title: 'Tecnología de clase mundial trabajando para ti',
+    subtitle: 'Integramos las mejores plataformas del mundo para maximizar tus resultados.',
+  },
   clients: {
     label: 'Negocios que ya crecen con Addendo',
   },

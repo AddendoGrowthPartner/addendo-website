@@ -22,6 +22,10 @@ const en = {
     revenue: 'Revenue Generated',
     operating: 'Operating Non-Stop',
   },
+  allies: {
+    title: 'World-class technology working for you',
+    subtitle: 'We integrate the best platforms in the world to maximize your results.',
+  },
   clients: {
     label: 'Businesses already growing with Addendo',
   },
