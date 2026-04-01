@@ -18,9 +18,9 @@ export default function StatsCounter() {
   useEffect(() => { import('gsap').then(({ gsap }) => { import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => { gsap.registerPlugin(ScrollTrigger); const el = ref.current; if (!el) return; gsap.fromTo(el.querySelectorAll('.st-box'), { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, stagger: 0.12, scrollTrigger: { trigger: el, start: 'top 85%' } }); }); }); }, []);
 
   const items = [
-    { end: 200, suffix: '+', label: t.stats.campaigns },
+    { end: 500, suffix: '+', label: t.stats.campaigns },
     { end: 150, suffix: '+', label: t.stats.businesses },
-    { end: 5, suffix: 'M+', prefix: '$', label: t.stats.revenue },
+    { end: 100, suffix: 'M+', prefix: '$', label: t.stats.revenue },
     { end: 24, suffix: '/7', label: t.stats.operating },
   ];
 

@@ -17,7 +17,7 @@ const es = {
     imgAlt: 'Empresario latino exitoso',
   },
   stats: {
-    campaigns: 'Campañas lanzadas',
+    campaigns: 'Campañas gestionadas',
     businesses: 'Negocios transformados',
     revenue: 'Revenue generado',
     operating: 'Operando sin parar',

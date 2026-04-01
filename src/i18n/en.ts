@@ -17,7 +17,7 @@ const en = {
     imgAlt: 'Successful Latino entrepreneur',
   },
   stats: {
-    campaigns: 'Campaigns Launched',
+    campaigns: 'Campaigns Managed',
     businesses: 'Businesses Transformed',
     revenue: 'Revenue Generated',
     operating: 'Operating Non-Stop',

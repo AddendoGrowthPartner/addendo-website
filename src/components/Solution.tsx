@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { useI18n } from '../i18n/context';
 
-const TEAM = 'https://images.pexels.com/photos/3183183/pexels-photo-3183183.jpeg?auto=compress&cs=tinysrgb&w=1260';
-const MEET = 'https://images.pexels.com/photos/5324960/pexels-photo-5324960.jpeg?auto=compress&cs=tinysrgb&w=800';
+const TEAM = 'https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg?auto=compress&cs=tinysrgb&w=1200';
+const MEET = 'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=600';
 
 export default function Solution() {
   const { t } = useI18n();
