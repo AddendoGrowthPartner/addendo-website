@@ -1,51 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/Navbar';
-import Hero from '../components/Hero';
-import StatsCounter from '../components/StatsCounter';
-import ClientLogos from '../components/ClientLogos';
-import SectionSeparator from '../components/SectionSeparator';
-import Problem from '../components/Problem';
-import Solution from '../components/Solution';
-import Services from '../components/Services';
-import Industries from '../components/Industries';
-import Process from '../components/Process';
-import Infrastructure from '../components/Infrastructure';
-import WhyAddendo from '../components/WhyAddendo';
-import Testimonials from '../components/Testimonials';
-import CtaFinal from '../components/CtaFinal';
-import Contact from '../components/Contact';
-import Footer from '../components/Footer';
-import WhatsAppButton from '../components/WhatsAppButton';
+import App from '../components/App';
 ---
 
 <Layout>
-  <Navbar client:load />
-  <Hero client:load />
-  <StatsCounter client:visible />
-  <ClientLogos client:visible />
-
-  <SectionSeparator number="01" label="El Problema" />
-  <Problem client:visible />
-  <Solution client:visible />
-
-  <SectionSeparator number="02" label="Nuestros Servicios" />
-  <Services client:load />
-  <Industries client:visible />
-
-  <SectionSeparator number="03" label="Como Trabajamos" />
-  <Process client:visible />
-  <Infrastructure client:visible />
-
-  <SectionSeparator number="04" label="Por Que Addendo" />
-  <WhyAddendo client:visible />
-  <Testimonials client:visible />
-
-  <CtaFinal client:visible />
-
-  <SectionSeparator number="05" label="Contacto" />
-  <Contact client:visible />
-
-  <Footer client:load />
-  <WhatsAppButton client:load />
+  <App client:load />
 </Layout>
