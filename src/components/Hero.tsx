@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useI18n } from '../i18n/context';
 
-const LOGO = 'https://res.cloudinary.com/dokzw376u/image/upload/v1775016113/VECTOR_ADDENDO_FINAL-removebg-preview_w97pwl.png';
 const HERO_IMG = 'https://images.pexels.com/photos/7129717/pexels-photo-7129717.jpeg?auto=compress&cs=tinysrgb&w=1260';
 
 export default function Hero() {
@@ -26,7 +25,6 @@ export default function Hero() {
     };
     draw();
     import('gsap').then(({ gsap }) => {
-      gsap.fromTo('.hero-logo', { opacity: 0, y: -20, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.8, delay: 0.1, ease: 'power3.out' });
       gsap.fromTo('.hero-badge', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, delay: 0.3 });
       gsap.fromTo('.hero-h1', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 1.1, delay: 0.5, ease: 'power3.out' });
       gsap.fromTo('.hero-p', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 1, delay: 0.7, ease: 'power3.out' });
@@ -45,17 +43,6 @@ export default function Hero() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 w-full pt-32 pb-16">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div>
-            {/* Logo grande en hero */}
-            <div className="hero-logo opacity-0 mb-8">
-              <img
-                src={LOGO}
-                alt="Addendo Growth Partner"
-                className=""
-                style={{ maxWidth: '200px', height: 'auto', filter: 'none' }}
-                loading="eager"
-              />
-            </div>
-
             <div className="hero-badge opacity-0 inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold/20 bg-gold/5 mb-8">
               <span className="w-2 h-2 rounded-full bg-gold animate-pulse" />
               <span className="text-gold text-xs font-semibold uppercase tracking-wider">{t.hero.badge}</span>

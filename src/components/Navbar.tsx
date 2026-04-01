@@ -28,8 +28,7 @@ export default function Navbar() {
           <img
             src={LOGO}
             alt="Addendo Growth Partner"
-            className="h-auto"
-            style={{ minWidth: '160px', height: 'auto', objectFit: 'contain', filter: 'none' }}
+            style={{ width: '160px', height: 'auto' }}
             loading="eager"
           />
         </a>
