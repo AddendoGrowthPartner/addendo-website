@@ -20,7 +20,7 @@ export default function Solution() {
             <div className="absolute -top-4 -left-4 w-24 h-24 border-2 border-gold/25 rounded-xl hidden lg:block" />
           </div>
           <div>
-            <h2 className="s-a opacity-0 font-display text-3xl sm:text-4xl md:text-5xl font-semibold mb-6 leading-tight">{t.solution.title1}<br /><span className="gold-gradient-text">{t.solution.titleGold}</span></h2>
+            <h2 className="s-a opacity-0 font-display text-3xl sm:text-4xl md:text-5xl font-normal mb-6 leading-tight">{t.solution.title1}<br /><span className="gold-gradient-text">{t.solution.titleGold}</span></h2>
             <p className="s-a opacity-0 text-lg md:text-xl text-white/50 mb-8 leading-relaxed">{t.solution.text}</p>
             <p className="s-a opacity-0 text-2xl md:text-3xl font-bold text-white">{t.solution.thatis}</p>
           </div>

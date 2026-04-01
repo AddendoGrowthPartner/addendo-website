@@ -10,7 +10,7 @@ export default function CtaFinal() {
     <section ref={ref} className="section-pad relative overflow-hidden" style={{ background: '#080F24' }}>
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gold/[0.06] rounded-full blur-[160px]" />
       <div className="relative max-w-4xl mx-auto text-center">
-        <h2 className="cta-a opacity-0 font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold mb-6 leading-tight">{t.cta.title1}<br /><span className="gold-gradient-text">{t.cta.titleGold}</span></h2>
+        <h2 className="cta-a opacity-0 font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal mb-6 leading-tight">{t.cta.title1}<br /><span className="gold-gradient-text">{t.cta.titleGold}</span></h2>
         <p className="cta-a opacity-0 text-lg md:text-xl text-white/50 max-w-2xl mx-auto mb-10 leading-relaxed">{t.cta.text}</p>
         <div className="cta-a opacity-0 mb-6">
           {/* PENDIENTE: reemplazar con Calendar link de GHL */}

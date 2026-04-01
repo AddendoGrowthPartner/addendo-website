@@ -17,7 +17,7 @@ export default function Infrastructure() {
     <section ref={ref} className="section-pad relative" style={{ background: '#080F24' }}>
       <div className="max-w-6xl mx-auto">
         <div className="inf-i opacity-0 text-center mb-14">
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold mb-4">{t.infra.title1}<span className="gold-gradient-text">{t.infra.titleGold}</span></h2>
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-normal mb-4">{t.infra.title1}<span className="gold-gradient-text">{t.infra.titleGold}</span></h2>
           <p className="text-white/40 text-lg max-w-xl mx-auto">{t.infra.subtitle}</p>
         </div>
         <div className="grid md:grid-cols-2 gap-5">

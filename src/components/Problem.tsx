@@ -18,7 +18,7 @@ export default function Problem() {
   return (
     <section ref={ref} className="section-pad relative overflow-hidden" style={{ background: '#0A1228' }}>
       <div className="max-w-7xl mx-auto">
-        <h2 className="p-title opacity-0 font-display text-3xl sm:text-4xl md:text-5xl font-semibold text-center mb-12 md:mb-16 leading-tight">
+        <h2 className="p-title opacity-0 font-display text-3xl sm:text-4xl md:text-5xl font-normal text-center mb-12 md:mb-16 leading-tight">
           {t.problem.title1}<br /><span className="text-white/40">{t.problem.title2}</span>
         </h2>
         <div className="grid lg:grid-cols-2 gap-12 items-center">

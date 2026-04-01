@@ -8,7 +8,7 @@ export default function Blog() {
     <section className="section-pad" style={{ background: '#080F24' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-16">
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold mb-6">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-normal mb-6">
             <span className="gold-gradient-text">{t.blog.title}</span>
           </h2>
           <p className="text-white/55 text-lg max-w-2xl mx-auto">{t.blog.subtitle}</p>
