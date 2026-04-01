@@ -43,6 +43,8 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden" style={{ background: '#080F24' }}>
       {!isMobile && <canvas ref={canvasRef} className="absolute inset-0 z-0" />}
+      <div className="hero-tech-bg" />
+      <div className="hero-tech-dots" />
       <div className="absolute inset-0 bg-gradient-to-b from-[#080F24] via-[#080F24]/85 to-[#080F24] z-[1]" />
       <div className="absolute top-1/4 left-1/3 w-[700px] h-[700px] bg-gold/[0.04] rounded-full blur-[160px] z-[1]" />
 

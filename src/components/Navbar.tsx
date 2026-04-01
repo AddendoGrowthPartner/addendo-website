@@ -22,13 +22,14 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 overflow-hidden transition-all duration-300 h-16 md:h-20 ${scrolled ? 'bg-[#080F24]/95 backdrop-blur-xl shadow-2xl shadow-black/30' : 'bg-transparent'}`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 overflow-hidden transition-all duration-300 h-20 md:h-24 ${scrolled ? 'bg-[#080F24]/95 backdrop-blur-xl shadow-2xl shadow-black/30' : 'bg-transparent'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-full">
         <a href="#" className="flex items-center">
           <img
             src={LOGO}
             alt="Addendo Growth Partner"
-            className="max-w-[180px] max-h-[58px] md:max-w-[192px] md:max-h-[62px] w-auto h-auto object-contain"
+            width={240} height={78}
+            className="md:!w-[260px] md:!h-[84px] w-auto h-auto object-contain"
             loading="eager"
           />
         </a>
