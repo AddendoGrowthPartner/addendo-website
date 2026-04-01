@@ -1,5 +1,7 @@
 import { useEffect, useRef } from 'react';
 
+const PROBLEM_IMAGE = 'https://images.pexels.com/photos/5920775/pexels-photo-5920775.jpeg?auto=compress&cs=tinysrgb&w=800';
+
 const problems = [
   {
     icon: (
@@ -55,44 +57,33 @@ export default function Problem() {
     import('gsap').then(({ gsap }) => {
       import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
         gsap.registerPlugin(ScrollTrigger);
-
         const el = sectionRef.current;
         if (!el) return;
 
         gsap.fromTo(
           el.querySelector('.problem-title'),
           { opacity: 0, y: 50 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            scrollTrigger: { trigger: el, start: 'top 80%' },
-          }
+          { opacity: 1, y: 0, duration: 0.8, scrollTrigger: { trigger: el, start: 'top 80%' } }
+        );
+
+        gsap.fromTo(
+          el.querySelector('.problem-image'),
+          { opacity: 0, x: 50 },
+          { opacity: 1, x: 0, duration: 1, scrollTrigger: { trigger: el, start: 'top 70%' } }
         );
 
         el.querySelectorAll('.problem-card').forEach((card, i) => {
           gsap.fromTo(
             card,
             { opacity: 0, x: -30 },
-            {
-              opacity: 1,
-              x: 0,
-              duration: 0.6,
-              delay: i * 0.12,
-              scrollTrigger: { trigger: el, start: 'top 70%' },
-            }
+            { opacity: 1, x: 0, duration: 0.6, delay: i * 0.12, scrollTrigger: { trigger: el, start: 'top 70%' } }
           );
         });
 
         gsap.fromTo(
           el.querySelector('.problem-closing'),
           { opacity: 0, y: 30 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            scrollTrigger: { trigger: el.querySelector('.problem-closing'), start: 'top 85%' },
-          }
+          { opacity: 1, y: 0, duration: 0.8, scrollTrigger: { trigger: el.querySelector('.problem-closing'), start: 'top 85%' } }
         );
       });
     });
@@ -102,26 +93,47 @@ export default function Problem() {
     <section ref={sectionRef} id="problema" className="section-padding bg-dark relative">
       <div className="absolute inset-0 bg-gradient-to-b from-navy via-dark to-dark" />
 
-      <div className="relative max-w-5xl mx-auto">
+      <div className="relative max-w-7xl mx-auto">
         <h2 className="problem-title opacity-0 font-display text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-16 leading-tight">
           Trabajas mas que nadie.
           <br />
           <span className="text-white/50">Pero tu negocio no crece como deberia.</span>
         </h2>
 
-        <div className="space-y-4">
-          {problems.map((p, i) => (
-            <div
-              key={i}
-              className="problem-card opacity-0 glass-card p-6 flex items-start gap-5 hover:border-gold/30 transition-all duration-300"
-            >
-              <div className="text-gold shrink-0 mt-0.5">{p.icon}</div>
-              <div>
-                <h3 className="text-lg font-bold text-white mb-1">{p.title}</h3>
-                <p className="text-white/60 leading-relaxed">{p.text}</p>
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Problems list */}
+          <div className="space-y-4">
+            {problems.map((p, i) => (
+              <div
+                key={i}
+                className="problem-card opacity-0 glass-card p-6 flex items-start gap-5 hover:border-gold/30 transition-all duration-300"
+              >
+                <div className="text-gold shrink-0 mt-0.5">{p.icon}</div>
+                <div>
+                  <h3 className="text-lg font-bold text-white mb-1">{p.title}</h3>
+                  <p className="text-white/60 leading-relaxed">{p.text}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Image */}
+          <div className="problem-image opacity-0 hidden lg:block">
+            <div className="relative rounded-2xl overflow-hidden border border-white/10">
+              <img
+                src={PROBLEM_IMAGE}
+                alt="Dueno de negocio hispano"
+                className="w-full h-[480px] object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/30 to-transparent" />
+              <div className="absolute bottom-6 left-6 right-6">
+                <p className="text-white/80 text-sm font-medium italic">
+                  "Trabajas duro, pero necesitas que ese esfuerzo se convierta en resultados reales."
+                </p>
               </div>
             </div>
-          ))}
+          </div>
         </div>
 
         <div className="problem-closing opacity-0 mt-16 text-center">

@@ -1,5 +1,8 @@
 import { useEffect, useRef } from 'react';
 
+const ENTREPRENEUR_IMAGE = 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=600';
+const WOMAN_IMAGE = 'https://images.pexels.com/photos/1181292/pexels-photo-1181292.jpeg?auto=compress&cs=tinysrgb&w=600';
+
 const reasons = [
   {
     icon: (
@@ -61,28 +64,22 @@ export default function WhyAddendo() {
         gsap.fromTo(
           el.querySelector('.why-title'),
           { opacity: 0, y: 50 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            scrollTrigger: { trigger: el, start: 'top 80%' },
-          }
+          { opacity: 1, y: 0, duration: 0.8, scrollTrigger: { trigger: el, start: 'top 80%' } }
         );
 
         el.querySelectorAll('.why-card').forEach((card, i) => {
           gsap.fromTo(
             card,
             { opacity: 0, y: 30, scale: 0.95 },
-            {
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              duration: 0.6,
-              delay: i * 0.1,
-              scrollTrigger: { trigger: card, start: 'top 90%' },
-            }
+            { opacity: 1, y: 0, scale: 1, duration: 0.6, delay: i * 0.1, scrollTrigger: { trigger: card, start: 'top 90%' } }
           );
         });
+
+        gsap.fromTo(
+          el.querySelector('.why-testimonials'),
+          { opacity: 0, y: 30 },
+          { opacity: 1, y: 0, duration: 0.8, scrollTrigger: { trigger: el.querySelector('.why-testimonials'), start: 'top 85%' } }
+        );
       });
     });
   }, []);
@@ -99,7 +96,7 @@ export default function WhyAddendo() {
           <span className="gold-gradient-text">Somos la ultima que vas a necesitar.</span>
         </h2>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
           {reasons.map((reason, i) => (
             <div
               key={i}
@@ -112,6 +109,20 @@ export default function WhyAddendo() {
               <p className="text-white/55 leading-relaxed text-sm">{reason.text}</p>
             </div>
           ))}
+        </div>
+
+        {/* Social proof with faces */}
+        <div className="why-testimonials opacity-0 flex flex-col sm:flex-row items-center justify-center gap-8">
+          <div className="flex -space-x-3">
+            <img src={ENTREPRENEUR_IMAGE} alt="" className="w-12 h-12 rounded-full border-2 border-navy object-cover" loading="lazy" />
+            <img src={WOMAN_IMAGE} alt="" className="w-12 h-12 rounded-full border-2 border-navy object-cover" loading="lazy" />
+            <div className="w-12 h-12 rounded-full border-2 border-navy bg-gold/20 flex items-center justify-center text-gold text-xs font-bold">
+              +50
+            </div>
+          </div>
+          <p className="text-white/50 text-sm">
+            Negocios hispanos que ya estan creciendo con Addendo
+          </p>
         </div>
       </div>
     </section>

@@ -1,5 +1,7 @@
 import { useEffect, useRef } from 'react';
 
+const HERO_IMAGE = 'https://images.pexels.com/photos/7129717/pexels-photo-7129717.jpeg?auto=compress&cs=tinysrgb&w=1260';
+
 export default function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -26,7 +28,6 @@ export default function Hero() {
     resize();
     window.addEventListener('resize', resize);
 
-    // Create particles
     for (let i = 0; i < 60; i++) {
       particles.push({
         x: Math.random() * canvas.width,
@@ -44,7 +45,6 @@ export default function Hero() {
       particles.forEach((p) => {
         p.x += p.vx;
         p.y += p.vy;
-
         if (p.x < 0) p.x = canvas.width;
         if (p.x > canvas.width) p.x = 0;
         if (p.y < 0) p.y = canvas.height;
@@ -56,13 +56,11 @@ export default function Hero() {
         ctx.fill();
       });
 
-      // Draw connections
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
           const dy = particles[i].y - particles[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-
           if (dist < 150) {
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
@@ -78,23 +76,11 @@ export default function Hero() {
     };
     animate();
 
-    // GSAP animation
     import('gsap').then(({ gsap }) => {
-      gsap.fromTo(
-        '.hero-title',
-        { opacity: 0, y: 60 },
-        { opacity: 1, y: 0, duration: 1, delay: 0.3, ease: 'power3.out' }
-      );
-      gsap.fromTo(
-        '.hero-subtitle',
-        { opacity: 0, y: 40 },
-        { opacity: 1, y: 0, duration: 1, delay: 0.6, ease: 'power3.out' }
-      );
-      gsap.fromTo(
-        '.hero-cta',
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 1, delay: 0.9, ease: 'power3.out' }
-      );
+      gsap.fromTo('.hero-title', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 1, delay: 0.3, ease: 'power3.out' });
+      gsap.fromTo('.hero-subtitle', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 1, delay: 0.6, ease: 'power3.out' });
+      gsap.fromTo('.hero-cta', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1, delay: 0.9, ease: 'power3.out' });
+      gsap.fromTo('.hero-image', { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 1.2, delay: 0.5, ease: 'power3.out' });
     });
 
     return () => {
@@ -104,47 +90,60 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Particle canvas */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 z-0"
-      />
-
-      {/* Gradient overlays */}
+    <section className="relative min-h-screen flex items-center overflow-hidden">
+      <canvas ref={canvasRef} className="absolute inset-0 z-0" />
       <div className="absolute inset-0 bg-gradient-to-b from-navy via-navy/90 to-navy z-[1]" />
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gold/5 rounded-full blur-[120px] z-[1]" />
 
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center pt-20">
-        <h1 className="hero-title opacity-0 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-tight mb-8">
-          Tu negocio merece{' '}
-          <span className="gold-gradient-text">crecer sin limites.</span>
-          <br />
-          Nosotros lo hacemos realidad.
-        </h1>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 w-full pt-28 pb-20">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Text */}
+          <div>
+            <h1 className="hero-title opacity-0 font-display text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-black leading-tight mb-8">
+              Tu negocio merece{' '}
+              <span className="gold-gradient-text">crecer sin limites.</span>
+              <br />
+              Nosotros lo hacemos realidad.
+            </h1>
 
-        <p className="hero-subtitle opacity-0 text-lg sm:text-xl md:text-2xl text-white/70 max-w-3xl mx-auto mb-10 leading-relaxed">
-          Addendo es el sistema completo que convierte tu negocio en una
-          maquina de ventas — presencia digital, campanas, contenido,
-          reputacion y clientes nuevos cada semana. Todo resuelto. Todo
-          funcionando. 24/7.
-        </p>
+            <p className="hero-subtitle opacity-0 text-lg sm:text-xl text-white/70 max-w-xl mb-10 leading-relaxed">
+              Addendo es el sistema completo que convierte tu negocio en una
+              maquina de ventas — presencia digital, campanas, contenido,
+              reputacion y clientes nuevos cada semana. Todo resuelto. Todo
+              funcionando. 24/7.
+            </p>
 
-        <div className="hero-cta opacity-0 flex flex-col items-center gap-4">
-          <a href="#contacto" className="btn-gold text-lg md:text-xl">
-            Agenda tu llamada estrategica gratis
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </a>
-          <p className="text-white/40 text-sm">
-            Sin compromiso. Sin presion. Solo una conversacion sobre como llevar
-            tu negocio al siguiente nivel.
-          </p>
+            <div className="hero-cta opacity-0 flex flex-col sm:flex-row items-start gap-4">
+              <a href="#contacto" className="btn-gold text-lg">
+                Agenda tu llamada estrategica gratis
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+              <p className="text-white/40 text-sm max-w-xs">
+                Sin compromiso. Sin presion. Solo una conversacion sobre como llevar tu negocio al siguiente nivel.
+              </p>
+            </div>
+          </div>
+
+          {/* Image */}
+          <div className="hero-image opacity-0 relative hidden lg:block">
+            <div className="relative rounded-2xl overflow-hidden border border-gold/20 shadow-2xl shadow-gold/10">
+              <img
+                src={HERO_IMAGE}
+                alt="Empresario latino exitoso"
+                className="w-full h-[500px] object-cover"
+                loading="eager"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-transparent to-transparent" />
+            </div>
+            {/* Decorative elements */}
+            <div className="absolute -top-4 -right-4 w-24 h-24 border-2 border-gold/20 rounded-2xl" />
+            <div className="absolute -bottom-4 -left-4 w-32 h-32 border-2 border-gold/10 rounded-2xl" />
+          </div>
         </div>
       </div>
 
-      {/* Bottom gradient fade */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-navy to-transparent z-10" />
     </section>
   );
