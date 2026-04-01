@@ -13,6 +13,7 @@ import Infrastructure from './Infrastructure';
 import WhyAddendo from './WhyAddendo';
 import Testimonials from './Testimonials';
 import CtaFinal from './CtaFinal';
+import Blog from './Blog';
 import Contact from './Contact';
 import Footer from './Footer';
 import WhatsAppButton from './WhatsAppButton';
@@ -42,6 +43,8 @@ function Content() {
       <CtaFinal />
       <SectionSeparator number="05" label={t.separators.s05} />
       <Contact />
+      <SectionSeparator number="06" label={t.separators.s06} />
+      <Blog />
       <Footer />
       <WhatsAppButton />
     </>

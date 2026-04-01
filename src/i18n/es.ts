@@ -207,12 +207,41 @@ const es = {
     contacto: 'Contacto',
     rights: 'Todos los derechos reservados.',
   },
+  blog: {
+    title: 'Estrategias que transforman negocios',
+    subtitle: 'Consejos, tendencias y casos de éxito para hacer crecer tu negocio.',
+    viewAll: 'Ver todos los artículos →',
+    posts: [
+      {
+        category: 'Marketing Digital',
+        title: 'Cómo duplicar tus leads en 30 días con Google Ads',
+        excerpt: 'Descubre las estrategias que usamos para multiplicar los resultados de nuestros clientes.',
+        date: 'Marzo 2026',
+        cta: 'Leer más →',
+      },
+      {
+        category: 'Redes Sociales',
+        title: 'Por qué tu negocio necesita estar en TikTok en 2026',
+        excerpt: 'TikTok ya no es solo para jóvenes — es el canal de mayor crecimiento para negocios locales.',
+        date: 'Marzo 2026',
+        cta: 'Leer más →',
+      },
+      {
+        category: 'SEO',
+        title: 'SEO Local: Aparece primero cuando te buscan en tu ciudad',
+        excerpt: 'Aprende cómo optimizar tu presencia para que Google te muestre a los clientes más cercanos.',
+        date: 'Marzo 2026',
+        cta: 'Leer más →',
+      },
+    ],
+  },
   separators: {
     s01: 'El Problema',
     s02: 'Nuestros Servicios',
     s03: 'Cómo Trabajamos',
     s04: 'Por Qué Addendo',
     s05: 'Contacto',
+    s06: 'Blog',
   },
 };
 

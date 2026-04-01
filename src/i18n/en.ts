@@ -207,12 +207,41 @@ const en = {
     contacto: 'Contact',
     rights: 'All rights reserved.',
   },
+  blog: {
+    title: 'Strategies that transform businesses',
+    subtitle: 'Tips, trends and success stories to grow your business.',
+    viewAll: 'View all articles →',
+    posts: [
+      {
+        category: 'Digital Marketing',
+        title: 'How to Double Your Leads in 30 Days with Google Ads',
+        excerpt: 'Discover the strategies we use to multiply our clients\' results.',
+        date: 'March 2026',
+        cta: 'Read more →',
+      },
+      {
+        category: 'Social Media',
+        title: 'Why Your Business Needs to Be on TikTok in 2026',
+        excerpt: 'TikTok is no longer just for young people — it\'s the fastest-growing channel for local businesses.',
+        date: 'March 2026',
+        cta: 'Read more →',
+      },
+      {
+        category: 'SEO',
+        title: 'Local SEO: Rank First When They Search in Your City',
+        excerpt: 'Learn how to optimize your presence so Google shows you to the nearest customers.',
+        date: 'March 2026',
+        cta: 'Read more →',
+      },
+    ],
+  },
   separators: {
     s01: 'The Problem',
     s02: 'Our Services',
     s03: 'How We Work',
     s04: 'Why Addendo',
     s05: 'Contact',
+    s06: 'Blog',
   },
 };
 
