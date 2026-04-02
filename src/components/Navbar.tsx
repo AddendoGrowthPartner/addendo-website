@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useI18n } from '../i18n/context';
 
-const LOGO_ICON = 'https://res.cloudinary.com/dokzw376u/image/upload/v1775016113/VECTOR_ADDENDO_FINAL-removebg-preview_w97pwl.png';
+const LOGO_ICON = 'https://res.cloudinary.com/dokzw376u/image/upload/v1775101381/LOGO_ADEDNDO_LIMPIO_SIN_EXTO_VECTORIZADO-removebg-preview_ea9tj4.png';
 
 export default function Navbar() {
   const { t, lang, setLang } = useI18n();
@@ -21,7 +21,7 @@ export default function Navbar() {
           <img
             src={LOGO_ICON}
             alt="Addendo"
-            style={{ height: '36px', width: 'auto', objectFit: 'contain' }}
+            style={{ height: '40px', width: 'auto', objectFit: 'contain' }}
           />
           <div className="flex flex-col leading-none">
             <span style={{ fontFamily: 'Fraunces, serif', fontSize: '18px', fontWeight: '400', color: '#C9A84C', letterSpacing: '0.12em' }}>ADDENDO</span>
