@@ -17,13 +17,13 @@ export default function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 h-24 bg-[#080F24]/90 backdrop-blur-md border-b border-[#C9A84C]/10 transition-all duration-300">
       <div className="flex items-center justify-between h-24 px-6 md:px-10 max-w-7xl mx-auto">
-        <a href="/" className="flex items-center gap-0 shrink-0">
+        <a href="/" className="flex items-center gap-1 shrink-0">
           <img
             src={LOGO_ICON}
             alt="Addendo"
             style={{ height: '80px', width: 'auto', objectFit: 'contain' }}
           />
-          <div className="flex flex-col leading-none" style={{ paddingLeft: '10px', borderLeft: '1px solid rgba(201, 168, 76, 0.4)' }}>
+          <div className="flex flex-col leading-none">
             <span style={{ fontFamily: 'Fraunces, serif', fontSize: '26px', fontWeight: '400', color: '#C9A84C', letterSpacing: '0.16em' }}>ADDENDO</span>
             <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '11px', fontWeight: '300', color: 'rgba(255,255,255,0.5)', letterSpacing: '0.25em' }}>GROWTH PARTNER</span>
           </div>
