@@ -41,16 +41,16 @@ export default function Hero() {
   }, [isMobile]);
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden" style={{ background: '#080F24' }}>
+    <section className="relative min-h-screen flex items-center" style={{ background: '#080F24' }}>
       {!isMobile && <canvas ref={canvasRef} className="absolute inset-0 z-0" />}
       <div className="hero-tech-bg" />
       <div className="hero-tech-dots" />
       <div className="absolute inset-0 bg-gradient-to-b from-[#080F24] via-[#080F24]/85 to-[#080F24] z-[1]" />
-      <div className="absolute top-1/4 left-1/3 w-[700px] h-[700px] bg-gold/[0.04] rounded-full blur-[160px] z-[1]" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 w-full pt-24 pb-16">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          <div>
+        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+          {/* Text column */}
+          <div className="flex-1">
             <div className="hero-badge inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold/20 bg-gold/5 mb-6 md:mb-8">
               <span className="w-2 h-2 rounded-full bg-gold animate-pulse" />
               <span className="text-gold text-xs font-semibold uppercase tracking-wider">{t.hero.badge}</span>
@@ -65,26 +65,24 @@ export default function Hero() {
 
             <p className="hero-p text-base sm:text-xl text-white/55 max-w-xl mb-8 md:mb-10 leading-relaxed">{t.hero.subtitle}</p>
 
-            <div className="hero-cta flex flex-col sm:flex-row items-center gap-6">
-              <a href="#contacto" className="btn-gold text-base md:text-lg justify-center" style={{ whiteSpace: 'nowrap' }}>
+            <div className="hero-cta flex flex-col sm:flex-row items-start sm:items-center gap-6">
+              <a href="#contacto" className="inline-flex items-center gap-3 bg-[#C9A84C] hover:bg-[#D4B96A] text-[#080F24] font-semibold py-4 px-8 rounded-lg transition-all duration-300 text-base md:text-lg">
                 {t.hero.cta}
                 <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
               </a>
-              <p className="text-white/30 text-sm max-w-xs text-center sm:text-left" style={{ wordBreak: 'normal', whiteSpace: 'normal' }}>{t.hero.ctaSub}</p>
+              <p className="text-white/30 text-sm max-w-xs">{t.hero.ctaSub}</p>
             </div>
           </div>
 
-          <div className="hero-img relative mx-auto max-w-[400px] lg:max-w-none">
-            <div className="relative rounded-xl overflow-hidden border-2 border-gold/25 shadow-2xl shadow-gold/10">
+          {/* Image column */}
+          <div className="hero-img flex-1 w-full max-w-[500px] lg:max-w-none">
+            <div className="rounded-2xl overflow-hidden border-2 border-gold/25 shadow-2xl shadow-gold/10">
               <picture>
                 <source media="(max-width: 767px)" srcSet={HERO_IMG_SM} />
                 <source media="(min-width: 768px)" srcSet={HERO_IMG_LG} />
-                <img src={HERO_IMG_LG} alt={t.hero.imgAlt} width={1200} height={800} className="w-full h-[300px] sm:h-[400px] lg:h-[520px] object-cover" loading="eager" fetchPriority="high" decoding="async" />
+                <img src={HERO_IMG_LG} alt={t.hero.imgAlt} width={1200} height={800} className="w-full h-auto rounded-2xl object-cover" loading="eager" fetchPriority="high" decoding="async" />
               </picture>
-              <div className="absolute inset-0 bg-gradient-to-t from-[#080F24]/70 via-transparent to-transparent" />
             </div>
-            <div className="absolute -top-5 -right-5 w-28 h-28 border-2 border-gold/20 rounded-xl hidden lg:block" />
-            <div className="absolute -bottom-5 -left-5 w-36 h-36 border-2 border-gold/10 rounded-xl hidden lg:block" />
           </div>
         </div>
       </div>
