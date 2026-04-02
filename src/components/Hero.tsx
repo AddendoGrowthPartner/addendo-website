@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { useI18n } from '../i18n/context';
 
-const HERO_IMG_SM = 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&q=80';
-const HERO_IMG_LG = 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80';
+const HERO_IMG_SM = 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&q=80';
+const HERO_IMG_LG = 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80';
 
 export default function Hero() {
   const { t } = useI18n();
@@ -48,7 +48,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-b from-[#080F24] via-[#080F24]/85 to-[#080F24] z-[1]" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 w-full pt-24 pb-16">
-        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+        <div className="flex flex-col lg:flex-row items-center gap-12 min-h-[600px]">
           {/* Text column */}
           <div className="flex-1">
             <div className="hero-badge inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold/20 bg-gold/5 mb-6 md:mb-8">
@@ -75,12 +75,12 @@ export default function Hero() {
           </div>
 
           {/* Image column */}
-          <div className="hero-img flex-1 w-full max-w-[500px] lg:max-w-none">
+          <div className="hero-img flex-1 w-full">
             <div className="rounded-2xl overflow-hidden border-2 border-gold/25 shadow-2xl shadow-gold/10">
               <picture>
                 <source media="(max-width: 767px)" srcSet={HERO_IMG_SM} />
                 <source media="(min-width: 768px)" srcSet={HERO_IMG_LG} />
-                <img src={HERO_IMG_LG} alt={t.hero.imgAlt} width={1200} height={800} className="w-full h-auto rounded-2xl object-cover" loading="eager" fetchPriority="high" decoding="async" />
+                <img src={HERO_IMG_LG} alt={t.hero.imgAlt} width={800} height={500} className="w-full rounded-2xl object-cover object-center h-[300px] lg:h-[500px]" loading="eager" fetchPriority="high" decoding="async" />
               </picture>
             </div>
           </div>
