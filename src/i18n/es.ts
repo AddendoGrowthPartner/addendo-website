@@ -80,7 +80,7 @@ const es = {
         services: [
           { name: 'SEO Técnico', desc: 'Tu sitio web preparado para aparecer en Google orgánicamente.', badge: 'Incluido' },
           { name: 'SEO Local', desc: 'Domina las búsquedas en tu ciudad y región.', badge: 'Incluido' },
-          { name: 'Google Business Profile', desc: 'Tu ficha de Google lista para atraer visitas locales.', badge: 'Incluido' },
+          { name: 'Google Business Profile', desc: 'Tu negocio aparece cuando alguien busca lo que vendes cerca de ti. Gestionamos y optimizamos tu perfil para que Google te muestre primero — más llamadas, más visitas, más ventas.', badge: 'Incluido' },
           { name: 'Link Building', desc: 'Construcción de autoridad con backlinks de alto valor.', badge: 'Premium' },
         ],
       },

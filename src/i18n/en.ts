@@ -80,7 +80,7 @@ const en = {
         services: [
           { name: 'Technical SEO', desc: 'Your site built to rank organically on Google.', badge: 'Included' },
           { name: 'Local SEO', desc: 'Dominate searches in your city and region.', badge: 'Included' },
-          { name: 'Google Business Profile', desc: 'Your Google listing ready to drive local visits.', badge: 'Included' },
+          { name: 'Google Business Profile', desc: 'Your business shows up when someone searches for what you sell nearby. We manage and optimize your profile so Google shows you first — more calls, more visits, more sales.', badge: 'Included' },
           { name: 'Link Building', desc: 'Authority building with high-value backlinks.', badge: 'Premium' },
         ],
       },
