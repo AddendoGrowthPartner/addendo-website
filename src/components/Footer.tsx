@@ -20,24 +20,29 @@ export default function Footer() {
     <footer className="border-t border-white/[0.05]" style={{ background: '#060C1E' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
         <div className="grid md:grid-cols-3 gap-12 md:gap-8">
-          <div>
+          <div className="text-center md:text-left flex flex-col items-center md:items-start">
             <img src={LOGO} alt="Addendo" className="mb-5" style={{ width: '160px', height: 'auto' }} loading="lazy" />
             <p className="text-white/30 text-sm leading-relaxed max-w-xs">{t.footer.desc}</p>
           </div>
-          <div>
+          <div className="text-center md:text-left flex flex-col items-center md:items-start">
             <h4 className="text-white/70 font-semibold mb-5 text-xs uppercase tracking-[0.15em]">{t.footer.nav}</h4>
             <ul className="space-y-3">{links.map(l => <li key={l.href}><a href={l.href} className="text-white/40 hover:text-gold transition-colors text-sm">{l.label}</a></li>)}</ul>
           </div>
-          <div>
+          <div className="text-center md:text-left flex flex-col items-center md:items-start">
             <h4 className="text-white/70 font-semibold mb-5 text-xs uppercase tracking-[0.15em]">{t.footer.contacto}</h4>
             <a href="mailto:admin@addendo.io" className="text-gold/80 hover:text-gold transition-colors text-sm block mb-6">admin@addendo.io</a>
-            <div className="flex gap-4">
+            <div className="flex gap-4 justify-center md:justify-start">
               {social.map(s => <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} className="text-white/30 hover:text-gold transition-colors"><svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d={s.d} /></svg></a>)}
             </div>
           </div>
         </div>
         <div className="mt-16 pt-8 border-t border-white/[0.04] text-center">
           <p className="text-white/20 text-xs">&copy; {new Date().getFullYear()} Addendo Growth Partner. {t.footer.rights}</p>
+          <div className="flex items-center justify-center gap-2 mt-3">
+            <a href="/privacy" className="text-white/20 text-xs hover:text-gold transition-colors">Privacy Policy</a>
+            <span className="text-white/10 text-xs">&middot;</span>
+            <a href="/terms" className="text-white/20 text-xs hover:text-gold transition-colors">Terms of Use</a>
+          </div>
         </div>
       </div>
     </footer>
