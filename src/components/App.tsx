@@ -17,7 +17,6 @@ import { useI18n } from '../i18n/context';
 
 const AIAgents = lazy(() => import('./AIAgents'));
 const ForWhom = lazy(() => import('./ForWhom'));
-const Industries = lazy(() => import('./Industries'));
 const Process = lazy(() => import('./Process'));
 const Infrastructure = lazy(() => import('./Infrastructure'));
 const WhyAddendo = lazy(() => import('./WhyAddendo'));
@@ -49,9 +48,6 @@ function Content() {
       <Solution />
       <SectionSeparator number="02" label={t.separators.s02} />
       <Services />
-      <Suspense fallback={LazyFallback}>
-        <Industries />
-      </Suspense>
       <SectionSeparator number="03" label={t.separators.s03} />
       <Suspense fallback={LazyFallback}>
         <Process />

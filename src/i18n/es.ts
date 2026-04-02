@@ -269,7 +269,7 @@ const es = {
   forWhom: {
     title1: 'Construido para negocios que quieren ',
     titleGold: 'crecer de verdad.',
-    subtitle: 'Trabajamos con empresas que están listas para escalar sus ventas con tecnología de verdad.',
+    subtitle: 'Trabajamos con cualquier negocio que venda — si tienes clientes, nosotros te ayudamos a conseguir más.',
     items: ['E-Commerce y Retail', 'Servicios Profesionales', 'Bienes Raíces', 'Salud y Bienestar', 'Restaurantes y Franquicias', 'Educación y Cursos Online', 'Paneles Solares', 'Filtros de Agua y Purificación', 'Agencias de Seguros', 'Abogados de Migración', 'Remodelación y Techos', 'Talleres y Mecánica Automotriz'],
     cta: 'Si tu negocio genera ventas y quieres más — somos tu equipo.',
   },

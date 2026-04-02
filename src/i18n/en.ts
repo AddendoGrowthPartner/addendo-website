@@ -269,7 +269,7 @@ const en = {
   forWhom: {
     title1: 'Built for businesses that want to ',
     titleGold: 'truly grow.',
-    subtitle: 'We work with companies ready to scale their sales with real technology.',
+    subtitle: 'We work with any business that sells — if you have clients, we help you get more.',
     items: ['E-Commerce & Retail', 'Professional Services', 'Real Estate', 'Health & Wellness', 'Restaurants & Franchises', 'Education & Online Courses', 'Solar Panels', 'Water Filtration & Purification', 'Insurance Agencies', 'Immigration Attorneys', 'Home Improvement & Roofing', 'Auto Repair & Mechanics'],
     cta: 'If your business generates sales and you want more — we\'re your team.',
   },
