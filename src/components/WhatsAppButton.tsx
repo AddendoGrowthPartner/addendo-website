@@ -11,7 +11,10 @@ export default function WhatsAppButton() {
       href={`https://wa.me/18557105590?text=${msg}`}
       target="_blank"
       rel="noopener noreferrer"
-      className="whatsapp-float"
+      className="fixed bottom-6 right-6 z-40 w-[60px] h-[60px] rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
+      style={{ background: '#C9A84C', boxShadow: '0 4px 20px rgba(201, 168, 76, 0.4)' }}
+      onMouseEnter={e => { e.currentTarget.style.background = '#D4B96A'; e.currentTarget.style.boxShadow = '0 8px 32px rgba(201, 168, 76, 0.55)'; }}
+      onMouseLeave={e => { e.currentTarget.style.background = '#C9A84C'; e.currentTarget.style.boxShadow = '0 4px 20px rgba(201, 168, 76, 0.4)'; }}
       aria-label="WhatsApp"
     >
       <svg className="w-7 h-7" fill="#080F24" viewBox="0 0 24 24">
