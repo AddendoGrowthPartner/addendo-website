@@ -10,9 +10,9 @@ export default function ClientLogos() {
     <section ref={ref} className="py-10 px-4" style={{ background: '#080F24' }}>
       <div className="max-w-6xl mx-auto text-center">
         <p className="cl-i opacity-0 text-white/25 text-xs uppercase tracking-[0.2em] mb-8 font-semibold">{t.clients.label}</p>
-        <div className="cl-i opacity-0 flex flex-wrap items-center justify-center gap-8 md:gap-16">
+        <div className="cl-i opacity-0 flex flex-wrap items-center justify-center gap-4 md:gap-6">
           {['Don Jacinto', 'CreditBridge', 'Ciudad Maderas', 'Bebé Genial', 'Neuron Kids'].map(n => (
-            <span key={n} className="text-white/[0.12] font-bold text-base md:text-lg tracking-widest uppercase hover:text-white/25 transition-colors duration-500">{n}</span>
+            <span key={n} className="px-5 py-2.5 rounded-full border border-gold/30 bg-gold/[0.05] text-white/70 font-bold text-xs md:text-sm tracking-widest uppercase hover:border-gold/50 hover:text-white/90 transition-all duration-300">{n}</span>
           ))}
         </div>
       </div>

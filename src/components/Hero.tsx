@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { useI18n } from '../i18n/context';
 
-const HERO_IMG_SM = 'https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg?auto=compress&cs=tinysrgb&w=400';
-const HERO_IMG_LG = 'https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg?auto=compress&cs=tinysrgb&w=1200';
+const HERO_IMG_SM = 'https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg?auto=compress&cs=tinysrgb&w=400';
+const HERO_IMG_LG = 'https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg?auto=compress&cs=tinysrgb&w=1200';
 
 export default function Hero() {
   const { t } = useI18n();

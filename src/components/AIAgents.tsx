@@ -1,6 +1,8 @@
 import { useI18n } from '../i18n/context';
+import { FiBarChart2, FiMegaphone, FiEdit3, FiSearch, FiCpu, FiStar, FiTrendingUp, FiMic } from 'react-icons/fi';
+import type { IconType } from 'react-icons';
 
-const icons = ['📊', '📢', '✍️', '🔎', '🤖', '⭐', '📈', '🎙️'];
+const icons: IconType[] = [FiBarChart2, FiMegaphone, FiEdit3, FiSearch, FiCpu, FiStar, FiTrendingUp, FiMic];
 
 export default function AIAgents() {
   const { t } = useI18n();
@@ -16,13 +18,18 @@ export default function AIAgents() {
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-          {t.aiAgents.items.map((item: { title: string; text: string }, i: number) => (
-            <div key={i} className="rounded-xl border border-gold/15 bg-[#0F1629] p-5 sm:p-6 hover:border-gold/40 transition-all duration-300 hover:-translate-y-1 group">
-              <div className="text-2xl mb-3 icon-elegant">{icons[i]}</div>
-              <h3 className="text-sm sm:text-base font-medium text-white mb-2">{item.title}</h3>
-              <p className="text-white/40 text-xs sm:text-sm leading-relaxed">{item.text}</p>
-            </div>
-          ))}
+          {t.aiAgents.items.map((item: { title: string; text: string }, i: number) => {
+            const Icon = icons[i];
+            return (
+              <div key={i} className="rounded-xl border border-gold/15 bg-[#0F1629] p-5 sm:p-6 hover:border-gold/40 transition-all duration-300 hover:-translate-y-1 group">
+                <div className="mb-3 icon-elegant">
+                  <Icon size={28} color="#C9A84C" className="sm:w-8 sm:h-8" />
+                </div>
+                <h3 className="text-sm sm:text-base font-medium text-white mb-2">{item.title}</h3>
+                <p className="text-white/40 text-xs sm:text-sm leading-relaxed">{item.text}</p>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
