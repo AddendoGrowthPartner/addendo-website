@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useI18n } from '../i18n/context';
 
-const LOGO_ICON = 'https://res.cloudinary.com/dokzw376u/image/upload/v1775101381/LOGO_ADEDNDO_LIMPIO_SIN_EXTO_VECTORIZADO-removebg-preview_ea9tj4.png';
+const LOGO_ICON = 'https://res.cloudinary.com/dokzw376u/image/upload/v1775104248/LOGO_FINAL_VECTORIZADO_ALTA_CALIDAD_-removebg-preview_uasfeg.png';
 
 export default function Navbar() {
   const { t, lang, setLang } = useI18n();
