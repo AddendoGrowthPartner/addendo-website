@@ -34,8 +34,8 @@ export default function Navbar() {
             <a key={l.href} href={l.href} className="text-white/80 hover:text-white transition-colors text-base font-medium tracking-[0.05em] uppercase">{l.label}</a>
           ))}
           <div className="flex items-center border border-white/10 rounded-full px-1 py-0.5 ml-1">
-            <button onClick={() => setLang('es')} className={`text-xs font-bold px-3 py-1 rounded-full transition-all ${lang === 'es' ? 'bg-gold text-[#080F24]' : 'text-white/40 hover:text-white'}`}>ES</button>
-            <button onClick={() => setLang('en')} className={`text-xs font-bold px-3 py-1 rounded-full transition-all ${lang === 'en' ? 'bg-gold text-[#080F24]' : 'text-white/40 hover:text-white'}`}>EN</button>
+            <button onClick={() => setLang('es')} className={`text-xs font-bold px-3 py-1.5 min-h-[36px] min-w-[36px] rounded-full transition-all ${lang === 'es' ? 'bg-gold text-[#080F24]' : 'text-white/40 hover:text-white'}`}>ES</button>
+            <button onClick={() => setLang('en')} className={`text-xs font-bold px-3 py-1.5 min-h-[36px] min-w-[36px] rounded-full transition-all ${lang === 'en' ? 'bg-gold text-[#080F24]' : 'text-white/40 hover:text-white'}`}>EN</button>
           </div>
           <a href="#contacto" className="btn-gold !py-2.5 !px-7 !text-sm">{t.nav.cta}</a>
         </div>

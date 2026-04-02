@@ -32,7 +32,7 @@ export default function Problem() {
           </div>
           <div className="p-img opacity-0">
             <div className="relative rounded-xl overflow-hidden border border-white/[0.08] max-w-[400px] mx-auto lg:max-w-none">
-              <img src={IMG} alt={t.problem.imgAlt} className="w-full h-[300px] sm:h-[380px] lg:h-[460px] object-cover grayscale hover:grayscale-0 transition-all duration-700" loading="lazy" decoding="async" />
+              <img src={IMG} alt={t.problem.imgAlt} width={800} height={600} className="w-full h-[300px] sm:h-[380px] lg:h-[460px] object-cover grayscale hover:grayscale-0 transition-all duration-700" loading="lazy" decoding="async" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0A1228] via-[#0A1228]/30 to-transparent" />
               <div className="absolute bottom-6 left-6 right-6"><p className="text-white/70 text-sm font-medium italic">{t.problem.imgQuote}</p></div>
             </div>

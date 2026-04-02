@@ -22,7 +22,7 @@ export default function Testimonials() {
         <div className="grid md:grid-cols-3 gap-6">
           {t.testimonials.items.map((te, i) => (
             <div key={i} className="te-c opacity-0 glass-card p-8 text-center">
-              <img src={imgs[i]} alt={te.name} className="w-16 h-16 rounded-full mx-auto mb-5 object-cover border-2 border-gold/30" loading="lazy" />
+              <img src={imgs[i]} alt={te.name} width={64} height={64} className="w-16 h-16 rounded-full mx-auto mb-5 object-cover border-2 border-gold/30" loading="lazy" />
               <p className="text-white/60 text-sm leading-relaxed mb-6 italic">"{te.quote}"</p>
               <p className="text-white font-bold text-sm">{te.name}</p>
               <p className="text-gold/60 text-xs mt-1">{te.business}</p>

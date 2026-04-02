@@ -79,7 +79,7 @@ export default function Hero() {
               <picture>
                 <source media="(max-width: 767px)" srcSet={HERO_IMG_SM} />
                 <source media="(min-width: 768px)" srcSet={HERO_IMG_LG} />
-                <img src={HERO_IMG_LG} alt={t.hero.imgAlt} className="w-full h-[300px] sm:h-[400px] lg:h-[520px] object-cover" loading="eager" fetchPriority="high" decoding="async" />
+                <img src={HERO_IMG_LG} alt={t.hero.imgAlt} width={1200} height={800} className="w-full h-[300px] sm:h-[400px] lg:h-[520px] object-cover" loading="eager" fetchPriority="high" decoding="async" />
               </picture>
               <div className="absolute inset-0 bg-gradient-to-t from-[#080F24]/70 via-transparent to-transparent" />
             </div>

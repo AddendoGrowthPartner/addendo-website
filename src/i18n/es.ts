@@ -11,7 +11,7 @@ const es = {
     title1: 'Tu negocio merece ',
     titleGold: 'crecer sin límites.',
     title2: 'Nosotros lo hacemos realidad.',
-    subtitle: 'Addendo es el sistema completo que convierte tu negocio en una máquina de ventas — combinamos estrategia, tecnología e inteligencia artificial para gestionar tu presencia digital, campañas, contenido y reputación, generándote clientes nuevos que se convierten en ventas cada semana.',
+    subtitle: 'Addendo es el sistema que convierte tu negocio en una máquina de ventas — combinamos estrategia, tecnología e inteligencia artificial para mover tu presencia digital, campañas, contenido y reputación, trayéndote clientes nuevos que se convierten en ventas cada semana.',
     cta: 'Agenda tu llamada estratégica gratis',
     ctaSub: 'Sin compromiso. Sin presión. Solo resultados.',
     imgAlt: 'Empresario latino exitoso',
@@ -24,7 +24,7 @@ const es = {
   },
   allies: {
     title: 'Tecnología de clase mundial trabajando para ti',
-    subtitle: 'Integramos las mejores plataformas del mundo para maximizar tus resultados.',
+    subtitle: 'Usamos las mejores plataformas del mundo para que tu negocio crezca más rápido.',
   },
   clients: {
     label: 'Negocios que ya crecen con Addendo',
@@ -69,7 +69,7 @@ const es = {
           { name: 'Google Ads (SEM)', desc: 'Campañas de búsqueda, display y shopping que convierten clics en clientes.', badge: 'Incluido' },
           { name: 'Meta Ads', desc: 'Facebook e Instagram ads segmentados para tu mercado exacto.', badge: 'Incluido' },
           { name: 'TikTok Ads', desc: 'Contenido patrocinado viral que llega a audiencias nuevas.', badge: 'Incluido' },
-          { name: 'YouTube Ads', desc: 'Video advertising que posiciona tu marca ante millones.', badge: 'Premium' },
+          { name: 'YouTube Ads', desc: 'Video ads que posicionan tu marca ante millones de personas.', badge: 'Premium' },
           { name: 'LinkedIn Ads', desc: 'Campañas B2B para llegar a tomadores de decisión.', badge: 'Premium' },
           { name: 'Retargeting', desc: 'Recupera clientes que visitaron tu sitio sin comprar.', badge: 'Incluido' },
         ],
@@ -77,10 +77,10 @@ const es = {
       {
         name: 'Presencia Orgánica',
         services: [
-          { name: 'SEO Técnico', desc: 'Optimización de sitio para posicionar en Google orgánicamente.', badge: 'Incluido' },
+          { name: 'SEO Técnico', desc: 'Tu sitio web preparado para aparecer en Google orgánicamente.', badge: 'Incluido' },
           { name: 'SEO Local', desc: 'Domina las búsquedas en tu ciudad y región.', badge: 'Incluido' },
-          { name: 'Google Business Profile', desc: 'Tu ficha de Google optimizada al máximo para visibilidad local.', badge: 'Incluido' },
-          { name: 'Link Building', desc: 'Construcción de autoridad con backlinks premium de alto valor.', badge: 'Premium' },
+          { name: 'Google Business Profile', desc: 'Tu ficha de Google lista para atraer visitas locales.', badge: 'Incluido' },
+          { name: 'Link Building', desc: 'Construcción de autoridad con backlinks de alto valor.', badge: 'Premium' },
         ],
       },
       {
@@ -89,7 +89,7 @@ const es = {
           { name: 'Facebook', desc: 'Comunidad, engagement y contenido que genera conversaciones.', badge: 'Incluido' },
           { name: 'Instagram', desc: 'Contenido visual, Reels y Stories que conectan con tu audiencia.', badge: 'Incluido' },
           { name: 'TikTok', desc: 'Videos virales y tendencias que disparan tu alcance.', badge: 'Incluido' },
-          { name: 'YouTube', desc: 'Canal optimizado y video marketing para autoridad de marca.', badge: 'Premium' },
+          { name: 'YouTube', desc: 'Canal bien armado y video marketing para autoridad de marca.', badge: 'Premium' },
           { name: 'LinkedIn', desc: 'Marca profesional B2B y thought leadership.', badge: 'Premium' },
         ],
       },
@@ -99,7 +99,7 @@ const es = {
           { name: 'Producción de Videos', desc: 'Videos profesionales con tecnología avanzada de producción.', badge: 'Incluido' },
           { name: 'Fotografía y Diseño', desc: 'Creativos visuales que elevan la percepción de tu marca.', badge: 'Incluido' },
           { name: 'Copywriting Persuasivo', desc: 'Textos que venden — ads, landing pages, emails, guiones.', badge: 'Incluido' },
-          { name: 'Blog y Contenido SEO', desc: 'Artículos optimizados que atraen tráfico orgánico.', badge: 'Incluido' },
+          { name: 'Blog y Contenido SEO', desc: 'Artículos que atraen tráfico orgánico y posicionan tu marca.', badge: 'Incluido' },
           { name: 'Email Marketing', desc: 'Secuencias automatizadas que nutren y convierten leads.', badge: 'Incluido' },
         ],
       },
@@ -116,7 +116,7 @@ const es = {
       {
         name: 'Estrategia y Analytics',
         services: [
-          { name: 'Auditoría Digital Completa', desc: 'Diagnóstico profundo de tu presencia y oportunidades.', badge: 'Incluido' },
+          { name: 'Auditoría Digital Completa', desc: 'Diagnóstico profundo de tu presencia y oportunidades reales.', badge: 'Incluido' },
           { name: 'Estrategia de Crecimiento', desc: 'Plan personalizado con metas medibles mes a mes.', badge: 'Incluido' },
           { name: 'Reportes en Tiempo Real', desc: 'Números claros que muestran exactamente qué funciona.', badge: 'Incluido' },
           { name: 'Dashboard del Cliente', desc: 'Acceso exclusivo a tus métricas cuando quieras.', badge: 'Incluido' },
@@ -148,7 +148,7 @@ const es = {
       { num: '01', title: 'Escuchamos', text: 'Entendemos tu negocio, tu mercado, tus metas y tus frustraciones. Todo empieza por conocerte a fondo.' },
       { num: '02', title: 'Diseñamos tu estrategia', text: 'Plan de crecimiento a tu medida. Cada acción con propósito, cada dólar con destino claro.' },
       { num: '03', title: 'Ejecutamos sin parar', text: 'Sitio web, campañas, contenido, seguimiento de leads — todo coordinado, todo funcionando.' },
-      { num: '04', title: 'Medimos y escalamos', text: 'Cada semana optimizamos. Lo que funciona se potencia. Tu negocio crece mes tras mes.' },
+      { num: '04', title: 'Medimos y escalamos', text: 'Cada semana ajustamos. Lo que funciona se escala. Tu negocio crece mes tras mes.' },
     ],
   },
   infra: {
@@ -219,7 +219,7 @@ const es = {
       {
         category: 'Marketing Digital',
         title: 'Cómo duplicar tus leads en 30 días con Google Ads',
-        excerpt: 'Descubre las estrategias que usamos para multiplicar los resultados de nuestros clientes.',
+        excerpt: 'Las estrategias exactas que usamos para multiplicar los resultados de nuestros clientes.',
         date: 'Marzo 2026',
         cta: 'Leer más →',
       },
@@ -233,7 +233,7 @@ const es = {
       {
         category: 'SEO',
         title: 'SEO Local: Aparece primero cuando te buscan en tu ciudad',
-        excerpt: 'Aprende cómo optimizar tu presencia para que Google te muestre a los clientes más cercanos.',
+        excerpt: 'Cómo preparar tu presencia para que Google te muestre a los clientes más cercanos.',
         date: 'Marzo 2026',
         cta: 'Leer más →',
       },
@@ -243,22 +243,22 @@ const es = {
     title1: 'Cómo funciona ',
     titleGold: 'el sistema.',
     steps: [
-      { num: '01', title: 'Diagnóstico Profundo', text: 'Analizamos tu negocio, competencia y mercado con inteligencia artificial para identificar exactamente dónde están las oportunidades de crecimiento.' },
-      { num: '02', title: 'Estrategia a Medida', text: 'Diseñamos un sistema de ventas y marketing automatizado, personalizado para tu industria, tu cliente ideal y tus objetivos de revenue.' },
-      { num: '03', title: 'Automatización Total', text: 'Desplegamos 127 agentes de IA que trabajan 24/7: generando leads, nutriendo prospectos, gestionando campañas y cerrando el ciclo de ventas.' },
+      { num: '01', title: 'Diagnóstico Profundo', text: 'Analizamos tu negocio, competencia y mercado con inteligencia artificial para identificar exactamente dónde están las oportunidades.' },
+      { num: '02', title: 'Estrategia a Medida', text: 'Diseñamos un sistema de ventas y marketing automatizado, hecho para tu industria, tu cliente ideal y tus objetivos de revenue.' },
+      { num: '03', title: 'Automatización Total', text: 'Desplegamos 127 agentes de IA que trabajan 24/7: generando leads, nutriendo prospectos, gestionando campañas y cerrando ventas.' },
       { num: '04', title: 'Resultados Medibles', text: 'Monitoreas en tiempo real cada métrica que importa: leads generados, costo por adquisición, revenue atribuible y ROI de cada acción.' },
     ],
   },
   aiAgents: {
     title1: '127 Agentes de IA. ',
     titleGold: 'Trabajando por ti, ahora mismo.',
-    subtitle: 'Mientras lees esto, nuestros agentes están analizando mercados, optimizando campañas, generando contenido y convirtiendo prospectos en clientes para nuestros clientes.',
+    subtitle: 'Mientras lees esto, nuestros agentes están analizando mercados, ajustando campañas, generando contenido y convirtiendo prospectos en clientes.',
     items: [
       { title: 'Inteligencia de Mercado', text: 'Scraping, spy ads y análisis competitivo en tiempo real' },
-      { title: 'Publicidad Digital', text: 'Meta Ads, Google Ads, TikTok y LinkedIn optimizados por IA' },
-      { title: 'Contenido Automatizado', text: 'Copy, diseño e imágenes generados y publicados automáticamente' },
+      { title: 'Publicidad Digital', text: 'Meta Ads, Google Ads, TikTok y LinkedIn gestionados por IA' },
+      { title: 'Contenido Automatizado', text: 'Copy, diseño e imágenes generados y publicados de manera automatizada' },
       { title: 'SEO y Posicionamiento', text: 'Rankings orgánicos y autoridad de dominio en piloto automático' },
-      { title: 'CRM Inteligente', text: 'Seguimiento, nutrición y cierre de leads sin intervención humana' },
+      { title: 'CRM Inteligente', text: 'Seguimiento, nutrición y cierre de leads de manera automatizada' },
       { title: 'Reputación Online', text: 'Monitoreo y gestión de reviews y menciones 24/7' },
       { title: 'Analytics en Tiempo Real', text: 'Dashboards con cada métrica que impacta tu revenue' },
       { title: 'Voz e IA Conversacional', text: 'Agentes de voz que atienden, califican y convierten leads' },
@@ -267,7 +267,7 @@ const es = {
   forWhom: {
     title1: 'Construido para negocios que quieren ',
     titleGold: 'crecer de verdad.',
-    subtitle: 'Trabajamos con empresas que están listas para escalar sus ventas usando tecnología de punta.',
+    subtitle: 'Trabajamos con empresas que están listas para escalar sus ventas con tecnología de verdad.',
     items: ['E-Commerce y Retail', 'Servicios Profesionales', 'Bienes Raíces', 'Salud y Bienestar', 'Restaurantes y Franquicias', 'Educación y Cursos Online'],
     cta: 'Si tu negocio genera ventas y quieres más — somos tu equipo.',
   },
@@ -276,7 +276,7 @@ const es = {
     titleGold: 'frecuentes.',
     items: [
       { q: '¿Cuánto tiempo tarda en verse resultados?', a: 'Los primeros resultados medibles aparecen entre la semana 2 y 4: leads entrando, campañas activas y sistemas funcionando. El crecimiento sostenido y el ROI compuesto se consolidan entre el mes 2 y 3.' },
-      { q: '¿Necesito tener conocimientos de marketing o tecnología?', a: 'Cero. Nosotros manejamos todo — estrategia, tecnología, ejecución y optimización. Tú recibes reportes claros y te enfocas en lo que mejor sabes hacer: dirigir tu negocio.' },
+      { q: '¿Necesito tener conocimientos de marketing o tecnología?', a: 'Cero. Nosotros manejamos todo — estrategia, tecnología, ejecución y ajustes. Tú recibes reportes claros y te enfocas en lo que mejor sabes hacer: dirigir tu negocio.' },
       { q: '¿Cómo sé que los resultados son reales y atribuibles a Addendo?', a: 'Cada acción está rastreada. Tienes acceso a un dashboard en tiempo real con leads generados, origen de cada venta, costo por adquisición y revenue atribuible directamente a nuestro sistema.' },
       { q: '¿Qué pasa si no veo resultados?', a: 'Trabajamos con garantía de resultados. Si en los primeros 60 días no hay métricas positivas verificables, revisamos la estrategia sin costo adicional hasta lograrlo.' },
       { q: '¿Cuál es la inversión mínima?', a: 'El plan Starter comienza en $1,500/mes más un setup fee inicial. Antes de cualquier inversión, hacemos una llamada estratégica gratuita para evaluar si somos el match correcto para tu negocio.' },
