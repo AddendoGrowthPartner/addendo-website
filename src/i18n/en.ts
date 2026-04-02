@@ -245,12 +245,12 @@ const en = {
     steps: [
       { num: '01', title: 'Deep Diagnosis', text: 'We analyze your business, competition and market with AI to identify exactly where the growth opportunities are.' },
       { num: '02', title: 'Custom Strategy', text: 'We design an automated sales and marketing system, personalized for your industry, ideal customer and revenue goals.' },
-      { num: '03', title: 'Total Automation', text: 'We deploy 46 AI agents working 24/7: generating leads, nurturing prospects, managing campaigns and closing the sales cycle.' },
+      { num: '03', title: 'Total Automation', text: 'We deploy 127 AI agents working 24/7: generating leads, nurturing prospects, managing campaigns and closing the sales cycle.' },
       { num: '04', title: 'Measurable Results', text: 'Monitor in real time every metric that matters: leads generated, cost per acquisition, attributable revenue and ROI.' },
     ],
   },
   aiAgents: {
-    title1: '46 AI Agents. ',
+    title1: '127 AI Agents. ',
     titleGold: 'Working for you, right now.',
     subtitle: 'While you read this, our agents are analyzing markets, optimizing campaigns, generating content and converting prospects into clients for our customers.',
     items: [

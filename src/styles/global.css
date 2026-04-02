@@ -263,12 +263,12 @@
     box-shadow: 0 8px 32px rgba(37, 211, 102, 0.55);
   }
 
-  .svc-icon {
-    filter: saturate(0.5) opacity(0.75);
+  .icon-elegant {
+    filter: saturate(0.45) opacity(0.75);
     transition: filter 0.3s ease, transform 0.3s ease;
   }
 
-  .group:hover .svc-icon {
+  .group:hover .icon-elegant {
     filter: saturate(1) opacity(1);
   }
 }

@@ -16,7 +16,7 @@ export default function HowItWorks() {
           {t.howItWorks.steps.map((step: { num: string; title: string; text: string }, i: number) => (
             <div key={i} className="relative glass-card p-8 text-center group">
               <span className="absolute top-4 right-4 text-6xl font-display font-bold text-gold/[0.07] leading-none select-none">{step.num}</span>
-              <div className="text-4xl mb-4">{icons[i]}</div>
+              <div className="text-4xl mb-4 icon-elegant">{icons[i]}</div>
               <h3 className="text-lg font-medium text-white mb-3">{step.title}</h3>
               <p className="text-white/50 text-sm leading-relaxed">{step.text}</p>
             </div>

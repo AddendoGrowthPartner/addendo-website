@@ -245,12 +245,12 @@ const es = {
     steps: [
       { num: '01', title: 'Diagnóstico Profundo', text: 'Analizamos tu negocio, competencia y mercado con inteligencia artificial para identificar exactamente dónde están las oportunidades de crecimiento.' },
       { num: '02', title: 'Estrategia a Medida', text: 'Diseñamos un sistema de ventas y marketing automatizado, personalizado para tu industria, tu cliente ideal y tus objetivos de revenue.' },
-      { num: '03', title: 'Automatización Total', text: 'Desplegamos 46 agentes de IA que trabajan 24/7: generando leads, nutriendo prospectos, gestionando campañas y cerrando el ciclo de ventas.' },
+      { num: '03', title: 'Automatización Total', text: 'Desplegamos 127 agentes de IA que trabajan 24/7: generando leads, nutriendo prospectos, gestionando campañas y cerrando el ciclo de ventas.' },
       { num: '04', title: 'Resultados Medibles', text: 'Monitoreas en tiempo real cada métrica que importa: leads generados, costo por adquisición, revenue atribuible y ROI de cada acción.' },
     ],
   },
   aiAgents: {
-    title1: '46 Agentes de IA. ',
+    title1: '127 Agentes de IA. ',
     titleGold: 'Trabajando por ti, ahora mismo.',
     subtitle: 'Mientras lees esto, nuestros agentes están analizando mercados, optimizando campañas, generando contenido y convirtiendo prospectos en clientes para nuestros clientes.',
     items: [

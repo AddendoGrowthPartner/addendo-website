@@ -15,8 +15,8 @@ export default function ForWhom() {
 
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto mb-12">
           {t.forWhom.items.map((item: string, i: number) => (
-            <div key={i} className="glass-card p-6 flex flex-col items-center gap-3">
-              <span className="text-3xl">{icons[i]}</span>
+            <div key={i} className="glass-card p-6 flex flex-col items-center gap-3 group">
+              <span className="text-3xl icon-elegant">{icons[i]}</span>
               <span className="text-sm sm:text-base font-medium text-white/90">{item}</span>
             </div>
           ))}

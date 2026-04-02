@@ -105,7 +105,7 @@ export default function Services() {
               return (
                 <div key={i} className="glass-card p-5 md:p-6 group">
                   <div className="flex items-start justify-between mb-3">
-                    <div className="svc-icon group-hover:scale-110">
+                    <div className="icon-elegant group-hover:scale-110">
                       {SvcIcon ? <SvcIcon size={32} color={svcIcon.color} /> : (
                         <svg className="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
