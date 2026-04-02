@@ -2,14 +2,14 @@ import { useEffect, useRef, useState } from 'react';
 import { useI18n } from '../i18n/context';
 
 export default function Contact() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const ref = useRef<HTMLElement>(null);
   const [form, setForm] = useState({ name: '', phone: '', email: '', business: '', message: '' });
 
   useEffect(() => { if (window.innerWidth < 768) return; import('gsap').then(({ gsap }) => { import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => { gsap.registerPlugin(ScrollTrigger); const el = ref.current; if (!el) return; gsap.fromTo(el.querySelectorAll('.ct-a'), { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, scrollTrigger: { trigger: el, start: 'top 80%' } }); }); }); }, []);
 
   const set = (k: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setForm(f => ({ ...f, [k]: e.target.value }));
-  const submit = (e: React.FormEvent) => { e.preventDefault(); const s = encodeURIComponent(`Consulta de ${form.name} — ${form.business}`); const b = encodeURIComponent(`Nombre: ${form.name}\nTeléfono: ${form.phone}\nEmail: ${form.email}\nNegocio: ${form.business}\n\nMensaje:\n${form.message}`); window.location.href = `mailto:admin@addendo.io?subject=${s}&body=${b}`; };
+  const submit = (e: React.FormEvent) => { e.preventDefault(); const isEn = lang === 'en'; const s = encodeURIComponent(isEn ? `Inquiry from ${form.name} — ${form.business}` : `Consulta de ${form.name} — ${form.business}`); const b = encodeURIComponent(isEn ? `Name: ${form.name}\nPhone: ${form.phone}\nEmail: ${form.email}\nBusiness: ${form.business}\n\nMessage:\n${form.message}` : `Nombre: ${form.name}\nTeléfono: ${form.phone}\nEmail: ${form.email}\nNegocio: ${form.business}\n\nMensaje:\n${form.message}`); window.location.href = `mailto:admin@addendo.io?subject=${s}&body=${b}`; };
   const ic = 'w-full px-5 py-4 bg-[#0F1629] border border-white/[0.08] rounded-xl text-white placeholder-white/25 focus:outline-none focus:border-gold/40 focus:ring-1 focus:ring-gold/20 transition-colors text-sm';
 
   return (

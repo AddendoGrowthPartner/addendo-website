@@ -1,7 +1,14 @@
+import { useI18n } from '../i18n/context';
+
 export default function WhatsAppButton() {
+  const { lang } = useI18n();
+  const msg = lang === 'es'
+    ? 'Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20Addendo'
+    : 'Hi%2C%20I%20want%20information%20about%20Addendo';
+
   return (
     <a
-      href="https://wa.me/18557105590?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20Addendo"
+      href={`https://wa.me/18557105590?text=${msg}`}
       target="_blank"
       rel="noopener noreferrer"
       className="whatsapp-float"

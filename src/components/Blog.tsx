@@ -43,7 +43,7 @@ export default function Blog() {
                 <p className="text-white/50 text-sm leading-relaxed mb-4">{post.excerpt}</p>
                 <div className="flex items-center justify-between">
                   <span className="text-white/30 text-xs">{post.date}</span>
-                  <a href="#" className="text-gold text-sm font-semibold hover:text-gold-light transition-colors">
+                  <a href="#contacto" className="text-gold text-sm font-semibold hover:text-gold-light transition-colors">
                     {post.cta}
                   </a>
                 </div>
@@ -54,7 +54,7 @@ export default function Blog() {
 
         <div className="text-center mt-12">
           <a
-            href="#"
+            href="#contacto"
             className="inline-flex items-center gap-2 px-8 py-3 rounded-full border border-gold/30 text-gold font-semibold hover:bg-gold/10 transition-all duration-300"
           >
             {t.blog.viewAll}
