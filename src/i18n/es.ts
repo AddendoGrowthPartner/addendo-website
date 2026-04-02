@@ -21,7 +21,7 @@ const es = {
     businesses: 'Negocios transformados',
     revenue: 'Revenue generado',
     operating: 'Operando sin parar',
-    proof: 'Nuestro equipo ha gestionado más de $100M en inversión publicitaria para negocios como el tuyo.',
+    proof: 'Hemos generado más de $100M en revenue para nuestros clientes. Ese es el resultado de hacer las cosas bien.',
   },
   allies: {
     title: 'Tecnología de clase mundial trabajando para ti',

@@ -21,7 +21,7 @@ const en = {
     businesses: 'Businesses Transformed',
     revenue: 'Revenue Generated',
     operating: 'Operating Non-Stop',
-    proof: 'Our team has managed over $100M in ad spend for businesses like yours.',
+    proof: 'We\'ve generated over $100M in revenue for our clients. That\'s what doing things right looks like.',
   },
   allies: {
     title: 'World-class technology working for you',

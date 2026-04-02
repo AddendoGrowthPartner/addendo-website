@@ -65,12 +65,12 @@ export default function Hero() {
 
             <p className="hero-p text-base sm:text-xl text-white/55 max-w-xl mb-8 md:mb-10 leading-relaxed">{t.hero.subtitle}</p>
 
-            <div className="hero-cta flex flex-col sm:flex-row items-start gap-4">
-              <a href="#contacto" className="btn-gold text-base md:text-lg">
+            <div className="hero-cta flex flex-col sm:flex-row items-center gap-6">
+              <a href="#contacto" className="btn-gold text-base md:text-lg w-full sm:w-auto min-w-[280px] justify-center">
                 {t.hero.cta}
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
               </a>
-              <p className="text-white/30 text-sm max-w-xs pt-2">{t.hero.ctaSub}</p>
+              <p className="text-white/30 text-sm max-w-xs text-center sm:text-left">{t.hero.ctaSub}</p>
             </div>
           </div>
 
