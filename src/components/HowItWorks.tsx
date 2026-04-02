@@ -8,9 +8,10 @@ export default function HowItWorks() {
   return (
     <section id="como-funciona" className="section-pad" style={{ background: '#080F24' }}>
       <div className="max-w-7xl mx-auto">
-        <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-normal text-center mb-16">
+        <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-normal text-center mb-4">
           {t.howItWorks.title1}<span className="gold-gradient-text">{t.howItWorks.titleGold}</span>
         </h2>
+        {t.howItWorks.subtitle && <p className="text-white/40 text-base sm:text-lg text-center max-w-2xl mx-auto mb-16">{t.howItWorks.subtitle}</p>}
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {t.howItWorks.steps.map((step: { num: string; title: string; text: string }, i: number) => (

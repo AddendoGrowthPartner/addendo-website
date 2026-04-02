@@ -34,7 +34,7 @@ export default function StatsCounter() {
   return (
     <section ref={ref} className="py-12 md:py-16 px-4" style={{ background: '#080F24' }}>
       <div className="max-w-5xl mx-auto">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center mb-8">
           {items.map((s, i) => (
             <div key={i} className="st-box opacity-0">
               <div className="text-gold/60 flex justify-center mb-3">{statIcons[i]}</div>
@@ -43,6 +43,7 @@ export default function StatsCounter() {
             </div>
           ))}
         </div>
+        <p className="st-box opacity-0 text-white/25 text-xs md:text-sm text-center max-w-xl mx-auto">{t.stats.proof}</p>
       </div>
     </section>
   );

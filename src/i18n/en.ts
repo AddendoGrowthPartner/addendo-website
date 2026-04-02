@@ -11,9 +11,9 @@ const en = {
     title1: 'Your business deserves ',
     titleGold: 'to grow without limits.',
     title2: 'We make it happen.',
-    subtitle: 'Addendo is the system that turns your business into a sales machine — we combine strategy, technology and AI to run your digital presence, campaigns, content and reputation, bringing you new clients that convert into sales every week.',
+    subtitle: 'Over 150 businesses already use Addendo to turn their digital presence into real sales — we combine strategy, technology and AI to run your campaigns, content and reputation, bringing you new clients every week.',
     cta: 'Schedule your free strategy call',
-    ctaSub: 'No commitment. No pressure. Just results.',
+    ctaSub: 'In 30 minutes we\'ll tell you exactly what\'s holding back your growth — free, no strings attached.',
     imgAlt: 'Successful Latino entrepreneur',
   },
   stats: {
@@ -21,6 +21,7 @@ const en = {
     businesses: 'Businesses Transformed',
     revenue: 'Revenue Generated',
     operating: 'Operating Non-Stop',
+    proof: 'Our team has managed over $100M in ad spend for businesses like yours.',
   },
   allies: {
     title: 'World-class technology working for you',
@@ -48,7 +49,7 @@ const en = {
   solution: {
     title1: "Addendo isn't an agency.",
     titleGold: "It's your complete growth department.",
-    text: "Imagine having a dedicated team that handles everything: getting your business to show up first when people search, making your social media generate real clients, and ensuring every dollar invested in advertising comes back multiplied.",
+    text: "We know what it takes to grow a business. That's why we built Addendo — so you have a dedicated team that handles everything: showing up first when people search, making your social media generate real clients, and ensuring every dollar invested comes back multiplied.",
     thatis: "That's Addendo.",
     no1: '"likes"',
     no2: '"followers"',
@@ -186,9 +187,9 @@ const en = {
   cta: {
     title1: 'Your competition is already moving.',
     titleGold: 'What about you?',
-    text: "Every day without a real strategy is a day you lose clients, money, and ground.",
+    text: "Every day without a real strategy is a day you lose clients, money, and ground. We only take on 5 new clients per month to guarantee dedicated attention.",
     button: 'I want my free strategy call',
-    sub: 'Limited spots per month.',
+    sub: '3 spots left this month.',
   },
   contact: {
     title: "Let's Talk.",
@@ -242,6 +243,7 @@ const en = {
   howItWorks: {
     title1: 'How the system ',
     titleGold: 'works.',
+    subtitle: 'A proven methodology used by the world\'s top agencies, adapted for businesses that want to grow fast.',
     steps: [
       { num: '01', title: 'Deep Diagnosis', text: 'We analyze your business, competition and market with AI to pinpoint exactly where the growth opportunities are.' },
       { num: '02', title: 'Custom Strategy', text: 'We design an automated sales and marketing system, built for your industry, ideal customer and revenue goals.' },
@@ -252,7 +254,7 @@ const en = {
   aiAgents: {
     title1: '127 AI Agents. ',
     titleGold: 'Working for you, right now.',
-    subtitle: 'While you read this, our agents are analyzing markets, tuning campaigns, generating content and converting prospects into paying clients.',
+    subtitle: 'The same level of technology used by Fortune 500 companies, now working for your business. While you read this, our agents are analyzing markets, tuning campaigns and converting prospects into paying clients.',
     items: [
       { title: 'Market Intelligence', text: 'Scraping, spy ads and real-time competitive analysis' },
       { title: 'Digital Advertising', text: 'Meta Ads, Google Ads, TikTok and LinkedIn managed by AI' },
@@ -268,14 +270,14 @@ const en = {
     title1: 'Built for businesses that want to ',
     titleGold: 'truly grow.',
     subtitle: 'We work with companies ready to scale their sales with real technology.',
-    items: ['E-Commerce & Retail', 'Professional Services', 'Real Estate', 'Health & Wellness', 'Restaurants & Franchises', 'Education & Online Courses'],
+    items: ['E-Commerce & Retail', 'Professional Services', 'Real Estate', 'Health & Wellness', 'Restaurants & Franchises', 'Education & Online Courses', 'Solar Panels', 'Water Filtration & Purification', 'Insurance Agencies', 'Immigration Attorneys', 'Home Improvement & Roofing', 'Auto Repair & Mechanics'],
     cta: 'If your business generates sales and you want more — we\'re your team.',
   },
   faq: {
     title1: 'Frequently ',
     titleGold: 'asked questions.',
     items: [
-      { q: 'How long does it take to see results?', a: 'The first measurable results appear between week 2 and 4: leads coming in, active campaigns and systems running. Sustained growth and compound ROI consolidate between month 2 and 3.' },
+      { q: 'How long does it take to see results?', a: 'Most of our clients see results within the first 3 weeks: leads coming in, active campaigns and systems running. Sustained growth and compound ROI consolidate between month 2 and 3.' },
       { q: 'Do I need marketing or technology knowledge?', a: 'Zero. We handle everything — strategy, technology, execution and adjustments. You receive clear reports and focus on what you do best: running your business.' },
       { q: 'How do I know the results are real and attributable to Addendo?', a: 'Every action is tracked. You have access to a real-time dashboard with leads generated, origin of each sale, cost per acquisition and revenue directly attributable to our system.' },
       { q: 'What if I don\'t see results?', a: 'We work with a results guarantee. If in the first 60 days there are no verifiable positive metrics, we revise the strategy at no additional cost until we achieve them.' },

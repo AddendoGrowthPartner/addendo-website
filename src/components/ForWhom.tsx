@@ -1,6 +1,6 @@
 import { useI18n } from '../i18n/context';
 
-const icons = ['🛒', '💼', '🏠', '❤️', '🍽️', '📚'];
+const icons = ['🛒', '💼', '🏠', '❤️', '🍽️', '📚', '☀️', '💧', '🛡️', '⚖️', '🏗️', '🔧'];
 
 export default function ForWhom() {
   const { t } = useI18n();
@@ -13,11 +13,11 @@ export default function ForWhom() {
         </h2>
         <p className="text-white/50 text-base sm:text-lg max-w-2xl mx-auto mb-14">{t.forWhom.subtitle}</p>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto mb-12">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-5 mb-12">
           {t.forWhom.items.map((item: string, i: number) => (
-            <div key={i} className="glass-card p-6 flex flex-col items-center gap-3 group">
-              <span className="text-3xl icon-elegant">{icons[i]}</span>
-              <span className="text-sm sm:text-base font-medium text-white/90">{item}</span>
+            <div key={i} className="glass-card p-5 flex flex-col items-center gap-3 group">
+              <span className="text-2xl sm:text-3xl icon-elegant">{icons[i]}</span>
+              <span className="text-xs sm:text-sm font-medium text-white/90 leading-tight">{item}</span>
             </div>
           ))}
         </div>

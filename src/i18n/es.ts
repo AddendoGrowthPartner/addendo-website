@@ -11,9 +11,9 @@ const es = {
     title1: 'Tu negocio merece ',
     titleGold: 'crecer sin límites.',
     title2: 'Nosotros lo hacemos realidad.',
-    subtitle: 'Addendo es el sistema que convierte tu negocio en una máquina de ventas — combinamos estrategia, tecnología e inteligencia artificial para mover tu presencia digital, campañas, contenido y reputación, trayéndote clientes nuevos que se convierten en ventas cada semana.',
+    subtitle: 'Más de 150 negocios ya usan Addendo para convertir su presencia digital en ventas reales — combinamos estrategia, tecnología e inteligencia artificial para mover tus campañas, contenido y reputación, trayéndote clientes nuevos cada semana.',
     cta: 'Agenda tu llamada estratégica gratis',
-    ctaSub: 'Sin compromiso. Sin presión. Solo resultados.',
+    ctaSub: 'En 30 minutos te decimos exactamente qué está frenando tu crecimiento — sin costo, sin compromiso.',
     imgAlt: 'Empresario latino exitoso',
   },
   stats: {
@@ -21,6 +21,7 @@ const es = {
     businesses: 'Negocios transformados',
     revenue: 'Revenue generado',
     operating: 'Operando sin parar',
+    proof: 'Nuestro equipo ha gestionado más de $100M en inversión publicitaria para negocios como el tuyo.',
   },
   allies: {
     title: 'Tecnología de clase mundial trabajando para ti',
@@ -48,7 +49,7 @@ const es = {
   solution: {
     title1: 'Addendo no es una agencia.',
     titleGold: 'Es tu departamento completo de crecimiento.',
-    text: 'Imagina tener un equipo dedicado que se encarga de todo: que tu negocio aparezca primero cuando te buscan, que tus redes generen clientes reales, y que cada dólar invertido en publicidad regrese multiplicado.',
+    text: 'Sabemos lo que es trabajar duro para hacer crecer un negocio. Por eso construimos Addendo — para que tengas un equipo dedicado que se encarga de todo: que aparezcas primero cuando te buscan, que tus redes generen clientes reales, y que cada dólar invertido regrese multiplicado.',
     thatis: 'Eso es Addendo.',
     no1: '"likes"',
     no2: '"seguidores"',
@@ -186,9 +187,9 @@ const es = {
   cta: {
     title1: 'Tu competencia ya se está moviendo.',
     titleGold: '¿Y tú?',
-    text: 'Cada día sin una estrategia real es un día que pierdes clientes, dinero y terreno.',
+    text: 'Cada día sin una estrategia real es un día que pierdes clientes, dinero y terreno. Solo aceptamos 5 clientes nuevos por mes para garantizar atención dedicada.',
     button: 'Quiero mi llamada estratégica gratis',
-    sub: 'Cupos limitados por mes.',
+    sub: 'Quedan 3 espacios disponibles este mes.',
   },
   contact: {
     title: 'Hablemos.',
@@ -242,6 +243,7 @@ const es = {
   howItWorks: {
     title1: 'Cómo funciona ',
     titleGold: 'el sistema.',
+    subtitle: 'Metodología probada por las agencias más grandes del mundo, adaptada para negocios que quieren crecer rápido.',
     steps: [
       { num: '01', title: 'Diagnóstico Profundo', text: 'Analizamos tu negocio, competencia y mercado con inteligencia artificial para identificar exactamente dónde están las oportunidades.' },
       { num: '02', title: 'Estrategia a Medida', text: 'Diseñamos un sistema de ventas y marketing automatizado, hecho para tu industria, tu cliente ideal y tus objetivos de revenue.' },
@@ -252,7 +254,7 @@ const es = {
   aiAgents: {
     title1: '127 Agentes de IA. ',
     titleGold: 'Trabajando por ti, ahora mismo.',
-    subtitle: 'Mientras lees esto, nuestros agentes están analizando mercados, ajustando campañas, generando contenido y convirtiendo prospectos en clientes.',
+    subtitle: 'El mismo nivel de tecnología que usan empresas Fortune 500, ahora trabajando para tu negocio. Mientras lees esto, nuestros agentes están analizando mercados, ajustando campañas y convirtiendo prospectos en clientes.',
     items: [
       { title: 'Inteligencia de Mercado', text: 'Scraping, spy ads y análisis competitivo en tiempo real' },
       { title: 'Publicidad Digital', text: 'Meta Ads, Google Ads, TikTok y LinkedIn gestionados por IA' },
@@ -268,14 +270,14 @@ const es = {
     title1: 'Construido para negocios que quieren ',
     titleGold: 'crecer de verdad.',
     subtitle: 'Trabajamos con empresas que están listas para escalar sus ventas con tecnología de verdad.',
-    items: ['E-Commerce y Retail', 'Servicios Profesionales', 'Bienes Raíces', 'Salud y Bienestar', 'Restaurantes y Franquicias', 'Educación y Cursos Online'],
+    items: ['E-Commerce y Retail', 'Servicios Profesionales', 'Bienes Raíces', 'Salud y Bienestar', 'Restaurantes y Franquicias', 'Educación y Cursos Online', 'Paneles Solares', 'Filtros de Agua y Purificación', 'Agencias de Seguros', 'Abogados de Migración', 'Remodelación y Techos', 'Talleres y Mecánica Automotriz'],
     cta: 'Si tu negocio genera ventas y quieres más — somos tu equipo.',
   },
   faq: {
     title1: 'Preguntas ',
     titleGold: 'frecuentes.',
     items: [
-      { q: '¿Cuánto tiempo tarda en verse resultados?', a: 'Los primeros resultados medibles aparecen entre la semana 2 y 4: leads entrando, campañas activas y sistemas funcionando. El crecimiento sostenido y el ROI compuesto se consolidan entre el mes 2 y 3.' },
+      { q: '¿Cuánto tiempo tarda en verse resultados?', a: 'La mayoría de nuestros clientes ven resultados en las primeras 3 semanas: leads entrando, campañas activas y sistemas funcionando. El crecimiento sostenido y el ROI compuesto se consolidan entre el mes 2 y 3.' },
       { q: '¿Necesito tener conocimientos de marketing o tecnología?', a: 'Cero. Nosotros manejamos todo — estrategia, tecnología, ejecución y ajustes. Tú recibes reportes claros y te enfocas en lo que mejor sabes hacer: dirigir tu negocio.' },
       { q: '¿Cómo sé que los resultados son reales y atribuibles a Addendo?', a: 'Cada acción está rastreada. Tienes acceso a un dashboard en tiempo real con leads generados, origen de cada venta, costo por adquisición y revenue atribuible directamente a nuestro sistema.' },
       { q: '¿Qué pasa si no veo resultados?', a: 'Trabajamos con garantía de resultados. Si en los primeros 60 días no hay métricas positivas verificables, revisamos la estrategia sin costo adicional hasta lograrlo.' },
