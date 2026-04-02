@@ -58,8 +58,9 @@ export default function Hero() {
 
             <h1 className="hero-h1 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal leading-[1.1] mb-6 md:mb-8">
               {t.hero.title1}
+              <br className="hidden sm:block" />
               <span className="gold-gradient-text" style={{ fontStyle: 'italic' }}>{t.hero.titleGold}</span>
-              {t.hero.title2 && <><br className="hidden sm:block" /><span className="text-white/90">{t.hero.title2}</span></>}
+              {t.hero.title2 && <>{' '}<br className="hidden sm:block" /><span className="text-white/90">{t.hero.title2}</span></>}
             </h1>
 
             <p className="hero-p text-base sm:text-xl text-white/55 max-w-xl mb-8 md:mb-10 leading-relaxed">{t.hero.subtitle}</p>
