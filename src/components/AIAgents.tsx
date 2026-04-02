@@ -1,8 +1,8 @@
 import { useI18n } from '../i18n/context';
-import { FiBarChart2, FiMegaphone, FiEdit3, FiSearch, FiCpu, FiStar, FiTrendingUp, FiMic } from 'react-icons/fi';
+import { FiBarChart2, FiRadio, FiEdit3, FiSearch, FiCpu, FiStar, FiTrendingUp, FiMic } from 'react-icons/fi';
 import type { IconType } from 'react-icons';
 
-const icons: IconType[] = [FiBarChart2, FiMegaphone, FiEdit3, FiSearch, FiCpu, FiStar, FiTrendingUp, FiMic];
+const icons: IconType[] = [FiBarChart2, FiRadio, FiEdit3, FiSearch, FiCpu, FiStar, FiTrendingUp, FiMic];
 
 export default function AIAgents() {
   const { t } = useI18n();
