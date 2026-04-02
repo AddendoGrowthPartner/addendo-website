@@ -24,7 +24,7 @@ export default function Navbar() {
             style={{ height: '80px', width: 'auto', objectFit: 'contain' }}
           />
           <div className="flex flex-col leading-none" style={{ alignItems: 'center', marginLeft: '-8px' }}>
-            <span style={{ fontFamily: 'Fraunces, serif', fontSize: '26px', fontWeight: '400', color: '#C9A84C', letterSpacing: '0.16em' }}>ADDENDO</span>
+            <span style={{ fontFamily: 'Bebas Neue, sans-serif', fontSize: '28px', fontWeight: '400', color: '#C9A84C', letterSpacing: '0.16em' }}>ADDENDO</span>
             <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '11px', fontWeight: '300', color: 'rgba(255,255,255,0.7)', letterSpacing: '0.25em', textAlign: 'center' as const }}>GROWTH PARTNER</span>
           </div>
         </a>
