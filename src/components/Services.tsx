@@ -90,7 +90,7 @@ export default function Services() {
             const CatIcon = catIcons[i].icon;
             return (
               <button key={i} onClick={() => setActive(i)} className={`flex items-center gap-2 px-3 md:px-4 py-2 md:py-2.5 rounded-lg text-xs md:text-sm font-semibold transition-all duration-300 ${active === i ? 'bg-gold text-[#080F24] shadow-lg shadow-gold/20' : 'bg-white/[0.04] text-white/50 hover:text-white/80 hover:bg-white/[0.08] border border-white/[0.06]'}`}>
-                <CatIcon size={18} color={active === i ? '#080F24' : catIcons[i].color} />
+                <CatIcon size={18} color={active === i ? '#080F24' : catIcons[i].color} style={{ filter: active === i ? 'saturate(1) opacity(1)' : 'saturate(0.35) opacity(0.65)', transition: 'filter 0.3s ease' }} />
                 <span className="hidden sm:inline">{c.name}</span>
               </button>
             );
