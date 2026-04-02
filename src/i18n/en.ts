@@ -211,6 +211,8 @@ const en = {
     nav: 'Navigation',
     contacto: 'Contact',
     rights: 'All rights reserved.',
+    privacyPolicy: 'Privacy Policy',
+    termsOfUse: 'Terms of Use',
   },
   blog: {
     title: 'Strategies that transform businesses',

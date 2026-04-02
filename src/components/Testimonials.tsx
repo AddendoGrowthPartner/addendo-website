@@ -1,3 +1,4 @@
+// TODO: Reemplazar con testimonios y fotos reales de clientes cuando estén disponibles
 import { useEffect, useRef } from 'react';
 import { useI18n } from '../i18n/context';
 

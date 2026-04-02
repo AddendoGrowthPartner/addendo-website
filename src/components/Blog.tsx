@@ -1,5 +1,11 @@
 import { useI18n } from '../i18n/context';
 
+const blogImages = [
+  'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80',
+  'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=800&q=80',
+  'https://images.unsplash.com/photo-1432888622747-4eb9a8f5a07d?w=800&q=80',
+];
+
 export default function Blog() {
   const { t } = useI18n();
   const posts = t.blog.posts;
@@ -27,10 +33,9 @@ export default function Blog() {
               onMouseEnter={e => (e.currentTarget.style.borderColor = 'rgba(201,168,76,0.4)')}
               onMouseLeave={e => (e.currentTarget.style.borderColor = 'rgba(201,168,76,0.15)')}
             >
-              {/* Placeholder image with gold gradient */}
               <div className="h-48 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#C9A84C]/20 via-[#0D1B3E] to-[#080F24]" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[rgba(26,26,46,0.6)] to-transparent" />
+                <img src={blogImages[i]} alt={post.title} width={800} height={400} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[rgba(26,26,46,0.8)] to-transparent" />
               </div>
 
               <div className="p-6">

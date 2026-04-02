@@ -39,9 +39,9 @@ export default function Footer() {
         <div className="mt-16 pt-8 border-t border-white/[0.04] text-center">
           <p className="text-white/20 text-xs">&copy; {new Date().getFullYear()} Addendo Growth Partner. {t.footer.rights}</p>
           <div className="flex items-center justify-center gap-2 mt-3">
-            <a href="/privacy" className="text-white/20 text-xs hover:text-gold transition-colors">Privacy Policy</a>
+            <a href="/privacy" className="text-white/20 text-xs hover:text-gold transition-colors">{t.footer.privacyPolicy}</a>
             <span className="text-white/10 text-xs">&middot;</span>
-            <a href="/terms" className="text-white/20 text-xs hover:text-gold transition-colors">Terms of Use</a>
+            <a href="/terms" className="text-white/20 text-xs hover:text-gold transition-colors">{t.footer.termsOfUse}</a>
           </div>
         </div>
       </div>

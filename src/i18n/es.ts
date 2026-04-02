@@ -211,6 +211,8 @@ const es = {
     nav: 'Navegación',
     contacto: 'Contacto',
     rights: 'Todos los derechos reservados.',
+    privacyPolicy: 'Política de Privacidad',
+    termsOfUse: 'Términos de Uso',
   },
   blog: {
     title: 'Estrategias que transforman negocios',
