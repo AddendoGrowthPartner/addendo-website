@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { useI18n } from '../i18n/context';
 
-const HERO_IMG_SM = 'https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg?auto=compress&cs=tinysrgb&w=400';
-const HERO_IMG_LG = 'https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg?auto=compress&cs=tinysrgb&w=1200';
+const HERO_IMG_SM = 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&q=80';
+const HERO_IMG_LG = 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80';
 
 export default function Hero() {
   const { t } = useI18n();
@@ -66,7 +66,7 @@ export default function Hero() {
             <p className="hero-p text-base sm:text-xl text-white/55 max-w-xl mb-8 md:mb-10 leading-relaxed">{t.hero.subtitle}</p>
 
             <div className="hero-cta flex flex-col sm:flex-row items-center gap-6">
-              <a href="#contacto" className="btn-gold text-base md:text-lg w-full sm:w-auto min-w-[280px] justify-center">
+              <a href="#contacto" className="btn-gold text-base md:text-lg w-full sm:w-auto whitespace-nowrap px-8 justify-center">
                 {t.hero.cta}
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
               </a>
