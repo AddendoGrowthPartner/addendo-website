@@ -1,16 +1,12 @@
 import { useEffect, useRef } from 'react';
 import { useI18n } from '../i18n/context';
+import { FiLayers, FiGlobe, FiCheckCircle, FiClock, FiZap, FiUsers } from 'react-icons/fi';
+import type { IconType } from 'react-icons';
 
 const E1 = 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=200';
 const E2 = 'https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=200';
 
-const icons = [
-  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>,
-  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" /></svg>,
-  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>,
-  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>,
-  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>,
-];
+const icons: IconType[] = [FiLayers, FiGlobe, FiCheckCircle, FiClock, FiZap, FiUsers];
 
 export default function WhyAddendo() {
   const { t } = useI18n();
@@ -23,13 +19,16 @@ export default function WhyAddendo() {
       <div className="relative max-w-6xl mx-auto">
         <h2 className="w-t opacity-0 font-display text-3xl sm:text-4xl md:text-5xl font-normal text-center mb-10">{t.why.title1}<br /><span className="gold-gradient-text">{t.why.titleGold}</span></h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
-          {t.why.items.map((r, i) => (
-            <div key={i} className={`w-c opacity-0 glass-card p-7 ${i === 4 ? 'sm:col-span-2 lg:col-span-1 lg:col-start-2' : ''}`}>
-              <div className="text-gold mb-4">{icons[i]}</div>
+          {t.why.items.map((r, i) => {
+            const Icon = icons[i];
+            return (
+            <div key={i} className="w-c opacity-0 glass-card p-7">
+              <div className="text-gold mb-4"><Icon size={32} color="#C9A84C" /></div>
               <h3 className="text-lg font-bold text-white mb-3">{r.title}</h3>
               <p className="text-white/45 leading-relaxed text-sm">{r.text}</p>
             </div>
-          ))}
+            );
+          })}
         </div>
         <div className="w-pr opacity-0 flex flex-col sm:flex-row items-center justify-center gap-5">
           <div className="flex -space-x-3">

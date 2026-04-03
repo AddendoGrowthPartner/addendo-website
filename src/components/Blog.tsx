@@ -3,7 +3,7 @@ import { useI18n } from '../i18n/context';
 const blogImages = [
   'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&q=80',
   'https://images.unsplash.com/photo-1562577309-4932fdd64cd1?w=800&q=80',
-  'https://images.unsplash.com/photo-1432888622747-4eb9a8f5a07d?w=800&q=80',
+  'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80',
 ];
 
 export default function Blog() {

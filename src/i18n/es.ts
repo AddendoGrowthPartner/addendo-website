@@ -172,6 +172,7 @@ const es = {
       { title: 'Resultados, no excusas', text: 'Te mostramos leads, ventas cerradas y retorno de inversión. Si no funciona, lo arreglamos.' },
       { title: 'Trabajamos 24/7', text: 'Tu presencia digital, campañas y seguimiento de clientes están activos siempre.' },
       { title: 'Tu éxito es nuestro negocio', text: 'No ganamos si tú no ganas. Cuando tú creces, nosotros crecemos.' },
+      { title: 'Equipo dedicado a tu cuenta', text: 'No eres un número más. Tienes un equipo enfocado exclusivamente en hacer crecer tu negocio.' },
     ],
     proof: 'Negocios que ya crecen con Addendo',
   },

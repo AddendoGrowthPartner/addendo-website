@@ -172,6 +172,7 @@ const en = {
       { title: 'Results, not excuses', text: "We show you leads, closed sales, and ROI. If it doesn't work, we fix it." },
       { title: 'We work 24/7', text: 'Your digital presence, campaigns, and client follow-up are active at all times.' },
       { title: 'Your success is our business', text: "We don't win if you don't win. When you grow, we grow." },
+      { title: 'A team dedicated to your account', text: "You're not just another client. You have a team focused exclusively on growing your business." },
     ],
     proof: 'Businesses already growing with Addendo',
   },
