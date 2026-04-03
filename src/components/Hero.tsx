@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useI18n } from '../i18n/context';
 
-const HERO_IMG_SM = 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&q=80';
-const HERO_IMG_LG = 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80';
+const HERO_BG = 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600&q=80';
 
 export default function Hero() {
   const { t } = useI18n();
@@ -34,60 +33,77 @@ export default function Hero() {
       gsap.fromTo('.hero-h1', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 1.1, delay: 0.5, ease: 'power3.out' });
       gsap.fromTo('.hero-p', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 1, delay: 0.7, ease: 'power3.out' });
       gsap.fromTo('.hero-cta', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1, delay: 0.9, ease: 'power3.out' });
-      gsap.fromTo('.hero-img', { opacity: 0, scale: 0.88, x: 60 }, { opacity: 1, scale: 1, x: 0, duration: 1.3, delay: 0.5, ease: 'power3.out' });
     });
 
     return () => { cancelAnimationFrame(raf); window.removeEventListener('resize', resize); };
   }, [isMobile]);
 
   return (
-    <section className="relative min-h-screen flex items-center" style={{ background: '#080F24' }}>
-      {!isMobile && <canvas ref={canvasRef} className="absolute inset-0 z-0" />}
-      <div className="hero-tech-bg" />
-      <div className="hero-tech-dots" />
-      <div className="absolute inset-0 bg-gradient-to-b from-[#080F24] via-[#080F24]/85 to-[#080F24] z-[1]" />
+    <section style={{ position: 'relative', overflow: 'hidden', minHeight: '100vh', display: 'flex', alignItems: 'center', background: '#080F24' }}>
+      {/* Background image */}
+      <img
+        src={HERO_BG}
+        alt=""
+        loading="eager"
+        fetchPriority="high"
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          objectPosition: 'center',
+          opacity: 0.15,
+          zIndex: 0,
+        }}
+      />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 w-full pt-24 pb-16">
-        <div className="flex flex-col lg:flex-row items-center gap-12 min-h-[600px]">
-          {/* Text column */}
-          <div className="flex-1">
-            <div className="hero-badge inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold/20 bg-gold/5 mb-6 md:mb-8">
-              <span className="w-2 h-2 rounded-full bg-gold animate-pulse" />
-              <span className="text-gold text-xs font-semibold uppercase tracking-wider">{t.hero.badge}</span>
-            </div>
+      {/* Dark gradient overlay */}
+      <div style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        background: 'linear-gradient(135deg, rgba(8,15,36,0.95) 0%, rgba(8,15,36,0.85) 50%, rgba(8,15,36,0.75) 100%)',
+        zIndex: 1,
+      }} />
 
-            <h1 className="hero-h1 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal leading-[1.1] mb-6 md:mb-8">
-              {t.hero.title1}
-              <br className="hidden sm:block" />
-              <span className="gold-gradient-text" style={{ fontStyle: 'italic' }}>{t.hero.titleGold}</span>
-              {t.hero.title2 && <>{' '}<br className="hidden sm:block" /><span className="text-white/90">{t.hero.title2}</span></>}
-            </h1>
+      {/* Particle canvas */}
+      {!isMobile && <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, zIndex: 2 }} />}
 
-            <p className="hero-p text-base sm:text-xl text-white/55 max-w-xl mb-8 md:mb-10 leading-relaxed">{t.hero.subtitle}</p>
+      {/* Tech background decorations */}
+      <div className="hero-tech-bg" style={{ zIndex: 2 }} />
+      <div className="hero-tech-dots" style={{ zIndex: 2 }} />
 
-            <div className="hero-cta flex flex-col sm:flex-row items-start sm:items-center gap-6">
-              <a href="#contacto" className="inline-flex items-center gap-3 bg-[#C9A84C] hover:bg-[#D4B96A] text-[#080F24] font-semibold py-4 px-8 rounded-lg transition-all duration-300 text-base md:text-lg">
-                {t.hero.cta}
-                <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-              </a>
-              <p className="text-white/30 text-sm max-w-xs">{t.hero.ctaSub}</p>
-            </div>
-          </div>
+      {/* Content */}
+      <div style={{ position: 'relative', zIndex: 3 }} className="max-w-4xl mx-auto px-4 sm:px-6 w-full pt-24 pb-16">
+        <div className="hero-badge inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold/20 bg-gold/5 mb-6 md:mb-8">
+          <span className="w-2 h-2 rounded-full bg-gold animate-pulse" />
+          <span className="text-gold text-xs font-semibold uppercase tracking-wider">{t.hero.badge}</span>
+        </div>
 
-          {/* Image column */}
-          <div className="hero-img flex-1 w-full">
-            <div className="rounded-2xl overflow-hidden border-2 border-gold/25 shadow-2xl shadow-gold/10">
-              <picture>
-                <source media="(max-width: 767px)" srcSet={HERO_IMG_SM} />
-                <source media="(min-width: 768px)" srcSet={HERO_IMG_LG} />
-                <img src={HERO_IMG_LG} alt={t.hero.imgAlt} width={800} height={500} className="w-full rounded-2xl object-cover object-center h-[300px] lg:h-[500px]" loading="eager" fetchPriority="high" decoding="async" />
-              </picture>
-            </div>
-          </div>
+        <h1 className="hero-h1 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal leading-[1.1] mb-6 md:mb-8">
+          {t.hero.title1}
+          <br className="hidden sm:block" />
+          <span className="gold-gradient-text" style={{ fontStyle: 'italic' }}>{t.hero.titleGold}</span>
+          {t.hero.title2 && <>{' '}<br className="hidden sm:block" /><span className="text-white/90">{t.hero.title2}</span></>}
+        </h1>
+
+        <p className="hero-p text-base sm:text-xl text-white/55 max-w-xl mb-8 md:mb-10 leading-relaxed">{t.hero.subtitle}</p>
+
+        <div className="hero-cta flex flex-col sm:flex-row items-start sm:items-center gap-6">
+          <a href="#contacto" className="inline-flex items-center gap-3 bg-[#C9A84C] hover:bg-[#D4B96A] text-[#080F24] font-semibold py-4 px-8 rounded-lg transition-all duration-300 text-base md:text-lg">
+            {t.hero.cta}
+            <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+          </a>
+          <p className="text-white/30 text-sm max-w-xs">{t.hero.ctaSub}</p>
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#080F24] to-transparent z-10" />
+      {/* Bottom fade */}
+      <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '160px', background: 'linear-gradient(to top, #080F24, transparent)', zIndex: 3 }} />
     </section>
   );
 }
