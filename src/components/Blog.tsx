@@ -13,7 +13,7 @@ export default function Blog() {
   return (
     <section className="section-pad" style={{ background: '#080F24' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-normal mb-6">
             <span className="gold-gradient-text">{t.blog.title}</span>
           </h2>

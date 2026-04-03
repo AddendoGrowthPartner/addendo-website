@@ -21,8 +21,8 @@ export default function WhyAddendo() {
     <section ref={ref} id="por-que" className="section-pad relative" style={{ background: '#080F24' }}>
       <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] bg-gold/[0.03] rounded-full blur-[130px]" />
       <div className="relative max-w-6xl mx-auto">
-        <h2 className="w-t opacity-0 font-display text-3xl sm:text-4xl md:text-5xl font-normal text-center mb-16">{t.why.title1}<br /><span className="gold-gradient-text">{t.why.titleGold}</span></h2>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-14">
+        <h2 className="w-t opacity-0 font-display text-3xl sm:text-4xl md:text-5xl font-normal text-center mb-10">{t.why.title1}<br /><span className="gold-gradient-text">{t.why.titleGold}</span></h2>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
           {t.why.items.map((r, i) => (
             <div key={i} className={`w-c opacity-0 glass-card p-7 ${i === 4 ? 'sm:col-span-2 lg:col-span-1 lg:col-start-2' : ''}`}>
               <div className="text-gold mb-4">{icons[i]}</div>

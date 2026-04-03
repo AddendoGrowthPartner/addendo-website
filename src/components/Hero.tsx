@@ -39,7 +39,7 @@ export default function Hero() {
   }, [isMobile]);
 
   return (
-    <section style={{ position: 'relative', overflow: 'hidden', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', paddingTop: '5rem', paddingBottom: '5rem', background: '#080F24' }}>
+    <section style={{ position: 'relative', overflow: 'hidden', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', paddingTop: '8rem', paddingBottom: '4rem', background: '#080F24' }}>
       {/* Background image */}
       <img
         src={HERO_BG}

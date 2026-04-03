@@ -10,7 +10,7 @@ export default function AIAgents() {
   return (
     <section className="section-pad" style={{ background: '#0A1230' }}>
       <div className="max-w-7xl mx-auto">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10">
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-normal mb-4">
             {t.aiAgents.title1}<span className="gold-gradient-text">{t.aiAgents.titleGold}</span>
           </h2>

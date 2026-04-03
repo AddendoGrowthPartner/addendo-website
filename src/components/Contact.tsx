@@ -16,7 +16,7 @@ export default function Contact() {
     <section ref={ref} id="contacto" className="section-pad relative" style={{ background: '#0A1228' }}>
       <div className="relative max-w-2xl mx-auto">
         <h2 className="ct-a opacity-0 font-display text-3xl sm:text-4xl md:text-5xl font-normal text-center mb-4"><span className="gold-gradient-text">{t.contact.title}</span></h2>
-        <p className="ct-a opacity-0 text-white/40 text-center mb-12 text-lg">{t.contact.subtitle}</p>
+        <p className="ct-a opacity-0 text-white/40 text-center mb-8 text-lg">{t.contact.subtitle}</p>
         <form onSubmit={submit} className="ct-a opacity-0 space-y-5">
           <div className="grid sm:grid-cols-2 gap-5">
             <div><label htmlFor="name" className="block text-xs font-semibold text-white/50 mb-2 uppercase tracking-wider">{t.contact.name}</label><input id="name" type="text" required value={form.name} onChange={set('name')} placeholder={t.contact.namePh} className={ic} /></div>

@@ -17,7 +17,7 @@ export default function Testimonials() {
     <section ref={ref} className="section-pad relative overflow-hidden" style={{ background: '#0A1228' }}>
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gold/[0.03] rounded-full blur-[150px]" />
       <div className="relative max-w-6xl mx-auto">
-        <div className="te-t opacity-0 text-center mb-14">
+        <div className="te-t opacity-0 text-center mb-10">
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-normal mb-4">{t.testimonials.title1}<span className="gold-gradient-text">{t.testimonials.titleGold}</span></h2>
         </div>
         <div className="grid md:grid-cols-3 gap-6">

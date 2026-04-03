@@ -17,7 +17,7 @@ export default function ForWhom() {
         <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-normal mb-4">
           {t.forWhom.title1}<span className="gold-gradient-text">{t.forWhom.titleGold}</span>
         </h2>
-        <p className="text-white/50 text-base sm:text-lg max-w-2xl mx-auto mb-14">{t.forWhom.subtitle}</p>
+        <p className="text-white/50 text-base sm:text-lg max-w-2xl mx-auto mb-10">{t.forWhom.subtitle}</p>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-5 mb-12">
           {t.forWhom.items.map((item: string, i: number) => {
