@@ -39,7 +39,7 @@ export default function Hero() {
   }, [isMobile]);
 
   return (
-    <section style={{ position: 'relative', overflow: 'hidden', minHeight: '100vh', display: 'flex', alignItems: 'center', background: '#080F24' }}>
+    <section style={{ position: 'relative', overflow: 'hidden', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '8rem 0', background: '#080F24' }}>
       {/* Background image */}
       <img
         src={HERO_BG}
@@ -78,22 +78,22 @@ export default function Hero() {
       <div className="hero-tech-dots" style={{ zIndex: 2 }} />
 
       {/* Content */}
-      <div style={{ position: 'relative', zIndex: 3 }} className="max-w-4xl mx-auto px-4 sm:px-6 w-full pt-24 pb-16">
-        <div className="hero-badge inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold/20 bg-gold/5 mb-6 md:mb-8">
+      <div style={{ position: 'relative', zIndex: 3 }} className="max-w-4xl mx-auto px-4 sm:px-6 w-full text-center">
+        <div className="hero-badge inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold/20 bg-gold/5 mb-8">
           <span className="w-2 h-2 rounded-full bg-gold animate-pulse" />
           <span className="text-gold text-xs font-semibold uppercase tracking-wider">{t.hero.badge}</span>
         </div>
 
-        <h1 className="hero-h1 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal leading-[1.1] mb-6 md:mb-8">
+        <h1 className="hero-h1 font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-normal leading-tight">
           {t.hero.title1}
           <br className="hidden sm:block" />
           <span className="gold-gradient-text" style={{ fontStyle: 'italic' }}>{t.hero.titleGold}</span>
           {t.hero.title2 && <>{' '}<br className="hidden sm:block" /><span className="text-white/90">{t.hero.title2}</span></>}
         </h1>
 
-        <p className="hero-p text-base sm:text-xl text-white/55 max-w-xl mb-8 md:mb-10 leading-relaxed">{t.hero.subtitle}</p>
+        <p className="hero-p text-xl md:text-2xl text-white/50 max-w-2xl mx-auto leading-relaxed mt-8">{t.hero.subtitle}</p>
 
-        <div className="hero-cta flex flex-col sm:flex-row items-start sm:items-center gap-6">
+        <div className="hero-cta flex flex-col sm:flex-row items-center justify-center gap-6 mt-10">
           <a href="#contacto" className="inline-flex items-center gap-3 bg-[#C9A84C] hover:bg-[#D4B96A] text-[#080F24] font-semibold py-4 px-8 rounded-lg transition-all duration-300 text-base md:text-lg">
             {t.hero.cta}
             <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
