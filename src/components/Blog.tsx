@@ -1,8 +1,8 @@
 import { useI18n } from '../i18n/context';
 
 const blogImages = [
-  'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80',
-  'https://images.unsplash.com/photo-1611605698335-8b1569810432?w=800&q=80',
+  'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&q=80',
+  'https://images.unsplash.com/photo-1562577309-4932fdd64cd1?w=800&q=80',
   'https://images.unsplash.com/photo-1432888622747-4eb9a8f5a07d?w=800&q=80',
 ];
 
