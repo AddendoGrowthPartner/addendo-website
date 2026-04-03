@@ -39,7 +39,7 @@ export default function Hero() {
   }, [isMobile]);
 
   return (
-    <section style={{ position: 'relative', overflow: 'hidden', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '8rem 0', background: '#080F24' }}>
+    <section style={{ position: 'relative', overflow: 'hidden', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', paddingTop: '5rem', paddingBottom: '5rem', background: '#080F24' }}>
       {/* Background image */}
       <img
         src={HERO_BG}
@@ -79,7 +79,7 @@ export default function Hero() {
 
       {/* Content */}
       <div style={{ position: 'relative', zIndex: 3 }} className="max-w-4xl mx-auto px-4 sm:px-6 w-full text-center">
-        <div className="hero-badge inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold/20 bg-gold/5 mb-8">
+        <div className="hero-badge inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold/20 bg-gold/5 mb-4">
           <span className="w-2 h-2 rounded-full bg-gold animate-pulse" />
           <span className="text-gold text-xs font-semibold uppercase tracking-wider">{t.hero.badge}</span>
         </div>
@@ -91,14 +91,29 @@ export default function Hero() {
           {t.hero.title2 && <>{' '}<br className="hidden sm:block" /><span className="text-white/90">{t.hero.title2}</span></>}
         </h1>
 
-        <p className="hero-p text-xl md:text-2xl text-white/50 max-w-2xl mx-auto leading-relaxed mt-8">{t.hero.subtitle}</p>
+        <p className="hero-p text-xl md:text-2xl text-white/50 max-w-3xl mx-auto leading-relaxed mt-4">{t.hero.subtitle}</p>
 
-        <div className="hero-cta flex flex-col sm:flex-row items-center justify-center gap-6 mt-10">
+        <div className="hero-cta flex flex-col sm:flex-row items-center justify-center gap-6 mt-6">
           <a href="#contacto" className="inline-flex items-center gap-3 bg-[#C9A84C] hover:bg-[#D4B96A] text-[#080F24] font-semibold py-4 px-8 rounded-lg transition-all duration-300 text-base md:text-lg">
             {t.hero.cta}
             <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
           </a>
           <p className="text-white/30 text-sm max-w-xs">{t.hero.ctaSub}</p>
+        </div>
+
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-8 mt-12 pt-12 border-t border-[#C9A84C]/20">
+          <div className="text-center">
+            <div style={{ fontFamily: 'Fraunces, serif', fontSize: '2rem', color: '#C9A84C' }}>500+</div>
+            <div className="text-gray-400 text-sm">{t.stats.campaigns}</div>
+          </div>
+          <div className="text-center">
+            <div style={{ fontFamily: 'Fraunces, serif', fontSize: '2rem', color: '#C9A84C' }}>150+</div>
+            <div className="text-gray-400 text-sm">{t.stats.businesses}</div>
+          </div>
+          <div className="text-center">
+            <div style={{ fontFamily: 'Fraunces, serif', fontSize: '2rem', color: '#C9A84C' }}>$100M+</div>
+            <div className="text-gray-400 text-sm">{t.stats.revenue}</div>
+          </div>
         </div>
       </div>
 
