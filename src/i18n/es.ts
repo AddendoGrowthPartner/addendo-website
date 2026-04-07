@@ -214,6 +214,7 @@ const es = {
     rights: 'Todos los derechos reservados.',
     privacyPolicy: 'Política de Privacidad',
     termsOfUse: 'Términos de Uso',
+    thirdParty: 'Divulgación de Terceros',
   },
   blog: {
     title: 'Estrategias que transforman negocios',

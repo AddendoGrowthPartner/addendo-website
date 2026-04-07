@@ -42,6 +42,8 @@ export default function Footer() {
             <a href="/privacy" className="text-white/20 text-xs hover:text-gold transition-colors">{t.footer.privacyPolicy}</a>
             <span className="text-white/10 text-xs">&middot;</span>
             <a href="/terms" className="text-white/20 text-xs hover:text-gold transition-colors">{t.footer.termsOfUse}</a>
+            <span className="text-white/10 text-xs">&middot;</span>
+            <a href="/working-with-a-third-party" className="text-white/20 text-xs hover:text-gold transition-colors">{t.footer.thirdParty}</a>
           </div>
         </div>
       </div>

@@ -214,6 +214,7 @@ const en = {
     rights: 'All rights reserved.',
     privacyPolicy: 'Privacy Policy',
     termsOfUse: 'Terms of Use',
+    thirdParty: 'Third Party Disclosure',
   },
   blog: {
     title: 'Strategies that transform businesses',
