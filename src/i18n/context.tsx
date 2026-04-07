@@ -33,6 +33,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   const setLang = (l: Lang) => {
     setLangState(l);
     localStorage.setItem('addendo-lang', l);
+    window.dispatchEvent(new CustomEvent('addendo-lang-change', { detail: l }));
   };
 
   const t = lang === 'es' ? es : en;
