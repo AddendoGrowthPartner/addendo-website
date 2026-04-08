@@ -14,7 +14,7 @@ export default function CtaFinal() {
         <p className="cta-a opacity-0 text-lg md:text-xl text-white/50 max-w-2xl mx-auto mb-10 leading-relaxed">{t.cta.text}</p>
         <div className="cta-a opacity-0 mb-6">
           {/* PENDIENTE: reemplazar con Calendar link de GHL */}
-          <a href="#contacto" className="btn-gold text-lg md:text-xl inline-flex">{t.cta.button}<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg></a>
+          <a href="#contacto" className="btn-gold text-lg md:text-xl inline-flex">{t.cta.button}<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg></a>
         </div>
         <p className="cta-a opacity-0 text-white/30 text-sm">{t.cta.sub}</p>
       </div>

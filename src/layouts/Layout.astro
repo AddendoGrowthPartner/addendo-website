@@ -11,7 +11,7 @@ const {
   description = 'Addendo es el sistema completo que convierte tu negocio en una máquina de ventas — presencia digital, campañas, contenido, reputación y clientes nuevos cada semana.',
 } = Astro.props;
 
-const ogImage = 'https://res.cloudinary.com/dokzw376u/image/upload/v1774995924/VECTOR_ADDENDO_FINAL_zuw6te.jpg';
+const ogImage = 'https://res.cloudinary.com/dokzw376u/image/upload/f_auto,q_auto/v1774995924/VECTOR_ADDENDO_FINAL_zuw6te.jpg';
 const siteUrl = 'https://addendo.io';
 ---
 
@@ -65,12 +65,13 @@ const siteUrl = 'https://addendo.io';
     <link rel="preconnect" href="https://images.pexels.com" />
 
     <!-- Hero image preload -->
-    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80" fetchpriority="high" />
+    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600&q=80&fm=webp" fetchpriority="high" />
 
     <!-- Fonts (non-blocking) -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&family=Inter:wght@300;400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&family=Inter:wght@300;400;500;600&display=swap" /></noscript>
-    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@700&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Teko:wght@700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Teko:wght@700&display=swap" rel="stylesheet" /></noscript>
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

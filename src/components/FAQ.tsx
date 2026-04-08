@@ -17,17 +17,26 @@ export default function FAQ() {
             <div key={i} className="rounded-xl border border-gold/15 bg-[#0F1629] overflow-hidden transition-colors hover:border-gold/30">
               <button
                 onClick={() => setOpen(open === i ? null : i)}
+                aria-expanded={open === i}
+                aria-controls={`faq-panel-${i}`}
+                id={`faq-trigger-${i}`}
+                aria-label={item.q}
                 className="w-full flex items-center justify-between p-5 sm:p-6 text-left"
               >
                 <span className="text-sm sm:text-base font-medium text-white pr-4">{item.q}</span>
                 <svg
                   className={`w-5 h-5 text-gold shrink-0 transition-transform duration-300 ${open === i ? 'rotate-180' : ''}`}
                   fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                  aria-hidden="true" focusable="false"
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
               <div
+                id={`faq-panel-${i}`}
+                role="region"
+                aria-labelledby={`faq-trigger-${i}`}
+                hidden={open !== i}
                 className="overflow-hidden transition-all duration-300"
                 style={{ maxHeight: open === i ? '300px' : '0', opacity: open === i ? 1 : 0 }}
               >

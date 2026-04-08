@@ -58,7 +58,7 @@ export default function TechAllies() {
                   key={`${ally.name}-${i}`}
                   className="flex flex-col items-center justify-center gap-2 px-3 shrink-0 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
                 >
-                  <Icon size={36} color={ally.color} style={{ height: 40, width: 'auto' }} />
+                  <Icon size={36} color={ally.color} style={{ height: 40, width: 'auto' }} aria-hidden={true} focusable={false} />
                   <span className="text-white/30 text-[9px] leading-none whitespace-nowrap">{ally.name}</span>
                 </div>
               );

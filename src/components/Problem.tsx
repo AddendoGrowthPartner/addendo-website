@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useI18n } from '../i18n/context';
 
-const IMG = 'https://images.pexels.com/photos/4050315/pexels-photo-4050315.jpeg?auto=compress&cs=tinysrgb&w=800';
+const IMG = 'https://images.pexels.com/photos/4050315/pexels-photo-4050315.jpeg?auto=compress&cs=tinysrgb&w=800&fm=webp';
 const icons = [
   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>,
   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>,
@@ -25,7 +25,7 @@ export default function Problem() {
           <div className="space-y-3">
             {t.problem.items.map((p, i) => (
               <div key={i} className="p-card opacity-0 glass-card p-5 flex items-start gap-4">
-                <div className="text-gold shrink-0 mt-0.5">{icons[i]}</div>
+                <div className="text-gold shrink-0 mt-0.5" aria-hidden="true">{icons[i]}</div>
                 <div><h3 className="text-base font-bold text-white mb-1">{p.title}</h3><p className="text-white/45 leading-relaxed text-sm">{p.text}</p></div>
               </div>
             ))}

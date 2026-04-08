@@ -37,11 +37,25 @@ import Layout from '../layouts/Layout.astro';
           <h2>4. Uso de la API de Google Ads</h2>
           <p>Addendo utiliza la API de Google Ads para construir y mantener herramientas propias que automatizan reportes de campañas, investigación de palabras clave y optimización de campañas para nuestros clientes. Este acceso a la API se utiliza exclusivamente para servir las necesidades publicitarias de nuestros clientes.</p>
 
-          <h2>5. Contacto</h2>
+          <h2>5. MCC y Funciones Específicas de la API de Google Ads</h2>
+          <p>Addendo gestiona las cuentas de Google Ads de sus clientes a través de su cuenta de administrador de Google Ads (My Client Center, MCC):</p>
+          <p><strong>ID de MCC:</strong> <code>424-957-3841</code></p>
+          <p>A través de la API de Google Ads, Addendo realiza las siguientes funciones específicas para cada cliente vinculado al MCC:</p>
+          <h3>Creación y estructuración de campañas</h3>
+          <p>Creamos campañas de Search, Display, Performance Max, Shopping y YouTube programáticamente vía API: configuración de objetivos, tipos de puja, ubicaciones geográficas, horarios, audiencias, anuncios responsivos y estructura de grupos de anuncios alineada con la estrategia del cliente.</p>
+          <h3>Investigación de palabras clave (Keyword Research)</h3>
+          <p>Usamos los servicios <code>KeywordPlanIdeaService</code> y <code>KeywordPlanService</code> de la API para identificar términos relevantes, estimar volumen de búsqueda, competencia y costo por clic, y construir grupos de palabras clave optimizados para cada cliente — incluyendo palabras clave negativas para reducir gasto desperdiciado.</p>
+          <h3>Reportes automáticos de rendimiento</h3>
+          <p>Utilizamos <code>GoogleAdsService.SearchStream</code> para extraer métricas de impresiones, clics, CTR, conversiones, costo por adquisición y revenue atribuible. Estos datos alimentan dashboards en tiempo real y reportes automáticos que se entregan a cada cliente de forma periódica.</p>
+          <h3>Gestión y optimización de presupuesto</h3>
+          <p>Vía <code>CampaignBudgetService</code> y <code>BiddingStrategyService</code>, ajustamos presupuestos diarios, redistribuimos inversión entre campañas según rendimiento, y aplicamos estrategias de puja automáticas (Target ROAS, Maximize Conversions, Target CPA) para maximizar el retorno sobre la inversión publicitaria.</p>
+          <p>Todas estas operaciones se ejecutan en cumplimiento estricto con la <a href="https://developers.google.com/google-ads/api/docs/policies" target="_blank" rel="noopener noreferrer">Política de la API de Google Ads</a> y los Términos de Servicio para Terceros. El acceso al MCC requiere autorización explícita del cliente y puede ser revocado en cualquier momento.</p>
+
+          <h2>6. Contacto</h2>
           <p>Para preguntas sobre cómo gestionamos tus campañas de Google Ads:</p>
           <p>Email: <a href="mailto:admin@addendo.io">admin@addendo.io</a><br />Sitio web: <a href="https://addendo.io">addendo.io</a></p>
 
-          <h2>6. Cumplimiento</h2>
+          <h2>7. Cumplimiento</h2>
           <p>Esta divulgación se proporciona en cumplimiento con la Política de Terceros de la API de Google Ads y los requisitos de Google "Working with a Third Party".</p>
           <p>Última actualización: 7 de abril de 2026.</p>
         </div>
@@ -75,11 +89,25 @@ import Layout from '../layouts/Layout.astro';
           <h2>4. Google Ads API Usage</h2>
           <p>Addendo uses the Google Ads API to build and maintain proprietary tools that automate campaign reporting, keyword research, and campaign optimization for our clients. This API access is used exclusively to serve our clients' advertising needs.</p>
 
-          <h2>5. Contact</h2>
+          <h2>5. MCC and Specific Google Ads API Functions</h2>
+          <p>Addendo manages its clients' Google Ads accounts through its Google Ads Manager Account (My Client Center, MCC):</p>
+          <p><strong>MCC ID:</strong> <code>424-957-3841</code></p>
+          <p>Through the Google Ads API, Addendo performs the following specific functions for each client linked to the MCC:</p>
+          <h3>Campaign creation and structuring</h3>
+          <p>We create Search, Display, Performance Max, Shopping and YouTube campaigns programmatically via the API: configuring objectives, bidding types, geographic locations, schedules, audiences, responsive ads, and ad-group structures aligned with each client's strategy.</p>
+          <h3>Keyword research</h3>
+          <p>We use the API's <code>KeywordPlanIdeaService</code> and <code>KeywordPlanService</code> to identify relevant terms, estimate search volume, competition and cost-per-click, and build optimized keyword groups for each client — including negative keywords to reduce wasted spend.</p>
+          <h3>Automated performance reporting</h3>
+          <p>We use <code>GoogleAdsService.SearchStream</code> to extract metrics for impressions, clicks, CTR, conversions, cost per acquisition and attributable revenue. This data feeds real-time dashboards and automated reports delivered to each client on a recurring basis.</p>
+          <h3>Budget management and optimization</h3>
+          <p>Via <code>CampaignBudgetService</code> and <code>BiddingStrategyService</code>, we adjust daily budgets, redistribute spend across campaigns based on performance, and apply automated bidding strategies (Target ROAS, Maximize Conversions, Target CPA) to maximize return on ad spend.</p>
+          <p>All of these operations are executed in strict compliance with the <a href="https://developers.google.com/google-ads/api/docs/policies" target="_blank" rel="noopener noreferrer">Google Ads API Policy</a> and the Third-Party Terms of Service. MCC access requires explicit client authorization and may be revoked at any time.</p>
+
+          <h2>6. Contact</h2>
           <p>For questions about how we manage your Google Ads campaigns:</p>
           <p>Email: <a href="mailto:admin@addendo.io">admin@addendo.io</a><br />Website: <a href="https://addendo.io">addendo.io</a></p>
 
-          <h2>6. Compliance</h2>
+          <h2>7. Compliance</h2>
           <p>This disclosure is provided in compliance with Google Ads API Third-Party Policy and Google's "Working with a Third Party" requirements.</p>
           <p>Last updated: April 7, 2026.</p>
         </div>
@@ -97,6 +125,7 @@ import Layout from '../layouts/Layout.astro';
   .legal-content a { color: #C9A84C; text-decoration: none; transition: color 0.2s; }
   .legal-content a:hover { color: #D4B96A; }
   .legal-content strong { color: rgba(255,255,255,0.65); }
+  .legal-content code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; font-size: 0.875em; color: #C9A84C; background: rgba(201,168,76,0.08); padding: 0.125rem 0.375rem; border-radius: 4px; }
   [data-lang-es] { display: none; }
   html[data-lang="es"] [data-lang-es] { display: revert; }
   html[data-lang="es"] [data-lang-en] { display: none; }

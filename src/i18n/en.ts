@@ -179,11 +179,9 @@ const en = {
   testimonials: {
     title1: 'What our ',
     titleGold: 'clients say.',
-    items: [
-      { name: 'Carlos M.', business: 'Restaurant La Esquina', quote: 'Since we started with Addendo, reservations tripled. Now we have a waiting list on weekends.' },
-      { name: 'Maria L.', business: 'MedSpa Belleza Latina', quote: 'I finally have a team that understands my market. My social media generates real appointments, not just likes.' },
-      { name: 'Roberto S.', business: 'RS Real Estate Group', quote: 'Addendo brought me 47 qualified leads in the first month. I closed 5 sales. The ROI is incredible.' },
-    ],
+    // PENDING: add real client testimonials with verified names, businesses and quotes.
+    items: [] as Array<{ name: string; business: string; quote: string }>,
+    pending: "We're collecting real testimonials from our clients. They will be published here soon.",
   },
   cta: {
     title1: 'Your competition is already moving.',

@@ -37,7 +37,7 @@ export default function StatsCounter() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center mb-8">
           {items.map((s, i) => (
             <div key={i} className="st-box opacity-0">
-              <div className="text-gold/60 flex justify-center mb-3">{statIcons[i]}</div>
+              <div className="text-gold/60 flex justify-center mb-3" aria-hidden="true">{statIcons[i]}</div>
               <Counter end={s.end} prefix={s.prefix} suffix={s.suffix} />
               <p className="text-white/35 text-xs md:text-sm mt-2 font-medium">{s.label}</p>
             </div>

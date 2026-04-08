@@ -22,8 +22,8 @@ export default function AIAgents() {
             const Icon = icons[i];
             return (
               <div key={i} className="rounded-xl border border-gold/15 bg-[#0F1629] p-5 sm:p-6 hover:border-gold/40 transition-all duration-300 hover:-translate-y-1 group">
-                <div className="mb-3 icon-elegant">
-                  <Icon size={28} color="#C9A84C" className="sm:w-8 sm:h-8" />
+                <div className="mb-3 icon-elegant" aria-hidden="true">
+                  <Icon size={28} color="#C9A84C" className="sm:w-8 sm:h-8" aria-hidden={true} focusable={false} />
                 </div>
                 <h3 className="text-sm sm:text-base font-medium text-white mb-2">{item.title}</h3>
                 <p className="text-white/40 text-xs sm:text-sm leading-relaxed">{item.text}</p>

@@ -89,8 +89,8 @@ export default function Services() {
           {cats.map((c: any, i: number) => {
             const CatIcon = catIcons[i].icon;
             return (
-              <button key={i} onClick={() => setActive(i)} className={`flex items-center gap-2 px-3 md:px-4 py-2 md:py-2.5 rounded-lg text-xs md:text-sm font-semibold transition-all duration-300 ${active === i ? 'bg-gold text-[#080F24] shadow-lg shadow-gold/20' : 'bg-white/[0.04] text-white/50 hover:text-white/80 hover:bg-white/[0.08] border border-white/[0.06]'}`}>
-                <CatIcon size={18} color={active === i ? '#080F24' : catIcons[i].color} style={{ filter: active === i ? 'saturate(1) opacity(1)' : 'saturate(0.35) opacity(0.65)', transition: 'filter 0.3s ease' }} />
+              <button key={i} onClick={() => setActive(i)} aria-label={c.name} aria-pressed={active === i} className={`flex items-center gap-2 px-3 md:px-4 py-2 md:py-2.5 rounded-lg text-xs md:text-sm font-semibold transition-all duration-300 ${active === i ? 'bg-gold text-[#080F24] shadow-lg shadow-gold/20' : 'bg-white/[0.04] text-white/50 hover:text-white/80 hover:bg-white/[0.08] border border-white/[0.06]'}`}>
+                <CatIcon size={18} color={active === i ? '#080F24' : catIcons[i].color} style={{ filter: active === i ? 'saturate(1) opacity(1)' : 'saturate(0.35) opacity(0.65)', transition: 'filter 0.3s ease' }} aria-hidden={true} focusable={false} />
                 <span className="hidden sm:inline">{c.name}</span>
               </button>
             );
@@ -105,9 +105,9 @@ export default function Services() {
               return (
                 <div key={i} className="glass-card p-5 md:p-6 group">
                   <div className="flex items-start justify-between mb-3">
-                    <div className="icon-elegant group-hover:scale-110">
-                      {SvcIcon ? <SvcIcon size={32} color={svcIcon.color} /> : (
-                        <svg className="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="icon-elegant group-hover:scale-110" aria-hidden="true">
+                      {SvcIcon ? <SvcIcon size={32} color={svcIcon.color} aria-hidden={true} focusable={false} /> : (
+                        <svg className="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
                         </svg>
                       )}

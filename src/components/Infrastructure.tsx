@@ -23,7 +23,7 @@ export default function Infrastructure() {
         <div className="grid md:grid-cols-2 gap-5">
           {t.infra.items.map((f, i) => (
             <div key={i} className="inf-i opacity-0 glass-card p-8 flex gap-5 items-start">
-              <div className="text-gold shrink-0">{icons[i]}</div>
+              <div className="text-gold shrink-0" aria-hidden="true">{icons[i]}</div>
               <div><h3 className="text-lg font-bold text-white mb-2">{f.title}</h3><p className="text-white/45 text-sm leading-relaxed">{f.desc}</p></div>
             </div>
           ))}

@@ -27,7 +27,7 @@ export default function Contact() {
             <div><label htmlFor="biz" className="block text-xs font-semibold text-white/50 mb-2 uppercase tracking-wider">{t.contact.business}</label><input id="biz" type="text" value={form.business} onChange={set('business')} placeholder={t.contact.businessPh} className={ic} /></div>
           </div>
           <div><label htmlFor="msg" className="block text-xs font-semibold text-white/50 mb-2 uppercase tracking-wider">{t.contact.message}</label><textarea id="msg" required rows={4} value={form.message} onChange={set('message')} placeholder={t.contact.messagePh} className={`${ic} resize-none`} /></div>
-          <button type="submit" className="btn-gold w-full justify-center text-lg">{t.contact.button}<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg></button>
+          <button type="submit" className="btn-gold w-full justify-center text-lg">{t.contact.button}<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg></button>
         </form>
       </div>
     </section>

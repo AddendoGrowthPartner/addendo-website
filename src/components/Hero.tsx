@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useI18n } from '../i18n/context';
 
-const HERO_BG = 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600&q=80';
+const HERO_BG = 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600&q=80&fm=webp';
 
 export default function Hero() {
   const { t } = useI18n();
@@ -44,8 +44,12 @@ export default function Hero() {
       <img
         src={HERO_BG}
         alt=""
+        width={1600}
+        height={1067}
         loading="eager"
         fetchPriority="high"
+        decoding="async"
+        aria-hidden="true"
         style={{
           position: 'absolute',
           top: 0,
@@ -96,7 +100,7 @@ export default function Hero() {
         <div className="hero-cta flex flex-col sm:flex-row items-center justify-center gap-6 mt-6">
           <a href="#contacto" className="inline-flex items-center gap-3 bg-[#C9A84C] hover:bg-[#D4B96A] text-[#080F24] font-semibold py-4 px-8 rounded-lg transition-all duration-300 text-base md:text-lg">
             {t.hero.cta}
-            <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+            <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
           </a>
           <p className="text-white/30 text-sm max-w-xs">{t.hero.ctaSub}</p>
         </div>

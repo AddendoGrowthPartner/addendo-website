@@ -21,8 +21,8 @@ export default function HowItWorks() {
             return (
               <div key={i} className="relative glass-card p-8 text-center group">
                 <span className="absolute top-4 right-4 text-6xl font-display font-bold text-gold/[0.07] leading-none select-none">{step.num}</span>
-                <div className="mb-4 flex justify-center icon-elegant">
-                  <Icon size={28} color="#C9A84C" className="sm:w-8 sm:h-8" />
+                <div className="mb-4 flex justify-center icon-elegant" aria-hidden="true">
+                  <Icon size={28} color="#C9A84C" className="sm:w-8 sm:h-8" aria-hidden={true} focusable={false} />
                 </div>
                 <h3 className="text-lg font-medium text-white mb-3">{step.title}</h3>
                 <p className="text-white/50 text-sm leading-relaxed">{step.text}</p>

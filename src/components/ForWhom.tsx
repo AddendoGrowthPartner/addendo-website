@@ -24,8 +24,8 @@ export default function ForWhom() {
             const Icon = icons[i];
             return (
               <div key={i} className="glass-card p-5 flex flex-col items-center gap-3 group">
-                <div className="icon-elegant">
-                  <Icon size={28} color="#C9A84C" className="sm:w-8 sm:h-8" />
+                <div className="icon-elegant" aria-hidden="true">
+                  <Icon size={28} color="#C9A84C" className="sm:w-8 sm:h-8" aria-hidden={true} focusable={false} />
                 </div>
                 <span className="text-xs sm:text-sm font-medium text-white/90 leading-tight">{item}</span>
               </div>

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useI18n } from '../i18n/context';
 
-const LOGO_ICON = 'https://res.cloudinary.com/dokzw376u/image/upload/v1775105209/Disen%CC%83o_Final_Logo_Para_Vector-removebg_elatop.png';
+const LOGO_ICON = 'https://res.cloudinary.com/dokzw376u/image/upload/f_auto,q_auto/v1775105209/Disen%CC%83o_Final_Logo_Para_Vector-removebg_elatop.png';
 
 export default function Navbar() {
   const { t, lang, setLang } = useI18n();
@@ -21,6 +21,9 @@ export default function Navbar() {
           <img
             src={LOGO_ICON}
             alt="Addendo"
+            width={80}
+            height={80}
+            decoding="async"
             style={{ height: '80px', width: 'auto', objectFit: 'contain' }}
           />
           <div className="flex flex-col leading-none" style={{ alignItems: 'center', marginLeft: '-8px' }}>
@@ -34,8 +37,8 @@ export default function Navbar() {
             <a key={l.href} href={l.href} className="text-white/80 hover:text-white transition-colors text-base font-medium tracking-[0.05em] uppercase">{l.label}</a>
           ))}
           <div className="flex items-center border border-white/10 rounded-full px-1 py-0.5 ml-1">
-            <button onClick={() => setLang('es')} className={`text-xs font-bold px-3 py-1.5 min-h-[36px] min-w-[36px] rounded-full transition-all ${lang === 'es' ? 'bg-gold text-[#080F24]' : 'text-white/40 hover:text-white'}`}>ES</button>
-            <button onClick={() => setLang('en')} className={`text-xs font-bold px-3 py-1.5 min-h-[36px] min-w-[36px] rounded-full transition-all ${lang === 'en' ? 'bg-gold text-[#080F24]' : 'text-white/40 hover:text-white'}`}>EN</button>
+            <button onClick={() => setLang('es')} aria-label="Cambiar idioma a español" aria-pressed={lang === 'es'} className={`text-xs font-bold px-3 py-1.5 min-h-[36px] min-w-[36px] rounded-full transition-all ${lang === 'es' ? 'bg-gold text-[#080F24]' : 'text-white/40 hover:text-white'}`}>ES</button>
+            <button onClick={() => setLang('en')} aria-label="Switch language to English" aria-pressed={lang === 'en'} className={`text-xs font-bold px-3 py-1.5 min-h-[36px] min-w-[36px] rounded-full transition-all ${lang === 'en' ? 'bg-gold text-[#080F24]' : 'text-white/40 hover:text-white'}`}>EN</button>
           </div>
           <a href="#contacto" className="btn-gold !py-2.5 !px-7 !text-sm">{t.nav.cta}</a>
         </div>
@@ -53,8 +56,8 @@ export default function Navbar() {
             <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="block text-white/80 hover:text-gold transition-colors text-base font-medium">{l.label}</a>
           ))}
           <div className="flex items-center gap-3 pt-2">
-            <button onClick={() => setLang('es')} className={`text-sm font-bold px-5 py-2 rounded-full transition-all ${lang === 'es' ? 'bg-gold text-[#080F24]' : 'border border-white/20 text-white/50'}`}>ES</button>
-            <button onClick={() => setLang('en')} className={`text-sm font-bold px-5 py-2 rounded-full transition-all ${lang === 'en' ? 'bg-gold text-[#080F24]' : 'border border-white/20 text-white/50'}`}>EN</button>
+            <button onClick={() => setLang('es')} aria-label="Cambiar idioma a español" aria-pressed={lang === 'es'} className={`text-sm font-bold px-5 py-2 rounded-full transition-all ${lang === 'es' ? 'bg-gold text-[#080F24]' : 'border border-white/20 text-white/50'}`}>ES</button>
+            <button onClick={() => setLang('en')} aria-label="Switch language to English" aria-pressed={lang === 'en'} className={`text-sm font-bold px-5 py-2 rounded-full transition-all ${lang === 'en' ? 'bg-gold text-[#080F24]' : 'border border-white/20 text-white/50'}`}>EN</button>
           </div>
           <a href="#contacto" onClick={() => setOpen(false)} className="btn-gold !text-sm block text-center mt-4">{t.nav.cta}</a>
         </div>
