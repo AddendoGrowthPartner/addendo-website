@@ -65,8 +65,14 @@ const steps = es.process.steps.map((s, i) => ({ es: s, en: en.process.steps[i] }
     transition: opacity 0.7s ease-out, transform 0.7s ease-out;
     will-change: opacity, transform;
   }
-  #proceso .pr-s[data-dir="left"]  { transform: translateX(-40px); }
-  #proceso .pr-s[data-dir="right"] { transform: translateX(40px); }
+  /* Slide-in transforms only on desktop. On mobile the rows must sit flush
+     with the section padding — any translateX would push them off the viewport
+     because data-dir attribute selectors have higher specificity than an
+     un-scoped `.pr-s { transform: none }` override inside a media query. */
+  @media (min-width: 768px) {
+    #proceso .pr-s[data-dir="left"]  { transform: translateX(-40px); }
+    #proceso .pr-s[data-dir="right"] { transform: translateX(40px); }
+  }
   #proceso .pr-t.is-visible,
   #proceso .pr-s.is-visible {
     opacity: 1;
