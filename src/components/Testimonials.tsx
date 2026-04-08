@@ -2,6 +2,7 @@
 // array `items` en src/i18n/es.ts y src/i18n/en.ts y este componente los renderizará.
 import { useEffect, useRef } from 'react';
 import { useI18n } from '../i18n/context';
+import { lazyGsap } from '../lib/lazyGsap';
 
 export default function Testimonials() {
   const { t } = useI18n();
@@ -9,20 +10,14 @@ export default function Testimonials() {
   const items = t.testimonials.items;
   const hasItems = items.length > 0;
 
-  useEffect(() => {
-    if (window.innerWidth < 768) return;
-    import('gsap').then(({ gsap }) => {
-      import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
-        gsap.registerPlugin(ScrollTrigger);
-        const el = ref.current;
-        if (!el) return;
-        gsap.fromTo(el.querySelector('.te-t'), { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, scrollTrigger: { trigger: el, start: 'top 80%' } });
-        el.querySelectorAll('.te-c').forEach((c, i) => {
-          gsap.fromTo(c, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, delay: i * 0.15, scrollTrigger: { trigger: el, start: 'top 70%' } });
-        });
-      });
+  useEffect(() => lazyGsap(ref.current, (gsap) => {
+    const el = ref.current;
+    if (!el) return;
+    gsap.fromTo(el.querySelector('.te-t'), { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, scrollTrigger: { trigger: el, start: 'top 80%' } });
+    el.querySelectorAll('.te-c').forEach((c, i) => {
+      gsap.fromTo(c, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, delay: i * 0.15, scrollTrigger: { trigger: el, start: 'top 70%' } });
     });
-  }, []);
+  }), []);
 
   return (
     <section ref={ref} className="section-pad relative overflow-hidden" style={{ background: '#0A1228' }}>

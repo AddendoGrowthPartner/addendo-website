@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { useI18n } from '../i18n/context';
+import { lazyGsap } from '../lib/lazyGsap';
 
 export default function Contact() {
   const { t, lang } = useI18n();
   const ref = useRef<HTMLElement>(null);
   const [form, setForm] = useState({ name: '', phone: '', email: '', business: '', message: '' });
 
-  useEffect(() => { if (window.innerWidth < 768) return; import('gsap').then(({ gsap }) => { import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => { gsap.registerPlugin(ScrollTrigger); const el = ref.current; if (!el) return; gsap.fromTo(el.querySelectorAll('.ct-a'), { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, scrollTrigger: { trigger: el, start: 'top 80%' } }); }); }); }, []);
+  useEffect(() => lazyGsap(ref.current, (gsap) => { const el = ref.current; if (!el) return; gsap.fromTo(el.querySelectorAll('.ct-a'), { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, scrollTrigger: { trigger: el, start: 'top 80%' } }); }), []);
 
   const set = (k: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setForm(f => ({ ...f, [k]: e.target.value }));
   const submit = (e: React.FormEvent) => { e.preventDefault(); const isEn = lang === 'en'; const s = encodeURIComponent(isEn ? `Inquiry from ${form.name} — ${form.business}` : `Consulta de ${form.name} — ${form.business}`); const b = encodeURIComponent(isEn ? `Name: ${form.name}\nPhone: ${form.phone}\nEmail: ${form.email}\nBusiness: ${form.business}\n\nMessage:\n${form.message}` : `Nombre: ${form.name}\nTeléfono: ${form.phone}\nEmail: ${form.email}\nNegocio: ${form.business}\n\nMensaje:\n${form.message}`); window.location.href = `mailto:admin@addendo.io?subject=${s}&body=${b}`; };

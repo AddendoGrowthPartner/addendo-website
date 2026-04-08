@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useI18n } from '../i18n/context';
+import { lazyGsap } from '../lib/lazyGsap';
 import { FaGoogle, FaMeta, FaTiktok, FaLinkedin, FaYoutube, FaInstagram, FaFacebook, FaWhatsapp, FaStripe } from 'react-icons/fa6';
 import { SiGoogleads, SiGoogleanalytics, SiGoogletagmanager, SiGooglemaps, SiGmail, SiFigma, SiLooker, SiHubspot } from 'react-icons/si';
 import type { IconType } from 'react-icons';
@@ -73,7 +74,7 @@ export default function Services() {
   const [active, setActive] = useState(0);
   const ref = useRef<HTMLElement>(null);
 
-  useEffect(() => { if (window.innerWidth < 768) return; import('gsap').then(({ gsap }) => { import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => { gsap.registerPlugin(ScrollTrigger); const el = ref.current; if (!el) return; gsap.fromTo(el.querySelector('.svc-t'), { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.8, scrollTrigger: { trigger: el, start: 'top 80%' } }); gsap.fromTo(el.querySelector('.svc-tabs'), { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, delay: 0.2, scrollTrigger: { trigger: el, start: 'top 75%' } }); gsap.fromTo(el.querySelector('.svc-c'), { opacity: 0 }, { opacity: 1, duration: 0.6, delay: 0.4, scrollTrigger: { trigger: el, start: 'top 70%' } }); }); }); }, []);
+  useEffect(() => lazyGsap(ref.current, (gsap) => { const el = ref.current; if (!el) return; gsap.fromTo(el.querySelector('.svc-t'), { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.8, scrollTrigger: { trigger: el, start: 'top 80%' } }); gsap.fromTo(el.querySelector('.svc-tabs'), { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, delay: 0.2, scrollTrigger: { trigger: el, start: 'top 75%' } }); gsap.fromTo(el.querySelector('.svc-c'), { opacity: 0 }, { opacity: 1, duration: 0.6, delay: 0.4, scrollTrigger: { trigger: el, start: 'top 70%' } }); }), []);
 
   const cats = t.services.categories;
   const cat = cats[active];

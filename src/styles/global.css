@@ -1,5 +1,41 @@
 @import "tailwindcss";
 
+/*
+ * CLS mitigation: size-adjusted fallback fonts mapped to local system fonts.
+ * Before the Google webfont loads, text renders with these metrics — matched
+ * as closely as possible to the real face — so the layout barely shifts when
+ * the swap happens. Removes most of the font-induced CLS seen in PageSpeed.
+ */
+@font-face {
+  font-family: 'Fraunces Fallback';
+  src: local('Georgia'), local('Times New Roman'), local('Times');
+  size-adjust: 100%;
+  ascent-override: 90%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter Fallback';
+  src: local('Arial'), local('Helvetica Neue'), local('Helvetica');
+  size-adjust: 107%;
+  ascent-override: 90%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Teko Fallback';
+  src: local('Impact'), local('Haettenschweiler'), local('Arial Narrow Bold');
+  size-adjust: 82%;
+  ascent-override: 90%;
+  descent-override: 20%;
+  line-gap-override: 0%;
+  font-display: swap;
+}
+
 @theme {
   --color-navy: #0D1B3E;
   --color-navy-deep: #080F24;
@@ -8,9 +44,9 @@
   --color-gold-light: #D4B96A;
   --color-dark: #0F1629;
   --color-dark-card: #111827;
-  --font-sans: 'Inter', system-ui, sans-serif;
-  --font-display: 'Fraunces', serif;
-  --font-label: 'Inter', system-ui, sans-serif;
+  --font-sans: 'Inter', 'Inter Fallback', system-ui, sans-serif;
+  --font-display: 'Fraunces', 'Fraunces Fallback', Georgia, serif;
+  --font-label: 'Inter', 'Inter Fallback', system-ui, sans-serif;
 }
 
 @layer base {

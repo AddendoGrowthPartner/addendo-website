@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { useI18n } from '../i18n/context';
 
-const HERO_BG = 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600&q=80&fm=webp';
+// LCP-critical image served via Cloudinary fetch (auto WebP/AVIF + resize to 1200w).
+// Cloudinary descarga y cachea la imagen remota una sola vez.
+// Para subirla de forma permanente: reemplazar por una URL /upload/ una vez cargada al MCC.
+const HERO_BG = 'https://res.cloudinary.com/dokzw376u/image/fetch/f_auto,q_auto,w_1200/https://images.unsplash.com/photo-1460925895917-afdab827c52f';
 
 export default function Hero() {
   const { t } = useI18n();
@@ -44,8 +47,8 @@ export default function Hero() {
       <img
         src={HERO_BG}
         alt=""
-        width={1600}
-        height={1067}
+        width={1200}
+        height={800}
         loading="eager"
         fetchPriority="high"
         decoding="async"

@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useI18n } from '../i18n/context';
+import { lazyGsap } from '../lib/lazyGsap';
 
 const TEAM = 'https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=1200&fm=webp';
 const MEET = 'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=600&fm=webp';
@@ -7,7 +8,7 @@ const MEET = 'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg
 export default function Solution() {
   const { t } = useI18n();
   const ref = useRef<HTMLElement>(null);
-  useEffect(() => { if (window.innerWidth < 768) return; import('gsap').then(({ gsap }) => { import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => { gsap.registerPlugin(ScrollTrigger); const el = ref.current; if (!el) return; gsap.fromTo(el.querySelectorAll('.s-a'), { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.2, scrollTrigger: { trigger: el, start: 'top 75%' } }); gsap.fromTo(el.querySelector('.s-imgs'), { opacity: 0, scale: 0.92 }, { opacity: 1, scale: 1, duration: 1.1, scrollTrigger: { trigger: el.querySelector('.s-imgs'), start: 'top 80%' } }); }); }); }, []);
+  useEffect(() => lazyGsap(ref.current, (gsap) => { const el = ref.current; if (!el) return; gsap.fromTo(el.querySelectorAll('.s-a'), { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.2, scrollTrigger: { trigger: el, start: 'top 75%' } }); gsap.fromTo(el.querySelector('.s-imgs'), { opacity: 0, scale: 0.92 }, { opacity: 1, scale: 1, duration: 1.1, scrollTrigger: { trigger: el.querySelector('.s-imgs'), start: 'top 80%' } }); }), []);
 
   return (
     <section ref={ref} className="section-pad relative overflow-hidden" style={{ background: '#080F24' }}>

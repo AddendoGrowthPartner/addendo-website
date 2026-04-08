@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useI18n } from '../i18n/context';
+import { lazyGsap } from '../lib/lazyGsap';
 
 const IMG = 'https://images.pexels.com/photos/4050315/pexels-photo-4050315.jpeg?auto=compress&cs=tinysrgb&w=800&fm=webp';
 const icons = [
@@ -13,7 +14,7 @@ const icons = [
 export default function Problem() {
   const { t } = useI18n();
   const ref = useRef<HTMLElement>(null);
-  useEffect(() => { if (window.innerWidth < 768) return; import('gsap').then(({ gsap }) => { import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => { gsap.registerPlugin(ScrollTrigger); const el = ref.current; if (!el) return; gsap.fromTo(el.querySelector('.p-title'), { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.8, scrollTrigger: { trigger: el, start: 'top 80%' } }); gsap.fromTo(el.querySelector('.p-img'), { opacity: 0, x: 50 }, { opacity: 1, x: 0, duration: 1, scrollTrigger: { trigger: el, start: 'top 70%' } }); el.querySelectorAll('.p-card').forEach((c, i) => { gsap.fromTo(c, { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.5, delay: i * 0.1, scrollTrigger: { trigger: el, start: 'top 70%' } }); }); gsap.fromTo(el.querySelector('.p-close'), { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, scrollTrigger: { trigger: el.querySelector('.p-close'), start: 'top 88%' } }); }); }); }, []);
+  useEffect(() => lazyGsap(ref.current, (gsap) => { const el = ref.current; if (!el) return; gsap.fromTo(el.querySelector('.p-title'), { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.8, scrollTrigger: { trigger: el, start: 'top 80%' } }); gsap.fromTo(el.querySelector('.p-img'), { opacity: 0, x: 50 }, { opacity: 1, x: 0, duration: 1, scrollTrigger: { trigger: el, start: 'top 70%' } }); el.querySelectorAll('.p-card').forEach((c, i) => { gsap.fromTo(c, { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.5, delay: i * 0.1, scrollTrigger: { trigger: el, start: 'top 70%' } }); }); gsap.fromTo(el.querySelector('.p-close'), { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, scrollTrigger: { trigger: el.querySelector('.p-close'), start: 'top 88%' } }); }), []);
 
   return (
     <section ref={ref} className="section-pad relative overflow-hidden" style={{ background: '#0A1228' }}>

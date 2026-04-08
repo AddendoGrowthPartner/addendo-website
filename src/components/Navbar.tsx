@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { useI18n } from '../i18n/context';
 
-const LOGO_ICON = 'https://res.cloudinary.com/dokzw376u/image/upload/f_auto,q_auto/v1775105209/Disen%CC%83o_Final_Logo_Para_Vector-removebg_elatop.png';
+// Logo servido al tamaño real de render (80px @ 2x retina). c_fit en lugar de c_fill
+// para preservar la relación de aspecto del logo (original 1663x1466).
+const LOGO_ICON = 'https://res.cloudinary.com/dokzw376u/image/upload/w_160,h_160,c_fit,f_auto,q_auto/v1775105209/Disen%CC%83o_Final_Logo_Para_Vector-removebg_elatop.png';
 
 export default function Navbar() {
   const { t, lang, setLang } = useI18n();
@@ -27,7 +29,7 @@ export default function Navbar() {
             style={{ height: '80px', width: 'auto', objectFit: 'contain' }}
           />
           <div className="flex flex-col leading-none" style={{ alignItems: 'center', marginLeft: '-8px' }}>
-            <span style={{ fontFamily: 'Teko, sans-serif', fontSize: '30px', fontWeight: '700', color: '#C9A84C', letterSpacing: '0.14em' }}>ADDENDO</span>
+            <span style={{ fontFamily: "'Teko', 'Teko Fallback', 'Impact', sans-serif", fontSize: '30px', fontWeight: '700', color: '#C9A84C', letterSpacing: '0.14em' }}>ADDENDO</span>
             <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '11px', fontWeight: '300', color: 'rgba(255,255,255,0.7)', letterSpacing: '0.25em', textAlign: 'center' as const }}>GROWTH PARTNER</span>
           </div>
         </a>
