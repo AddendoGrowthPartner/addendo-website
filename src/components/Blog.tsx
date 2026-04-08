@@ -1,9 +1,15 @@
 import { useI18n } from '../i18n/context';
 
 const blogImages = [
-  'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&q=80&fm=webp',
-  'https://images.unsplash.com/photo-1562577309-4932fdd64cd1?w=800&q=80&fm=webp',
-  'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80&fm=webp',
+  '/blog/google-ads-leads.jpg',
+  '/blog/tiktok-business.jpg',
+  '/blog/seo-local.jpg',
+];
+
+const blogSlugs = [
+  '/blog/duplicar-leads-google-ads',
+  '/blog/tiktok-negocios-2026',
+  '/blog/seo-local-aparecer-primero',
 ];
 
 export default function Blog() {
@@ -22,9 +28,10 @@ export default function Blog() {
 
         <div className="grid md:grid-cols-3 gap-8">
           {posts.map((post: any, i: number) => (
-            <article
+            <a
               key={i}
-              className="group rounded-2xl overflow-hidden border transition-all duration-300 hover:-translate-y-1"
+              href={blogSlugs[i]}
+              className="group block rounded-2xl overflow-hidden border transition-all duration-300 hover:-translate-y-1 no-underline"
               style={{
                 background: 'rgba(26,26,46,0.6)',
                 backdropFilter: 'blur(16px)',
@@ -33,33 +40,35 @@ export default function Blog() {
               onMouseEnter={e => (e.currentTarget.style.borderColor = 'rgba(201,168,76,0.4)')}
               onMouseLeave={e => (e.currentTarget.style.borderColor = 'rgba(201,168,76,0.15)')}
             >
-              <div className="h-48 relative overflow-hidden">
-                <img src={blogImages[i]} alt={post.title} width={800} height={400} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[rgba(26,26,46,0.8)] to-transparent" />
-              </div>
-
-              <div className="p-6">
-                <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-gold/10 text-gold border border-gold/20 mb-4">
-                  {post.category}
-                </span>
-                <h3 className="font-display text-xl font-bold text-white mb-3 leading-snug">
-                  {post.title}
-                </h3>
-                <p className="text-white/50 text-sm leading-relaxed mb-4">{post.excerpt}</p>
-                <div className="flex items-center justify-between">
-                  <span className="text-white/30 text-xs">{post.date}</span>
-                  <a href="#contacto" className="text-gold text-sm font-semibold hover:text-gold-light transition-colors">
-                    {post.cta}
-                  </a>
+              <article>
+                <div className="h-48 relative overflow-hidden">
+                  <img src={blogImages[i]} alt={post.title} width={800} height={400} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[rgba(26,26,46,0.8)] to-transparent" />
                 </div>
-              </div>
-            </article>
+
+                <div className="p-6">
+                  <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-gold/10 text-gold border border-gold/20 mb-4">
+                    {post.category}
+                  </span>
+                  <h3 className="font-display text-xl font-bold text-white mb-3 leading-snug">
+                    {post.title}
+                  </h3>
+                  <p className="text-white/50 text-sm leading-relaxed mb-4">{post.excerpt}</p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-white/30 text-xs">{post.date}</span>
+                    <span className="text-gold text-sm font-semibold group-hover:text-gold-light transition-colors">
+                      {post.cta}
+                    </span>
+                  </div>
+                </div>
+              </article>
+            </a>
           ))}
         </div>
 
         <div className="text-center mt-12">
           <a
-            href="#contacto"
+            href="/#blog"
             className="inline-flex items-center gap-2 px-8 py-3 rounded-full border border-gold/30 text-gold font-semibold hover:bg-gold/10 transition-all duration-300"
           >
             {t.blog.viewAll}

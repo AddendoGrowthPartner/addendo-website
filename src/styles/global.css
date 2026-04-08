@@ -295,4 +295,214 @@
   .group:hover .icon-elegant {
     filter: saturate(1) opacity(1);
   }
+
+  /* ============================================================
+     Blog article typography — shared by the 3 static blog posts
+     in src/pages/blog/*.astro. Scoped to .blog-article so it
+     doesn't leak into React-rendered prose elsewhere.
+     ============================================================ */
+  .blog-article {
+    color: rgba(255, 255, 255, 0.8);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.8;
+  }
+  .blog-article p {
+    margin-bottom: 1.5rem;
+    color: rgba(255, 255, 255, 0.78);
+  }
+  .blog-article p:first-child {
+    font-size: 1.1875rem;
+    color: rgba(255, 255, 255, 0.88);
+  }
+  .blog-article h2 {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 400;
+    color: #C9A84C;
+    letter-spacing: 0.005em;
+    line-height: 1.25;
+    margin-top: 3rem;
+    margin-bottom: 1.25rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(201, 168, 76, 0.15);
+  }
+  @media (min-width: 768px) {
+    .blog-article h2 {
+      font-size: 2.125rem;
+    }
+  }
+  .blog-article h3 {
+    font-family: var(--font-sans);
+    font-size: 1.1875rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.95);
+    margin-top: 2.25rem;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.005em;
+  }
+  .blog-article h3::first-letter {
+    color: #C9A84C;
+  }
+  .blog-article strong {
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 600;
+  }
+  .blog-article a {
+    color: #C9A84C;
+    text-decoration: underline;
+    text-decoration-color: rgba(201, 168, 76, 0.4);
+    text-underline-offset: 4px;
+    transition: text-decoration-color 0.2s;
+  }
+  .blog-article a:hover {
+    text-decoration-color: #C9A84C;
+  }
+  .blog-article ul,
+  .blog-article ol {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+  .blog-article li {
+    margin-bottom: 0.5rem;
+  }
+  .blog-article ol {
+    list-style: decimal;
+  }
+  .blog-article ol li::marker {
+    color: #C9A84C;
+    font-weight: 700;
+  }
+  .blog-article ul {
+    list-style: disc;
+  }
+  .blog-article ul li::marker {
+    color: rgba(201, 168, 76, 0.6);
+  }
+
+  /* Blog post layout — shared by the 3 static .astro posts. */
+  .blog-post { background: #080F24; min-height: 100vh; }
+
+  .blog-hero {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+  }
+  @media (min-width: 768px) { .blog-hero { height: 400px; } }
+  .blog-hero img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  .blog-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(8, 15, 36, 0.55) 0%,
+      rgba(8, 15, 36, 0.75) 50%,
+      rgba(8, 15, 36, 0.95) 100%
+    );
+  }
+  .blog-hero-inner {
+    position: relative;
+    max-width: 720px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 1.25rem 1rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  @media (min-width: 768px) {
+    .blog-hero-inner { padding: 2rem 1.5rem 3rem; }
+  }
+
+  .blog-back {
+    position: absolute;
+    top: 1.25rem;
+    left: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  @media (min-width: 768px) {
+    .blog-back { top: 2rem; left: 1.5rem; }
+  }
+  .blog-back:hover { color: #C9A84C; }
+
+  .blog-category {
+    display: inline-block;
+    padding: 0.375rem 0.875rem;
+    border-radius: 9999px;
+    background: rgba(201, 168, 76, 0.12);
+    border: 1px solid rgba(201, 168, 76, 0.35);
+    color: #C9A84C;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.875rem;
+    width: fit-content;
+  }
+
+  .blog-title {
+    font-family: 'Fraunces', 'Fraunces Fallback', Georgia, serif;
+    font-size: 1.625rem;
+    font-weight: 400;
+    line-height: 1.18;
+    color: #ffffff;
+    margin: 0 0 0.875rem;
+    letter-spacing: 0.005em;
+    max-width: 42rem;
+  }
+  @media (min-width: 640px) { .blog-title { font-size: 2rem; } }
+  @media (min-width: 768px) { .blog-title { font-size: 2.75rem; } }
+
+  .blog-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.8125rem;
+    letter-spacing: 0.02em;
+  }
+  .blog-meta-sep { color: rgba(201, 168, 76, 0.5); }
+
+  .blog-article-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 3rem 1rem 4rem;
+  }
+  @media (min-width: 768px) {
+    .blog-article-wrap { padding: 4rem 1.5rem 6rem; }
+  }
+
+  .blog-cta {
+    margin-top: 3.5rem;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(201, 168, 76, 0.25);
+    text-align: center;
+  }
+  .blog-cta-text {
+    font-family: 'Fraunces', 'Fraunces Fallback', Georgia, serif;
+    font-size: 1.375rem;
+    font-weight: 400;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 36rem;
+    margin: 0 auto 1.75rem;
+    letter-spacing: 0.005em;
+  }
+  @media (min-width: 768px) {
+    .blog-cta-text { font-size: 1.625rem; }
+  }
 }

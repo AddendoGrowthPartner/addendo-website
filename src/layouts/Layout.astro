@@ -4,15 +4,22 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
+  ogImage?: string;
+  canonical?: string;
+  preloadImage?: string;
 }
+
+const siteUrl = 'https://addendo.io';
+const defaultOgImage = 'https://res.cloudinary.com/dokzw376u/image/upload/f_auto,q_auto/v1774995924/VECTOR_ADDENDO_FINAL_zuw6te.jpg';
+const defaultPreloadImage = 'https://res.cloudinary.com/dokzw376u/image/fetch/f_auto,q_auto,w_1200/https://images.unsplash.com/photo-1460925895917-afdab827c52f';
 
 const {
   title = 'Addendo | Tu sistema completo de crecimiento y ventas',
   description = 'Addendo es el sistema completo que convierte tu negocio en una máquina de ventas — presencia digital, campañas, contenido, reputación y clientes nuevos cada semana.',
+  ogImage = defaultOgImage,
+  canonical = siteUrl,
+  preloadImage = defaultPreloadImage,
 } = Astro.props;
-
-const ogImage = 'https://res.cloudinary.com/dokzw376u/image/upload/f_auto,q_auto/v1774995924/VECTOR_ADDENDO_FINAL_zuw6te.jpg';
-const siteUrl = 'https://addendo.io';
 ---
 
 <!doctype html>
@@ -26,11 +33,11 @@ const siteUrl = 'https://addendo.io';
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href={siteUrl} />
+    <link rel="canonical" href={canonical} />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={siteUrl} />
+    <meta property="og:url" content={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
@@ -65,7 +72,7 @@ const siteUrl = 'https://addendo.io';
     <link rel="preconnect" href="https://images.pexels.com" />
 
     <!-- Hero image preload -->
-    <link rel="preload" as="image" href="https://res.cloudinary.com/dokzw376u/image/fetch/f_auto,q_auto,w_1200/https://images.unsplash.com/photo-1460925895917-afdab827c52f" fetchpriority="high" />
+    <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />
     <link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
 
     <!-- Fonts (non-blocking) -->
