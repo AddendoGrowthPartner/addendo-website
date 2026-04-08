@@ -17,17 +17,31 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<Lang>('es');
 
   useEffect(() => {
+    // Resolve initial language — storage wins, otherwise navigator lang.
     const stored = localStorage.getItem('addendo-lang') as Lang | null;
+    let detected: Lang;
     if (stored && (stored === 'es' || stored === 'en')) {
-      setLangState(stored);
-      return;
-    }
-    const browserLang = navigator.language || '';
-    if (browserLang.startsWith('es')) {
-      setLangState('es');
+      detected = stored;
     } else {
-      setLangState('en');
+      const browserLang = (navigator.language || '').toLowerCase();
+      detected = browserLang.startsWith('es') ? 'es' : 'en';
+      localStorage.setItem('addendo-lang', detected);
     }
+    setLangState(detected);
+    // Propagate to static .astro islands that listen for this event.
+    document.documentElement.setAttribute('data-lang', detected);
+    window.dispatchEvent(new CustomEvent('addendo-lang-change', { detail: detected }));
+  }, []);
+
+  // Keep multiple I18nProvider instances (one per React island) in sync: when
+  // one island triggers a language change, the others update their state too.
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const detail = (e as CustomEvent).detail;
+      if (detail === 'es' || detail === 'en') setLangState(detail);
+    };
+    window.addEventListener('addendo-lang-change', handler);
+    return () => window.removeEventListener('addendo-lang-change', handler);
   }, []);
 
   const setLang = (l: Lang) => {

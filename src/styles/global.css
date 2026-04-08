@@ -112,6 +112,15 @@
       opacity: 1 !important;
     }
   }
+
+  /*
+   * Bilingual content toggle used by static .astro components (Process, …).
+   * Default is English. The inline resolver script in Layout.astro sets
+   * html[data-lang] before first paint; React components keep using useI18n.
+   */
+  [data-lang-es] { display: none; }
+  html[data-lang="es"] [data-lang-es] { display: revert; }
+  html[data-lang="es"] [data-lang-en] { display: none; }
 }
 
 @layer components {

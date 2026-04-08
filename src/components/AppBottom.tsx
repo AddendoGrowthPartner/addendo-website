@@ -1,21 +1,9 @@
 import { lazy, Suspense } from 'react';
 import { I18nProvider } from '../i18n/context';
-import Navbar from './Navbar';
-import Hero from './Hero';
-import HowItWorks from './HowItWorks';
-import StatsCounter from './StatsCounter';
-import TechAllies from './TechAllies';
-import ClientLogos from './ClientLogos';
-import Problem from './Problem';
-import Solution from './Solution';
-import Services from './Services';
 import Contact from './Contact';
 import Footer from './Footer';
 import WhatsAppButton from './WhatsAppButton';
 
-const AIAgents = lazy(() => import('./AIAgents'));
-const ForWhom = lazy(() => import('./ForWhom'));
-const Process = lazy(() => import('./Process'));
 const Infrastructure = lazy(() => import('./Infrastructure'));
 const WhyAddendo = lazy(() => import('./WhyAddendo'));
 const Testimonials = lazy(() => import('./Testimonials'));
@@ -25,24 +13,13 @@ const FAQ = lazy(() => import('./FAQ'));
 
 const LazyFallback = <div className="py-20" />;
 
-function Content() {
+// Bottom half of the page, rendered after the static Process.astro island.
+// Has its own I18nProvider; cross-island sync happens through the
+// 'addendo-lang-change' CustomEvent handled inside I18nProvider.
+export default function AppBottom() {
   return (
-    <>
-      <Navbar />
-      <Hero />
-      <HowItWorks />
+    <I18nProvider>
       <Suspense fallback={LazyFallback}>
-        <AIAgents />
-        <ForWhom />
-      </Suspense>
-      <StatsCounter />
-      <TechAllies />
-      <ClientLogos />
-      <Problem />
-      <Solution />
-      <Services />
-      <Suspense fallback={LazyFallback}>
-        <Process />
         <Infrastructure />
       </Suspense>
       <Suspense fallback={LazyFallback}>
@@ -59,14 +36,6 @@ function Content() {
       <Contact />
       <Footer />
       <WhatsAppButton />
-    </>
-  );
-}
-
-export default function App() {
-  return (
-    <I18nProvider>
-      <Content />
     </I18nProvider>
   );
 }
