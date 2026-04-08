@@ -1,0 +1,143 @@
+---
+// Static WhyAddendo section — ported from WhyAddendo.tsx.
+// react-icons/fi (FiLayers, FiGlobe, FiCheckCircle, FiClock, FiZap, FiUsers)
+// replaced with inline feather-style SVGs so we can drop React.
+import es from '../i18n/es';
+import en from '../i18n/en';
+
+const items = es.why.items.map((it, i) => ({ es: it, en: en.why.items[i] }));
+
+const E1 = 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=200&fm=webp';
+const E2 = 'https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=200&fm=webp';
+---
+
+<section id="por-que" class="section-pad relative" style="background: #080F24">
+  <div class="absolute bottom-0 left-1/4 w-[400px] h-[400px] bg-gold/[0.03] rounded-full blur-[130px]"></div>
+  <div class="relative max-w-6xl mx-auto">
+    <h2 class="w-t font-display text-3xl sm:text-4xl md:text-5xl font-normal text-center mb-10">
+      <span data-lang-es>{es.why.title1}</span>
+      <span data-lang-en>{en.why.title1}</span>
+      <br />
+      <span class="gold-gradient-text" data-lang-es>{es.why.titleGold}</span>
+      <span class="gold-gradient-text" data-lang-en>{en.why.titleGold}</span>
+    </h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
+      {items.map(({ es: s, en: e }, i) => (
+        <div class="w-c glass-card p-7">
+          <div class="text-gold mb-4" aria-hidden="true">
+            <svg class="why-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              {i === 0 && (
+                <g>
+                  <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                  <polyline points="2 17 12 22 22 17"></polyline>
+                  <polyline points="2 12 12 17 22 12"></polyline>
+                </g>
+              )}
+              {i === 1 && (
+                <g>
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="2" y1="12" x2="22" y2="12"></line>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                </g>
+              )}
+              {i === 2 && (
+                <g>
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </g>
+              )}
+              {i === 3 && (
+                <g>
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </g>
+              )}
+              {i === 4 && (
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+              )}
+              {i === 5 && (
+                <g>
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 11a4 4 0 0 0 0-7.75"></path>
+                </g>
+              )}
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-white mb-3">
+            <span data-lang-es>{s.title}</span>
+            <span data-lang-en>{e.title}</span>
+          </h3>
+          <p class="text-white/45 leading-relaxed text-sm">
+            <span data-lang-es>{s.text}</span>
+            <span data-lang-en>{e.text}</span>
+          </p>
+        </div>
+      ))}
+    </div>
+    <div class="w-pr flex flex-col sm:flex-row items-center justify-center gap-5">
+      <div class="flex -space-x-3">
+        <img src={E1} alt="" aria-hidden="true" width="44" height="44" class="w-11 h-11 rounded-full border-2 border-[#080F24] object-cover" loading="lazy" decoding="async" />
+        <img src={E2} alt="" aria-hidden="true" width="44" height="44" class="w-11 h-11 rounded-full border-2 border-[#080F24] object-cover" loading="lazy" decoding="async" />
+        <div class="w-11 h-11 rounded-full border-2 border-[#080F24] bg-gold/20 flex items-center justify-center text-gold text-xs font-bold">+50</div>
+      </div>
+      <p class="text-white/35 text-sm">
+        <span data-lang-es>{es.why.proof}</span>
+        <span data-lang-en>{en.why.proof}</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  #por-que .w-t {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    will-change: opacity, transform;
+  }
+  #por-que .w-c {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    will-change: opacity, transform;
+  }
+  #por-que .w-pr {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    will-change: opacity, transform;
+  }
+  #por-que .is-visible { opacity: 1; transform: none; }
+  @media (max-width: 767px) {
+    #por-que .w-t, #por-que .w-c, #por-que .w-pr {
+      opacity: 1; transform: none; transition: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #por-que .w-t, #por-que .w-c, #por-que .w-pr {
+      opacity: 1; transform: none; transition: none;
+    }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    if (typeof window === 'undefined') return;
+    if (window.innerWidth < 768) return;
+    if (!('IntersectionObserver' in window)) return;
+    var targets = document.querySelectorAll('#por-que .w-t, #por-que .w-c, #por-que .w-pr');
+    if (!targets.length) return;
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        obs.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    var cards = document.querySelectorAll('#por-que .w-c');
+    cards.forEach(function (c, i) { c.style.transitionDelay = (i * 0.08) + 's'; });
+    targets.forEach(function (t) { obs.observe(t); });
+  })();
+</script>
