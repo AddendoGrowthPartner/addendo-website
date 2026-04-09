@@ -9,6 +9,7 @@ export default function Navbar() {
     { label: t.nav.servicios, href: '#servicios' },
     { label: t.nav.proceso, href: '#proceso' },
     { label: t.nav.nosotros, href: '#por-que' },
+    { label: t.nav.blog, href: '/blog' },
     { label: t.nav.contacto, href: '#contacto' },
   ];
 

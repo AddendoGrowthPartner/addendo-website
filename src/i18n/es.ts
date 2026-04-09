@@ -3,6 +3,7 @@ const es = {
     servicios: 'Servicios',
     proceso: 'Proceso',
     nosotros: 'Nosotros',
+    blog: 'Blog',
     contacto: 'Contacto',
     cta: 'Agenda tu llamada',
   },

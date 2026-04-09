@@ -26,16 +26,22 @@ export default function Blog() {
           <p className="text-white/55 text-lg max-w-2xl mx-auto">{t.blog.subtitle}</p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        {/* Desktop: grid 3 cols | Mobile: horizontal scroll carousel */}
+        <div
+          className="blog-carousel md:grid md:grid-cols-3 md:gap-8"
+          style={{ display: 'flex', gap: '1rem', overflowX: 'auto', scrollSnapType: 'x mandatory', WebkitOverflowScrolling: 'touch' }}
+        >
           {posts.map((post: any, i: number) => (
             <a
               key={i}
               href={blogSlugs[i]}
-              className="group block rounded-2xl overflow-hidden border transition-all duration-300 hover:-translate-y-1 no-underline"
+              className="group block rounded-2xl overflow-hidden border transition-all duration-300 hover:-translate-y-1 no-underline shrink-0 md:shrink md:w-auto"
               style={{
                 background: 'rgba(26,26,46,0.6)',
                 backdropFilter: 'blur(16px)',
                 borderColor: 'rgba(201,168,76,0.15)',
+                minWidth: '280px',
+                scrollSnapAlign: 'start',
               }}
               onMouseEnter={e => (e.currentTarget.style.borderColor = 'rgba(201,168,76,0.4)')}
               onMouseLeave={e => (e.currentTarget.style.borderColor = 'rgba(201,168,76,0.15)')}
@@ -65,10 +71,18 @@ export default function Blog() {
             </a>
           ))}
         </div>
+        <style dangerouslySetInnerHTML={{ __html: `
+          .blog-carousel::-webkit-scrollbar { display: none; }
+          .blog-carousel { -ms-overflow-style: none; scrollbar-width: none; }
+          @media (min-width: 768px) {
+            .blog-carousel { display: grid !important; overflow-x: visible !important; scroll-snap-type: none !important; }
+            .blog-carousel > a { min-width: 0 !important; scroll-snap-align: unset !important; }
+          }
+        `}} />
 
         <div className="text-center mt-12">
           <a
-            href="/#blog"
+            href="/blog"
             className="inline-flex items-center gap-2 px-8 py-3 rounded-full border border-gold/30 text-gold font-semibold hover:bg-gold/10 transition-all duration-300"
           >
             {t.blog.viewAll}
