@@ -17,7 +17,7 @@ export default function Solution() {
         <div className="grid lg:grid-cols-2 gap-16 items-center mb-16">
           <div className="s-imgs opacity-0 relative order-2 lg:order-none max-w-[400px] mx-auto lg:max-w-none">
             <div className="rounded-xl overflow-hidden border-2 border-gold/20 shadow-2xl"><img src={TEAM} alt={t.solution.imgAlt1} width={1200} height={800} className="w-full h-[260px] sm:h-[320px] lg:h-[360px] object-cover" loading="lazy" decoding="async" /></div>
-            <div className="absolute -bottom-8 -right-8 w-52 h-52 rounded-xl overflow-hidden border-4 border-[#080F24] shadow-xl hidden lg:block"><img src={MEET} alt={t.solution.imgAlt2} width={600} height={400} className="w-full h-full object-cover" loading="lazy" /></div>
+            <div className="absolute -bottom-8 -right-8 w-52 h-52 rounded-xl overflow-hidden border-4 border-[#080F24] shadow-xl hidden lg:block"><img src={MEET} alt={t.solution.imgAlt2} width={600} height={400} className="w-full h-full object-cover" loading="lazy" decoding="async" /></div>
             <div className="absolute -top-4 -left-4 w-24 h-24 border-2 border-gold/25 rounded-xl hidden lg:block" />
           </div>
           <div>

@@ -48,7 +48,7 @@ export default function Blog() {
             >
               <article>
                 <div className="h-48 relative overflow-hidden">
-                  <img src={blogImages[i]} alt={post.title} width={800} height={400} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                  <img src={blogImages[i]} alt={post.title} width={800} height={400} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[rgba(26,26,46,0.8)] to-transparent" />
                 </div>
 

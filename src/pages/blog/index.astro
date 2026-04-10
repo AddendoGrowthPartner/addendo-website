@@ -53,7 +53,7 @@ const posts = [
         {posts.map((post) => (
           <a href={post.url} class="blog-card">
             <div class="blog-card-img">
-              <img src={post.image} alt={post.title} width="800" height="400" loading="lazy" />
+              <img src={post.image} alt={post.title} width="800" height="400" loading="lazy" decoding="async" />
               <div class="blog-card-img-overlay" />
             </div>
             <div class="blog-card-body">
