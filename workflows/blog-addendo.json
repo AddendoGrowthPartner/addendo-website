@@ -1,0 +1,321 @@
+{
+  "name": "Addendo — Blog Automatico Addendo Lunes y Jueves",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 7 * * 1,4"
+            }
+          ]
+        }
+      },
+      "id": "adn-schedule-01",
+      "name": "Trigger Lunes y Jueves 7am EST",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [240, 300],
+      "notes": "Activa el workflow los lunes (1) y jueves (4) a las 7am hora de Nueva York"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.dataforseo.com/v3/keywords_data/google_ads/keywords_for_keywords/live",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "contentType": "json",
+        "body": "=[\n  {\n    \"keywords\": [\n      \"marketing digital con IA\",\n      \"agencia automatizada\",\n      \"automatizacion para negocios\",\n      \"marketing para latinos USA\",\n      \"inteligencia artificial marketing\",\n      \"agencia marketing IA\",\n      \"automatizacion ventas\",\n      \"marketing digital hispano\"\n    ],\n    \"language_code\": \"es\",\n    \"location_code\": 2840,\n    \"include_adult_keywords\": false\n  }\n]",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "adn-dataforseo-02",
+      "name": "Buscar Keywords DataForSEO",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [460, 300],
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "dataforseo-basic-auth",
+          "name": "DATA FOR SEO API"
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 3000,
+      "notes": "Obtiene keywords de marketing digital con IA y automatizacion para negocios latinos en USA"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Obtener static data para trackear keywords ya usadas\nconst staticData = $getWorkflowStaticData('global');\nif (!staticData.usedKeywords) {\n  staticData.usedKeywords = [];\n}\n\n// Extraer keywords del response de DataForSEO\nconst items = $input.all();\nlet keywords = [];\n\nfor (const item of items) {\n  const tasks = item.json.tasks || [];\n  for (const task of tasks) {\n    const results = task.result || [];\n    for (const result of results) {\n      const keywordData = result.items || [];\n      for (const kw of keywordData) {\n        const volume = kw.keyword_info?.search_volume || 0;\n        const difficulty = kw.keyword_properties?.keyword_difficulty || 100;\n        const keyword = kw.keyword || '';\n\n        if (\n          volume > 500 &&\n          difficulty < 40 &&\n          keyword.length > 3 &&\n          !staticData.usedKeywords.includes(keyword)\n        ) {\n          keywords.push({\n            keyword,\n            volume,\n            difficulty,\n            score: volume / (difficulty + 1)\n          });\n        }\n      }\n    }\n  }\n}\n\n// Ordenar por mejor ratio volumen/dificultad\nkeywords.sort((a, b) => b.score - a.score);\n\nif (keywords.length === 0) {\n  // Fallback: keywords base si no hay nuevas\n  const fallbacks = [\n    'marketing digital con inteligencia artificial',\n    'agencia de marketing automatizada para latinos',\n    'automatizacion de ventas para negocios hispanos',\n    'como automatizar el marketing de tu negocio',\n    'herramientas de IA para marketing digital'\n  ];\n  const unused = fallbacks.filter(k => !staticData.usedKeywords.includes(k));\n  if (unused.length === 0) {\n    throw new Error('No hay keywords disponibles. Reiniciar lista de usadas si es necesario.');\n  }\n  keywords = [{ keyword: unused[0], volume: 700, difficulty: 25, score: 28 }];\n}\n\nconst best = keywords[0];\nconst today = new Date().toISOString().split('T')[0];\n\n// Generar slug limpio\nconst slug = best.keyword\n  .toLowerCase()\n  .replace(/[áàäâ]/g, 'a')\n  .replace(/[éèëê]/g, 'e')\n  .replace(/[íìïî]/g, 'i')\n  .replace(/[óòöô]/g, 'o')\n  .replace(/[úùüû]/g, 'u')\n  .replace(/ñ/g, 'n')\n  .replace(/[^a-z0-9\\s]/g, '')\n  .trim()\n  .replace(/\\s+/g, '-');\n\n// Marcar como usada\nstaticData.usedKeywords.push(best.keyword);\n\nreturn [{\n  json: {\n    keyword: best.keyword,\n    volume: best.volume,\n    difficulty: best.difficulty,\n    slug: slug,\n    date: today,\n    filePath: `src/content/blog/${slug}-${today}.md`,\n    pageUrl: `https://addendo.io/blog/${slug}/`\n  }\n}];"
+      },
+      "id": "adn-code-03",
+      "name": "Seleccionar Mejor Keyword",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 300],
+      "notes": "Filtra keywords con volumen >500 y dificultad <40, selecciona la mejor no usada anteriormente usando static data del workflow"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-api-key",
+              "value": "={{ $credentials.anthropicApi.apiKey }}"
+            },
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={\n  \"model\": \"claude-sonnet-4-20250514\",\n  \"max_tokens\": 8192,\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"Eres el editor jefe de contenido de Addendo Growth Partner, la agencia de marketing y ventas 100% automatizada con IA mas avanzada de America Latina, basada en Kissimmee, Florida. Escribes articulos de blog de alto valor para addendo.io que posicionan a la empresa como lider en marketing digital con IA para negocios latinos en Estados Unidos.\\n\\nEscribe un articulo COMPLETO en español de MINIMO 1,500 palabras sobre la keyword: {{ $json.keyword }}\\n\\nREQUISITOS OBLIGATORIOS:\\n\\n1. FRONTMATTER ASTRO.JS (EXACTAMENTE en este formato, al inicio del archivo):\\n---\\ntitle: \\\"[Titulo optimizado con la keyword principal — maximo 60 caracteres]\\\"\\ndescription: \\\"[Meta descripcion de 150-160 caracteres con la keyword y beneficio claro]\\\"\\npubDate: {{ $json.date }}\\nauthor: \\\"Addendo Growth Partner\\\"\\nimage: \\\"/images/blog/{{ $json.slug }}.jpg\\\"\\ntags: [\\\"[tag1]\\\", \\\"[tag2]\\\", \\\"[tag3]\\\", \\\"[tag4]\\\"]\\n---\\n\\n2. ESTRUCTURA DEL ARTICULO:\\n   - H1 que contenga la keyword exacta\\n   - Primer parrafo: keyword en las primeras 100 palabras con un hook poderoso\\n   - Minimo 3 H2 con keywords secundarias relacionadas a marketing digital e IA\\n   - Minimo 2 H3 bajo cada H2 principal\\n   - Datos, estadisticas o casos de uso reales donde aplique\\n   - Tablas comparativas si son relevantes\\n   - CTA final hacia Addendo:\\n     ## ¿Listo para Automatizar tu Marketing con IA?\\n     [parrafo explicando que Addendo es la solucion, mencionar que trabajan con negocios latinos en USA, invitar a agendar una consultoria gratuita en addendo.io]\\n\\n3. SCHEMA JSON-LD al final del articulo (tipo Article con Organization como publisher)\\n\\n4. TONO: Experto en marketing digital con IA, datos y resultados, directo y profesional. Hablar desde la experiencia real de agencia. Evitar lenguaje tecnico sin explicar.\\n\\nPalabras del articulo: minimo 1,500. Devuelve SOLO el contenido markdown, nada mas, sin explicaciones antes ni despues.\"\n    }\n  ]\n}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "id": "adn-claude-04",
+      "name": "Escribir Articulo con Claude Sonnet",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [900, 300],
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "anthropic-api-key",
+          "name": "Anthropic API Key"
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 2,
+      "waitBetweenTries": 5000,
+      "notes": "Llama a Claude Sonnet 4 para escribir articulo de marketing digital con IA de 1500+ palabras con frontmatter Astro.js"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extraer el texto del articulo del response de Claude\nconst claudeResponse = $input.first().json;\nconst articleContent = claudeResponse.content?.[0]?.text || '';\n\nif (!articleContent || articleContent.length < 500) {\n  throw new Error('Claude devolvio contenido vacio o muy corto: ' + articleContent.substring(0, 200));\n}\n\n// Datos de la keyword del nodo anterior\nconst keywordData = $('Seleccionar Mejor Keyword').first().json;\n\n// Codificar el contenido en base64 para GitHub API\nconst contentBase64 = Buffer.from(articleContent, 'utf-8').toString('base64');\n\nreturn [{\n  json: {\n    articleContent,\n    contentBase64,\n    filePath: keywordData.filePath,\n    slug: keywordData.slug,\n    date: keywordData.date,\n    keyword: keywordData.keyword,\n    pageUrl: keywordData.pageUrl,\n    wordCount: articleContent.split(/\\s+/).length,\n    commitMessage: `Blog Addendo: ${keywordData.keyword} (${keywordData.date})`\n  }\n}];"
+      },
+      "id": "adn-code-extract-05",
+      "name": "Extraer y Preparar Articulo",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1120, 300],
+      "notes": "Extrae el texto del response de Claude y lo codifica en base64 para enviar a GitHub"
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://api.github.com/repos/AddendoGrowthPartner/addendo-website/contents/{{ $json.filePath }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $credentials.githubOAuth2Api.accessToken }}"
+            },
+            {
+              "name": "Accept",
+              "value": "application/vnd.github+json"
+            },
+            {
+              "name": "X-GitHub-Api-Version",
+              "value": "2022-11-28"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={\n  \"message\": \"{{ $json.commitMessage }}\",\n  \"content\": \"{{ $json.contentBase64 }}\",\n  \"branch\": \"main\"\n}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "adn-github-06",
+      "name": "Crear Archivo en GitHub Addendo",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1340, 300],
+      "credentials": {
+        "githubOAuth2Api": {
+          "id": "github-oauth-addendo",
+          "name": "GitHub AddendoGrowthPartner"
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 2,
+      "waitBetweenTries": 3000,
+      "notes": "Crea el archivo .md en el repositorio addendo-website en la ruta src/content/blog/"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://indexing.googleapis.com/v3/urlNotifications:publish",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "authentication": "oAuth2",
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={\n  \"url\": \"{{ $('Extraer y Preparar Articulo').first().json.pageUrl }}\",\n  \"type\": \"URL_UPDATED\"\n}",
+        "options": {
+          "timeout": 15000
+        }
+      },
+      "id": "adn-indexing-07",
+      "name": "Notificar Google Indexing API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1560, 300],
+      "credentials": {
+        "oAuth2Api": {
+          "id": "google-indexing-oauth",
+          "name": "Google Indexing API OAuth2"
+        }
+      },
+      "continueOnFail": true,
+      "notes": "Notifica a Google que hay una URL nueva para indexar rapidamente. continueOnFail:true para no bloquear el email si falla"
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "send",
+        "toList": "admin@addendo.io",
+        "subject": "=✅ Artículo publicado — Addendo — {{ $('Extraer y Preparar Articulo').first().json.keyword }}",
+        "emailType": "html",
+        "message": "=<h2>✅ Nuevo artículo publicado — addendo.io</h2>\n<table style=\"border-collapse:collapse;font-family:Arial,sans-serif;font-size:14px\">\n  <tr><td style=\"padding:8px;font-weight:bold\">Keyword:</td><td style=\"padding:8px\">{{ $('Extraer y Preparar Articulo').first().json.keyword }}</td></tr>\n  <tr style=\"background:#f9f9f9\"><td style=\"padding:8px;font-weight:bold\">Fecha:</td><td style=\"padding:8px\">{{ $('Extraer y Preparar Articulo').first().json.date }}</td></tr>\n  <tr><td style=\"padding:8px;font-weight:bold\">URL:</td><td style=\"padding:8px\"><a href=\"{{ $('Extraer y Preparar Articulo').first().json.pageUrl }}\">{{ $('Extraer y Preparar Articulo').first().json.pageUrl }}</a></td></tr>\n  <tr style=\"background:#f9f9f9\"><td style=\"padding:8px;font-weight:bold\">Palabras:</td><td style=\"padding:8px\">{{ $('Extraer y Preparar Articulo').first().json.wordCount }}</td></tr>\n  <tr><td style=\"padding:8px;font-weight:bold\">Archivo GitHub:</td><td style=\"padding:8px\">{{ $('Extraer y Preparar Articulo').first().json.filePath }}</td></tr>\n</table>\n<p style=\"margin-top:16px;color:#666\">Enviado por el sistema automatico de Addendo Growth Partner</p>",
+        "options": {}
+      },
+      "id": "adn-gmail-08",
+      "name": "Enviar Email Confirmacion Admin",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [1780, 300],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "gmail-addendo-oauth",
+          "name": "Gmail Addendo"
+        }
+      },
+      "notes": "Envia email de confirmacion a admin@addendo.io con el resumen del articulo de Addendo publicado"
+    }
+  ],
+  "connections": {
+    "Trigger Lunes y Jueves 7am EST": {
+      "main": [
+        [
+          {
+            "node": "Buscar Keywords DataForSEO",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buscar Keywords DataForSEO": {
+      "main": [
+        [
+          {
+            "node": "Seleccionar Mejor Keyword",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Seleccionar Mejor Keyword": {
+      "main": [
+        [
+          {
+            "node": "Escribir Articulo con Claude Sonnet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Escribir Articulo con Claude Sonnet": {
+      "main": [
+        [
+          {
+            "node": "Extraer y Preparar Articulo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extraer y Preparar Articulo": {
+      "main": [
+        [
+          {
+            "node": "Crear Archivo en GitHub Addendo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Crear Archivo en GitHub Addendo": {
+      "main": [
+        [
+          {
+            "node": "Notificar Google Indexing API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notificar Google Indexing API": {
+      "main": [
+        [
+          {
+            "node": "Enviar Email Confirmacion Admin",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "saveExecutionProgress": true,
+    "saveDataErrorExecution": "all",
+    "saveDataSuccessExecution": "all",
+    "timezone": "America/New_York"
+  },
+  "staticData": null,
+  "tags": [
+    { "name": "addendo" },
+    { "name": "blog" },
+    { "name": "addendo-website" },
+    { "name": "seo-automatico" }
+  ],
+  "triggerCount": 1,
+  "active": false,
+  "versionId": "1",
+  "meta": {
+    "templateCredsSetupCompleted": false
+  }
+}
