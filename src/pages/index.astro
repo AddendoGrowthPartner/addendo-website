@@ -1,0 +1,18 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AppTop from '../components/AppTop';
+import Pulse from '../components/Pulse.astro';
+import Process from '../components/Process.astro';
+import Infrastructure from '../components/Infrastructure.astro';
+import WhyAddendo from '../components/WhyAddendo.astro';
+import AppBottom from '../components/AppBottom';
+---
+
+<Layout>
+  <AppTop client:load />
+  <Pulse />
+  <Process />
+  <Infrastructure />
+  <WhyAddendo />
+  <AppBottom client:visible />
+</Layout>

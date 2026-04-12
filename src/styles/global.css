@@ -1,0 +1,508 @@
+@import "tailwindcss";
+
+/*
+ * CLS mitigation: size-adjusted fallback fonts mapped to local system fonts.
+ * Before the Google webfont loads, text renders with these metrics — matched
+ * as closely as possible to the real face — so the layout barely shifts when
+ * the swap happens. Removes most of the font-induced CLS seen in PageSpeed.
+ */
+@font-face {
+  font-family: 'Fraunces Fallback';
+  src: local('Georgia'), local('Times New Roman'), local('Times');
+  size-adjust: 100%;
+  ascent-override: 90%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter Fallback';
+  src: local('Arial'), local('Helvetica Neue'), local('Helvetica');
+  size-adjust: 107%;
+  ascent-override: 90%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Teko Fallback';
+  src: local('Impact'), local('Haettenschweiler'), local('Arial Narrow Bold');
+  size-adjust: 82%;
+  ascent-override: 90%;
+  descent-override: 20%;
+  line-gap-override: 0%;
+  font-display: swap;
+}
+
+@theme {
+  --color-navy: #0D1B3E;
+  --color-navy-deep: #080F24;
+  --color-navy-light: #142650;
+  --color-gold: #C9A84C;
+  --color-gold-light: #D4B96A;
+  --color-dark: #0F1629;
+  --color-dark-card: #111827;
+  --font-sans: 'Inter', 'Inter Fallback', system-ui, sans-serif;
+  --font-display: 'Fraunces', 'Fraunces Fallback', Georgia, serif;
+  --font-label: 'Inter', 'Inter Fallback', system-ui, sans-serif;
+}
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 96px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
+  body {
+    background-color: #080F24;
+    color: #ffffff;
+    font-family: var(--font-sans);
+    font-weight: 300;
+    letter-spacing: -0.01em;
+    overflow-x: hidden;
+    max-width: 100vw;
+    word-break: break-word;
+  }
+
+  .navbar-offset {
+    padding-top: 64px;
+  }
+
+  @media (min-width: 768px) {
+    .navbar-offset {
+      padding-top: 80px;
+    }
+  }
+
+  h1, h2 {
+    font-family: var(--font-display);
+    font-weight: 300;
+    letter-spacing: 0.01em;
+    line-height: 1.1;
+  }
+
+  h3 {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  img, video, svg, canvas {
+    max-width: 100%;
+    height: auto;
+  }
+
+  ::selection {
+    background-color: var(--color-gold);
+    color: var(--color-navy);
+  }
+
+  @media (max-width: 767px) {
+    .opacity-0 {
+      opacity: 1 !important;
+    }
+  }
+
+  /*
+   * Bilingual content toggle used by static .astro components (Process, …).
+   * Default is English. The inline resolver script in Layout.astro sets
+   * html[data-lang] before first paint; React components keep using useI18n.
+   */
+  [data-lang-es] { display: none; }
+  html[data-lang="es"] [data-lang-es] { display: revert; }
+  html[data-lang="es"] [data-lang-en] { display: none; }
+}
+
+@layer components {
+  .font-display {
+    font-family: var(--font-display) !important;
+  }
+
+  .btn-gold {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.125rem 2.75rem;
+    background: linear-gradient(135deg, var(--color-gold), var(--color-gold-light));
+    color: var(--color-navy);
+    font-family: var(--font-label);
+    font-weight: 500;
+    font-size: 0.875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-radius: 0.625rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+  }
+
+  .btn-gold:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(201, 168, 76, 0.45);
+  }
+
+  .section-pad {
+    padding: 3.5rem 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .section-pad {
+      padding: 5rem 2rem;
+    }
+  }
+
+  .gold-gradient-text {
+    background: linear-gradient(135deg, var(--color-gold), var(--color-gold-light), #E8D5A0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  h1 .gold-gradient-text,
+  h2 .gold-gradient-text {
+    font-style: italic;
+  }
+
+  .glass-card {
+    background: rgba(15, 22, 41, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(201, 168, 76, 0.12);
+    border-radius: 0.875rem;
+    transition: all 0.4s ease;
+  }
+
+  .glass-card:hover {
+    border-color: rgba(201, 168, 76, 0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  .section-sep {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    padding: 1.5rem;
+    font-family: var(--font-label);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(201, 168, 76, 0.4);
+  }
+
+  .section-sep::before,
+  .section-sep::after {
+    content: '';
+    flex: 1;
+    max-width: 200px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201, 168, 76, 0.25), transparent);
+  }
+
+  /* Tech grid background for hero */
+  .hero-tech-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  /* Grid lines */
+  .hero-tech-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.06) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse 70% 60% at 30% 50%, black 0%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 30% 50%, black 0%, transparent 100%);
+  }
+
+  /* Diagonal lines + glow */
+  .hero-tech-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(135deg, transparent 0%, transparent 49.5%, rgba(201,168,76,0.07) 49.5%, rgba(201,168,76,0.07) 50.5%, transparent 50.5%, transparent 100%),
+      linear-gradient(45deg, transparent 0%, transparent 49.5%, rgba(201,168,76,0.06) 49.5%, rgba(201,168,76,0.06) 50.5%, transparent 50.5%, transparent 100%),
+      linear-gradient(-30deg, transparent 0%, transparent 49.7%, rgba(201,168,76,0.05) 49.7%, rgba(201,168,76,0.05) 50.3%, transparent 50.3%, transparent 100%),
+      radial-gradient(ellipse 50% 60% at 25% 45%, rgba(201,168,76,0.14) 0%, transparent 70%);
+    background-size: 100% 100%;
+  }
+
+  /* Grid dot intersections */
+  .hero-tech-dots {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: radial-gradient(circle 1px at center, rgba(201,168,76,0.06) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse 70% 60% at 30% 50%, black 0%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 30% 50%, black 0%, transparent 100%);
+  }
+
+  /* Marquee animation */
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  @media (max-width: 767px) {
+    .marquee-track {
+      animation-duration: 20s !important;
+    }
+    .hero-tech-bg::before {
+      background-image:
+        linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+    }
+    .hero-tech-bg::after {
+      background:
+        linear-gradient(135deg, transparent 0%, transparent 49.5%, rgba(201,168,76,0.035) 49.5%, rgba(201,168,76,0.035) 50.5%, transparent 50.5%, transparent 100%),
+        linear-gradient(45deg, transparent 0%, transparent 49.5%, rgba(201,168,76,0.03) 49.5%, rgba(201,168,76,0.03) 50.5%, transparent 50.5%, transparent 100%),
+        radial-gradient(ellipse 60% 50% at 30% 40%, rgba(201,168,76,0.07) 0%, transparent 70%);
+    }
+    .hero-tech-dots {
+      background-image: radial-gradient(circle 1px at center, rgba(201,168,76,0.03) 1px, transparent 1px);
+    }
+  }
+
+  .icon-elegant {
+    filter: saturate(0.45) opacity(0.75);
+    transition: filter 0.3s ease, transform 0.3s ease;
+  }
+
+  .group:hover .icon-elegant {
+    filter: saturate(1) opacity(1);
+  }
+
+  /* ============================================================
+     Blog article typography — shared by the 3 static blog posts
+     in src/pages/blog/*.astro. Scoped to .blog-article so it
+     doesn't leak into React-rendered prose elsewhere.
+     ============================================================ */
+  .blog-article {
+    color: rgba(255, 255, 255, 0.8);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.8;
+  }
+  .blog-article p {
+    margin-bottom: 1.5rem;
+    color: rgba(255, 255, 255, 0.78);
+  }
+  .blog-article p:first-child {
+    font-size: 1.1875rem;
+    color: rgba(255, 255, 255, 0.88);
+  }
+  .blog-article h2 {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 400;
+    color: #C9A84C;
+    letter-spacing: 0.005em;
+    line-height: 1.25;
+    margin-top: 3rem;
+    margin-bottom: 1.25rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(201, 168, 76, 0.15);
+  }
+  @media (min-width: 768px) {
+    .blog-article h2 {
+      font-size: 2.125rem;
+    }
+  }
+  .blog-article h3 {
+    font-family: var(--font-sans);
+    font-size: 1.1875rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.95);
+    margin-top: 2.25rem;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.005em;
+  }
+  .blog-article h3::first-letter {
+    color: #C9A84C;
+  }
+  .blog-article strong {
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 600;
+  }
+  .blog-article a {
+    color: #C9A84C;
+    text-decoration: underline;
+    text-decoration-color: rgba(201, 168, 76, 0.4);
+    text-underline-offset: 4px;
+    transition: text-decoration-color 0.2s;
+  }
+  .blog-article a:hover {
+    text-decoration-color: #C9A84C;
+  }
+  .blog-article ul,
+  .blog-article ol {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+  .blog-article li {
+    margin-bottom: 0.5rem;
+  }
+  .blog-article ol {
+    list-style: decimal;
+  }
+  .blog-article ol li::marker {
+    color: #C9A84C;
+    font-weight: 700;
+  }
+  .blog-article ul {
+    list-style: disc;
+  }
+  .blog-article ul li::marker {
+    color: rgba(201, 168, 76, 0.6);
+  }
+
+  /* Blog post layout — shared by the 3 static .astro posts. */
+  .blog-post { background: #080F24; min-height: 100vh; }
+
+  .blog-hero {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+  }
+  @media (min-width: 768px) { .blog-hero { height: 400px; } }
+  .blog-hero img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  .blog-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(8, 15, 36, 0.55) 0%,
+      rgba(8, 15, 36, 0.75) 50%,
+      rgba(8, 15, 36, 0.95) 100%
+    );
+  }
+  .blog-hero-inner {
+    position: relative;
+    max-width: 720px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 1.25rem 1rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  @media (min-width: 768px) {
+    .blog-hero-inner { padding: 2rem 1.5rem 3rem; }
+  }
+
+  .blog-back {
+    position: absolute;
+    top: 1.25rem;
+    left: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  @media (min-width: 768px) {
+    .blog-back { top: 2rem; left: 1.5rem; }
+  }
+  .blog-back:hover { color: #C9A84C; }
+
+  .blog-category {
+    display: inline-block;
+    padding: 0.375rem 0.875rem;
+    border-radius: 9999px;
+    background: rgba(201, 168, 76, 0.12);
+    border: 1px solid rgba(201, 168, 76, 0.35);
+    color: #C9A84C;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.875rem;
+    width: fit-content;
+  }
+
+  .blog-title {
+    font-family: 'Fraunces', 'Fraunces Fallback', Georgia, serif;
+    font-size: 1.625rem;
+    font-weight: 400;
+    line-height: 1.18;
+    color: #ffffff;
+    margin: 0 0 0.875rem;
+    letter-spacing: 0.005em;
+    max-width: 42rem;
+  }
+  @media (min-width: 640px) { .blog-title { font-size: 2rem; } }
+  @media (min-width: 768px) { .blog-title { font-size: 2.75rem; } }
+
+  .blog-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.8125rem;
+    letter-spacing: 0.02em;
+  }
+  .blog-meta-sep { color: rgba(201, 168, 76, 0.5); }
+
+  .blog-article-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 3rem 1rem 4rem;
+  }
+  @media (min-width: 768px) {
+    .blog-article-wrap { padding: 4rem 1.5rem 6rem; }
+  }
+
+  .blog-cta {
+    margin-top: 3.5rem;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(201, 168, 76, 0.25);
+    text-align: center;
+  }
+  .blog-cta-text {
+    font-family: 'Fraunces', 'Fraunces Fallback', Georgia, serif;
+    font-size: 1.375rem;
+    font-weight: 400;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 36rem;
+    margin: 0 auto 1.75rem;
+    letter-spacing: 0.005em;
+  }
+  @media (min-width: 768px) {
+    .blog-cta-text { font-size: 1.625rem; }
+  }
+}

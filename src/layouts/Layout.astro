@@ -1,0 +1,159 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  canonical?: string;
+  preloadImage?: string;
+}
+
+const siteUrl = 'https://addendo.io';
+const defaultOgImage = 'https://res.cloudinary.com/dokzw376u/image/upload/f_auto,q_auto/v1774995924/VECTOR_ADDENDO_FINAL_zuw6te.jpg';
+const defaultPreloadImage = 'https://res.cloudinary.com/dokzw376u/image/fetch/f_auto,q_auto,w_1200/https://images.unsplash.com/photo-1460925895917-afdab827c52f';
+
+const {
+  title = 'Addendo | Tu sistema completo de crecimiento y ventas',
+  description = 'Addendo es el sistema completo que convierte tu negocio en una máquina de ventas — presencia digital, campañas, contenido, reputación y clientes nuevos cada semana.',
+  ogImage = defaultOgImage,
+  canonical = siteUrl,
+  preloadImage = defaultPreloadImage,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="es_US" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Schema.org -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Addendo Growth Partner",
+      "url": siteUrl,
+      "logo": ogImage,
+      "description": description,
+      "areaServed": "US",
+      "serviceType": ["Digital Marketing", "Sales Growth", "Web Development", "SEO", "Advertising"],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "admin@addendo.io",
+        "contactType": "sales"
+      }
+    })} />
+
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Hero image preload -->
+    <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />
+
+    <!-- Fonts (non-blocking) -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&family=Inter:wght@300;400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&family=Inter:wght@300;400;500;600&display=swap" /></noscript>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Teko:wght@700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Teko:wght@700&display=swap" rel="stylesheet" /></noscript>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- GTM + GA4 — carga diferida para no bloquear renderizado -->
+    <script is:inline>
+      function loadGTM() {
+        if (window.gtmLoaded) return;
+        window.gtmLoaded = true;
+        // GA4
+        var g = document.createElement('script');
+        g.async = true;
+        g.src = 'https://www.googletagmanager.com/gtag/js?id=G-C7DCM1NZ6P';
+        document.head.appendChild(g);
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-C7DCM1NZ6P');
+        // GTM
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-WSBBDQ4L');
+      }
+      setTimeout(loadGTM, 3000);
+      document.addEventListener('click', loadGTM, {once: true});
+      document.addEventListener('scroll', loadGTM, {once: true});
+      document.addEventListener('touchstart', loadGTM, {once: true});
+    </script>
+
+    <!-- Microsoft Clarity -->
+    <script is:inline type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "w6865bxodj");
+    </script>
+    <!--
+      Global language resolver: runs synchronously before body paint so static
+      .astro content (bilingual sections using data-lang-es / data-lang-en)
+      renders in the correct language from frame 1. React islands keep using
+      the I18nContext, and both sides stay in sync via the
+      'addendo-lang-change' CustomEvent dispatched by I18nProvider.
+    -->
+    <script is:inline>
+      (function () {
+        function resolve() {
+          try {
+            var params = new URLSearchParams(window.location.search);
+            var fromUrl = params.get('lang');
+            if (fromUrl === 'es' || fromUrl === 'en') {
+              localStorage.setItem('addendo-lang', fromUrl);
+              return fromUrl;
+            }
+            var stored = localStorage.getItem('addendo-lang');
+            if (stored === 'es' || stored === 'en') return stored;
+            var browser = (navigator.language || '').toLowerCase();
+            return browser.indexOf('es') === 0 ? 'es' : 'en';
+          } catch (e) {
+            return 'en';
+          }
+        }
+        function apply(l) { document.documentElement.setAttribute('data-lang', l); }
+        apply(resolve());
+        window.addEventListener('addendo-lang-change', function (e) {
+          apply((e && e.detail) || resolve());
+        });
+      })();
+    </script>
+  </head>
+  <body>
+    <!-- GTM noscript -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WSBBDQ4L" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <slot />
+  </body>
+</html>

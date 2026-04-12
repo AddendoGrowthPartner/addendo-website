@@ -1,0 +1,105 @@
+---
+// Static Process section — ported from Process.tsx.
+// No React: text comes directly from the i18n data files and is rendered
+// bilingually. Language is toggled at runtime by the global resolver script
+// in Layout.astro via html[data-lang] + CSS rules in global.css.
+// Scroll animations use CSS @keyframes + a tiny IntersectionObserver below.
+import es from '../i18n/es';
+import en from '../i18n/en';
+
+// Same length guaranteed (both i18n files define 4 steps).
+const steps = es.process.steps.map((s, i) => ({ es: s, en: en.process.steps[i] }));
+---
+
+<section id="proceso" class="section-pad relative" style="background: #0A1228">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="pr-t font-display text-3xl sm:text-4xl md:text-5xl font-normal text-center mb-12">
+      <span data-lang-es>{es.process.title1}</span>
+      <span data-lang-en>{en.process.title1}</span>
+      <br />
+      <span class="gold-gradient-text" data-lang-es>{es.process.titleGold}</span>
+      <span class="gold-gradient-text" data-lang-en>{en.process.titleGold}</span>
+    </h2>
+    <div class="relative">
+      <div class="absolute left-8 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-px bg-gradient-to-b from-gold/30 via-gold/15 to-transparent hidden sm:block"></div>
+      <div class="space-y-16 md:space-y-24">
+        {steps.map(({ es: s, en: e }, i) => (
+          <div
+            class:list={[
+              'pr-s relative flex flex-col md:flex-row gap-6 md:gap-14',
+              i % 2 === 1 && 'md:flex-row-reverse',
+            ]}
+            data-dir={i % 2 === 0 ? 'left' : 'right'}
+          >
+            <div class:list={['md:w-1/2', i % 2 === 1 ? 'md:text-left' : 'md:text-right']}>
+              <span class="text-gold font-display text-6xl md:text-7xl font-black opacity-20 leading-none block">{s.num}</span>
+              <h3 class="text-xl md:text-2xl font-bold text-white mt-2">
+                <span data-lang-es>{s.title}</span>
+                <span data-lang-en>{e.title}</span>
+              </h3>
+              <p class="text-white/45 mt-3 leading-relaxed max-w-md inline-block">
+                <span data-lang-es>{s.text}</span>
+                <span data-lang-en>{e.text}</span>
+              </p>
+            </div>
+            <div class="hidden md:block absolute left-1/2 -translate-x-1/2 top-4 w-3.5 h-3.5 bg-gold rounded-full ring-4 ring-[#0A1228] z-10" aria-hidden="true"></div>
+            <div class="md:w-1/2"></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Scroll-in animations — equivalent to the previous GSAP fromTo calls.
+     Mobile and reduced-motion users skip the animation entirely. */
+  #proceso .pr-t {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    will-change: opacity, transform;
+  }
+  #proceso .pr-s {
+    opacity: 0;
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    will-change: opacity, transform;
+  }
+  /* Slide-in transforms only on desktop. On mobile the rows must sit flush
+     with the section padding — any translateX would push them off the viewport
+     because data-dir attribute selectors have higher specificity than an
+     un-scoped `.pr-s { transform: none }` override inside a media query. */
+  @media (min-width: 768px) {
+    #proceso .pr-s[data-dir="left"]  { transform: translateX(-40px); }
+    #proceso .pr-s[data-dir="right"] { transform: translateX(40px); }
+  }
+  #proceso .pr-t.is-visible,
+  #proceso .pr-s.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+  @media (max-width: 767px) {
+    #proceso .pr-t, #proceso .pr-s { opacity: 1; transform: none; transition: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #proceso .pr-t, #proceso .pr-s { opacity: 1; transform: none; transition: none; }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    if (typeof window === 'undefined') return;
+    if (window.innerWidth < 768) return;
+    if (!('IntersectionObserver' in window)) return;
+    var targets = document.querySelectorAll('#proceso .pr-t, #proceso .pr-s');
+    if (!targets.length) return;
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        obs.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -12% 0px' });
+    targets.forEach(function (t) { obs.observe(t); });
+  })();
+</script>
