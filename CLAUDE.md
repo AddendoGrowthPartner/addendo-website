@@ -1,0 +1,299 @@
+# ADDENDO AGENCY OS — CLAUDE.md
+## Sistema Operativo de la Agencia mas Automatizada de America Latina
+
+---
+
+## IDENTIDAD DEL SISTEMA
+
+- **Empresa:** Addendo Growth Partner (Addendo LLC)
+- **CEO:** Jose Raul Ramirez — admin@addendo.io
+- **Mision:** Agencia de marketing y ventas 100% automatizada con IA
+- **Ubicacion:** Kissimmee, Florida, USA
+- **Servidor AWS:** ubuntu@18.233.117.68
+- **N8N:** https://n8n.addendo.io
+- **Sitio web:** https://addendo.io
+
+---
+
+## REGLAS DE COMPORTAMIENTO OBLIGATORIAS
+
+1. **Siempre responder en español** — Jose no es tecnico
+2. **Nunca inventar datos, hechos ni resultados**
+3. **Siempre leer el skill del agente antes de ejecutar cualquier tarea**
+4. **Siempre continuar desde donde se quedo la ultima sesion**
+5. **Cuando Jose de una orden, identificar que agente o agentes deben ejecutarla**
+6. **Nunca ejecutar una tarea sin el skill correspondiente cargado**
+7. **Si una tarea requiere multiples agentes, activarlos en el orden correcto**
+
+---
+
+## COMO IDENTIFICAR QUE AGENTE ACTIVAR
+
+Cuando Jose da una orden, seguir este proceso:
+
+1. **Leer la orden** y entender el objetivo
+2. **Identificar que agente o agentes** del sistema son responsables
+3. **Leer el skill** de ese agente en `.claude/agents/skills-globales/`
+4. **Ejecutar la tarea** siguiendo las instrucciones del skill
+5. **Si la tarea requiere multiples agentes**, activarlos en paralelo como subagentes
+
+---
+
+## MAPA DE AGENTES POR TIPO DE TAREA
+
+### CUANDO JOSE DICE "tenemos un cliente nuevo":
+→ Activar en secuencia:
+1. director-cuenta (#3)
+2. onboarding-cliente (#2)
+3. agente-auditoria (#10)
+4. director-estrategia (#9)
+5. director-creativo (#15)
+6. project-manager (#4)
+
+### CUANDO JOSE DICE "construye el sitio web de [cliente]":
+→ Activar en secuencia:
+1. diseno-web (#18)
+2. desarrollo-web (#20)
+3. frontend-dev (#21)
+4. revisor-qa (#39)
+5. agente-deployment (#45)
+
+### CUANDO JOSE DICE "investiga la competencia de [cliente]":
+→ Activar en paralelo:
+- agente-scraping (#5) +
+- agente-spy-ads (#6) +
+- agente-redes-organicas (#7)
+
+→ Despues consolidar con:
+- agente-investigacion (#8)
+
+### CUANDO JOSE DICE "escribe un articulo de blog para [cliente]":
+→ Activar en secuencia:
+1. seo (#27) para keywords
+2. copywriting-seo (#16) para redactar
+3. revisor-qa (#39)
+4. agente-deployment (#45) para publicar
+
+### CUANDO JOSE DICE "lanza campañas de publicidad para [cliente]":
+→ Activar segun canal:
+- google-ads (#12) +
+- meta-ads (#11) +
+- tiktok-ads (#13) +
+- linkedin-ads (#14) +
+- youtube-ads (#48)
+
+→ Segun estrategia, despues:
+- revisor-qa (#39)
+- aprobador (#41)
+
+### CUANDO JOSE DICE "busca clientes nuevos para Addendo":
+→ Activar en secuencia:
+1. agente-prospector (#35)
+2. agente-preventa (#1)
+
+### CUANDO JOSE DICE "hay un problema con un cliente":
+→ Activar en secuencia:
+1. agente-pqr (#44)
+2. director-cuenta (#3)
+3. Jose (si es critico)
+
+### CUANDO JOSE DICE "crea el reporte mensual de [cliente]":
+→ Activar en paralelo:
+- agente-analytics (#42) +
+- reportes (#36)
+
+→ Despues:
+- director-cuenta (#3) para entregar
+
+### CUANDO JOSE DICE "revisa la seguridad del servidor":
+→ Activar en paralelo:
+- seguridad (#40) +
+- servidor-cloud (#25) +
+- agente-monitor (#43)
+
+---
+
+## LOS 48 AGENTES DEL SISTEMA
+
+### CAPA 01 — ENTRADA
+| # | Agente | Skill |
+|---|--------|-------|
+| #1 | agente-preventa | `agente-preventa.md` |
+| #2 | onboarding-cliente | `onboarding-cliente.md` |
+| #3 | director-cuenta | `director-cuenta.md` |
+| #4 | project-manager | `project-manager.md` |
+
+### CAPA 02 — INTELIGENCIA
+| # | Agente | Skill |
+|---|--------|-------|
+| #5 | agente-scraping | `scraping-inteligencia-competitiva.md` |
+| #6 | agente-spy-ads | `agente-spy-ads.md` |
+| #7 | agente-redes-organicas | `agente-redes-organicas.md` |
+| #8 | agente-investigacion | `agente-investigacion.md` |
+| #9 | director-estrategia | `director-estrategia.md` |
+| #10 | agente-auditoria | `agente-auditoria.md` |
+
+### CAPA 03 — PUBLICIDAD
+| # | Agente | Skill |
+|---|--------|-------|
+| #11 | meta-ads | `meta-ads.md` |
+| #12 | google-ads | `google-ads.md` |
+| #13 | tiktok-ads | `tiktok-ads.md` |
+| #14 | linkedin-ads | `linkedin-ads.md` |
+
+### CAPA 04 — DISEÑO Y CONTENIDO
+| # | Agente | Skill |
+|---|--------|-------|
+| #15 | director-creativo | `director-creativo.md` |
+| #16 | copywriting | `copywriting-seo.md` |
+| #17 | diseno-imagen | `diseno-imagen.md` |
+| #18 | diseno-web | `diseno-web.md` |
+| #19 | gestor-assets | `gestor-assets.md` |
+
+### CAPA 05 — SISTEMAS
+| # | Agente | Skill |
+|---|--------|-------|
+| #20 | desarrollo-web | `desarrollo-web.md` |
+| #21 | frontend-dev | `frontend-dev.md` |
+| #22 | backend-dev | `backend-dev.md` |
+| #23 | ghl-crm | `ghl-crm.md` |
+| #24 | n8n-automatizacion | `n8n-automatizacion.md` |
+| #25 | servidor-cloud | `servidor-cloud.md` |
+| #26 | agentes-voz | `agentes-voz.md` |
+
+### CAPA 06 — CRECIMIENTO
+| # | Agente | Skill |
+|---|--------|-------|
+| #27 | seo | `seo.md` |
+| #28 | contenido-redes | `contenido-redes.md` |
+| #29 | youtube-organico | `youtube-organico.md` |
+| #30 | ventas-atencion | `ventas-atencion.md` |
+| #31 | agente-email-marketing | `agente-email-marketing.md` |
+| #32 | agente-gbp | `agente-gbp.md` |
+| #33 | agente-cro | `agente-cro.md` |
+| #34 | agente-reputacion | `agente-reputacion.md` |
+| #35 | agente-prospector | `agente-prospector.md` |
+
+### CAPA 07 — FINANZAS Y DATOS
+| # | Agente | Skill |
+|---|--------|-------|
+| #36 | reportes | `reportes.md` |
+| #37 | finanzas | `finanzas.md` |
+| #38 | analisis-datos | `analisis-datos.md` |
+
+### CAPA 08 — CONTROL
+| # | Agente | Skill |
+|---|--------|-------|
+| #39 | revisor-qa | `revisor-qa.md` |
+| #40 | seguridad | `seguridad.md` |
+| #41 | aprobador | `aprobador.md` |
+| #42 | agente-analytics | `agente-analytics.md` |
+| #43 | agente-monitor | `agente-monitor.md` |
+| #44 | agente-pqr | `agente-pqr.md` |
+| #45 | agente-deployment | `agente-deployment.md` |
+| #46 | agente-rp | `agente-rp.md` |
+
+### AGENTES ESPECIALES
+| # | Agente | Skill |
+|---|--------|-------|
+| #47 | growth-content-specialist | `growth-content-specialist.md` |
+| #48 | youtube-ads | `youtube-ads.md` |
+
+**Total: 48 agentes** — todos los skills estan en `.claude/agents/skills-globales/`
+
+---
+
+## INFRAESTRUCTURA DEL SISTEMA
+
+### Servidor y desarrollo
+- **AWS EC2:** ubuntu@18.233.117.68 (t3.small, Ubuntu 24)
+- **SSH:** `ssh -i ~/Desktop/addendo-server-key.pem ubuntu@18.233.117.68`
+- **N8N:** https://n8n.addendo.io (PM2, puerto 5678)
+- **Claude Code AWS:** `/home/ubuntu/addendo-website/`
+- **Claude Code Mac:** `/Users/Mac/addendo-website/`
+- **GitHub:** AddendoGrowthPartner
+- **Vercel:** sitios de clientes
+- **Cloudflare:** DNS y CDN
+
+### Plataformas y cuentas
+- **GHL:** CRM agencia
+- **Google Ads MCC:** 424-957-3841
+- **Meta Business ID:** 161783471681304
+- **Cloudinary:** dokzw376u
+
+---
+
+## CLIENTES ACTIVOS
+
+| Cliente | Estado |
+|---------|--------|
+| Don Jacinto Nahual | donjacintonahual.com — sitio live |
+| Bebe Genial | sitio pendiente |
+| Neuron Kids | sitio pendiente |
+| Creditos Experto | sitio pendiente |
+| CreditBridge | proyecto de Jose — pendiente |
+| Ciudad Maderas | proyecto de Jose — pendiente |
+
+---
+
+## COMO USAR EL SISTEMA DE SUBAGENTES
+
+Cuando una tarea requiere multiples agentes trabajando en paralelo, usar este formato:
+
+### Para tareas paralelas
+**Ejemplo:** investigar la competencia de un cliente nuevo
+
+1. **Leer el skill** de cada agente involucrado
+2. **Crear un subagente** por cada tarea paralela
+3. **Consolidar los resultados** cuando todos terminen
+4. **Entregar el resultado consolidado** a Jose
+
+### Patron tipico de coordinacion paralela:
+
+```
+Tarea: "investiga la competencia de [cliente]"
+
+Subagente 1 → agente-scraping (#5)
+  Lee: scraping-inteligencia-competitiva.md
+  Ejecuta: extraccion de SEO/web/mercado
+
+Subagente 2 → agente-spy-ads (#6)
+  Lee: agente-spy-ads.md
+  Ejecuta: extraccion de ads pagados
+
+Subagente 3 → agente-redes-organicas (#7)
+  Lee: agente-redes-organicas.md
+  Ejecuta: extraccion de contenido organico
+
+[esperar a que los 3 terminen]
+
+Consolidacion → agente-investigacion (#8)
+  Lee: agente-investigacion.md
+  Recibe: los 3 reportes
+  Entrega: reporte consolidado al director-estrategia
+```
+
+---
+
+## REGLA DE ORO
+
+**Antes de ejecutar cualquier tarea, responder estas 4 preguntas:**
+
+1. ¿Que agente es responsable de esta tarea?
+2. ¿Lei su skill completo?
+3. ¿Tengo todos los inputs que el skill requiere?
+4. ¿Se a quien le entrego el resultado?
+
+**Si la respuesta a cualquiera de estas es NO** — parar y resolver antes de continuar.
+
+---
+
+## FILOSOFIA DEL SISTEMA
+
+> "Nunca actuar sin contexto. Nunca improvisar sin skill. Nunca entregar sin verificar. La calidad de Addendo se construye con disciplina sistematica, no con velocidad sin metodo."
+
+El sistema de 48 agentes existe para que cada decision se tome con la misma rigurosidad que tomaria el mejor especialista del mundo en cada area. La forma de honrar ese diseño es **leyendo el skill, siguiendo el proceso, y respetando las dependencias entre agentes**.
+
+---
+
+*Sistema operativo de Addendo Growth Partner — 48 agentes especializados, 1 mision: ser la agencia mas automatizada de America Latina.*

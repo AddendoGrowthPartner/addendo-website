@@ -1,0 +1,309 @@
+{
+  "name": "Addendo \u2014 Inteligencia de Mercado Semanal",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 6 * * 1"
+            }
+          ]
+        }
+      },
+      "id": "schedule-lunes",
+      "name": "Schedule Lunes 6AM",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        220,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "inteligencia-mercado-manual",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "webhook-manual-inteligencia",
+      "name": "Webhook Manual",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        220,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "// Lista de clientes activos de Addendo Growth Partner\nconst clientes = [\n  {\n    nombre: 'Don Jacinto Nahual',\n    industria: 'brujo',\n    ciudad: 'Los Angeles',\n    sitio_web: 'donjacintonahual.com',\n    keywords_principales: [\n      'brujo en Los Angeles',\n      'brujeria Los Angeles',\n      'curandero Los Angeles',\n      'spiritual healer Los Angeles',\n      'witch doctor near me',\n      'limpia espiritual Los Angeles',\n      'amarres de amor Los Angeles'\n    ],\n    competidores: [\n      'https://www.yelp.com/search?find_desc=brujo&find_loc=Los+Angeles',\n      'https://www.google.com/search?q=brujo+los+angeles'\n    ]\n  },\n  {\n    nombre: 'Addendo',\n    industria: 'agencia marketing digital',\n    ciudad: 'Los Angeles',\n    sitio_web: 'addendo.io',\n    keywords_principales: [\n      'marketing agency Los Angeles',\n      'digital marketing agency LA',\n      'SEO agency Los Angeles',\n      'PPC management Los Angeles',\n      'web design agency Los Angeles',\n      'social media agency Los Angeles',\n      'Hispanic marketing agency'\n    ],\n    competidores: [\n      'https://www.google.com/search?q=marketing+agency+los+angeles',\n      'https://www.google.com/search?q=hispanic+marketing+agency+los+angeles'\n    ]\n  }\n];\n\nreturn clientes.map(c => ({ json: c }));"
+      },
+      "id": "clientes-activos",
+      "name": "Clientes Activos",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        520,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.dataforseo.com/v3/keywords_data/google_ads/keywords_for_keywords/live",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "=[\n  {\n    \"keywords\": {{ JSON.stringify($json.keywords_principales) }},\n    \"language_code\": \"en\",\n    \"location_name\": \"United States\",\n    \"include_seed_keyword\": true,\n    \"sort_by\": \"search_volume\",\n    \"limit\": 50\n  }\n]",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "dataforseo-keywords-semanal",
+      "name": "DataForSEO Keywords Semanal",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        800,
+        140
+      ],
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "DATAFORSEO_CREDENTIAL_ID",
+          "name": "DataForSEO API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.apify.com/v2/acts/apify~google-ads-transparency-scraper/runs?token={{$credentials.apifyApi.token}}&waitForFinish=120",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"queries\": {{ JSON.stringify($json.keywords_principales.slice(0, 3)) }},\n  \"maxResults\": 30,\n  \"language\": \"en\",\n  \"country\": \"US\"\n}",
+        "options": {
+          "timeout": 180000
+        }
+      },
+      "id": "apify-ads-semanal",
+      "name": "Apify Ads Transparency Semanal",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        800,
+        340
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "APIFY_CREDENTIAL_ID",
+          "name": "Apify API Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.apify.com/v2/acts/apify~website-content-crawler/runs?token={{$credentials.apifyApi.token}}&waitForFinish=120",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"startUrls\": [\n    { \"url\": \"https://{{ $json.sitio_web }}\" },\n    { \"url\": \"{{ $json.competidores[0] }}\" }\n  ],\n  \"maxCrawlPages\": 5,\n  \"crawlerType\": \"cheerio\",\n  \"maxConcurrency\": 5\n}",
+        "options": {
+          "timeout": 180000
+        }
+      },
+      "id": "apify-scraping-semanal",
+      "name": "Apify Scraping Competidores Semanal",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        800,
+        540
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "APIFY_CREDENTIAL_ID",
+          "name": "Apify API Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-api-key",
+              "value": "={{$credentials.httpHeaderAuth.value}}"
+            },
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"claude-sonnet-4-20250514\",\n  \"max_tokens\": 4096,\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"Eres el analista de inteligencia de mercado de Addendo Growth Partner.\\n\\nGenera el REPORTE SEMANAL DE INTELIGENCIA DE MERCADO para el siguiente cliente.\\n\\n## CLIENTE\\nNombre: {{ $('Clientes Activos').item.json.nombre }}\\nIndustria: {{ $('Clientes Activos').item.json.industria }}\\nCiudad: {{ $('Clientes Activos').item.json.ciudad }}\\nSitio Web: {{ $('Clientes Activos').item.json.sitio_web }}\\n\\n## DATOS DE KEYWORDS (DataForSEO)\\n{{ JSON.stringify($('DataForSEO Keywords Semanal').item.json, null, 2).substring(0, 3000) }}\\n\\n## ANUNCIOS ACTIVOS COMPETIDORES (Google Ads Transparency)\\n{{ JSON.stringify($('Apify Ads Transparency Semanal').item.json, null, 2).substring(0, 3000) }}\\n\\n## SCRAPING PAGINAS COMPETIDORES\\n{{ JSON.stringify($('Apify Scraping Competidores Semanal').item.json, null, 2).substring(0, 3000) }}\\n\\n---\\n\\nGenera el reporte con estas secciones:\\n\\n1. **RESUMEN EJECUTIVO** \u2014 Estado del mercado esta semana\\n2. **IDEAS DE BLOGS** \u2014 5 ideas de blog posts basadas en keywords trending y gaps de contenido. Incluir: titulo sugerido, keyword target, volumen estimado, y angulo unico\\n3. **OPORTUNIDADES DE KEYWORDS** \u2014 Keywords nuevas o con cambios significativos de volumen. Tabla con: keyword, volumen, competencia, CPC, y recomendacion\\n4. **MEJORAS AL SITIO WEB** \u2014 Basado en el scraping del sitio del cliente vs competidores, que mejorar en UX, contenido, CTAs, velocidad\\n5. **ANALISIS DE ANUNCIOS COMPETIDORES** \u2014 Que estan anunciando, copy que usan, landing pages, presupuesto estimado, y oportunidades para el cliente\\n6. **ACCIONES RECOMENDADAS ESTA SEMANA** \u2014 Top 3 acciones priorizadas por impacto\\n\\nFormato: HTML profesional listo para email. Usa tablas, colores sutiles, y formato limpio.\"\n    }\n  ]\n}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "id": "claude-reporte-semanal",
+      "name": "Claude Reporte Semanal",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1120,
+        340
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "ANTHROPIC_CREDENTIAL_ID",
+          "name": "Anthropic API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "admin@addendo.io",
+        "subject": "=Reporte Inteligencia de Mercado \u2014 {{ $('Clientes Activos').item.json.nombre }} \u2014 {{ new Date().toLocaleDateString('es-MX', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) }}",
+        "emailType": "html",
+        "message": "=<div style=\"font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto;\">\n<div style=\"background: #1a1a2e; color: white; padding: 20px; text-align: center;\">\n  <h1 style=\"margin: 0;\">Addendo Growth Partner</h1>\n  <p style=\"margin: 5px 0 0; opacity: 0.8;\">Reporte Semanal de Inteligencia de Mercado</p>\n</div>\n<div style=\"padding: 20px; background: #f5f5f5;\">\n  <p><strong>Cliente:</strong> {{ $('Clientes Activos').item.json.nombre }}</p>\n  <p><strong>Industria:</strong> {{ $('Clientes Activos').item.json.industria }}</p>\n  <p><strong>Ciudad:</strong> {{ $('Clientes Activos').item.json.ciudad }}</p>\n  <p><strong>Fecha:</strong> {{ new Date().toLocaleDateString('es-MX', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) }}</p>\n</div>\n<div style=\"padding: 20px;\">\n{{ $json.content ? $json.content[0].text : JSON.stringify($json, null, 2) }}\n</div>\n<div style=\"background: #1a1a2e; color: white; padding: 15px; text-align: center; font-size: 12px;\">\n  <p>Generado automaticamente por Addendo Growth Partner | addendo.io</p>\n</div>\n</div>",
+        "options": {}
+      },
+      "id": "gmail-reporte-semanal",
+      "name": "Gmail Reporte Semanal",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1400,
+        340
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "GMAIL_CREDENTIAL_ID",
+          "name": "Gmail Addendo"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Schedule Lunes 6AM": {
+      "main": [
+        [
+          {
+            "node": "Clientes Activos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Manual": {
+      "main": [
+        [
+          {
+            "node": "Clientes Activos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clientes Activos": {
+      "main": [
+        [
+          {
+            "node": "DataForSEO Keywords Semanal",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Apify Ads Transparency Semanal",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Apify Scraping Competidores Semanal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DataForSEO Keywords Semanal": {
+      "main": [
+        [
+          {
+            "node": "Claude Reporte Semanal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Apify Ads Transparency Semanal": {
+      "main": [
+        [
+          {
+            "node": "Claude Reporte Semanal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Apify Scraping Competidores Semanal": {
+      "main": [
+        [
+          {
+            "node": "Claude Reporte Semanal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude Reporte Semanal": {
+      "main": [
+        [
+          {
+            "node": "Gmail Reporte Semanal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "name": "addendo",
+      "createdAt": "2026-04-10T00:00:00.000Z",
+      "updatedAt": "2026-04-10T00:00:00.000Z"
+    },
+    {
+      "name": "inteligencia-mercado",
+      "createdAt": "2026-04-10T00:00:00.000Z",
+      "updatedAt": "2026-04-10T00:00:00.000Z"
+    }
+  ],
+  "triggerCount": 2,
+  "updatedAt": "2026-04-10T00:00:00.000Z",
+  "versionId": "1"
+}

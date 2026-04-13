@@ -1,0 +1,278 @@
+{
+  "name": "Addendo \u2014 Investigacion Manual Prospecto",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "investigacion-prospecto",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook Prospecto",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        220,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// Datos del prospecto recibidos via webhook\nconst body = $input.item.json.body || $input.item.json;\n\nconst prospecto = {\n  nombre_negocio: body.nombre_negocio || 'Sin nombre',\n  ciudad: body.ciudad || 'Sin ciudad',\n  industria: body.industria || 'Sin industria',\n  sitio_web: body.sitio_web || '',\n  email_contacto: body.email_contacto || '',\n  notas: body.notas || ''\n};\n\n// Keywords de busqueda derivadas\nconst keywords_busqueda = [\n  `${prospecto.industria} ${prospecto.ciudad}`,\n  `best ${prospecto.industria} ${prospecto.ciudad}`,\n  `${prospecto.industria} near me ${prospecto.ciudad}`\n];\n\nreturn {\n  json: {\n    prospecto,\n    keywords_busqueda,\n    timestamp: new Date().toISOString()\n  }\n};"
+      },
+      "id": "datos-prospecto",
+      "name": "Datos Prospecto",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        460,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.dataforseo.com/v3/keywords_data/google_ads/keywords_for_keywords/live",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "=[\n  {\n    \"keywords\": {{ JSON.stringify($json.keywords_busqueda) }},\n    \"language_code\": \"en\",\n    \"location_name\": \"United States\",\n    \"include_seed_keyword\": true,\n    \"sort_by\": \"search_volume\"\n  }\n]",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "dataforseo-keywords",
+      "name": "DataForSEO Keywords",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        700,
+        160
+      ],
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "DATAFORSEO_CREDENTIAL_ID",
+          "name": "DataForSEO API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.apify.com/v2/acts/apify~website-content-crawler/runs?token={{$credentials.apifyApi.token}}&waitForFinish=120",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"startUrls\": [\n    { \"url\": \"https://www.google.com/search?q={{ encodeURIComponent($json.keywords_busqueda[0]) }}\" }\n  ],\n  \"maxCrawlPages\": 3,\n  \"crawlerType\": \"cheerio\",\n  \"maxConcurrency\": 5\n}",
+        "options": {
+          "timeout": 180000
+        }
+      },
+      "id": "apify-scraping-competidores",
+      "name": "Apify Scraping Competidores",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        700,
+        380
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "APIFY_CREDENTIAL_ID",
+          "name": "Apify API Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.apify.com/v2/acts/apify~google-ads-transparency-scraper/runs?token={{$credentials.apifyApi.token}}&waitForFinish=120",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"queries\": [\n    \"{{ $('Datos Prospecto').item.json.prospecto.industria }} {{ $('Datos Prospecto').item.json.prospecto.ciudad }}\"\n  ],\n  \"maxResults\": 20,\n  \"language\": \"en\",\n  \"country\": \"US\"\n}",
+        "options": {
+          "timeout": 180000
+        }
+      },
+      "id": "apify-ads-transparency",
+      "name": "Apify Google Ads Transparency",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        700,
+        580
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "APIFY_CREDENTIAL_ID",
+          "name": "Apify API Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-api-key",
+              "value": "={{$credentials.httpHeaderAuth.value}}"
+            },
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"claude-sonnet-4-20250514\",\n  \"max_tokens\": 4096,\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"Eres el analista de inteligencia comercial de Addendo Growth Partner, una agencia de marketing digital.\\n\\nAnaliza la siguiente informacion de un prospecto y genera una PROPUESTA COMERCIAL completa.\\n\\n## DATOS DEL PROSPECTO\\n{{ JSON.stringify($('Datos Prospecto').item.json.prospecto, null, 2) }}\\n\\n## KEYWORDS DE SU INDUSTRIA (DataForSEO)\\n{{ JSON.stringify($('DataForSEO Keywords').item.json, null, 2).substring(0, 3000) }}\\n\\n## SITIOS WEB COMPETIDORES (Scraping)\\n{{ JSON.stringify($('Apify Scraping Competidores').item.json, null, 2).substring(0, 3000) }}\\n\\n## ANUNCIOS ACTIVOS COMPETIDORES (Google Ads Transparency)\\n{{ JSON.stringify($('Apify Google Ads Transparency').item.json, null, 2).substring(0, 3000) }}\\n\\n---\\n\\nGenera la propuesta con estas secciones:\\n\\n1. **RESUMEN EJECUTIVO** \u2014 Quien es el prospecto y su mercado\\n2. **ANALISIS DE COMPETENCIA** \u2014 Que hacen los competidores top, sus fortalezas y debilidades\\n3. **OPORTUNIDADES DE KEYWORDS** \u2014 Keywords de alto volumen y baja competencia donde puede posicionarse\\n4. **ANALISIS DE ANUNCIOS** \u2014 Que estan publicitando los competidores y donde hay gaps\\n5. **ESTRATEGIA RECOMENDADA** \u2014 Plan de accion con SEO, Google Ads, y contenido\\n6. **PAQUETE SUGERIDO** \u2014 Que servicios de Addendo le beneficiarian mas (SEO, PPC, Web Design, Social Media)\\n7. **PROYECCION DE RESULTADOS** \u2014 Estimacion a 3 y 6 meses\\n\\nFormato: HTML profesional listo para email. Usa tablas donde sea relevante.\"\n    }\n  ]\n}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "id": "claude-analisis",
+      "name": "Claude Analisis Propuesta",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1000,
+        300
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "ANTHROPIC_CREDENTIAL_ID",
+          "name": "Anthropic API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "admin@addendo.io",
+        "subject": "=Propuesta Comercial \u2014 {{ $('Datos Prospecto').item.json.prospecto.nombre_negocio }} ({{ $('Datos Prospecto').item.json.prospecto.ciudad }})",
+        "emailType": "html",
+        "message": "=<h2>Propuesta Comercial Automatizada</h2>\n<p><strong>Prospecto:</strong> {{ $('Datos Prospecto').item.json.prospecto.nombre_negocio }}</p>\n<p><strong>Ciudad:</strong> {{ $('Datos Prospecto').item.json.prospecto.ciudad }}</p>\n<p><strong>Industria:</strong> {{ $('Datos Prospecto').item.json.prospecto.industria }}</p>\n<p><strong>Generado:</strong> {{ $('Datos Prospecto').item.json.timestamp }}</p>\n<hr>\n{{ $json.content ? $json.content[0].text : JSON.stringify($json, null, 2) }}",
+        "options": {}
+      },
+      "id": "gmail-envio-propuesta",
+      "name": "Gmail Enviar Propuesta",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1280,
+        300
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "GMAIL_CREDENTIAL_ID",
+          "name": "Gmail Addendo"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook Prospecto": {
+      "main": [
+        [
+          {
+            "node": "Datos Prospecto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Datos Prospecto": {
+      "main": [
+        [
+          {
+            "node": "DataForSEO Keywords",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Apify Scraping Competidores",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Apify Google Ads Transparency",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DataForSEO Keywords": {
+      "main": [
+        [
+          {
+            "node": "Claude Analisis Propuesta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Apify Scraping Competidores": {
+      "main": [
+        [
+          {
+            "node": "Claude Analisis Propuesta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Apify Google Ads Transparency": {
+      "main": [
+        [
+          {
+            "node": "Claude Analisis Propuesta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude Analisis Propuesta": {
+      "main": [
+        [
+          {
+            "node": "Gmail Enviar Propuesta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "name": "addendo",
+      "createdAt": "2026-04-10T00:00:00.000Z",
+      "updatedAt": "2026-04-10T00:00:00.000Z"
+    },
+    {
+      "name": "investigacion",
+      "createdAt": "2026-04-10T00:00:00.000Z",
+      "updatedAt": "2026-04-10T00:00:00.000Z"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2026-04-10T00:00:00.000Z",
+  "versionId": "1"
+}

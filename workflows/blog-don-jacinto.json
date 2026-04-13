@@ -1,0 +1,340 @@
+{
+  "name": "Addendo — Blog Automatico Don Jacinto Nahual",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "days",
+              "daysInterval": 1,
+              "triggerAtHour": 6,
+              "triggerAtMinute": 0
+            }
+          ]
+        },
+        "timezone": "America/New_York"
+      },
+      "id": "schedule-trigger",
+      "name": "Schedule Trigger - 6am EST diario",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        220,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// Lista maestra de keywords del nicho esoterico para Don Jacinto Nahual\n// Mercado: hispanos en USA - LA, Houston, Chicago, Miami, NY\n\nconst keywordsBase = [\n  // Brujo - ciudades principales\n  'brujo en los angeles',\n  'brujo en houston',\n  'brujo en chicago',\n  'brujo en miami',\n  'brujo en nueva york',\n  'brujo cerca de mi',\n  'mejor brujo en estados unidos',\n  'brujo poderoso',\n  'brujo de verdad',\n  'consulta con brujo',\n  \n  // Curandero\n  'curandero en los angeles',\n  'curandero en houston',\n  'curandero en chicago',\n  'curandero en miami',\n  'curandero cerca de mi',\n  'curandero espiritual',\n  'curandero mexicano en usa',\n  'curandero limpia espiritual',\n  \n  // Limpias espirituales\n  'limpia espiritual en los angeles',\n  'limpia espiritual en houston',\n  'limpia espiritual en chicago',\n  'limpia espiritual en miami',\n  'limpia espiritual cerca de mi',\n  'limpia espiritual con huevo',\n  'limpia para la mala suerte',\n  'limpia para atraer dinero',\n  'limpia para el amor',\n  'limpia espiritual a distancia',\n  \n  // Amarres de amor\n  'amarre de amor en los angeles',\n  'amarre de amor en houston',\n  'amarre de amor en miami',\n  'amarre de amor que funcione',\n  'amarre de amor poderoso',\n  'amarre de amor con foto',\n  'amarre para regresar a tu pareja',\n  'amarre eterno de amor',\n  'amarre de amor garantizado',\n  \n  // Otros servicios\n  'tarot en los angeles',\n  'tarot en houston',\n  'lectura de cartas',\n  'desamarre de amor',\n  'endulzamiento de amor',\n  'oraciones para el amor',\n  'rituales para el dinero',\n  'rituales de proteccion',\n  'velas para el amor',\n  'remedios para mal de ojo'\n];\n\nreturn {\n  json: {\n    cliente: 'don-jacinto-nahual',\n    sitio_web: 'donjacintonahual.com',\n    repositorio: 'AddendoGrowthPartner/don-jacinto-nahual',\n    nicho: 'servicios esotericos - brujo curandero',\n    idioma: 'espanol',\n    mercado: 'hispanos en USA',\n    keywords_base: keywordsBase,\n    fecha_ejecucion: new Date().toISOString()\n  }\n};"
+      },
+      "id": "config-cliente",
+      "name": "Configuracion Cliente",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        460,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.dataforseo.com/v3/keywords_data/google/search_volume/live",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "=[\n  {\n    \"keywords\": {{ JSON.stringify($json.keywords_base) }},\n    \"language_code\": \"es\",\n    \"location_name\": \"United States\",\n    \"sort_by\": \"search_volume\"\n  }\n]",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "dataforseo-volumen",
+      "name": "DataForSEO - Buscar Keywords",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        700,
+        300
+      ],
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "DATAFORSEO_CREDENTIAL_ID",
+          "name": "DataForSEO API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// Filtrar y seleccionar la mejor keyword no usada\n// Criterios: volumen > 500, dificultad < 40, no usada antes\n\nconst response = $input.item.json;\nconst tasks = response.tasks || [];\nconst result = tasks[0]?.result || [];\n\n// Filtrar keywords con volumen > 500\nconst keywordsFiltradas = result\n  .filter(kw => {\n    const volume = kw.search_volume || 0;\n    const difficulty = kw.keyword_difficulty || 100;\n    return volume >= 500 && difficulty < 40;\n  })\n  .map(kw => ({\n    keyword: kw.keyword,\n    volume: kw.search_volume,\n    difficulty: kw.keyword_difficulty || 0,\n    cpc: kw.cpc || 0,\n    competition: kw.competition || 0\n  }));\n\n// Ordenar por volumen descendente\nkeywordsFiltradas.sort((a, b) => b.volume - a.volume);\n\n// Leer keywords ya usadas (desde Google Sheets en la implementacion real)\n// Por ahora simulamos con array vacio - reemplazar con lectura real\nconst keywordsUsadas = [];\n\n// Seleccionar la primera no usada\nconst keywordSeleccionada = keywordsFiltradas.find(\n  kw => !keywordsUsadas.includes(kw.keyword)\n);\n\nif (!keywordSeleccionada) {\n  throw new Error('No hay keywords disponibles que cumplan los criterios');\n}\n\n// Generar slug a partir de la keyword\nconst slug = keywordSeleccionada.keyword\n  .toLowerCase()\n  .normalize('NFD')\n  .replace(/[\\u0300-\\u036f]/g, '')\n  .replace(/[^a-z0-9\\s-]/g, '')\n  .replace(/\\s+/g, '-')\n  .replace(/-+/g, '-')\n  .replace(/^-|-$/g, '');\n\nconst fecha = new Date().toISOString().split('T')[0];\nconst nombreArchivo = `${slug}-${fecha}.md`;\n\nreturn {\n  json: {\n    keyword_seleccionada: keywordSeleccionada.keyword,\n    volumen: keywordSeleccionada.volume,\n    dificultad: keywordSeleccionada.difficulty,\n    cpc: keywordSeleccionada.cpc,\n    slug: slug,\n    nombre_archivo: nombreArchivo,\n    fecha: fecha,\n    cliente: 'don-jacinto-nahual',\n    sitio_web: 'donjacintonahual.com',\n    url_articulo: `https://donjacintonahual.com/blog/${slug}/`\n  }\n};"
+      },
+      "id": "seleccionar-keyword",
+      "name": "Seleccionar Mejor Keyword",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        940,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "create",
+        "modelId": {
+          "__rl": true,
+          "value": "claude-sonnet-4-20250514",
+          "mode": "list"
+        },
+        "messages": {
+          "messageValues": [
+            {
+              "role": "user",
+              "message": "=Eres un experto en SEO y copywriting para servicios esotericos en espanol. Vas a escribir un articulo de blog completo de minimo 1,500 palabras optimizado para SEO sobre la keyword principal: \"{{ $json.keyword_seleccionada }}\"\n\nCONTEXTO DEL CLIENTE:\n- Nombre: Don Jacinto Nahual\n- Sitio: donjacintonahual.com\n- Servicios: brujo, curandero, limpias espirituales, amarres de amor, tarot, rituales\n- Audiencia: hispanos en USA (Los Angeles, Houston, Chicago, Miami, Nueva York)\n- Tono: respetuoso, autoritativo, calido, sin sensacionalismo\n\nDATOS DE LA KEYWORD:\n- Keyword principal: {{ $json.keyword_seleccionada }}\n- Volumen mensual: {{ $json.volumen }}\n- Dificultad: {{ $json.dificultad }}\n\nREQUISITOS DEL ARTICULO:\n\n1. LONGITUD: minimo 1,500 palabras de contenido real (no contar el frontmatter)\n\n2. ESTRUCTURA:\n- Frontmatter Astro.js completo (ver formato abajo)\n- H1 con la keyword principal\n- Primer parrafo: respuesta directa con la keyword principal en las primeras 60 palabras\n- 5-7 secciones H2 que cubran sub-temas relacionados\n- H3 dentro de los H2 cuando aplique\n- FAQ al final con minimo 5 preguntas y respuestas\n- Conclusion con CTA hacia los servicios de Don Jacinto\n\n3. SEO:\n- Keyword principal en H1, primer parrafo, ultima parrafo, y minimo 8 veces naturalmente en el cuerpo\n- Keywords secundarias relacionadas con el nicho esoterico\n- Mencion de las ciudades target (LA, Houston, Chicago, Miami, NY)\n\n4. CTA FINAL:\n- Invitar a contactar a Don Jacinto Nahual\n- Mencionar consulta confidencial\n- Telefono / WhatsApp para contacto inmediato\n\n5. CONTENIDO:\n- Real y especifico, sin placeholders tipo [aqui va X]\n- Educativo y respetuoso\n- Sin promesas medicas o legales\n- Sin palabras tipo \"garantizado al 100%\"\n- Tono profesional pero accesible\n\nFORMATO DE FRONTMATTER ASTRO.JS (incluir EXACTAMENTE asi al inicio):\n\n---\ntitle: \"[titulo SEO con keyword - max 60 caracteres]\"\ndescription: \"[meta description con keyword - max 155 caracteres]\"\npubDate: \"{{ $json.fecha }}\"\nauthor: \"Don Jacinto Nahual\"\nimage: \"/blog/{{ $json.slug }}.jpg\"\ntags: [\"[tag1]\", \"[tag2]\", \"[tag3]\", \"[tag4]\", \"[tag5]\"]\nslug: \"{{ $json.slug }}\"\n---\n\n[Aqui empieza el articulo con H1, intro, contenido, FAQ, conclusion]\n\nIMPORTANTE: devuelve UNICAMENTE el contenido del archivo .md completo, empezando con --- del frontmatter. No agregues explicaciones, comentarios, ni texto adicional fuera del archivo."
+            }
+          ]
+        },
+        "options": {
+          "maxTokensToSample": 8000,
+          "temperature": 0.7
+        }
+      },
+      "id": "claude-articulo",
+      "name": "Claude - Escribir Articulo",
+      "type": "@n8n/n8n-nodes-langchain.anthropic",
+      "typeVersion": 1.3,
+      "position": [
+        1180,
+        300
+      ],
+      "credentials": {
+        "anthropicApi": {
+          "id": "ANTHROPIC_CREDENTIAL_ID",
+          "name": "Anthropic Claude"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// Combinar el articulo generado con metadata del workflow\nconst articulo = $input.item.json.message?.content?.[0]?.text || $input.item.json.text || $input.item.json.content || '';\n\n// Recuperar datos del nodo anterior\nconst metadata = $('Seleccionar Mejor Keyword').item.json;\n\n// Validar que el articulo tiene frontmatter\nif (!articulo.startsWith('---')) {\n  throw new Error('El articulo generado no tiene frontmatter valido');\n}\n\n// Validar longitud minima\nif (articulo.length < 5000) {\n  throw new Error(`Articulo muy corto: ${articulo.length} caracteres (minimo 5000)`);\n}\n\nreturn {\n  json: {\n    ...metadata,\n    contenido_articulo: articulo,\n    contenido_base64: Buffer.from(articulo).toString('base64'),\n    longitud_caracteres: articulo.length,\n    commit_message: `blog: articulo SEO - ${metadata.keyword_seleccionada}`,\n    ruta_archivo: `src/content/blog/${metadata.nombre_archivo}`\n  }\n};"
+      },
+      "id": "preparar-archivo",
+      "name": "Preparar Archivo para GitHub",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1420,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "create",
+        "owner": {
+          "__rl": true,
+          "value": "AddendoGrowthPartner",
+          "mode": "name"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "don-jacinto-nahual",
+          "mode": "name"
+        },
+        "filePath": "={{ $json.ruta_archivo }}",
+        "binaryData": false,
+        "fileContent": "={{ $json.contenido_articulo }}",
+        "commitMessage": "={{ $json.commit_message }}"
+      },
+      "id": "github-create-file",
+      "name": "GitHub - Crear Archivo Blog",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1,
+      "position": [
+        1660,
+        300
+      ],
+      "credentials": {
+        "githubApi": {
+          "id": "GITHUB_CREDENTIAL_ID",
+          "name": "GitHub AddendoGrowthPartner"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://indexing.googleapis.com/v3/urlNotifications:publish",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"url\": \"{{ $('Preparar Archivo para GitHub').item.json.url_articulo }}\",\n  \"type\": \"URL_UPDATED\"\n}",
+        "options": {
+          "timeout": 15000
+        }
+      },
+      "id": "google-indexing",
+      "name": "Google Indexing API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1900,
+        300
+      ],
+      "credentials": {
+        "googleApi": {
+          "id": "GOOGLE_INDEXING_CREDENTIAL_ID",
+          "name": "Google Indexing API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "admin@addendo.io",
+        "subject": "=✅ Articulo publicado — {{ $('Preparar Archivo para GitHub').item.json.keyword_seleccionada }} — Don Jacinto Nahual",
+        "emailType": "html",
+        "message": "=<h2>📝 Nuevo articulo publicado</h2>\n\n<p><strong>Cliente:</strong> Don Jacinto Nahual</p>\n<p><strong>Sitio:</strong> donjacintonahual.com</p>\n\n<hr>\n\n<h3>Detalles del articulo</h3>\n<ul>\n  <li><strong>Keyword principal:</strong> {{ $('Preparar Archivo para GitHub').item.json.keyword_seleccionada }}</li>\n  <li><strong>Volumen mensual:</strong> {{ $('Preparar Archivo para GitHub').item.json.volumen }}</li>\n  <li><strong>Dificultad SEO:</strong> {{ $('Preparar Archivo para GitHub').item.json.dificultad }}</li>\n  <li><strong>Slug:</strong> {{ $('Preparar Archivo para GitHub').item.json.slug }}</li>\n  <li><strong>Fecha de publicacion:</strong> {{ $('Preparar Archivo para GitHub').item.json.fecha }}</li>\n</ul>\n\n<h3>Enlaces</h3>\n<ul>\n  <li><strong>URL del articulo:</strong> <a href=\"{{ $('Preparar Archivo para GitHub').item.json.url_articulo }}\">{{ $('Preparar Archivo para GitHub').item.json.url_articulo }}</a></li>\n  <li><strong>Repositorio:</strong> AddendoGrowthPartner/don-jacinto-nahual</li>\n  <li><strong>Archivo:</strong> {{ $('Preparar Archivo para GitHub').item.json.ruta_archivo }}</li>\n</ul>\n\n<h3>Estado</h3>\n<ul>\n  <li>✅ Articulo generado por Claude</li>\n  <li>✅ Commit a GitHub realizado</li>\n  <li>✅ URL enviada a Google Indexing API</li>\n</ul>\n\n<hr>\n\n<p><em>Workflow automatico de Addendo Agency OS</em></p>",
+        "options": {}
+      },
+      "id": "gmail-notify",
+      "name": "Gmail - Notificar a Jose",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        2140,
+        300
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "GMAIL_CREDENTIAL_ID",
+          "name": "Gmail Addendo"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Schedule Trigger - 6am EST diario": {
+      "main": [
+        [
+          {
+            "node": "Configuracion Cliente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Configuracion Cliente": {
+      "main": [
+        [
+          {
+            "node": "DataForSEO - Buscar Keywords",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DataForSEO - Buscar Keywords": {
+      "main": [
+        [
+          {
+            "node": "Seleccionar Mejor Keyword",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Seleccionar Mejor Keyword": {
+      "main": [
+        [
+          {
+            "node": "Claude - Escribir Articulo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude - Escribir Articulo": {
+      "main": [
+        [
+          {
+            "node": "Preparar Archivo para GitHub",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar Archivo para GitHub": {
+      "main": [
+        [
+          {
+            "node": "GitHub - Crear Archivo Blog",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GitHub - Crear Archivo Blog": {
+      "main": [
+        [
+          {
+            "node": "Google Indexing API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Indexing API": {
+      "main": [
+        [
+          {
+            "node": "Gmail - Notificar a Jose",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "",
+    "timezone": "America/New_York"
+  },
+  "versionId": "1",
+  "meta": {
+    "instanceId": "addendo-n8n",
+    "client": "don-jacinto-nahual",
+    "purpose": "blog-automation-seo",
+    "schedule": "daily-6am-est",
+    "agent": "growth-content-specialist + seo + copywriting"
+  },
+  "tags": [
+    {
+      "name": "addendo"
+    },
+    {
+      "name": "blog-automation"
+    },
+    {
+      "name": "don-jacinto-nahual"
+    },
+    {
+      "name": "seo"
+    }
+  ]
+}
