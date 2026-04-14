@@ -1402,6 +1402,1497 @@ Recibir reportes mediocres y nunca decirlo. Los reportes futuros seran igual de 
 
 ---
 
+## FASE 8 — METODOLOGIA COMPLEMENTARIA: LAS 7 MALETAS DE FELIPE VERGARA
+
+### 8.1 Por que esta metodologia existe dentro del agente-investigacion
+
+Las Fases 1-7 de este skill consolidan los reportes de los tres espias (#5 scraping, #6 spy-ads, #7 redes-organicas). Eso cubre el lado "de afuera" — que hacen los competidores, donde rankean, que anuncios corren, como publican. Pero deja un hueco enorme: **la voz del cliente real**. Que dolor tiene, que objeciones lo detienen, que lo convence de comprar, a quien se parece demograficamente.
+
+La metodologia de las **7 Maletas de Cualquier Compra** de Felipe Vergara llena ese hueco. Es un marco de investigacion de **voice of customer + market research** que el agente-investigacion ejecuta cuando:
+
+- Llega un cliente nuevo y necesitamos entender a su publico antes de disenar estrategia
+- Un cliente existente tiene campanias que no convierten y necesitamos descubrir el problema real
+- El director-creativo (#15) pide briefs con insights de dolor/objecion textuales
+- El director-estrategia (#9) necesita evidencia real del publico para validar propuestas de valor
+- Se va a rehacer la web, los ads o el proceso de ventas y no hay suficiente claridad del publico
+
+```
+POSICIONAMIENTO DE LAS 7 MALETAS DENTRO DEL SISTEMA:
+
+FASES 1-7 (consolidacion de espias):
+  Input:  3 reportes de #5, #6, #7
+  Output: Reporte de inteligencia competitiva (20-40 paginas)
+  Lente:  Que hacen los competidores y donde estan los vacios competitivos
+  
+FASE 8 (7 Maletas):
+  Input:  Nombre empresa + URL + Google Business + busquedas web
+  Output: Reporte 7 Maletas HTML (estilo Apple/minimalista)
+  Lente:  Que piensa/siente/dice el cliente real y como compra
+
+RELACION ENTRE AMBOS:
+  El reporte consolidado responde "donde esta el vacio competitivo".
+  El reporte 7 Maletas responde "por que compra (o no compra) la gente".
+  Juntos, el director-estrategia tiene la vision COMPLETA.
+
+CUANDO EJECUTAR UNA SOLA O AMBAS:
+  - Cliente nuevo premium: AMBAS (consolidacion + 7 Maletas)
+  - Cliente nuevo estandar: 7 Maletas primero, consolidacion despues
+  - Campania que no convierte: 7 Maletas (foco en Maleta 6 — objeciones)
+  - Rebranding / nueva web: 7 Maletas (foco en Maletas 1, 2, 4)
+  - Solo analisis competitivo: Fases 1-7 (sin 7 Maletas)
+```
+
+**Regla operativa:** las 7 Maletas NO reemplazan a las Fases 1-7, las complementan. El agente-investigacion decide cual ejecutar segun el pedido. Si el cliente pide "analiza mi publico", son 7 Maletas. Si pide "analiza mi competencia", son Fases 1-7. Si pide "entiendeme todo", son las dos, en ese orden: primero 7 Maletas (para fijar al cliente), luego consolidacion competitiva (para fijar el mercado).
+
+---
+
+### 8.2 Rol del agente en modo 7 Maletas
+
+Cuando el agente-investigacion ejecuta las 7 Maletas, cambia ligeramente de sombrero:
+
+```
+MODO CONSOLIDACION (Fases 1-7):
+  Rol: Analista que CONECTA reportes ya recolectados
+  No recolecta datos. Sintetiza los datos de los espias.
+  
+MODO 7 MALETAS (Fase 8):
+  Rol: Investigador de mercado que RECOLECTA + SINTETIZA
+  SI recolecta datos — pero con herramientas web, no scraping profundo
+  Usa: WebFetch, busquedas Google con operadores, Google Business,
+       Facebook Ads Library, redes sociales publicas, marketplaces
+```
+
+La diferencia operativa clave: en modo 7 Maletas el agente SI hace WebFetch y busquedas directas, porque el objetivo es mas rapido y ligero que el trabajo profundo de los espias. Las 7 Maletas se completan en **20 minutos activos** aproximadamente, no en 8 horas.
+
+**Regla de oro identica al resto del skill:** nunca inventes datos. Si en una seccion no encontraste evidencia, escribe literalmente **"No encontrado"**. Un dato real pesa mas que diez inventados. Esto es doblemente critico en las 7 Maletas porque el entregable alimenta copywriting y ads — un dato inventado se convierte en un anuncio que miente, y eso destruye confianza.
+
+---
+
+### 8.3 Inputs obligatorios al inicio
+
+Antes de empezar cualquier investigacion de 7 Maletas, el agente verifica que tiene los tres inputs minimos. Si falta alguno, NO inicia — pide a project-manager (#4) o a onboarding-cliente (#2) que los consiga.
+
+```
+INPUTS OBLIGATORIOS:
+
+1. NOMBRE DE LA EMPRESA / NEGOCIO
+   Ejemplo: "Clinica Dental Sonrisa Feliz"
+   Uso: identificacion en Google Business, busquedas nominales,
+        slug del reporte final
+
+2. URL DEL SITIO WEB
+   Ejemplo: https://sonrisafeliz.mx
+   Uso: WebFetch para extraer propuesta de valor, servicios,
+        testimonios embebidos, precios si estan publicos
+
+3. NOMBRE EN GOOGLE BUSINESS / CIUDAD + GIRO
+   Ejemplo: "Sonrisa Feliz — Guadalajara — Clinica Dental"
+   Uso: localizar el perfil de Google Business correcto
+        (puede haber varios con nombres parecidos)
+
+INPUTS OPCIONALES (mejoran calidad si existen):
+
+4. INSTAGRAM / FACEBOOK / TIKTOK URLs
+   Permiten extraer comentarios reales de posts recientes
+   
+5. LISTA SUGERIDA DE COMPETIDORES
+   Si el cliente ya sabe contra quien compite, ahorra tiempo
+   
+6. CONTEXTO DEL PEDIDO
+   Ej: "Quieren mejorar conversion de la landing de invisalign"
+   Permite sesgar el analisis hacia la maleta que mas importa
+
+VERIFICACION INICIAL:
+  [ ] Tengo los 3 inputs obligatorios
+  [ ] La URL del cliente responde (test rapido con WebFetch)
+  [ ] El perfil de Google Business existe y es accesible
+  [ ] Tengo claro que tipo de negocio es (servicio, ecommerce,
+      producto fisico, SaaS, infoproducto, local, etc.)
+
+Si alguno falla, pedir aclaracion antes de invertir tiempo.
+```
+
+---
+
+### 8.4 Flujo de trabajo maestro — resumen de 20 minutos
+
+```
+╔═══════════════════════════════════════════════════════════╗
+║  FLUJO 7 MALETAS — 20 MINUTOS ACTIVOS                     ║
+╠═══════════════════════════════════════════════════════════╣
+║                                                           ║
+║  FASE A — Analisis del negocio del cliente (~5 min)       ║
+║    A.1  WebFetch de la URL del cliente                    ║
+║    A.2  Extraer 30-50 reviews de Google Business          ║
+║    A.3  Revisar comentarios de ultimos 3-5 posts sociales ║
+║                                                           ║
+║  FASE B — Analisis de competidores (~10 min)              ║
+║    B.1  Identificar 3-5 competidores (busquedas Google)   ║
+║    B.2  WebFetch de sus sitios web                        ║
+║    B.3  Extraer 15-30 reviews por competidor              ║
+║    B.4  Facebook Ads Library — anuncios activos           ║
+║                                                           ║
+║  FASE C — Investigacion de mercado general (~5 min)       ║
+║    C.1  Truco ESPACIO: "{producto} comprar"               ║
+║    C.2  Truco ASTERISCO: "* {producto} comprar"           ║
+║    C.3  Guias de compra / articulos del nicho             ║
+║    C.4  Marketplaces si aplica (Amazon, MercadoLibre)     ║
+║                                                           ║
+║  FASE D — Sintesis y reporte (~fuera del timer)           ║
+║    D.1  Llenar la plantilla de las 7 Maletas              ║
+║    D.2  Generar el reporte HTML estilo Apple              ║
+║    D.3  Entregar al solicitante + guardar en Drive        ║
+║                                                           ║
+╚═══════════════════════════════════════════════════════════╝
+
+Nota: "20 minutos activos" = tiempo de recoleccion pura.
+La sintesis y el reporte HTML toman 30-60 min adicionales.
+Total end-to-end: 60-90 min por cliente.
+```
+
+---
+
+### 8.5 FASE A — Analisis del negocio del cliente
+
+#### A.1 WebFetch de la URL del cliente
+
+**Que extraer:**
+
+```
+CHECKLIST DE EXTRACCION WEB DEL CLIENTE:
+
+[ ] Propuesta de valor principal (hero + subhero)
+[ ] Lista completa de servicios / productos
+[ ] Precios publicados (si existen)
+[ ] Promesas especificas / garantias
+[ ] Diferenciales declarados por el propio cliente
+[ ] Testimonios embebidos en la web (texto + nombre + foto)
+[ ] Preguntas frecuentes (FAQ) — fuente de oro para objeciones
+[ ] Casos de exito / portafolio
+[ ] CTA principal (que quieren que haga el visitante)
+[ ] Formulario o flujo de conversion (email, WhatsApp, llamada)
+[ ] Tiempo en mercado declarado (ej: "15 anios de experiencia")
+[ ] Equipo / fundadores (nombres, credenciales)
+[ ] Sellos de confianza (certificaciones, premios, medios)
+
+QUE CAPTURAR TEXTUALMENTE (no parafrasear):
+  - El hero headline exacto
+  - Los bullets de beneficios
+  - Los testimonios con nombre y fecha si existe
+  - Las preguntas del FAQ tal como estan escritas
+  - El CTA y el copy del boton principal
+```
+
+**Regla operativa:** si la web del cliente es un Wordpress con 20 paginas, NO se leen todas. Se lee la home, la pagina de servicios principal, el FAQ y la pagina de contacto. Con eso alcanza para las 7 Maletas. Profundizar mas es desperdicio de tiempo en esta fase.
+
+#### A.2 Google Business — extraer 30-50 reviews completas
+
+**Esta es la fuente #1 de oro para las 7 Maletas.** Los reviews de Google Business son publicos, masivos y representan clientes reales que compraron (o intentaron comprar) y dejaron evidencia textual. De aqui salen datos de Maleta 1 (publico), Maleta 2 (problema/dolor), Maleta 3 (solucion validada), Maleta 5 (testimonios) y Maleta 6 (objeciones cuando son reviews negativas).
+
+```
+PROTOCOLO DE EXTRACCION DE REVIEWS DE GOOGLE BUSINESS:
+
+1. Localizar el perfil correcto
+   - Buscar en Google: "{nombre empresa} {ciudad}"
+   - Confirmar por direccion / telefono / foto del local
+   - Si hay mas de un perfil (cadenas), anotar cual se analiza
+
+2. Extraer idealmente 30-50 reviews
+   - Priorizar reviews de los ultimos 12 meses (relevancia)
+   - Incluir un mix de 5 estrellas, 3-4 estrellas y 1-2 estrellas
+   - Las de 1-2 estrellas son CRITICAS — son el origen de objeciones
+
+3. Para cada review capturar:
+   - Texto completo tal como esta (sin resumir)
+   - Estrellas (1-5)
+   - Nombre del reviewer (para inferir genero)
+   - Fecha relativa (hace 2 meses, hace 1 anio)
+   - Respuesta del negocio si existe
+
+4. Clasificar cada review mentalmente en:
+   - REVIEW-DOLOR: describe un problema que tenia el cliente
+   - REVIEW-SOLUCION: describe como el negocio lo resolvio
+   - REVIEW-DIFERENCIAL: menciona lo que hace unico al negocio
+   - REVIEW-TESTIMONIO: expresion emocional de satisfaccion
+   - REVIEW-OBJECION: queja o problema no resuelto (1-2 estrellas)
+   - REVIEW-CONVERSION: describe como supo del negocio / por que lo eligio
+
+PATRON DE CONTEO:
+  Si el mismo dolor/objecion/diferencial aparece 5+ veces en 30 reviews,
+  es un hallazgo SOLIDO. Si aparece 1-2 veces, es anecdota.
+  Solo los patrones van al reporte final.
+```
+
+**Regla operativa:** si Google Business tiene menos de 15 reviews, se complementa con reviews de Facebook, Yelp, TripAdvisor (segun giro), Doctoralia (medicos), Trustpilot, G2/Capterra (SaaS). El objetivo son 30+ unidades de evidencia textual.
+
+#### A.3 Comentarios de redes sociales
+
+```
+QUE REVISAR:
+
+Instagram / Facebook / TikTok del cliente:
+  - Ultimos 3-5 posts con mayor engagement
+  - Comentarios publicos (no DMs, no se tienen)
+  - Preguntas frecuentes en comentarios = objeciones
+  - Elogios repetidos = diferenciales validados socialmente
+  - Menciones de precio en comentarios = objecion de costo
+
+Que NO hacer:
+  - No inventar volumenes de engagement si no se ven las metricas
+  - No interpretar emojis como evidencia (ej: "🔥🔥🔥" no dice nada)
+  - No usar comentarios claramente spam / bots
+
+Tiempo maximo: 5 minutos. Si los posts no tienen comentarios
+reales, se descarta esta fuente y se anota "No encontrado".
+```
+
+---
+
+### 8.6 FASE B — Analisis de competidores
+
+#### B.1 Identificar 3-5 competidores
+
+Si el cliente no los proporciono, el agente los identifica con estas busquedas en Google:
+
+```
+BUSQUEDAS DE IDENTIFICACION DE COMPETENCIA:
+
+1. Busqueda comercial directa:
+   "mejor {giro} en {ciudad}"
+   "top {giro} {ciudad}"
+   "{giro} {ciudad} recomendado"
+
+2. Busqueda transaccional:
+   "{producto/servicio} {ciudad}"
+   "{producto/servicio} precio {ciudad}"
+   "comprar {producto} {ciudad}"
+
+3. Busqueda de marcas:
+   "alternativa a {cliente}"
+   "vs {cliente}"
+
+4. Google Maps / Google Business:
+   Ver los 5-10 negocios del mismo giro mas cercanos
+   geograficamente al cliente, con mayor numero de reviews
+
+CRITERIO DE SELECCION (3-5 competidores):
+  - Mismo producto/servicio core (no marcas paralelas)
+  - Misma region geografica si es servicio local
+  - Rango de precios similar (no comparar un Rolex con un Casio)
+  - Que tengan presencia digital real (web + reviews + redes)
+
+COMPETIDORES A DESCARTAR:
+  - Marketplaces genericos (Amazon, MercadoLibre) salvo que
+    sean el canal principal del cliente
+  - Competidores muertos (web caida, sin reviews recientes)
+  - Competidores 10x mas grandes (no son competencia realista)
+```
+
+#### B.2 WebFetch de sitios web de competidores
+
+Mismo checklist que A.1 pero mas rapido — se busca especificamente:
+
+```
+FOCO EN WEBS DE COMPETIDORES:
+
+[ ] Propuesta de valor y como la expresan diferente al cliente
+[ ] Precios publicados (si los tienen y el cliente no)
+[ ] Diferenciales que declaran (para mapear saturacion)
+[ ] Garantias y promesas
+[ ] CTAs y flujo de conversion
+[ ] Testimonios destacados
+
+PREGUNTA CLAVE:
+  "Que dice este competidor que el cliente NO dice, y viceversa?"
+  Esa brecha es material para la Maleta 4 (diferenciales).
+```
+
+#### B.3 Reviews de Google de competidores
+
+Mismo protocolo que A.2, pero con menor volumen por competidor:
+
+```
+POR COMPETIDOR: 15-30 reviews (vs 30-50 del cliente)
+
+PRIORIDADES:
+  - Reviews de 1-2 estrellas (de ahi salen sus debilidades)
+  - Reviews que mencionan precio
+  - Reviews que comparan: "mejor que {otro competidor}"
+  - Reviews con emocion fuerte (muy positivas o muy negativas)
+
+SINTESIS POR COMPETIDOR:
+  - 3 elogios mas repetidos (sus fortalezas)
+  - 3 quejas mas repetidas (sus debilidades)
+  - Rating promedio y volumen total
+```
+
+#### B.4 Facebook Ads Library — anuncios activos
+
+```
+PROTOCOLO FACEBOOK ADS LIBRARY:
+
+URL: https://www.facebook.com/ads/library/
+
+1. Pais correcto (el del cliente)
+2. Categoria: "Todos los anuncios"
+3. Buscar por nombre de pagina de cada competidor
+4. Filtrar: "Anuncios activos"
+
+QUE EXTRAER POR COMPETIDOR:
+  - Cantidad total de anuncios activos
+  - Tipos de creativo dominantes (imagen, video, carrusel)
+  - 3-5 headlines/copys mas repetidos (textual)
+  - Oferta principal que estan promoviendo ahora
+  - CTA del boton (Reservar, Comprar, Mas info, WhatsApp)
+  - Landing page o destino del anuncio
+
+SENALES QUE INTERPRETAR:
+  - 30+ anuncios activos = inversion fuerte ($5K-15K/mes)
+  - 5-15 anuncios = inversion media ($1K-5K/mes)
+  - 1-3 anuncios = inversion ligera o testing
+  - 0 anuncios = no estan en meta ads (oportunidad)
+
+CROSS-REFERENCE OBLIGATORIO:
+  Esto puede duplicarse con el reporte del agente-spy-ads (#6).
+  Si ya existe ese reporte, NO se repite — se cita y se enlaza.
+```
+
+---
+
+### 8.7 FASE C — Investigacion de mercado general
+
+Esta fase saca al agente del ambito directo del cliente y sus competidores y lo pone en el **mercado amplio**. Aqui es donde salen los dolores, objeciones y lenguaje genericos del nicho que nadie en la competencia inmediata esta capturando.
+
+#### C.1 Truco ESPACIO — descubrir frases reales que la gente escribe
+
+```
+QUE ES EL TRUCO ESPACIO:
+
+En Google, al escribir tu query seguido de un ESPACIO, el autocompletado
+revela las frases MAS BUSCADAS que empiezan con esa query. Son literalmente
+las palabras que la gente escribe en Google — oro puro para entender
+el lenguaje real del publico.
+
+EJEMPLO:
+  Escribes en Google: "invisalign comprar "   (nota el espacio al final)
+  Google sugiere:
+    - invisalign comprar en mexico
+    - invisalign comprar precio
+    - invisalign comprar online
+    - invisalign comprar con descuento
+    - invisalign comprar aligners sin dentista
+
+CADA SUGERENCIA ES UN INSIGHT:
+  - "en mexico" = busqueda geolocalizada fuerte
+  - "precio" = la objecion principal es costo
+  - "online" = hay demanda de compra remota (objecion de distancia)
+  - "con descuento" = sensibilidad a precio confirmada
+  - "sin dentista" = objecion de no querer ir a consultorio
+
+COMO EJECUTARLO EN MODO AGENTE:
+  Aunque el agente no puede "ver" el autocompletado visual de Google,
+  puede hacer WebSearch con queries parciales y observar los resultados
+  sugeridos en las paginas de resultados (related searches al final
+  de la SERP, preguntas "People Also Ask", etc.).
+
+  Alternativa: usar herramientas como AnswerThePublic.com,
+  AlsoAsked.com o simplemente observar "Busquedas relacionadas"
+  en Google.
+
+QUERIES RECOMENDADAS:
+  "{producto/servicio} "
+  "{producto/servicio} comprar "
+  "{producto/servicio} precio "
+  "{producto/servicio} {ciudad} "
+  "{marca del cliente} "
+  "{marca del competidor} "
+```
+
+#### C.2 Truco ASTERISCO — descubrir el prefijo oculto
+
+```
+QUE ES EL TRUCO ASTERISCO:
+
+En Google, el asterisco (*) funciona como comodin. Al poner * al
+inicio de una frase, Google rellena con las palabras mas comunes
+que la gente usa ANTES de esa frase.
+
+EJEMPLO:
+  Escribes: "* invisalign comprar"
+  Google / autocompletado revelan:
+    - como invisalign comprar
+    - donde invisalign comprar
+    - cuanto cuesta invisalign comprar
+    - mejor invisalign comprar
+
+POR QUE ES PODEROSO:
+  El truco ESPACIO da el SUFIJO de la intencion.
+  El truco ASTERISCO da el PREFIJO de la intencion.
+  Juntos dan la frase COMPLETA que piensa el usuario.
+
+COMO USARLO EN EL REPORTE:
+  Maleta 2 (problema): "como quitar {dolor}" revela lenguaje de dolor
+  Maleta 6 (objeciones): "cuanto cuesta {producto}" confirma precio
+  Maleta 7 (conversion): "donde comprar {producto}" revela canal
+
+QUERIES RECOMENDADAS:
+  "* {producto/servicio}"
+  "* {producto/servicio} comprar"
+  "* {producto/servicio} vale la pena"
+  "* {producto/servicio} funciona"
+```
+
+#### C.3 Guias de compra y articulos del nicho
+
+```
+QUE BUSCAR:
+
+1. "Como elegir {producto/servicio}" — articulos educativos
+2. "Guia de compra de {producto}" — blogs de medios o marcas
+3. "Que preguntar antes de comprar {producto}"
+4. Reddit / Quora / foros: "{producto} vale la pena?"
+5. YouTube: reviews del nicho, videos de "antes de comprar X"
+
+DE AQUI SALEN:
+  - Criterios de decision que usa el publico
+  - Dolores que la industria reconoce
+  - Objeciones comunes que los medios cubren
+  - Vocabulario tecnico vs vocabulario de usuario
+
+TIEMPO MAXIMO: 5 min. Con 2-3 articulos solidos alcanza.
+```
+
+#### C.4 Marketplaces (si aplica)
+
+```
+CUANDO APLICA:
+  - El cliente vende producto fisico que tambien esta en Amazon/ML
+  - Existe un producto sustituto en marketplace
+  - El publico compara precios con lo que hay en marketplaces
+
+QUE EXTRAER:
+  - Rango de precios real del mercado
+  - Reviews negativas (seccion oro para objeciones)
+  - Q&A (preguntas y respuestas) — literalmente objeciones
+    pre-compra expresadas por compradores reales
+  - Caracteristicas mas valoradas en reviews positivas
+
+CUANDO NO APLICA:
+  - Servicios locales puros (dentista, abogado, barberia)
+  - SaaS B2B sin equivalente en marketplace
+  - Infoproductos / coaching / cursos personalizados
+
+Si no aplica, se escribe "No aplica a este giro" y se omite.
+```
+
+---
+
+### 8.8 FASE D — Llenar la plantilla de las 7 Maletas
+
+Esta es la fase de sintesis. Toda la data recolectada en A, B y C se convierte en 7 maletas estructuradas. Cada maleta sigue el mismo formato riguroso.
+
+#### 8.8.1 Principio transversal: evidencia textual > parafraseo
+
+```
+REGLA DE ESCRITURA DE CADA MALETA:
+
+CADA hallazgo debe tener:
+  1. La afirmacion sintetizada
+  2. Una cita TEXTUAL que la respalda
+  3. La fuente (Google Business review, FAQ del cliente,
+     comentario de Instagram, truco espacio, etc.)
+  4. La frecuencia (apareci en X de Y fuentes revisadas)
+
+FORMATO MODELO:
+  Hallazgo: "El publico del cliente es sensible a precio"
+  Cita: "No me alcanzaba para la tarifa normal pero encontre
+         este plan accesible" — review de Maria G., 5 estrellas,
+         hace 3 meses
+  Fuente: Google Business review #12 de 34 analizadas
+  Frecuencia: 9 de 34 reviews (26%) mencionan precio o acceso
+              economico como factor de decision
+
+POR QUE ASI:
+  Un director-creativo puede escribir anuncios usando LA CITA
+  TEXTUAL (maximo poder), no un parafraseo debil.
+  Un director-estrategia puede validar el hallazgo porque ve
+  la evidencia original.
+  Un revisor-qa puede auditar el reporte porque todo es rastreable.
+```
+
+#### 8.8.2 MALETA 1 — PUBLICO
+
+**Objetivo:** describir con evidencia real a quien le esta hablando el negocio.
+
+```
+ESTRUCTURA OBLIGATORIA DE LA MALETA 1:
+
+1. RANGO DE EDADES
+   - Inferido de reviews y comentarios (tono, referencias culturales,
+     apodos, emojis usados)
+   - Ejemplo valido: "25-40 anios — predominan referencias a
+     embarazo, maternidad reciente, busqueda de 'algo rapido
+     porque trabajo'"
+   - Si no hay evidencia clara: "No encontrado — se sugiere
+     encuesta directa al cliente"
+
+2. GENERO DOMINANTE
+   - Inferido de nombres de reviewers (X hombres, Y mujeres, Z neutros)
+   - Confirmado con tono y temas mencionados
+   - Porcentaje aproximado: "70% femenino / 30% masculino"
+
+3. UBICACION GEOGRAFICA
+   - Barrios / colonias / ciudades mencionadas en reviews
+   - Distancia que estan dispuestos a recorrer
+   - Ejemplo: "Mayoria de Guadalajara (80%), Zapopan (15%),
+     Tlaquepaque (5%). Distancia maxima mencionada: 40 min en auto."
+
+4. SITUACION SENTIMENTAL / FAMILIAR
+   - Menciones de pareja, hijos, familia, soltero
+   - Ejemplo: "47% mencionan hijos o familia, 22% pareja,
+     el resto no menciona — sugiere publico con carga familiar alta"
+
+5. PODER ADQUISITIVO
+   - Rango de precios mencionados
+   - Uso de terminos "economico", "accesible", "premium",
+     "vale la pena", "caro pero"
+   - Ejemplo: "Rango de ticket declarado $800-3,500 MXN.
+     Termino 'accesible' aparece 11 veces, 'caro' aparece 4 veces
+     pero siempre seguido de 'pero vale la pena'"
+
+6. PERFIL DERIVADO (1 parrafo sintesis)
+   - Un parrafo que describe al avatar con voz humana
+   - Ejemplo: "Mujer de 28-40 anios, vive en zona metropolitana
+     de Guadalajara, con al menos un hijo, trabaja medio tiempo
+     o completo, sensible a precio pero dispuesta a pagar mas
+     si percibe valor, toma decisiones de compra en 3-7 dias,
+     consulta con pareja o hermana antes de decidir."
+```
+
+#### 8.8.3 MALETA 2 — PROBLEMA
+
+**Objetivo:** listar TODOS los dolores reales del publico con evidencia textual.
+
+```
+ESTRUCTURA OBLIGATORIA DE LA MALETA 2:
+
+1. LISTA EXHAUSTIVA DE DOLORES (minimo 5)
+   Cada uno con:
+     - Titulo del dolor
+     - Cita textual que lo documenta
+     - Fuente (review, FAQ, comentario, busqueda)
+     - Frecuencia de aparicion
+
+   Ejemplo:
+     Dolor 1: "Miedo a que el tratamiento duela"
+     Cita: "Tenia panico de que me doliera como la ultima vez
+            que fui al dentista hace 5 anios"
+     Fuente: Google Business review #8
+     Frecuencia: 14 de 34 reviews (41%)
+
+2. DISTINCION CRITICA: DOLOR vs OBJECION
+   Esta es la parte donde mas se equivocan los analistas.
+   
+   ✅ DOLOR (va en Maleta 2):
+     Es el problema QUE VIVE el cliente hoy.
+     "Me duele la espalda todos los dias"
+     "No cierro ventas por Instagram"
+     "Mi bebe no duerme"
+     Un dolor es algo que el producto RESUELVE.
+   
+   ❌ OBJECION (va en Maleta 6):
+     Es la razon QUE LO DETIENE de comprar la solucion.
+     "No confio en comprar online"
+     "No se si me va a funcionar a mi"
+     "Es muy caro"
+     Una objecion es algo que la venta tiene que SUPERAR.
+
+   Si confundes los dos, el director-creativo escribira
+   anuncios atacando la objecion cuando deberia atacar el dolor,
+   o viceversa. Separacion disciplinada es critica.
+
+3. LOS 3 PROBLEMAS PRINCIPALES (por frecuencia + impacto emocional)
+   - Rankear los dolores por:
+     * Frecuencia (cuantas veces aparece)
+     * Intensidad emocional (con cuanta fuerza lo expresan)
+   - Los top 3 son los que van a copy y ads prioritariamente
+
+4. EL PROBLEMA MAS IMPORTANTE (el "Jobs to be Done" central)
+   - Un solo problema — el que mas se repite en mas fuentes
+   - Expresado como "trabajo que el cliente contrata al producto"
+   - Ejemplo: "El publico contrata a Sonrisa Feliz para eliminar
+     la verguenza de sonreir despues de anios de dientes torcidos,
+     sin tener que pasar por un tratamiento doloroso o largo"
+```
+
+#### 8.8.4 MALETA 3 — SOLUCION
+
+**Objetivo:** describir como el producto/servicio resuelve el problema #1 y como lo comunica.
+
+```
+ESTRUCTURA OBLIGATORIA DE LA MALETA 3:
+
+1. LA SOLUCION SEGUN EL CLIENTE
+   - Que promete resolver (textual de su web)
+   - Como lo describe (lenguaje que usa)
+   - Cita del hero / propuesta de valor
+
+2. VALIDACION EN REVIEWS
+   - Que dicen los compradores sobre COMO se resolvio su problema
+   - Citas textuales (minimo 3)
+   - Ejemplo: "'No senti nada, me puse audifonos y cuando desperte
+     ya estaba listo' — review de Carlos R., 5 estrellas"
+
+3. COMO LA COMUNICAN LOS COMPETIDORES
+   - Resumen de las propuestas de valor de los 3-5 competidores
+   - Tabla simple: Competidor | Propuesta de valor | Enfasis
+
+4. BRECHA DE COMUNICACION
+   - Que estan diciendo TODOS (saturado — no diferencial)
+   - Que NO esta diciendo nadie (oportunidad)
+   - Ejemplo: "Todos dicen 'experiencia'. Nadie dice 'sin dolor'.
+     Nuestro cliente puede apropiarse del mensaje 'sin dolor'"
+
+5. OPORTUNIDAD DE MEJORA (si existe)
+   - Si la solucion del cliente tiene gaps vs la necesidad real
+   - Ejemplo: "Los clientes piden financiamiento en reviews,
+     pero el cliente no lo ofrece — sugerencia al director-estrategia"
+```
+
+#### 8.8.5 MALETA 4 — DIFERENCIALES
+
+**Objetivo:** identificar que hace unico al cliente vs competencia, con evidencia.
+
+```
+ESTRUCTURA OBLIGATORIA DE LA MALETA 4:
+
+1. LISTA DE DIFERENCIALES DECLARADOS
+   - Lo que el cliente dice que lo hace diferente (web + marketing)
+   - Cada uno con evidencia textual
+
+2. LISTA DE DIFERENCIALES VALIDADOS POR CLIENTES
+   - Lo que los clientes dicen en reviews que los hace destacar
+   - Formato: afirmacion + cita textual + frecuencia
+
+3. TABLA COMPARATIVA OBLIGATORIA
+
+   | Atributo          | Cliente | Comp 1 | Comp 2 | Comp 3 | Saturacion |
+   |-------------------|---------|--------|--------|--------|------------|
+   | Precio economico  | Si      | Si     | Si     | No     | ALTA       |
+   | Atencion rapida   | Si      | No     | Si     | No     | MEDIA      |
+   | Sin dolor         | Si      | No     | No     | No     | BAJA       |
+   | Financiamiento    | No      | Si     | No     | Si     | MEDIA      |
+   | Domicilio         | No      | No     | No     | No     | VACIA      |
+
+   INTERPRETACION DE SATURACION:
+     ALTA   = todos lo dicen, no es diferencial real
+     MEDIA  = algunos lo dicen, es util como apoyo
+     BAJA   = pocos o nadie lo dice, aqui esta el oro
+     VACIA  = nadie lo dice — oportunidad de ser el primero
+
+4. EL DIFERENCIAL MENOS SATURADO (oportunidad #1)
+   - El atributo con saturacion BAJA o VACIA donde el cliente es fuerte
+   - Recomendacion: apropiarse de ese mensaje en toda la comunicacion
+   - Ejemplo: "Nadie en la competencia habla de 'sin dolor'
+     y el cliente tiene 14 reviews validandolo. Recomendamos
+     construir toda la propuesta de valor alrededor de 'El unico
+     tratamiento sin dolor en Guadalajara'"
+
+5. DIFERENCIAL QUE EL CLIENTE NO SABE QUE TIENE
+   - Cuando los reviews mencionan algo que la web NO destaca
+   - Es un insight particularmente valioso para creativo
+```
+
+#### 8.8.6 MALETA 5 — TESTIMONIOS
+
+**Objetivo:** curar los 5 mejores testimonios + recomendar estrategia de recoleccion.
+
+```
+ESTRUCTURA OBLIGATORIA DE LA MALETA 5:
+
+1. TOP 5 TESTIMONIOS TEXTUALES
+   Cada uno con:
+     - Cita completa (sin cortes que distorsionen)
+     - Nombre del cliente (primer nombre + inicial apellido)
+     - Fuente (Google, Facebook, web embebida, etc.)
+     - Fecha aproximada
+     - Por que se eligio (especifico: "valida diferencial sin dolor"
+       o "menciona resultado cuantificable")
+   
+   CRITERIO DE SELECCION:
+     - Especifico (no generico "muy bueno")
+     - Emocional (habla del impacto en la vida)
+     - Resultados cuantificables cuando sea posible
+     - Diverso (diferentes avatares de publico)
+
+2. PATRONES EN TESTIMONIOS (analisis cuantitativo)
+   - Que porcentaje menciona RESULTADOS
+   - Que porcentaje menciona EL EQUIPO / TRATO
+   - Que porcentaje menciona PRECIO / VALOR
+   - Que porcentaje menciona TIEMPO / RAPIDEZ
+   - Que porcentaje menciona RESOLUCION DE DOLOR ESPECIFICO
+   
+   Ejemplo: "De 34 reviews, 62% menciona el trato del personal,
+   44% menciona resultados cuantificables, 26% menciona precio
+   y 38% menciona ausencia de dolor."
+
+3. ESTRATEGIA DE RECOLECCION SEGUN TIPO DE NEGOCIO
+   
+   Ecommerce:
+     Email automatizado 5-7 dias post-compra
+     Pedir foto del producto en uso + 2 lineas
+     Incentivo: descuento en proxima compra
+   
+   Servicio presencial (dentista, barberia, spa):
+     Solicitud en el momento + link WhatsApp con QR
+     Video corto del cliente satisfecho (con permiso)
+     Pedir review directa en Google Business
+   
+   Curso / infoproducto:
+     Email a mitad del curso: "que te esta funcionando?"
+     Email al terminar: "que cambio en tu vida?"
+     Testimonio en video grabado por el alumno
+   
+   SaaS B2B:
+     Review en G2 / Capterra al cumplir 90 dias de uso
+     Case study con resultados cuantificables
+     Quote para landing con logo + cargo + empresa
+   
+   Servicio profesional (abogado, contador, consultor):
+     Review en Google Business al cerrar caso
+     LinkedIn recommendation del cliente
+     Video testimonial con permiso explicito
+
+4. TEMPLATE DE PEDIDO DE TESTIMONIO (customizable)
+   - Mensaje corto que el cliente puede usar
+   - Incluye link directo a la plataforma de review
+   - Pregunta abierta que invita a detalle especifico
+```
+
+#### 8.8.7 MALETA 6 — OBJECIONES
+
+**Objetivo:** listar minimo 10 objeciones reales que detienen la venta.
+
+```
+ESTRUCTURA OBLIGATORIA DE LA MALETA 6:
+
+1. LISTA DE OBJECIONES (minimo 10)
+   Fuentes para encontrarlas:
+     - Reviews negativas de 1-2 estrellas (cliente + competidores)
+     - Preguntas en comentarios de redes sociales
+     - Q&A de marketplaces (Amazon, MercadoLibre)
+     - FAQ de la web del cliente (si responde objeciones, las revela)
+     - Truco espacio/asterisco con "{producto} vale la pena"
+     - Truco espacio con "{producto} problemas"
+     - Foros (Reddit, Quora) del nicho
+   
+   Formato por objecion:
+     - Titulo de la objecion
+     - Fuente especifica
+     - Frecuencia (cuantas veces aparece)
+     - Cita textual
+     - Como la aborda actualmente el cliente (o "No la aborda")
+
+   Ejemplo:
+     Objecion 3: "Temor a que no funcione en mi caso especifico"
+     Fuente: 6 preguntas en comentarios de Instagram + 2 reviews
+     Frecuencia: 8 de 34 reviews y comentarios (24%)
+     Cita: "Tengo los dientes muy torcidos, dudo que este
+            tratamiento me sirva a mi"
+     Aborda actualmente: NO la aborda en web ni en ads
+
+2. LAS 3 OBJECIONES MAS CRITICAS
+   - Las que mas se repiten Y mas impacto tienen en conversion
+   - Para cada una:
+     * Como rebatirla en un anuncio (copy sugerido)
+     * Como rebatirla en la web (seccion / FAQ sugerida)
+     * Como rebatirla en el proceso de venta (script)
+
+   Ejemplo de rebatimiento de objecion de precio:
+     En anuncio: "Desde $580/mes — mas barato que tu cafe diario"
+     En web: Calculadora de costo/mes vs tratamiento tradicional
+     En venta: Ofrecer 3 opciones (basico, medio, premium) para
+               que el cliente elija, no rechace por precio
+
+3. OBJECIONES OCULTAS (no dichas pero inferidas)
+   - A veces la objecion NO se dice, se revela por omision
+   - Ejemplo: si nadie pregunta por financiamiento, quiza no saben
+     que existe — es una objecion oculta de poder adquisitivo
+
+4. RANKING DE OBJECIONES POR PRIORIDAD
+   - Criterio: Frecuencia x Impacto en decision x Facilidad de rebatir
+   - Las de alta frecuencia + alto impacto + facil rebatir: ataque #1
+   - Las de baja frecuencia o dificil rebatir: menor prioridad
+```
+
+#### 8.8.8 MALETA 7 — CONVERSION
+
+**Objetivo:** mapear el camino real del cliente desde que descubre hasta que compra.
+
+```
+ESTRUCTURA OBLIGATORIA DE LA MALETA 7:
+
+1. CANALES DE DESCUBRIMIENTO
+   Como llegan los clientes hoy (evidencia en reviews y datos):
+     - Google (SEO organico)
+     - Google Ads
+     - Redes sociales (organico)
+     - Meta Ads / TikTok Ads
+     - Referidos / boca en boca
+     - Google Maps / Business
+     - Walk-in / transeuntes (si es local)
+   
+   Por cada canal: porcentaje aproximado + evidencia
+   Ejemplo: "'Los vi por Instagram' aparece 12 veces en reviews
+   (35%) — el canal social es el principal de descubrimiento"
+
+2. LUGAR DONDE OCURRE LA VENTA
+   - Web con checkout directo
+   - WhatsApp (consulta antes de cerrar)
+   - Llamada telefonica
+   - Tienda / oficina fisica
+   - Videollamada / Zoom
+   
+   Consecuencia para estrategia:
+     Si la venta es por WhatsApp, la optimizacion prioritaria es
+     el script de WhatsApp, no la web. Si es en tienda fisica,
+     lo critico es el ambiente del local y la capacitacion del staff.
+
+3. TIEMPO DE DECISION DE COMPRA
+   - Impulso (< 1 hora)
+   - Corto (1-3 dias)
+   - Medio (1-2 semanas)
+   - Largo (1-3 meses)
+   - Muy largo (3+ meses, ej: cirugia, inmuebles)
+   
+   Evidencia de reviews: "Lo estuve pensando 2 meses antes de ir"
+   Consecuencia: si la decision es larga, necesitamos remarketing
+   y secuencia de email, no un solo anuncio.
+
+4. DISPARADORES DE DECISION
+   Que hace que el cliente FINALMENTE compre:
+     - "Lo compre porque..."
+     - "Lo que me convencio fue..."
+     - "Decidi cuando..."
+   
+   Disparadores comunes: descuento, urgencia, testimonio especifico,
+   recomendacion de alguien cercano, evento de vida (boda, viaje),
+   demostracion gratis, garantia de devolucion.
+
+5. SENALES DE CONFIANZA QUE PESAN
+   - Reviews y rating (cuantas estrellas, cuantos reviews)
+   - Garantia visible
+   - Tiempo en mercado declarado
+   - Equipo visible (fotos, credenciales)
+   - Medios / premios
+   - Sellos de certificacion
+   - Recomendacion personal
+   
+   Ranking por fuerza segun evidencia en reviews y comentarios.
+
+6. PUNTOS DE FUGA (donde se pierde mas trafico)
+   - Formulario muy largo
+   - Precio no publicado
+   - Falta de horario visible
+   - No hay WhatsApp
+   - No responden rapido
+   - Web no carga en movil
+   - No hay opcion de financiamiento
+   
+   Cada uno con evidencia (si aplica) y recomendacion de fix.
+
+7. MAPA DE JOURNEY RESUMIDO (1 parrafo narrativo)
+   "La clienta Maria ve un anuncio de Instagram de nuestro cliente,
+   entra al perfil, ve reviews, se va a Google Maps, compara con
+   2 competidores, regresa porque nuestro cliente tiene 4.8 con
+   180 reviews vs 4.3 con 60, le escribe al WhatsApp, pregunta
+   precio y horarios, agenda cita 3-7 dias despues, llega al local,
+   cierra la venta en la primera consulta si siente que no le va
+   a doler. Tiempo total del journey: 7-14 dias."
+```
+
+---
+
+### 8.9 FASE E — Generacion del reporte HTML estilo Apple
+
+El entregable final de las 7 Maletas es un archivo HTML autocontenido con diseno minimalista tipo Apple. No es un PDF, no es un Doc — es un HTML que se puede abrir en navegador, imprimir a PDF si se quiere, y compartir por link.
+
+#### 8.9.1 Nombre del archivo
+
+```
+CONVENCION OBLIGATORIA:
+
+Nombre: 7-maletas-[slug-empresa]-[YYYY-MM-DD].html
+
+Reglas del slug:
+  - Todo en minusculas
+  - Espacios reemplazados por guion
+  - Sin acentos (ej: "clinica" no "clínica")
+  - Sin caracteres especiales
+  - Maximo 30 caracteres en el slug
+
+Ejemplos:
+  7-maletas-sonrisa-feliz-2026-04-14.html
+  7-maletas-don-jacinto-nahual-2026-04-14.html
+  7-maletas-bebe-genial-2026-04-14.html
+
+Ubicacion: guardar en Google Drive del cliente
+  /addendo-clientes/[cliente]/inteligencia/7-maletas/
+```
+
+#### 8.9.2 Sistema de diseno (estilo Apple / minimalista)
+
+```
+PALETA DE COLORES OBLIGATORIA:
+
+Fondo principal:      #ffffff  (blanco puro)
+Fondo secundario:     #f5f5f7  (gris muy claro, estilo Apple)
+Texto primario:       #1d1d1f  (negro grafito, estilo Apple)
+Texto secundario:     #6e6e73  (gris medio)
+Acento / enlaces:     #0071e3  (azul Apple)
+Linea separadora:     #d2d2d7  (gris claro)
+Verde (positivo):     #34c759
+Rojo (negativo):      #ff3b30
+Amarillo (aviso):     #ff9500
+
+NO USAR:
+  ❌ Gradientes
+  ❌ Sombras dramaticas
+  ❌ Animaciones
+  ❌ Fondos oscuros (dark mode) por default
+  ❌ Iconos decorativos exagerados
+  ❌ Emojis en titulos de seccion
+```
+
+```
+TIPOGRAFIA OBLIGATORIA:
+
+Font stack: -apple-system, BlinkMacSystemFont, "Inter",
+            "SF Pro Display", "Segoe UI", Roboto, sans-serif
+
+Pesos usados:
+  - 300 (ligero) para subtitulos grandes
+  - 400 (regular) para cuerpo
+  - 500 (medio) para destacados
+  - 600 (semibold) para H2, H3
+  - 700 (bold) para H1
+
+Escala tipografica:
+  H1:      48px / line-height 1.1 / peso 700
+  H2:      32px / line-height 1.2 / peso 600
+  H3:      22px / line-height 1.3 / peso 600
+  Cuerpo:  17px / line-height 1.6 / peso 400
+  Caption: 14px / line-height 1.5 / peso 400 / color secundario
+
+Espaciado:
+  - Mucho espacio en blanco
+  - Max-width del contenido: 960px centrado
+  - Padding lateral en movil: 24px
+  - Margen inferior de secciones: 80px
+  - Margen entre parrafos: 24px
+```
+
+#### 8.9.3 Estructura del HTML
+
+```
+SECCIONES DEL REPORTE:
+
+1. HEADER (hero)
+   - Titulo: "Reporte 7 Maletas"
+   - Subtitulo: nombre de la empresa
+   - Fecha en formato largo (ej: "14 de abril de 2026")
+   - Una linea de eyebrow: "Investigacion de mercado — Addendo"
+
+2. EXECUTIVE SUMMARY
+   - 4 metricas en grid (cards estilo Apple)
+     * Reviews analizadas: [N]
+     * Competidores analizados: [N]
+     * Fuentes totales consultadas: [N]
+     * Objeciones detectadas: [N]
+   - Parrafo de 3-4 lineas con el hallazgo #1 del reporte
+
+3. LAS 7 SECCIONES (una por maleta)
+   Cada maleta con:
+     - Numero grande (01, 02, ... 07) en tipografia ligera
+     - Titulo de la maleta
+     - Subtitulo explicativo de 1 linea
+     - Contenido estructurado (listas, citas destacadas, tablas)
+   
+   Citas textuales destacadas con:
+     - Borde izquierdo azul (#0071e3) de 3px
+     - Padding izquierdo 24px
+     - Italica ligera
+     - Autoria y fuente en caption al final
+
+4. CROSS-REFERENCES (si existe reporte consolidado)
+   Mini-seccion con links a:
+     - Reporte consolidado de inteligencia competitiva (si existe)
+     - Reporte del agente-scraping
+     - Reporte del agente-spy-ads
+     - Reporte del agente-redes-organicas
+
+5. FOOTER
+   - Creditos metodologia:
+     "Metodologia: Las 7 Maletas de Cualquier Compra — Felipe Vergara
+      YouTube: https://www.youtube.com/@FelipeVergara"
+   - Credito Addendo:
+     "Investigacion ejecutada por el agente-investigacion #8
+      del sistema operativo de Addendo Growth Partner"
+   - Fecha y version del reporte
+```
+
+#### 8.9.4 Template HTML base
+
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>7 Maletas — [EMPRESA] — [FECHA]</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Inter",
+                 "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+    color: #1d1d1f;
+    background: #ffffff;
+    line-height: 1.6;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 80px 24px;
+  }
+  .eyebrow {
+    font-size: 14px;
+    color: #6e6e73;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+  }
+  h2 {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-top: 80px;
+    margin-bottom: 24px;
+    letter-spacing: -0.01em;
+  }
+  h3 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-top: 40px;
+    margin-bottom: 16px;
+  }
+  p { margin-bottom: 24px; }
+  .maleta-number {
+    font-size: 96px;
+    font-weight: 300;
+    color: #d2d2d7;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .metric-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin: 40px 0;
+  }
+  .metric-card {
+    background: #f5f5f7;
+    border-radius: 18px;
+    padding: 32px 24px;
+    text-align: center;
+  }
+  .metric-value {
+    font-size: 40px;
+    font-weight: 700;
+    color: #1d1d1f;
+    display: block;
+    margin-bottom: 8px;
+  }
+  .metric-label {
+    font-size: 14px;
+    color: #6e6e73;
+  }
+  blockquote {
+    border-left: 3px solid #0071e3;
+    padding: 8px 0 8px 24px;
+    margin: 24px 0;
+    font-style: italic;
+    color: #1d1d1f;
+  }
+  blockquote cite {
+    display: block;
+    font-style: normal;
+    font-size: 14px;
+    color: #6e6e73;
+    margin-top: 8px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 32px 0;
+  }
+  th, td {
+    text-align: left;
+    padding: 16px;
+    border-bottom: 1px solid #d2d2d7;
+  }
+  th {
+    font-weight: 600;
+    background: #f5f5f7;
+  }
+  .divider {
+    border: 0;
+    border-top: 1px solid #d2d2d7;
+    margin: 80px 0;
+  }
+  footer {
+    margin-top: 120px;
+    padding-top: 40px;
+    border-top: 1px solid #d2d2d7;
+    color: #6e6e73;
+    font-size: 14px;
+  }
+  footer a { color: #0071e3; text-decoration: none; }
+  @media (max-width: 720px) {
+    h1 { font-size: 36px; }
+    h2 { font-size: 26px; }
+    .metric-grid { grid-template-columns: repeat(2, 1fr); }
+    .maleta-number { font-size: 64px; }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="eyebrow">Investigacion de mercado — Addendo</div>
+    <h1>Reporte 7 Maletas</h1>
+    <p style="font-size: 22px; color: #6e6e73;">
+      [NOMBRE DE LA EMPRESA]<br>
+      [FECHA EN FORMATO LARGO]
+    </p>
+
+    <h2>Resumen ejecutivo</h2>
+    <div class="metric-grid">
+      <div class="metric-card">
+        <span class="metric-value">[N]</span>
+        <span class="metric-label">Reviews analizadas</span>
+      </div>
+      <div class="metric-card">
+        <span class="metric-value">[N]</span>
+        <span class="metric-label">Competidores</span>
+      </div>
+      <div class="metric-card">
+        <span class="metric-value">[N]</span>
+        <span class="metric-label">Fuentes consultadas</span>
+      </div>
+      <div class="metric-card">
+        <span class="metric-value">[N]</span>
+        <span class="metric-label">Objeciones detectadas</span>
+      </div>
+    </div>
+    <p>[Hallazgo principal del reporte en 3-4 lineas]</p>
+
+    <hr class="divider">
+
+    <!-- MALETA 1 -->
+    <div class="maleta-number">01</div>
+    <h2>Publico</h2>
+    <p style="color: #6e6e73;">Quien es realmente el cliente</p>
+    <!-- Contenido de Maleta 1 -->
+
+    <!-- Repetir estructura para Maletas 2-7 -->
+
+    <footer>
+      <p>
+        Metodologia: Las 7 Maletas de Cualquier Compra —
+        Felipe Vergara.<br>
+        <a href="https://www.youtube.com/@FelipeVergara">
+          https://www.youtube.com/@FelipeVergara
+        </a>
+      </p>
+      <p style="margin-top: 16px;">
+        Investigacion ejecutada por el agente-investigacion #8
+        del sistema operativo de Addendo Growth Partner —
+        [FECHA] — v1.0
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
+```
+
+**Regla operativa:** el template es el punto de partida, no el destino. El agente ajusta textos, numeros y estructura pero NO modifica la paleta ni la tipografia. La consistencia visual entre reportes de distintos clientes es parte del producto.
+
+---
+
+### 8.10 Principios no negociables del modo 7 Maletas
+
+Estos 6 principios aplican de manera estricta al ejecutar la metodologia. El revisor-qa (#39) audita contra esta lista.
+
+```
+PRINCIPIO 1 — NO INVENTAR DATOS. NUNCA.
+  Si no hay evidencia, la seccion dice "No encontrado".
+  Un reporte con huecos honestos vale infinitamente mas que
+  uno completo con datos fabricados.
+
+PRINCIPIO 2 — CITAS TEXTUALES > PARAFRASEO.
+  Siempre que se pueda, usar la frase literal del cliente real.
+  El poder emocional de una cita textual es irremplazable.
+
+PRINCIPIO 3 — PATRONES > CASOS UNICOS.
+  Un hallazgo necesita aparecer 5+ veces en 30 fuentes para
+  ser reportado como patron. Casos aislados se mencionan
+  pero no se usan como base de recomendacion.
+
+PRINCIPIO 4 — EVIDENCIA > OPINION.
+  El agente no opina sobre el publico. Reporta lo que el
+  publico dice de si mismo a traves de reviews, comentarios
+  y busquedas. La opinion va en las recomendaciones, no en
+  el diagnostico.
+
+PRINCIPIO 5 — ACCIONABLE > TEORICO.
+  Cada maleta termina con al menos una recomendacion concreta
+  que el director-creativo o el director-estrategia pueda
+  ejecutar. Sin accionable, la maleta queda incompleta.
+
+PRINCIPIO 6 — CONTEXTO LOCAL SIEMPRE.
+  Un publico de Guadalajara no es el de Monterrey ni el de
+  Ciudad de Mexico. Si el negocio es local, el analisis es
+  local. No generalizar entre ciudades sin evidencia.
+```
+
+---
+
+### 8.11 Integracion con el resto del ecosistema Addendo
+
+```
+QUIEN USA EL REPORTE 7 MALETAS:
+
+#15 director-creativo:
+  Toma Maleta 2 (dolores) + Maleta 6 (objeciones) para briefs.
+  Toma Maleta 5 (testimonios) para creativos sociales.
+  Toma Maleta 4 (diferenciales) para copy de anuncios.
+
+#16 copywriting-seo:
+  Toma el lenguaje literal del publico (trucos espacio/asterisco)
+  para palabras clave reales.
+  Toma Maleta 3 (solucion) para paginas de servicio.
+
+#9 director-estrategia:
+  Integra las 7 Maletas con el reporte consolidado (Fases 1-7).
+  Decide la propuesta de valor maestra del cliente.
+  Prioriza canales segun Maleta 7 (conversion).
+
+#11, #12, #13, #48 (Meta, Google, TikTok, YouTube Ads):
+  Usan Maleta 1 (publico) para segmentacion.
+  Usan Maleta 2 (dolores) y Maleta 6 (objeciones) para copy.
+  Usan Maleta 7 (conversion) para decidir objetivos de campania.
+
+#33 agente-cro:
+  Toma Maleta 6 (objeciones) para optimizar la web.
+  Toma Maleta 7 (conversion) para reducir puntos de fuga.
+
+#34 agente-reputacion:
+  Toma Maleta 5 (testimonios) y el plan de recoleccion.
+  Ejecuta la estrategia de testimonios segun tipo de negocio.
+
+#30 ventas-atencion:
+  Toma Maleta 6 (objeciones) y los scripts de rebate.
+  Usa Maleta 7 (conversion) para afinar el flujo de WhatsApp.
+```
+
+**Regla operativa:** al entregar el reporte 7 Maletas, el agente-investigacion deja claro en el mensaje de entrega QUE secciones son relevantes para QUE agentes. Esto acelera la adopcion y evita que cada agente tenga que leer las 7 maletas completas.
+
+---
+
+### 8.12 Checklist de verificacion antes de entregar
+
+Antes de subir el HTML a Drive y avisar al solicitante, el agente-investigacion corre este checklist punto por punto. Si alguno falla, NO entrega — corrige primero.
+
+```
+CHECKLIST DE ENTREGA DEL REPORTE 7 MALETAS:
+
+FUENTES Y EVIDENCIA:
+  [ ] 30+ reviews del cliente analizadas (o se documento el gap)
+  [ ] 3-5 competidores identificados y analizados
+  [ ] 15-30 reviews por competidor analizadas
+  [ ] Facebook Ads Library revisada para cada competidor
+  [ ] Trucos espacio y asterisco ejecutados para keywords clave
+  [ ] Marketplaces revisados (si aplica al giro)
+
+MALETA 1 — PUBLICO:
+  [ ] Rango de edades con evidencia
+  [ ] Genero dominante con porcentaje
+  [ ] Ubicacion geografica con barrios/ciudades
+  [ ] Situacion familiar con evidencia
+  [ ] Poder adquisitivo con rango de precio
+  [ ] Parrafo de avatar en voz humana
+
+MALETA 2 — PROBLEMA:
+  [ ] Minimo 5 dolores con cita textual y fuente
+  [ ] Distincion clara dolor vs objecion aplicada
+  [ ] Top 3 problemas priorizados
+  [ ] El problema mas importante identificado
+
+MALETA 3 — SOLUCION:
+  [ ] Como la describe el cliente (textual)
+  [ ] Validacion en reviews (minimo 3 citas)
+  [ ] Como la comunican los competidores (tabla)
+  [ ] Brecha de comunicacion identificada
+  [ ] Oportunidad de mejora (si existe)
+
+MALETA 4 — DIFERENCIALES:
+  [ ] Lista de diferenciales declarados
+  [ ] Lista de diferenciales validados por clientes
+  [ ] Tabla comparativa cliente vs 3+ competidores
+  [ ] Saturacion marcada por atributo
+  [ ] Diferencial menos saturado identificado
+
+MALETA 5 — TESTIMONIOS:
+  [ ] Top 5 testimonios con nombre y fuente
+  [ ] Patrones cuantitativos calculados
+  [ ] Estrategia de recoleccion segun tipo de negocio
+  [ ] Template de pedido de testimonio
+
+MALETA 6 — OBJECIONES:
+  [ ] Minimo 10 objeciones listadas
+  [ ] Cada una con fuente, frecuencia y cita
+  [ ] 3 objeciones criticas con rebate en ads/web/venta
+  [ ] Objeciones ocultas identificadas si existen
+
+MALETA 7 — CONVERSION:
+  [ ] Canales de descubrimiento con porcentajes
+  [ ] Lugar de venta identificado
+  [ ] Tiempo de decision estimado
+  [ ] Disparadores de decision listados
+  [ ] Senales de confianza rankeadas
+  [ ] Puntos de fuga identificados
+  [ ] Journey resumido en parrafo narrativo
+
+REPORTE HTML:
+  [ ] Nombre del archivo con convencion 7-maletas-[slug]-[fecha].html
+  [ ] Paleta de colores Apple respetada (no gradientes)
+  [ ] Tipografia -apple-system / Inter aplicada
+  [ ] Tamano de hero, H2 y H3 respetan la escala
+  [ ] Executive summary con 4 metricas
+  [ ] Las 7 secciones presentes y numeradas
+  [ ] Citas textuales con formato blockquote
+  [ ] Tabla comparativa con estilo limpio
+  [ ] Footer con creditos Felipe Vergara + Addendo
+  [ ] Responsive verificado en 720px
+
+CALIDAD TRANSVERSAL:
+  [ ] Cero datos inventados — todo con fuente
+  [ ] Cero "probablemente", "quiza", "tal vez" sin evidencia
+  [ ] Todas las citas textuales estan entre comillas
+  [ ] Fuentes estan identificadas con platform + fecha
+  [ ] Recomendaciones accionables en cada maleta
+  [ ] Mensaje de entrega indica que secciones sirven a que agentes
+```
+
+---
+
+### 8.13 Anti-patrones especificos del modo 7 Maletas
+
+```
+❌ ANTI-PATRON 1: Confundir dolor con objecion
+   Sintoma: la Maleta 2 tiene frases como "no confian"
+   Correccion: mover a Maleta 6
+
+❌ ANTI-PATRON 2: Generalizar con 3 reviews
+   Sintoma: "Al publico le importa el precio" basado en 2 citas
+   Correccion: minimo 5 apariciones en 30 fuentes
+
+❌ ANTI-PATRON 3: Inventar demografia
+   Sintoma: "Publico femenino de 25-40 anios con hijos"
+   sin evidencia de nombres ni temas
+   Correccion: si no hay evidencia, escribir "No determinable
+   con la muestra actual"
+
+❌ ANTI-PATRON 4: Parafrasear citas textuales
+   Sintoma: "Los clientes dicen que el trato es muy bueno"
+   Correccion: "'La doctora te explica todo con paciencia, no
+   te apura como en otros lugares' — Maria L., review 5 estrellas"
+
+❌ ANTI-PATRON 5: Recomendaciones genericas
+   Sintoma: "Mejorar la propuesta de valor"
+   Correccion: "Cambiar el hero de 'Experiencia premium' a
+   'El unico tratamiento sin dolor en Guadalajara' — basado
+   en la saturacion del atributo 'premium' (3 de 4 competidores
+   lo dicen) vs el atributo 'sin dolor' (0 competidores lo dicen)"
+
+❌ ANTI-PATRON 6: Omitir la Maleta 7
+   Sintoma: el reporte es fuerte en 1-6 pero la conversion queda vaga
+   Correccion: la Maleta 7 es la que convierte el insight en
+   accion — sin ella el reporte es teorico
+
+❌ ANTI-PATRON 7: Reporte HTML con gradientes, emojis, animaciones
+   Sintoma: el archivo se ve "divertido" pero no "profesional"
+   Correccion: respetar estrictamente el sistema de diseno Apple
+
+❌ ANTI-PATRON 8: No citar a Felipe Vergara
+   Sintoma: footer sin el credito a la metodologia
+   Correccion: obligatorio incluir el credito — es parte del
+   contrato etico de usar un framework publico
+
+❌ ANTI-PATRON 9: Entregar sin checklist
+   Sintoma: faltan secciones o hay citas sin fuente
+   Correccion: correr 8.12 antes de notificar entrega
+
+❌ ANTI-PATRON 10: Duplicar trabajo de los espias
+   Sintoma: el agente analiza ads de competidores ignorando que
+   agente-spy-ads (#6) ya tiene el reporte
+   Correccion: antes de ejecutar B.4, verificar si ya existe
+   reporte del #6 y referenciarlo en vez de duplicar
+
+❌ ANTI-PATRON 11: No distinguir tipo de negocio
+   Sintoma: estrategia de testimonios identica para SaaS y
+   para dentista local
+   Correccion: usar el mapa de 8.8.6 punto 3 — cada tipo de
+   negocio tiene su propia ruta
+
+❌ ANTI-PATRON 12: Mezclar las 7 Maletas con las Fases 1-7
+   Sintoma: reporte hibrido confuso
+   Correccion: son dos entregables separados. Si se pidieron
+   ambos, se entregan como dos archivos distintos con una
+   nota de cross-reference entre ellos.
+```
+
+---
+
+### 8.14 Creditos obligatorios
+
+Cada reporte 7 Maletas cierra con esta seccion, sin excepciones:
+
+```
+Metodologia: Las 7 Maletas de Cualquier Compra — Felipe Vergara
+Canal: https://www.youtube.com/@FelipeVergara
+
+Adaptacion operativa e integracion al sistema de agentes:
+Addendo Growth Partner — agente-investigacion #8
+
+Este reporte es la aplicacion del framework de Felipe Vergara al
+contexto especifico del cliente, ejecutado como parte del sistema
+operativo de 48 agentes de Addendo. El merito metodologico es de
+Felipe Vergara; la ejecucion sistematizada es de Addendo.
+```
+
+**Regla de oro final del modo 7 Maletas:** reconocer la fuente no es opcional. Es parte de la integridad intelectual del sistema. Cualquier reporte que omita este credito es invalido y se devuelve al agente para correccion.
+
+---
+
 ## REGLAS MAESTRAS DEL SKILL
 
 1. **Los datos crudos son ruido. El insight es la señal.** El agente investigacion produce señal, no ruido.
@@ -1451,5 +2942,27 @@ Recibir reportes mediocres y nunca decirlo. Los reportes futuros seran igual de 
 23. **Tasa de uso de recomendaciones > 80% por el director-estrategia.** Si baja, revisar la calidad del reporte.
 
 24. **El agente investigacion es el conector entre el equipo de inteligencia y el equipo de estrategia.** Sin el, hay desconexion.
+
+25. **El agente opera en dos modos: CONSOLIDACION (Fases 1-7) y 7 MALETAS (Fase 8).** Nunca mezclarlos en un mismo entregable — son reportes separados con cross-reference mutua.
+
+26. **En modo 7 Maletas, NUNCA inventar datos.** Si no hay evidencia, la seccion dice "No encontrado". Un reporte con huecos honestos vale mas que uno completo con datos fabricados.
+
+27. **Citas textuales > parafraseo.** El poder emocional de la frase literal del cliente es irremplazable para creativo y copy.
+
+28. **Patrones > casos unicos.** Un hallazgo necesita 5+ apariciones en 30 fuentes para ser patron reportado. Menos es anecdota.
+
+29. **Distinguir DOLOR (Maleta 2) de OBJECION (Maleta 6) con disciplina.** Confundirlos rompe la utilidad del reporte para el director-creativo.
+
+30. **Diferencial menos saturado = mayor oportunidad.** La Maleta 4 siempre termina identificando el atributo donde la competencia no esta presente.
+
+31. **Estrategia de testimonios segun tipo de negocio.** Ecommerce, servicio presencial, curso y SaaS tienen rutas distintas — nunca aplicar la misma receta.
+
+32. **Reporte HTML 7 Maletas con diseno Apple estricto.** Paleta, tipografia y espaciado no negociables. Sin gradientes, sin animaciones, sin emojis decorativos.
+
+33. **Creditos a Felipe Vergara obligatorios en cada reporte 7 Maletas.** La integridad intelectual es parte del producto.
+
+34. **Antes de ejecutar Fase B.4 (Facebook Ads Library) verificar si agente-spy-ads #6 ya tiene el reporte** — si existe, se referencia en vez de duplicar.
+
+35. **Checklist de verificacion (8.12) es obligatorio antes de entregar cualquier reporte 7 Maletas.** Si algun punto falla, no se entrega hasta corregir.
 
 25. **El agente investigacion mide su exito por la CALIDAD del plan estrategico que el director-estrategia produce con su reporte — no por el numero de paginas escritas.**
