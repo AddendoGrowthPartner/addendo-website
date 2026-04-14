@@ -2893,6 +2893,1224 @@ Felipe Vergara; la ejecucion sistematizada es de Addendo.
 
 ---
 
+## FASE 9 — METODOLOGIA THICK DATA: DE LO QUE PASA AL POR QUE PASA
+
+### 9.1 Por que el Thick Data es el ingrediente secreto de Addendo
+
+Las Fases 1-7 responden QUE hace la competencia. La Fase 8 (7 Maletas) responde QUIEN es el cliente y que lo detiene. Pero queda un tercer hueco: **el lenguaje exacto, textual, crudo, con el que el cliente real habla de su problema cuando nadie le esta vendiendo nada**. Ese lenguaje no esta en reviews de Google (donde el cliente ya compro y modula el tono), ni en la web del propio negocio (donde habla el marketing). Esta en foros, hilos de Reddit a las 2am, grupos privados de Facebook, comentarios debajo de videos de YouTube, Q&A de Amazon y conversaciones de Quora.
+
+Ahi es donde el cliente escribe sin filtro, sin saber que alguien lo va a leer con intencion comercial. Y ahi es donde se encuentran las **frases que convierten 3-5 veces mas** cuando se usan textualmente en un anuncio, una landing o un email.
+
+```
+EL PROBLEMA QUE RESUELVE EL THICK DATA:
+
+BIG DATA DICE:
+  "El 67% de los clicks en Meta Ads para 'invisalign' vienen
+  de mujeres de 25-44 anios en zonas urbanas, con tasa de
+  conversion del 2.3% y CPA de $180."
+
+  Util para optimizar presupuesto.
+  Inutil para escribir un anuncio que conecte.
+
+THICK DATA DICE:
+  "Llevo 15 anios sonriendo con la mano en la boca. Mi novio
+  me propuso matrimonio y ahora me aterra pensar en las fotos
+  de la boda. Estoy buscando algo discreto pero no se si los
+  invisibles realmente funcionan para casos como el mio, porque
+  tengo los dientes muy cruzados." — hilo en r/invisalign
+
+  Inutil para optimizar presupuesto.
+  ORO PURO para escribir un anuncio que conecte.
+
+UN ANUNCIO HECHO CON BIG DATA:
+  "Invisalign Premium — Tratamiento de ortodoncia invisible.
+  Agenda tu cita hoy."
+  Resultado: CTR 0.8%, conversion 1.9%
+
+EL MISMO ANUNCIO HECHO CON THICK DATA:
+  "Llevas anios sonriendo con la mano en la boca?
+  Tu boda o foto importante merece que vuelvas a sonreir
+  sin pensarlo. Tratamiento invisible incluso para casos
+  complejos — agenda tu evaluacion gratis."
+  Resultado: CTR 2.4%, conversion 4.1% (3x el anterior)
+
+LA DIFERENCIA ESTA EN UNA SOLA COSA:
+  Usar las palabras EXACTAS que la clienta escribio a las 2am
+  en un foro, no las palabras que inventa un marketero en
+  una sala de juntas.
+```
+
+**Regla operativa:** el Thick Data no reemplaza al Big Data — lo complementa. Big Data dice A QUIEN mostrar el anuncio. Thick Data dice QUE decirle. Juntos producen campanias que otras agencias no pueden replicar porque no tienen el input cualitativo sistematizado.
+
+---
+
+### 9.2 Posicionamiento dentro del sistema Addendo
+
+El agente-investigacion ahora opera en **tres modos complementarios**:
+
+```
+MODO 1 — CONSOLIDACION COMPETITIVA (Fases 1-7)
+  Input:  Reportes de los tres espias (#5, #6, #7)
+  Output: Reporte consolidado de inteligencia competitiva
+  Lente:  Que hacen los competidores y donde esta el vacio
+  Duracion: 2-4 horas de sintesis
+  Entregable: Markdown / Notion (20-40 paginas)
+
+MODO 2 — 7 MALETAS (Fase 8)
+  Input:  URL cliente + Google Business + busquedas
+  Output: Reporte HTML estilo Apple con las 7 maletas
+  Lente:  Publico, dolor, solucion, diferencial, testimonios,
+          objeciones y conversion
+  Duracion: 60-90 min end-to-end
+  Entregable: HTML autocontenido
+
+MODO 3 — THICK DATA (Fase 9)
+  Input:  Nicho + problema + avatar inicial (del modo 2 o brief)
+  Output: Biblioteca de Golden Nuggets clasificados
+  Lente:  El lenguaje crudo, sin filtro, del cliente en su
+          habitat natural (foros, Reddit, grupos, comentarios)
+  Duracion: 2-4 horas por investigacion
+  Entregable: Google Sheet + Notion page por categoria de uso
+
+SINERGIA COMPLETA:
+  Modo 1  →  "Donde esta el vacio competitivo"
+  Modo 2  →  "Quien es el cliente y que lo detiene"
+  Modo 3  →  "Que palabras exactas usar para hablarle"
+  
+  Juntos, el director-creativo #15 y el director-estrategia #9
+  tienen un briefing tan denso que las campanias se escriben
+  solas. Las otras agencias no tienen esto.
+```
+
+**Regla operativa:** el Thick Data se ejecuta DESPUES del modo 7 Maletas cuando existe, porque el avatar y los dolores detectados en las maletas guian la busqueda. Si el cliente es muy urgente y no hay tiempo para 7 Maletas completas, el Thick Data se puede ejecutar con un brief rapido de 1 pagina.
+
+---
+
+### 9.3 Definicion operativa del Thick Data
+
+```
+QUE ES THICK DATA (definicion de Tricia Wang):
+
+"Datos cualitativos profundos que capturan la experiencia humana
+real en su contexto — emociones, motivaciones, historias, narrativas
+y lenguaje. Son los datos que un dashboard no puede mostrar porque
+no se pueden cuantificar sin perder su esencia."
+
+ADAPTACION OPERATIVA DE ADDENDO:
+
+Thick Data para marketing = recoleccion sistematica de las palabras,
+frases y narrativas exactas que usa el cliente ideal cuando habla
+de su problema, deseo, frustracion o sueno en espacios donde NO
+esta siendo observado comercialmente.
+
+LAS 5 CUALIDADES DE UN DATO THICK:
+
+1. TEXTUAL — es una cita literal, no un resumen
+2. CONTEXTUAL — tiene la situacion emocional completa
+3. NO PERFORMATIVO — el autor no sabia que seria leido comercialmente
+4. PROFUNDO — revela motivaciones, no solo acciones
+5. UTILIZABLE — se puede pegar (con minimas ediciones) en un anuncio
+
+SI UN DATO NO TIENE LAS 5, NO ES THICK. ES SOLO UNA CITA.
+```
+
+---
+
+### 9.4 Los Golden Nuggets — el output del Thick Data
+
+El entregable principal del modo Thick Data no es un reporte narrativo — es una **biblioteca de Golden Nuggets** clasificados por categoria de uso. Un Golden Nugget es una cita textual real que cumple las 5 cualidades de 9.3 y esta lista para alimentar una pieza de marketing.
+
+```
+ANATOMIA DE UN GOLDEN NUGGET:
+
+┌──────────────────────────────────────────────────────────┐
+│ ID: GN-2026-04-14-0031                                   │
+│ Cliente: Sonrisa Feliz                                   │
+│ Categoria: DOLOR-EMOCIONAL                               │
+│ Fuente: Reddit — r/invisalign — "nervous about consult"  │
+│ URL: reddit.com/r/invisalign/comments/...                │
+│ Fecha de la cita: 2026-03-08                             │
+│ Autor (anonimizado): usuario u/anon23xx                  │
+│ Verbatim: "Llevo 15 anios sonriendo con la mano en la    │
+│  boca. Mi novio me propuso y ahora me aterra pensar en   │
+│  las fotos de la boda."                                  │
+│ Por que es oro: combina dolor de anios (cronico) +       │
+│  disparador especifico (boda) + vision (fotos) — formula │
+│  ideal para hook de anuncio                              │
+│ Usos recomendados:                                       │
+│  - Meta Ads hook (primer linea del creativo)             │
+│  - Landing page hero                                     │
+│  - Email 1 de bienvenida (asunto)                        │
+│ Ediciones sugeridas: ninguna, usar textual               │
+└──────────────────────────────────────────────────────────┘
+
+CRITERIOS PARA QUE UNA CITA SEA UPGRADED A GOLDEN NUGGET:
+
+  [ ] Es textual (no parafraseada)
+  [ ] Viene de una fuente no performativa (no es review comercial)
+  [ ] Tiene emocion o dolor especifico identificable
+  [ ] No contiene marcas, groserias fuertes ni identificadores
+  [ ] Se puede usar con cero o minimas ediciones
+  [ ] Resuena con el avatar de la Maleta 1 del cliente
+  [ ] La fuente es rastreable (URL capturada)
+
+CANTIDAD OBJETIVO POR INVESTIGACION:
+  Minimo: 30 Golden Nuggets
+  Optimo: 50-80 Golden Nuggets
+  Maximo util: 120 (mas de eso es ruido)
+
+  Si en 3 horas no aparecen 30, el nicho es oscuro y
+  hay que revisar las fuentes. No rebajar el estandar.
+```
+
+---
+
+### 9.5 Taxonomia de Golden Nuggets — las 8 categorias de uso
+
+Cada Golden Nugget se clasifica en UNA de estas 8 categorias segun su mejor uso en marketing. Esta taxonomia es la que conecta el Thick Data con la ejecucion creativa.
+
+```
+CATEGORIA 1 — DOLOR-EMOCIONAL
+  Frases que describen el sufrimiento emocional del problema.
+  Uso principal: hooks de anuncios, primer parrafo de landings.
+  Ejemplo: "Me he sentido invisible durante anios"
+
+CATEGORIA 2 — DOLOR-FUNCIONAL
+  Frases que describen el problema practico, operativo, fisico.
+  Uso principal: bullets de beneficios invertidos, FAQ.
+  Ejemplo: "Paso 4 horas al dia en esto y siento que no avanzo"
+
+CATEGORIA 3 — DESEO / SUENO
+  Frases que describen el resultado idealizado que buscan.
+  Uso principal: promesa central de landing, asunto de email.
+  Ejemplo: "Solo quiero poder sonreir en las fotos sin pensarlo"
+
+CATEGORIA 4 — OBJECION / MIEDO
+  Frases que expresan la razon por la que NO compran.
+  Uso principal: seccion "pero que tal si..." en landings,
+  FAQ, rebate en script de ventas, email 3-4 de secuencia.
+  Ejemplo: "Me da miedo gastar tanto y que no funcione"
+
+CATEGORIA 5 — INTENTO FALLIDO
+  Frases que describen que ya probaron y NO funciono.
+  Uso principal: amplificar dolor + diferenciar propuesta.
+  Ejemplo: "Ya probe tres dietas y siempre recupero el peso"
+
+CATEGORIA 6 — DISPARADOR DE DECISION
+  Frases que describen el momento/evento que los hace actuar.
+  Uso principal: urgencia relevante, segmentacion por evento
+  de vida, creativos estacionales.
+  Ejemplo: "Mi hija tiene su graduacion en 3 meses y no puedo
+  seguir escondiendome"
+
+CATEGORIA 7 — TRANSFORMACION (antes/despues textual)
+  Frases de quienes YA resolvieron el problema describiendo
+  el cambio.
+  Uso principal: testimonios, secciones de prueba social,
+  storytelling en video.
+  Ejemplo: "Hace 6 meses no me reconocia en el espejo, hoy
+  me busco en cada reflejo"
+
+CATEGORIA 8 — LENGUAJE DE NICHO (jerga, metaforas, modismos)
+  Palabras especificas que usa el nicho y que un outsider no
+  usaria — codigos que senalan pertenencia.
+  Uso principal: palabras clave para SEO, copy que "suena
+  como uno de nosotros", credibilidad.
+  Ejemplo: en fitness — "plateau", "cut", "bulk"; en dentista
+  invisalign — "attachments", "refinements", "tray"
+```
+
+**Regla operativa:** un Golden Nugget se clasifica en UNA sola categoria (la mas fuerte). Si una cita sirve para dos, se duplica como entradas distintas con ID diferente. Esto permite filtrar por categoria cuando el director-creativo pide "dame los 10 mejores dolores emocionales para esta campania".
+
+---
+
+### 9.6 Las 6 fuentes primarias del Thick Data
+
+Cada fuente tiene su perfil: tipo de dato que produce, esfuerzo de extraccion y sesgos a considerar.
+
+```
+FUENTE 1 — REDDIT
+  Tipo de dato: hilos largos, narrativos, honestos, anonimos.
+  Esfuerzo: medio-alto (requiere buscar subreddits correctos).
+  Sesgo: publico mas joven, tecnologico, angloparlante por default.
+  Oro: categoria de hilo "advice", "help", "vent", "struggling".
+  Donde buscar: r/{nicho}, r/{problema}, r/AskReddit con keyword.
+  
+FUENTE 2 — GRUPOS DE FACEBOOK (publicos o semi-publicos)
+  Tipo de dato: posts con alta emocion, especialmente de mujeres
+  y publicos locales/hispanos.
+  Esfuerzo: medio (requiere unirse al grupo).
+  Sesgo: suele ser mas emocional, menos analitico.
+  Oro: grupos de nicho "Mamas primerizas de {ciudad}", "Ansiedad
+  y depresion", "Emprendedores digitales Mexico".
+  Donde buscar: Facebook search > Grupos > "{nicho} {ciudad}".
+
+FUENTE 3 — COMENTARIOS DE YOUTUBE
+  Tipo de dato: reacciones cortas pero emocionales a contenido
+  del nicho.
+  Esfuerzo: bajo (solo requiere scroll + lectura).
+  Sesgo: suele reaccionar a un contenido especifico, no expresa
+  problema desde cero.
+  Oro: videos de creators con 100K+ views en el nicho, leer
+  los top 50 comentarios.
+  Donde buscar: YouTube > "{problema}" > filtrar por vistas.
+
+FUENTE 4 — RESENAS Y Q&A DE AMAZON (O MARKETPLACES)
+  Tipo de dato: reviews negativas (1-3 estrellas) son oro puro,
+  Q&A revela objeciones pre-compra textuales.
+  Esfuerzo: bajo-medio.
+  Sesgo: limitado a productos comprables en marketplace.
+  Oro: reviews de 3 estrellas — ni enamorados ni haters, son
+  los mas narrativos y honestos.
+  Donde buscar: Amazon > producto del nicho > ordenar por
+  "mas recientes" + filtrar por 1-3 estrellas.
+
+FUENTE 5 — COMENTARIOS EN REDES DE COMPETIDORES
+  Tipo de dato: preguntas y objeciones directas al competidor.
+  Esfuerzo: bajo.
+  Sesgo: personas ya intentando comprar, no exploracion inicial.
+  Oro: comentarios que el competidor no ha respondido o
+  respondio pobremente.
+  Donde buscar: Instagram, TikTok, Facebook del competidor >
+  ultimos 10-20 posts > leer comentarios.
+
+FUENTE 6 — FOROS ESPECIALIZADOS Y QUORA
+  Tipo de dato: respuestas largas con historias de vida.
+  Esfuerzo: medio.
+  Sesgo: tiende a ser publico mas educado y reflexivo.
+  Oro: preguntas con 50+ respuestas, leer las respuestas top.
+  Donde buscar: Quora.com > "{problema}", foros verticales
+  (BabyCenter, MyFitnessPal, forocoches, etc.).
+
+FUENTES SECUNDARIAS (no primarias pero utiles):
+  - TikTok comentarios de videos virales del nicho
+  - Twitter/X busquedas con lenguaje especifico
+  - Discord servers del nicho (si son accesibles)
+  - Transcripciones de podcasts del nicho
+```
+
+**Regla operativa:** el agente NO usa las 6 fuentes para cada investigacion. Selecciona las 3-4 mas ricas segun el nicho del cliente. Ejemplo: para un SaaS B2B, Reddit + Quora + Grupos LinkedIn + comentarios YouTube. Para un producto de maternidad, Facebook + BabyCenter + comentarios Instagram + Amazon.
+
+---
+
+### 9.7 Flujo de trabajo maestro — 2 a 4 horas
+
+```
+╔═══════════════════════════════════════════════════════════╗
+║  FLUJO THICK DATA — 2-4 HORAS                             ║
+╠═══════════════════════════════════════════════════════════╣
+║                                                           ║
+║  FASE A — Preparacion (~15 min)                           ║
+║    A.1  Revisar Maleta 1 (avatar) y Maleta 2 (dolores)    ║
+║    A.2  Identificar 3-5 queries maestras                  ║
+║    A.3  Seleccionar las 3-4 fuentes mas ricas             ║
+║                                                           ║
+║  FASE B — Recoleccion (~90-150 min)                       ║
+║    B.1  Reddit deep dive (30-45 min)                      ║
+║    B.2  Grupos Facebook / foros (20-30 min)               ║
+║    B.3  YouTube comentarios (15-25 min)                   ║
+║    B.4  Amazon / marketplaces (15-25 min)                 ║
+║    B.5  Redes de competidores (10-15 min)                 ║
+║                                                           ║
+║  FASE C — Clasificacion (~30-45 min)                      ║
+║    C.1  Volcar todas las citas crudas a un staging sheet  ║
+║    C.2  Filtrar: cada cita pasa los 5 criterios de 9.4    ║
+║    C.3  Clasificar cada nugget en 1 de las 8 categorias   ║
+║    C.4  Asignar usos recomendados                         ║
+║                                                           ║
+║  FASE D — Activacion (~15-30 min)                         ║
+║    D.1  Generar starter-packs por canal                   ║
+║    D.2  Guardar biblioteca en Google Sheets + Notion      ║
+║    D.3  Notificar al director-creativo con top 10         ║
+║                                                           ║
+╚═══════════════════════════════════════════════════════════╝
+```
+
+---
+
+### 9.8 FASE A — Preparacion
+
+#### A.1 Revision del brief base
+
+```
+ANTES DE BUSCAR, EL AGENTE LEE:
+
+- Maleta 1 del reporte 7 Maletas (avatar del cliente)
+- Maleta 2 (top 3 dolores ya identificados)
+- Maleta 6 (top 3 objeciones ya identificadas)
+- Propuesta de valor del cliente (para saber que NO buscar)
+
+POR QUE:
+  El Thick Data no empieza de cero — empieza desde donde
+  terminaron las 7 Maletas. La busqueda debe AMPLIFICAR
+  los hallazgos iniciales, no duplicarlos.
+
+QUE GENERA ESTA LECTURA:
+  Una "hoja de expedicion" con:
+    - 1 avatar descrito en 3 lineas
+    - 3-5 dolores hipotesis a confirmar
+    - 3-5 objeciones hipotesis a confirmar
+    - 2-3 suenos/deseos hipotesis
+    - Jerga esperada del nicho
+```
+
+#### A.2 Construccion de queries maestras
+
+```
+FORMULA DE QUERIES DE THICK DATA:
+
+Tipo 1 — QUERIES DE SITUACION
+  "{problema} no se que hacer"
+  "alguien ha probado {solucion}"
+  "necesito consejo {problema}"
+  "estoy desesperado {problema}"
+
+Tipo 2 — QUERIES DE OBJECION
+  "{solucion} vale la pena"
+  "{solucion} me estafaron"
+  "{solucion} no funciona"
+  "{producto} decepcionado"
+
+Tipo 3 — QUERIES DE RESULTADO
+  "{solucion} cambio mi vida"
+  "antes y despues {solucion}"
+  "resultados reales {solucion}"
+
+Tipo 4 — QUERIES DE COMPARACION
+  "{producto A} vs {producto B}"
+  "mejor alternativa a {competidor}"
+
+Tipo 5 — QUERIES DE EVENTO DE VIDA
+  "{problema} antes de mi boda"
+  "{problema} embarazada"
+  "{problema} a los 40"
+
+REGLA:
+  De cada tipo se extraen 1-2 queries. Total: 5-10 queries
+  maestras que guian toda la expedicion.
+
+NO USAR QUERIES GENERICAS:
+  ❌ "invisalign" — demasiado amplio
+  ❌ "dieta" — demasiado amplio
+  ✅ "invisalign funciona casos severos"
+  ✅ "dieta no bajo de peso 40 anios"
+```
+
+#### A.3 Seleccion de fuentes
+
+```
+MATRIZ DE SELECCION SEGUN TIPO DE NEGOCIO:
+
+Servicio local (dentista, clinica, spa):
+  Primarias: Reddit + Facebook grupos locales + Google reviews
+  Secundarias: YouTube + foros verticales
+
+Ecommerce producto fisico:
+  Primarias: Amazon reviews + Reddit + TikTok comentarios
+  Secundarias: YouTube unboxings + Quora
+
+Infoproducto / curso:
+  Primarias: YouTube + Reddit + grupos Facebook del nicho
+  Secundarias: Quora + Twitter/X
+
+SaaS B2B:
+  Primarias: Reddit + Quora + LinkedIn grupos + G2 reviews
+  Secundarias: YouTube tutoriales + Twitter/X
+
+Coaching / consultoria:
+  Primarias: Reddit + Quora + YouTube + grupos Facebook
+  Secundarias: podcasts + foros verticales
+
+Salud / wellness / maternidad:
+  Primarias: BabyCenter/foros verticales + Facebook grupos
+             + Reddit subs especificos
+  Secundarias: TikTok + YouTube
+```
+
+---
+
+### 9.9 FASE B — Recoleccion detallada por fuente
+
+#### B.1 Reddit deep dive
+
+```
+PROTOCOLO REDDIT:
+
+1. Identificar 3-5 subreddits relevantes
+   - r/{nicho exacto} si existe
+   - r/{problema} subs (ej: r/loseit, r/anxiety)
+   - r/AskReddit con keyword especifica
+   - r/{ciudad/pais} si es geo-local
+
+2. Por cada subreddit, filtrar:
+   - Top hilos del mes (Top > Month)
+   - Hilos con 50+ comentarios
+   - Flair "advice", "help", "discussion", "vent" si existe
+
+3. Por cada hilo seleccionado:
+   - Leer post original completo (frecuentemente oro puro)
+   - Leer los top 10 comentarios
+   - Leer respuestas a los top comentarios (segundo nivel)
+
+4. Extraer citas que cumplan los 5 criterios de 9.3
+
+5. Capturar SIEMPRE:
+   - URL del hilo
+   - Fecha de la cita
+   - Handle del autor (u/anonXX) — anonimizar si es personal
+
+CUANTO TIEMPO: 30-45 min
+OBJETIVO DE NUGGETS: 10-20 citas crudas (antes de filtro final)
+
+SENALES DE HILO OSCURO:
+  - Se publico a las 2am-5am hora local del autor
+  - El post original dice "no se si aqui es el lugar pero..."
+  - Comentarios con "yo pase por lo mismo, dejame contarte"
+  - Titulo en minusculas con signos de interrogacion multiples
+  Estos hilos tienen la mayor densidad de Thick Data.
+```
+
+#### B.2 Grupos de Facebook
+
+```
+PROTOCOLO FACEBOOK GROUPS:
+
+1. Buscar grupos con filtros:
+   - "{nicho} {ciudad}" — grupos locales
+   - "{problema} {audiencia}" — "Ansiedad mamas primerizas"
+   - Grupos publicos o con request rapido de join
+
+2. Por cada grupo, filtrar posts:
+   - Ordenar por "nuevos" o por "comentarios mas recientes"
+   - Buscar posts largos (3+ parrafos)
+   - Priorizar posts con 20+ comentarios
+
+3. Extraer del post original + de los comentarios:
+   - Citas que describen el dolor SIN buscar vender nada
+   - Preguntas hechas por miembros (=objeciones)
+   - Respuestas con "a mi me paso esto" (=historias)
+
+CUANTO TIEMPO: 20-30 min
+OBJETIVO: 5-15 citas crudas
+
+PRECAUCION ETICA:
+  Los grupos son semi-privados aunque el acceso sea publico.
+  Las citas se ANONIMIZAN completamente — nunca nombre real.
+  Nunca copiar fotos. Nunca crosspostear la cita con identificadores.
+  Si es grupo cerrado con expectativa de privacidad fuerte,
+  se usa solo el insight conceptual, no la cita textual.
+```
+
+#### B.3 YouTube comentarios
+
+```
+PROTOCOLO YOUTUBE COMMENTS:
+
+1. Buscar videos del nicho con alto engagement:
+   - Videos con 100K+ vistas
+   - Videos de creators de nicho (no celebridades)
+   - Videos con titulos tipo "mi experiencia con X" (son magneto
+     de comentarios personales)
+
+2. Ordenar comentarios por "mas populares" primero, luego por "mas recientes".
+
+3. Leer los top 50 comentarios + leer 10-20 replies a los top.
+
+4. Citas oro aqui:
+   - "a mi tambien me paso..."
+   - "llevo X anios con esto y..."
+   - "gracias, pense que era el unico..."
+   - Preguntas no respondidas (=oportunidad de contenido)
+
+CUANTO TIEMPO: 15-25 min
+OBJETIVO: 8-15 citas
+
+TRUCO:
+  Buscar videos donde el creator responde en los comentarios
+  con respuestas largas — esos hilos de creator+audiencia son
+  minas de insights.
+```
+
+#### B.4 Amazon / marketplaces
+
+```
+PROTOCOLO AMAZON / MERCADOLIBRE:
+
+1. Identificar 3-5 productos del nicho (incluyendo del cliente
+   si aplica, y de competidores).
+
+2. Por cada producto:
+   a) Reviews de 3 estrellas (ni haters ni fans — narrativos)
+   b) Reviews de 1 estrella (objeciones duras)
+   c) Q&A section (preguntas pre-compra = objeciones textuales)
+   d) Reviews "verified purchase" recientes
+
+3. Citas oro:
+   - Reviews que cuentan historia completa de uso
+   - Preguntas Q&A que empiezan con "tengo X condicion, me servira?"
+   - Reviews que comparan con marcas competidoras textualmente
+
+CUANTO TIEMPO: 15-25 min
+OBJETIVO: 8-15 citas
+
+CRUZAR CON:
+  Reporte del agente-spy-ads #6 para no duplicar con lo que ya
+  se analizo de creativos de competencia.
+```
+
+#### B.5 Comentarios en redes de competidores
+
+```
+PROTOCOLO REDES COMPETIDORES:
+
+1. Listar 3-5 competidores directos (los del reporte consolidado).
+
+2. Por cada competidor, en Instagram, TikTok, Facebook:
+   - Ir a los ultimos 10-20 posts
+   - Leer comentarios publicos
+   - Priorizar posts de oferta / lanzamiento (ahi salen las
+     objeciones pre-compra)
+
+3. Citas oro:
+   - Preguntas sin respuesta del competidor
+   - Objeciones explicitas ("me parece caro", "y si no funciona")
+   - Quejas de clientes anteriores
+   - Testimonios espontaneos (son golden nuggets tipo transformacion)
+
+CUANTO TIEMPO: 10-15 min
+OBJETIVO: 5-10 citas
+
+PRECAUCION:
+  No usar citas que identifiquen al autor — anonimizar siempre.
+  No usar citas que sean claramente fake (bots, spam).
+```
+
+#### B.6 Foros verticales y Quora
+
+```
+PROTOCOLO FOROS VERTICALES:
+
+Foros por nicho (ejemplos):
+  Maternidad: BabyCenter, ElBebe, BabyFacts
+  Fitness: MyFitnessPal forums, Bodybuilding.com
+  Finanzas: Bogleheads, Reddit r/personalfinance
+  Automoviles: Forocoches (ES), MotorPasion foros
+  Salud mental: PsychCentral, Reddit r/anxiety, r/depression
+  SaaS B2B: Reddit r/SaaS, IndieHackers, ProductHunt discussions
+
+QUORA:
+  Buscar preguntas con 50+ respuestas en el nicho.
+  Leer las respuestas top (votadas por la comunidad).
+  Las respuestas narrativas son minas de historias personales.
+
+CUANTO TIEMPO: 20-30 min si se usan estas fuentes
+OBJETIVO: 8-15 citas
+```
+
+---
+
+### 9.10 FASE C — Clasificacion y curacion
+
+#### C.1 Staging sheet — volcado crudo
+
+```
+ESTRUCTURA DEL STAGING SHEET (Google Sheets):
+
+Columnas:
+  A — ID temporal (auto-numerado)
+  B — Cita textual (verbatim, sin editar)
+  C — Fuente (Reddit / FB / YouTube / Amazon / Otro)
+  D — URL
+  E — Fecha cita
+  F — Autor anonimizado
+  G — Nicho/tema
+  H — Notas del agente (contexto del hilo)
+
+REGLA:
+  En esta fase se copia TODO sin filtrar. Mejor tener 150
+  citas crudas y filtrar despues que perder oro por filtro
+  prematuro.
+```
+
+#### C.2 Filtro de los 5 criterios
+
+```
+CADA CITA SE VALIDA CONTRA LOS 5 CRITERIOS:
+
+[ ] TEXTUAL — la cita es literal, no parafraseada
+[ ] CONTEXTUAL — hay contexto emocional claro
+[ ] NO PERFORMATIVO — autor no sabia que seria usado
+[ ] PROFUNDO — revela motivacion, no solo hecho superficial
+[ ] UTILIZABLE — se puede pegar con minimas ediciones
+
+CALIFICACION:
+  5/5 = Golden Nugget (pasa a biblioteca final)
+  4/5 = Silver (se guarda como backup, no entra a starter packs)
+  3/5 o menos = se descarta
+
+EDICIONES PERMITIDAS SIN PERDER AUTENTICIDAD:
+  - Corregir typos obvios
+  - Remover groserias fuertes (reemplazar con [...])
+  - Acortar si la cita tiene >40 palabras irrelevantes al punto
+  - Traducir si es un cliente hispano en fuente inglesa
+  
+EDICIONES NO PERMITIDAS:
+  - Cambiar el tono
+  - Agregar palabras que el autor no dijo
+  - Reemplazar sinonimos por "mejorar marketing"
+  - Combinar dos citas en una
+```
+
+#### C.3 Clasificacion en las 8 categorias
+
+```
+CADA GOLDEN NUGGET SE CLASIFICA EN UNA DE LAS 8:
+
+1. DOLOR-EMOCIONAL
+2. DOLOR-FUNCIONAL
+3. DESEO / SUENO
+4. OBJECION / MIEDO
+5. INTENTO FALLIDO
+6. DISPARADOR DE DECISION
+7. TRANSFORMACION
+8. LENGUAJE DE NICHO
+
+Si una cita puede ir en dos categorias:
+  - Elegir la MAS FUERTE (la que primero golpea al leer)
+  - Si sirve igual en dos, duplicarla como dos entries con
+    IDs distintos y mismo texto
+
+DISTRIBUCION IDEAL EN UNA BIBLIOTECA DE 50-80:
+  Dolor emocional: 15-20%
+  Dolor funcional: 10-15%
+  Deseo / sueno: 15-20%
+  Objecion: 15-20%
+  Intento fallido: 5-10%
+  Disparador: 5-10%
+  Transformacion: 10-15%
+  Lenguaje de nicho: 5-10%
+
+SI HAY DESBALANCE FUERTE:
+  - 80% dolores y 0% deseo → falta buscar fuentes positivas
+  - 70% transformacion → riesgo de usar reviews performativos
+  - 0% objeciones → falta buscar comentarios negativos
+  Volver a FASE B a completar la fuente que falta.
+```
+
+#### C.4 Asignacion de usos recomendados
+
+```
+PARA CADA NUGGET, ASIGNAR 1-3 USOS RECOMENDADOS:
+
+CANALES POSIBLES:
+  - Meta Ads hook
+  - Meta Ads body
+  - Google Ads headline
+  - Google Ads description
+  - Landing hero
+  - Landing subtitulo / bullets
+  - Landing seccion FAQ
+  - Landing seccion testimonios
+  - Email asunto
+  - Email cuerpo parrafo 1 (hook)
+  - Email secuencia dia 3-5 (objecion)
+  - Script de WhatsApp / ventas
+  - Post organico redes
+  - Video script hook (primeros 3 segundos)
+
+MAPEO CATEGORIA → CANALES RECOMENDADOS:
+
+  DOLOR-EMOCIONAL → Meta hook, Landing hero, Email asunto,
+                    Video script hook
+  DOLOR-FUNCIONAL → Landing bullets, Google description,
+                    FAQ seccion
+  DESEO/SUENO     → Landing promesa, Meta Ads body,
+                    Email asunto positivo
+  OBJECION        → FAQ, Email secuencia, Script ventas,
+                    Landing seccion "pero que si..."
+  INTENTO FALLIDO → Meta hook diferenciador, Landing
+                    seccion "por que esto SI funciona"
+  DISPARADOR      → Meta Ads con urgencia relevante,
+                    Email con evento de vida
+  TRANSFORMACION  → Landing testimonios, Video social,
+                    Posts organicos
+  LENGUAJE NICHO  → SEO keywords, Google Ads headlines,
+                    todo el copy para sonar "de los de casa"
+```
+
+---
+
+### 9.11 FASE D — Activacion de Golden Nuggets en cada canal
+
+Esta es la fase donde los nuggets dejan de ser datos y se convierten en copy listo para usar.
+
+#### D.1 Meta Ads (Facebook / Instagram)
+
+```
+FORMULA META ADS CON GOLDEN NUGGETS:
+
+HOOK (primer linea — 1-2 segundos de atencion):
+  Usar cita textual de categoria DOLOR-EMOCIONAL o DISPARADOR.
+  Maximo 10 palabras.
+  
+  Ejemplo:
+  Nugget: "Llevo 15 anios sonriendo con la mano en la boca"
+  Hook:   "¿Llevas anios sonriendo con la mano en la boca?"
+  
+BODY (desarrollo — 2-4 lineas):
+  Amplificar el dolor usando citas de DOLOR-FUNCIONAL.
+  Transicion a la vision usando DESEO/SUENO.
+  
+  Ejemplo:
+  "Cada foto te recuerda lo mismo. Cada conversacion te hace
+  bajar la mirada. Y lo que mas quieres es poder sonreir sin
+  pensarlo, especialmente ahora con la boda tan cerca."
+
+REBATE DE OBJECION (parrafo 3):
+  Usar cita tipo OBJECION + respuesta directa.
+  
+  Ejemplo:
+  "Sabemos que has pensado 'y si no funciona para mi caso'.
+  Por eso hacemos tu evaluacion gratis antes de que decidas nada."
+
+CTA (llamada a la accion):
+  Accion especifica + low commitment.
+  
+  Ejemplo:
+  "Agenda tu evaluacion gratis — cupo limitado esta semana."
+
+ESTRUCTURA COMPLETA CON NUGGETS:
+  [Hook con DOLOR-EMOCIONAL]
+  [Body con DOLOR-FUNCIONAL + DESEO]
+  [Rebate con OBJECION]
+  [CTA]
+
+FORMATO CREATIVO RECOMENDADO:
+  - Video 15-30 seg con el hook en texto visual grande
+  - Carrusel con 5 slides: dolor, amplifica, vision, prueba, CTA
+  - Imagen estatica solo si el hook es ultra fuerte
+
+SIEMPRE TEST A/B:
+  Varaciones con 3 nuggets distintos del mismo dolor.
+  El que gane revela el matiz emocional correcto.
+```
+
+#### D.2 Google Ads
+
+```
+FORMULA GOOGLE ADS CON GOLDEN NUGGETS:
+
+HEADLINES (3-5, hasta 30 caracteres cada una):
+
+  Headline 1 (match con intencion de busqueda):
+    Usar LENGUAJE-NICHO textual.
+    Ejemplo: "Invisalign Casos Complejos"
+  
+  Headline 2 (beneficio central):
+    Usar version corta de DESEO/SUENO.
+    Ejemplo: "Sonrisa Perfecta en 6 Meses"
+  
+  Headline 3 (objecion rebatida):
+    Usar anti-OBJECION.
+    Ejemplo: "Evaluacion Gratis — Sin Compromiso"
+  
+  Headline 4 (diferenciador):
+    Usar cita tipo TRANSFORMACION condensada.
+    Ejemplo: "Mas de 2,000 Sonrisas Transformadas"
+
+DESCRIPTIONS (2-4, hasta 90 caracteres):
+  
+  Description 1 (dolor + solucion):
+    Ejemplo: "¿Dientes torcidos afectan tu confianza?
+             Tratamiento invisible incluso en casos complejos.
+             Evaluacion gratis."
+  
+  Description 2 (prueba social + urgencia):
+    Ejemplo: "Clinica mas recomendada en Guadalajara.
+             Agenda esta semana, cupo limitado."
+
+REGLA DE ORO GOOGLE ADS:
+  El usuario YA tiene intencion de busqueda — el copy debe
+  confirmar que estan en el lugar correcto y rebatir la
+  objecion mas grande que queda (precio, confianza, dolor).
+
+QUE NUGGETS NO USAR AQUI:
+  - DOLOR-EMOCIONAL largos (no caben)
+  - INTENTO FALLIDO (el usuario ya busca solucion)
+  - Citas con groserias o jerga demasiado informal
+```
+
+#### D.3 Landing pages
+
+```
+MAPA DE LANDING PAGE CON GOLDEN NUGGETS:
+
+SECCION 1 — HERO (above the fold):
+  Headline: DOLOR-EMOCIONAL + promesa implicita
+  Subheadline: DESEO/SUENO condensado
+  CTA: botton con accion clara
+  
+  Ejemplo:
+  H: "¿Llevas anios escondiendo tu sonrisa?"
+  SH: "Recupera la confianza de sonreir sin pensarlo —
+       tratamiento invisible para cualquier caso."
+  CTA: "Agenda tu evaluacion gratis"
+
+SECCION 2 — DOLORES AMPLIFICADOS:
+  Usar 3-4 nuggets de DOLOR-FUNCIONAL como bullets.
+  
+  Ejemplo:
+  "Reconoces esto?
+   • Cubrirte la boca cada vez que ries
+   • Evitar las fotos grupales o pedir siempre la segunda fila
+   • Cancelar eventos importantes por verguenza
+   • Pensar 'ya es tarde para arreglarlo'"
+
+SECCION 3 — INTENTOS FALLIDOS (opcional, poderoso):
+  Nugget tipo INTENTO FALLIDO + diferenciador.
+  
+  Ejemplo:
+  "Ya probaste brackets tradicionales y no los completaste?
+   Consultaste en otras clinicas y te dijeron que tu caso
+   era demasiado complejo? Esta vez es diferente — y te
+   vamos a mostrar por que."
+
+SECCION 4 — LA SOLUCION:
+  Explicacion del producto usando LENGUAJE-NICHO para credibilidad.
+
+SECCION 5 — TRANSFORMACION / PRUEBA SOCIAL:
+  3-5 testimonios usando nuggets de categoria TRANSFORMACION.
+  Si tienes fotos antes/despues, incluir.
+
+SECCION 6 — FAQ / REBATE DE OBJECIONES:
+  Cada pregunta es un nugget tipo OBJECION.
+  La respuesta es directa, honesta, con prueba si existe.
+  
+  Ejemplo:
+  "Q: 'Me da miedo gastar tanto y que no funcione'"
+  A: "Por eso empezamos con evaluacion gratis en la que te
+     mostramos el plan exacto, el tiempo estimado y el precio
+     con financiamiento. Si no lo vemos viable, te lo decimos."
+
+SECCION 7 — CTA FINAL + URGENCIA
+  Repetir CTA + razon para actuar ahora (DISPARADOR de decision)
+
+MINIMO 8-12 NUGGETS POR LANDING PAGE BIEN HECHA.
+```
+
+#### D.4 Email marketing
+
+```
+SECUENCIA DE 5 EMAILS CON GOLDEN NUGGETS:
+
+EMAIL 1 — BIENVENIDA / HOOK EMOCIONAL
+  Asunto: nugget DOLOR-EMOCIONAL condensado.
+  Ejemplo asunto: "¿Llevas anios escondiendo la sonrisa?"
+  Cuerpo: historia corta + promesa + CTA suave.
+
+EMAIL 2 — AMPLIFICACION DEL DOLOR
+  Asunto: variacion de DOLOR-FUNCIONAL.
+  Ejemplo: "3 cosas que dejas de hacer cuando los dientes duelen"
+  Cuerpo: 3 bullets de dolores funcionales + transicion a
+  "hay otra forma".
+
+EMAIL 3 — INTENTO FALLIDO + DIFERENCIADOR
+  Asunto: nugget tipo INTENTO FALLIDO.
+  Ejemplo: "'Ya probe todo y nada funciono'"
+  Cuerpo: validar intentos fallidos, luego mostrar por que
+  este sistema es diferente.
+
+EMAIL 4 — OBJECION PRINCIPAL
+  Asunto: la objecion mas comun encontrada en Thick Data.
+  Ejemplo: "'Y si no funciona para mi caso?'"
+  Cuerpo: rebate con evidencia + testimonio especifico.
+
+EMAIL 5 — TRANSFORMACION + CTA FUERTE
+  Asunto: nugget de TRANSFORMACION o DISPARADOR.
+  Ejemplo: "'Mi hija me dijo que no me reconocia'"
+  Cuerpo: historia completa de transformacion + CTA directo
+  con urgencia relevante.
+
+REGLA TRANSVERSAL DE EMAILS:
+  Cada asunto = un Golden Nugget condensado a <50 caracteres.
+  Cada primer linea del cuerpo = otro Golden Nugget.
+  Esto duplica la probabilidad de apertura y lectura.
+```
+
+---
+
+### 9.12 Entregables del modo Thick Data
+
+```
+ENTREGABLE 1 — BIBLIOTECA EN GOOGLE SHEETS
+
+Nombre del archivo:
+  thick-data-[slug-cliente]-[YYYY-MM-DD].xlsx
+
+Pestañas:
+  1. README (instrucciones de uso + leyenda de categorias)
+  2. BIBLIOTECA (todos los Golden Nuggets)
+     Columnas: ID, verbatim, categoria, fuente, URL, fecha,
+     usos recomendados, notas
+  3. STARTER PACK META ADS (top 15 para anuncios sociales)
+  4. STARTER PACK GOOGLE ADS (top 15 para search)
+  5. STARTER PACK LANDING (top 20 para hero + secciones)
+  6. STARTER PACK EMAIL (top 15 para asuntos + cuerpos)
+  7. LENGUAJE NICHO (glosario de jerga encontrada)
+  8. OBJECIONES MAESTRAS (top 10 con rebate propuesto)
+
+ENTREGABLE 2 — RESUMEN EJECUTIVO EN NOTION / MARKDOWN
+
+Secciones:
+  - Avatar del cliente (confirmado o ajustado vs Maleta 1)
+  - Top 5 dolores emocionales (con nuggets textuales)
+  - Top 3 deseos/suenos
+  - Top 10 objeciones (con rebate)
+  - 5 disparadores de decision detectados
+  - Glosario de nicho (10-20 palabras clave)
+  - Recomendacion de angulos para 3 campanias de Meta
+  - Recomendacion de 3 headlines maestras para landing
+
+ENTREGABLE 3 — CROSS-REFERENCE CON OTROS REPORTES
+
+Al entregar, enlazar:
+  - Reporte 7 Maletas (si existe)
+  - Reporte consolidado (si existe)
+  - Reportes de los tres espias
+
+NOTIFICACION A AGENTES POSTERIORES:
+  El agente-investigacion envia un mensaje estructurado a:
+  - #15 director-creativo: "Biblioteca lista, starter packs
+    disponibles para 4 canales, top 10 nuggets por categoria"
+  - #16 copywriting-seo: "Glosario de nicho + 20 keywords
+    derivadas de lenguaje real"
+  - #11 meta-ads, #12 google-ads: "Starter packs por canal"
+  - #9 director-estrategia: "Recomendacion de angulos confirmados"
+```
+
+---
+
+### 9.13 Checklist de verificacion antes de entregar
+
+```
+CHECKLIST DE ENTREGA DE BIBLIOTECA THICK DATA:
+
+RECOLECCION:
+  [ ] Minimo 3 fuentes primarias utilizadas
+  [ ] Minimo 30 Golden Nuggets validados
+  [ ] Distribucion balanceada en las 8 categorias
+  [ ] Cada nugget con URL y fecha capturadas
+  [ ] Todos los autores anonimizados
+
+CALIDAD DE NUGGETS:
+  [ ] Cada uno pasa los 5 criterios de 9.3
+  [ ] Cero citas inventadas o resumidas
+  [ ] Cero citas con identificadores personales
+  [ ] Ediciones dentro del rango permitido (no distorsion)
+
+CLASIFICACION:
+  [ ] Cada nugget en exactamente una categoria principal
+  [ ] Duplicados marcados si aplican a dos usos
+  [ ] Usos recomendados (1-3) asignados a cada uno
+
+STARTER PACKS:
+  [ ] Meta Ads pack con 15 nuggets
+  [ ] Google Ads pack con 15 nuggets
+  [ ] Landing pack con 20 nuggets
+  [ ] Email pack con 15 nuggets
+
+REPORTE EJECUTIVO:
+  [ ] Top 5 dolores emocionales con nuggets
+  [ ] Top 10 objeciones con rebate
+  [ ] Glosario de nicho documentado
+  [ ] 3 angulos de campania recomendados
+
+INTEGRACION:
+  [ ] Cross-reference con 7 Maletas (si existe)
+  [ ] Notificacion a director-creativo enviada
+  [ ] Notificacion a agentes de ads enviada
+  [ ] Biblioteca guardada en Drive del cliente
+
+ETICA:
+  [ ] Autores anonimizados en toda la biblioteca
+  [ ] No se copiaron datos de grupos estrictamente privados
+  [ ] Nugetts con groserias fuertes sanitizados
+  [ ] Citas textuales respetadas sin distorsion
+```
+
+---
+
+### 9.14 Anti-patrones del modo Thick Data
+
+```
+❌ ANTI-PATRON 1: Parafrasear en vez de citar textual
+   Sintoma: "Los clientes dicen que les da miedo gastar"
+   Correccion: "'Me da miedo gastar tanto y que no funcione'
+              — u/anon, Reddit, 2026-03-12"
+
+❌ ANTI-PATRON 2: Usar reviews de Google como Thick Data
+   Sintoma: mezclar las 34 reviews de Google Business con
+   los Golden Nuggets de foros/Reddit
+   Correccion: las reviews de Google son input de las 7 Maletas.
+   Thick Data es especificamente de fuentes NO performativas.
+
+❌ ANTI-PATRON 3: Inventar citas "basadas en patron"
+   Sintoma: "El publico suele decir cosas como..."
+   Correccion: o hay cita textual con URL, o no hay nugget.
+
+❌ ANTI-PATRON 4: Identificar autores reales
+   Sintoma: copiar el handle o nombre completo del autor
+   Correccion: anonimizar como u/anon, usuario Reddit,
+   miembro de grupo FB, etc.
+
+❌ ANTI-PATRON 5: Saltar el filtro de 5 criterios
+   Sintoma: biblioteca con 150 citas pero 60% son superficiales
+   Correccion: mejor 40 nuggets 5/5 que 150 nuggets 3/5
+
+❌ ANTI-PATRON 6: Ignorar el balance de las 8 categorias
+   Sintoma: 80% dolor, 0% deseo
+   Correccion: volver a FASE B a buscar fuentes positivas
+
+❌ ANTI-PATRON 7: Entregar biblioteca sin starter packs
+   Sintoma: 60 nuggets sin organizar por canal
+   Correccion: el director-creativo no tiene tiempo de
+   filtrar 60 — entrega top 15 por canal, curados
+
+❌ ANTI-PATRON 8: Usar nuggets antiguos (>18 meses)
+   Sintoma: citas de 2022 en biblioteca de 2026
+   Correccion: priorizar ultimos 12 meses. Las palabras
+   envejecen rapido (especialmente jerga)
+
+❌ ANTI-PATRON 9: No capturar URL
+   Sintoma: cita sin fuente verificable
+   Correccion: cada nugget debe ser trazable
+
+❌ ANTI-PATRON 10: Confundir jerga con lenguaje de nicho util
+   Sintoma: "tray", "attachments" listados como keywords SEO
+   sin verificar volumen de busqueda
+   Correccion: confirmar con agente-seo #27 cuales jergas
+   son ademas keywords con trafico
+
+❌ ANTI-PATRON 11: No anonimizar grupos privados
+   Sintoma: copiar cita de grupo cerrado con nombre real
+   Correccion: riesgo legal y etico. Si no se puede
+   anonimizar bien, NO usar esa cita.
+
+❌ ANTI-PATRON 12: Ejecutar Thick Data sin 7 Maletas previa
+   Sintoma: recoleccion sin hipotesis de dolores/avatar
+   Correccion: la 7 Maletas da la brujula. Sin ella, el
+   Thick Data es ciego (aceptable solo si hay brief ejecutivo
+   de 1 pagina en su lugar).
+```
+
+---
+
+### 9.15 Etica del Thick Data
+
+```
+PRINCIPIOS ETICOS NO NEGOCIABLES:
+
+1. ANONIMATO COMPLETO DE AUTORES
+   Los autores de las citas no pidieron ser usados en marketing.
+   Nunca usar nombre real, handle con identidad, foto, o
+   informacion que permita identificarlos.
+
+2. RESPETO POR EL CONTEXTO ORIGINAL
+   Una cita escrita en un grupo de apoyo emocional NO se usa
+   para venderle al mismo grupo. Se usa para escribir copy
+   que ayuda a OTROS con el mismo problema.
+
+3. NO SCRAPING DE ESPACIOS PRIVADOS
+   Grupos cerrados con expectativa fuerte de privacidad NO
+   son fuente. Si el acceso requiere aprobacion manual con
+   preguntas, el contenido tiene expectativa de privacidad.
+
+4. NO DISTORSION DE LA CITA
+   Editar para corregir typos o acortar es aceptable. Editar
+   para cambiar el sentido o intensificar el dolor no lo es.
+
+5. USO RESPONSABLE DEL LENGUAJE DE VULNERABILIDAD
+   Los nuggets de dolor emocional profundo (ansiedad, depresion,
+   trauma) se usan con cuidado. No para manipular, sino para
+   hacer sentir comprendido a quien ve el anuncio.
+
+6. FRASE SANA EN MARKETING:
+   "Usamos las palabras reales de personas como tu, para que
+   sepas que no estas solo en lo que sientes."
+
+Si un nugget cruza estas lineas, se descarta sin excepcion.
+El valor ROI no justifica cruzar la linea etica.
+```
+
+---
+
+### 9.16 Por que esto es la ventaja competitiva de Addendo
+
+```
+LO QUE NINGUNA AGENCIA TRADICIONAL HACE:
+
+1. Las agencias tradicionales escriben copy desde la experiencia
+   del creativo, no desde el lenguaje real del cliente.
+
+2. Las agencias tradicionales usan "reviews" como si fueran
+   Thick Data, sin reconocer que son performativos.
+
+3. Las agencias tradicionales no tienen un sistema para
+   clasificar y activar citas textuales en distintos canales.
+
+4. Las agencias tradicionales no conectan Thick Data con
+   taxonomias de uso (las 8 categorias).
+
+5. Las agencias tradicionales no integran Thick Data con
+   research de avatar (7 Maletas) ni con inteligencia
+   competitiva (Fases 1-7).
+
+LO QUE ADDENDO SI HACE:
+
+  Sistema completo en 3 modos:
+    Modo 1 — Competencia: que hacen los demas
+    Modo 2 — Cliente: quien es y que lo detiene
+    Modo 3 — Lenguaje: que palabras exactas lo mueven
+  
+  Biblioteca vive y crece por cliente. Cada campania agrega
+  mas nuggets al deposito. A los 6 meses, el cliente tiene
+  200+ Golden Nuggets propios — un activo que ninguna agencia
+  tradicional puede replicar sin 6 meses de recoleccion.
+
+Este es el ingrediente secreto. Este es el por que Addendo
+convierte 3-5x mejor que una agencia tradicional en el mismo
+nicho con el mismo presupuesto.
+```
+
+---
+
+### 9.17 Creditos intelectuales del Thick Data
+
+```
+El concepto de Thick Data fue acunado por Tricia Wang,
+etnografa y tecnologa, en su charla TED "The human insights
+missing from big data" (2017) y en su trabajo sobre investigacion
+etnografica aplicada a productos digitales.
+
+Adaptacion operativa al contexto de marketing digital y
+sistematizacion en el sistema de agentes de Addendo:
+  Addendo Growth Partner — agente-investigacion #8
+
+Referencias:
+  - Tricia Wang — https://www.triciawang.com
+  - TED Talk: "The human insights missing from big data"
+  - Libro "The Mom Test" (Rob Fitzpatrick) — para extraccion
+    honesta de lenguaje del cliente
+  - "Breakthrough Advertising" (Eugene Schwartz) — para
+    entender niveles de awareness en copy
+
+Este skill es la aplicacion del framework conceptual de Wang
+al contexto operativo de marketing de performance, ejecutado
+de forma sistemica dentro del sistema de 48 agentes de Addendo.
+```
+
+---
+
 ## REGLAS MAESTRAS DEL SKILL
 
 1. **Los datos crudos son ruido. El insight es la señal.** El agente investigacion produce señal, no ruido.
@@ -2964,5 +4182,27 @@ Felipe Vergara; la ejecucion sistematizada es de Addendo.
 34. **Antes de ejecutar Fase B.4 (Facebook Ads Library) verificar si agente-spy-ads #6 ya tiene el reporte** — si existe, se referencia en vez de duplicar.
 
 35. **Checklist de verificacion (8.12) es obligatorio antes de entregar cualquier reporte 7 Maletas.** Si algun punto falla, no se entrega hasta corregir.
+
+36. **El agente opera en TRES modos: CONSOLIDACION (Fases 1-7), 7 MALETAS (Fase 8) y THICK DATA (Fase 9).** Cada modo tiene entregable propio — nunca mezclarlos, siempre cross-referenciar.
+
+37. **Big Data dice QUE pasa; Thick Data dice POR QUE pasa.** Sin Thick Data, el copy convierte 3-5x menos — es el ingrediente secreto de Addendo.
+
+38. **Un Golden Nugget es una cita TEXTUAL con los 5 criterios: textual, contextual, no performativo, profundo, utilizable.** Si falla uno, no es Golden Nugget.
+
+39. **Minimo 30 Golden Nuggets por investigacion Thick Data, optimo 50-80.** Menos de 30 = el nicho es oscuro o las fuentes estan mal elegidas — revisar antes de bajar el estandar.
+
+40. **Las 8 categorias de Golden Nuggets son obligatorias:** Dolor-Emocional, Dolor-Funcional, Deseo, Objecion, Intento Fallido, Disparador, Transformacion, Lenguaje de Nicho. Cada nugget clasifica en exactamente una categoria principal.
+
+41. **Cada Golden Nugget se entrega con usos recomendados por canal.** Sin asignacion de uso, el director-creativo no puede activarlo rapido.
+
+42. **Los starter packs por canal son obligatorios: Meta Ads, Google Ads, Landing, Email.** El director-creativo recibe 15-20 nuggets curados por canal, no la biblioteca cruda.
+
+43. **Anonimato completo de autores en Thick Data.** Nunca nombre real, handle identificable, ni datos personales. La etica no es opcional.
+
+44. **No usar reviews de Google Business como Thick Data.** Son performativas — input de las 7 Maletas. Thick Data viene solo de fuentes no comerciales (foros, Reddit, grupos, comentarios).
+
+45. **El Thick Data se ejecuta idealmente despues de las 7 Maletas.** La maleta 1 (avatar) y 2 (dolores) sirven de brujula. Sin ella, se requiere brief ejecutivo de 1 pagina.
+
+46. **Tres modos, un sistema.** Consolidacion + 7 Maletas + Thick Data = la investigacion mas completa del marketing moderno. Ninguna agencia tradicional tiene esto sistematizado — esa es la ventaja competitiva de Addendo.
 
 25. **El agente investigacion mide su exito por la CALIDAD del plan estrategico que el director-estrategia produce con su reporte — no por el numero de paginas escritas.**
