@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
+  <rect width="500" height="500" fill="#0A0F1E"/>
+  <text x="250" y="252" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="72" font-weight="700" fill="#C9A84C" letter-spacing="4">ADDENDO</text>
+  <text x="250" y="302" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="18" font-weight="400" fill="#FFFFFF" letter-spacing="10">GROWTH PARTNER</text>
+  <line x1="180" y1="277" x2="320" y2="277" stroke="#C9A84C" stroke-width="1" opacity="0.5"/>
+</svg>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1640 624" width="1640" height="624">
+  <rect width="1640" height="624" fill="#0A0F1E"/>
+
+  <!-- Subtle decorative radial glow -->
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#C9A84C" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#0A0F1E" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1640" height="624" fill="url(#glow)"/>
+
+  <!-- Logo left -->
+  <g font-family="Georgia, 'Times New Roman', serif" text-anchor="middle">
+    <text x="360" y="304" font-size="96" font-weight="700" fill="#C9A84C" letter-spacing="6">ADDENDO</text>
+    <text x="360" y="354" font-size="22" font-weight="400" fill="#FFFFFF" letter-spacing="12" font-family="Helvetica, Arial, sans-serif">GROWTH PARTNER</text>
+  </g>
+
+  <!-- Vertical gold divider -->
+  <line x1="720" y1="164" x2="720" y2="460" stroke="#C9A84C" stroke-width="2" opacity="0.7"/>
+
+  <!-- Right text block -->
+  <g font-family="Helvetica, Arial, sans-serif" text-anchor="start">
+    <text x="750" y="264" font-size="44" font-weight="600" fill="#FFFFFF">AI-powered growth department</text>
+    <text x="750" y="329" font-size="32" font-weight="500" fill="#C9A84C" letter-spacing="2">Automate · Scale · Close more deals</text>
+    <text x="750" y="384" font-size="26" font-weight="300" fill="#FFFFFF" opacity="0.85">Automatiza tu negocio con IA 24/7</text>
+  </g>
+</svg>

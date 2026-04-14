@@ -111,9 +111,15 @@ Cuando Jose da una orden, seguir este proceso:
 - servidor-cloud (#25) +
 - agente-monitor (#43)
 
+### CUANDO JOSE DICE "haz un video para [cliente]":
+→ Activar en secuencia:
+1. agente-video-director (#51) — disena estrategia + guion tecnico
+2. diseno-imagen (#17) — produce el video segun briefing
+3. contenido-redes (#28) — publica en las plataformas
+
 ---
 
-## LOS 48 AGENTES DEL SISTEMA
+## LOS 51 AGENTES DEL SISTEMA
 
 ### CAPA 01 — ENTRADA
 | # | Agente | Skill |
@@ -198,8 +204,11 @@ Cuando Jose da una orden, seguir este proceso:
 |---|--------|-------|
 | #47 | growth-content-specialist | `growth-content-specialist.md` |
 | #48 | youtube-ads | `youtube-ads.md` |
+| #49 | agente-manychat | `agente-manychat.md` |
+| #50 | agente-constructor-workflows | `agente-constructor-workflows.md` |
+| #51 | agente-video-director | `agente-video-director.md` |
 
-**Total: 48 agentes** — todos los skills estan en `.claude/agents/skills-globales/`
+**Total: 51 agentes** — todos los skills estan en `.claude/agents/skills-globales/`
 
 ---
 
@@ -292,8 +301,8 @@ Consolidacion → agente-investigacion (#8)
 
 > "Nunca actuar sin contexto. Nunca improvisar sin skill. Nunca entregar sin verificar. La calidad de Addendo se construye con disciplina sistematica, no con velocidad sin metodo."
 
-El sistema de 48 agentes existe para que cada decision se tome con la misma rigurosidad que tomaria el mejor especialista del mundo en cada area. La forma de honrar ese diseño es **leyendo el skill, siguiendo el proceso, y respetando las dependencias entre agentes**.
+El sistema de 51 agentes existe para que cada decision se tome con la misma rigurosidad que tomaria el mejor especialista del mundo en cada area. La forma de honrar ese diseño es **leyendo el skill, siguiendo el proceso, y respetando las dependencias entre agentes**.
 
 ---
 
-*Sistema operativo de Addendo Growth Partner — 48 agentes especializados, 1 mision: ser la agencia mas automatizada de America Latina.*
+*Sistema operativo de Addendo Growth Partner — 51 agentes especializados, 1 mision: ser la agencia mas automatizada de America Latina.*
