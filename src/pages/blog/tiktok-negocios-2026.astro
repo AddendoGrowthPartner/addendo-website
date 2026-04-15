@@ -1,176 +1,81 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-
-const metaTitleEs = 'Por qué tu negocio necesita estar en TikTok en 2026 | Addendo';
-const metaTitleEn = 'Why Your Business Needs to Be on TikTok in 2026 | Addendo';
-const metaDescEs = 'TikTok ya no es solo para jóvenes. Descubre por qué es el canal de mayor oportunidad para negocios hoy y cómo empezar sin perder tiempo.';
-const metaDescEn = 'TikTok is no longer just for young people. Discover why it\'s the biggest opportunity channel for businesses today and how to start without wasting time.';
-
-const canonical = 'https://addendo.io/blog/tiktok-negocios-2026';
-const ogImage = 'https://addendo.io/blog/tiktok-business.jpg';
-const heroImage = '/blog/tiktok-business.jpg';
-
-const publishedDate = '2026-04-08';
+import BlogPostLayout from '../../layouts/BlogPostLayout.astro';
 ---
 
-<Layout
-  title={metaTitleEs}
-  description={metaDescEs}
-  ogImage={ogImage}
-  canonical={canonical}
-  preloadImage={heroImage}
+<BlogPostLayout
+  titleEs="Por qué tu negocio necesita estar en TikTok en 2026"
+  titleEn="Why Your Business Needs to Be on TikTok in 2026"
+  descEs="TikTok ya no es solo para jóvenes. Descubre por qué es el canal de mayor oportunidad para negocios hoy y cómo empezar sin perder tiempo."
+  descEn="TikTok is no longer just for young people. Discover why it's the biggest opportunity channel for businesses today and how to start without wasting time."
+  category="Redes Sociales"
+  date="2026-04-08"
+  readTime={7}
+  heroImg="/blog/tiktok-business.jpg"
+  heroWidth={1200}
+  heroHeight={900}
+  slug="tiktok-negocios-2026"
 >
-  <article class="blog-post">
-    <header class="blog-hero">
-      <img
-        src={heroImage}
-        alt=""
-        width="1200"
-        height="900"
-        fetchpriority="high"
-        decoding="async"
-        aria-hidden="true"
-      />
-      <div class="blog-hero-overlay"></div>
-      <div class="blog-hero-inner">
-        <a href="/" class="blog-back" aria-label="Volver al inicio / Back to home">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-            <line x1="19" y1="12" x2="5" y2="12"></line>
-            <polyline points="12 19 5 12 12 5"></polyline>
-          </svg>
-          <span data-lang-es>Volver al inicio</span>
-          <span data-lang-en>Back to home</span>
-        </a>
+  <!-- ========== ES ========== -->
+  <div class="blog-article" data-lang-es>
+    <p>Hace dos años, cuando le decíamos a un dueño de negocio que debería estar en TikTok, la reacción era casi siempre la misma: "Eso es para adolescentes que bailan." Hoy esa conversación cambió completamente.</p>
+    <p>TikTok tiene más de mil millones de usuarios activos. Y lo más importante para un negocio: su algoritmo es el único en las redes sociales que todavía te permite llegar a personas que no te siguen, sin pagar publicidad.</p>
+    <p>Eso, en marketing, vale oro.</p>
 
-        <span class="blog-category">
-          <span data-lang-es>Redes Sociales</span>
-          <span data-lang-en>Social Media</span>
-        </span>
+    <h2>Por qué TikTok es diferente a Instagram o Facebook</h2>
+    <p>En Instagram y Facebook, el alcance orgánico de una página de negocio está muerto. Si tienes 10,000 seguidores y publicas algo, con suerte lo ven 300 personas. El resto lo ven solo si pagas.</p>
+    <p>TikTok funciona al revés. El algoritmo distribuye tu contenido a personas que no te conocen, basándose en qué tanto interactúan con él en los primeros minutos. Un negocio con 200 seguidores puede tener un video con 50,000 vistas si el contenido engancha.</p>
+    <p>Eso no existe en ninguna otra plataforma hoy.</p>
 
-        <h1 class="blog-title">
-          <span data-lang-es>Por qué tu negocio necesita estar en TikTok en 2026</span>
-          <span data-lang-en>Why Your Business Needs to Be on TikTok in 2026</span>
-        </h1>
+    <h2>Qué tipo de contenido funciona para negocios</h2>
+    <p>El error más común es intentar replicar en TikTok lo que funciona en Instagram — fotos bonitas, frases motivacionales, catálogo de productos. Ese contenido no funciona en TikTok porque la plataforma está construida alrededor del video y la autenticidad.</p>
+    <p>Lo que sí funciona:</p>
 
-        <div class="blog-meta">
-          <time datetime={publishedDate}>
-            <span data-lang-es>Abril 2026</span>
-            <span data-lang-en>April 2026</span>
-          </time>
-          <span class="blog-meta-sep" aria-hidden="true">•</span>
-          <span>
-            <span data-lang-es>7 min de lectura</span>
-            <span data-lang-en>7 min read</span>
-          </span>
-        </div>
-      </div>
-    </header>
+    <h3>Detrás de cámaras honesto</h3>
+    <p>Mostrar cómo se hace lo que haces, sin editar demasiado. Un taller mecánico mostrando una reparación difícil. Un restaurante mostrando cómo prepara su plato más popular. La gente consume ese contenido porque se siente auténtico.</p>
 
-    <div class="blog-article-wrap">
-      <!-- ========== ES ========== -->
-      <div class="blog-article" data-lang-es>
-        <p>Hace dos años, cuando le decíamos a un dueño de negocio que debería estar en TikTok, la reacción era casi siempre la misma: "Eso es para adolescentes que bailan." Hoy esa conversación cambió completamente.</p>
-        <p>TikTok tiene más de mil millones de usuarios activos. Y lo más importante para un negocio: su algoritmo es el único en las redes sociales que todavía te permite llegar a personas que no te siguen, sin pagar publicidad.</p>
-        <p>Eso, en marketing, vale oro.</p>
+    <h3>Responder preguntas del sector</h3>
+    <p>"¿Cuánto cuesta realmente remodelar un baño?" "¿Qué pasa si no llevo mis impuestos al día?" Los videos que responden preguntas que la gente tiene pero no sabe a quién hacerle generan confianza y posicionan al negocio como experto.</p>
 
-        <h2>Por qué TikTok es diferente a Instagram o Facebook</h2>
-        <p>En Instagram y Facebook, el alcance orgánico de una página de negocio está muerto. Si tienes 10,000 seguidores y publicas algo, con suerte lo ven 300 personas. El resto lo ven solo si pagas.</p>
-        <p>TikTok funciona al revés. El algoritmo distribuye tu contenido a personas que no te conocen, basándose en qué tanto interactúan con él en los primeros minutos. Un negocio con 200 seguidores puede tener un video con 50,000 vistas si el contenido engancha.</p>
-        <p>Eso no existe en ninguna otra plataforma hoy.</p>
+    <h3>Mostrar resultados antes y después</h3>
+    <p>Funciona en casi cualquier industria — construcción, estética, fitness, marketing. El cerebro humano está programado para comparar.</p>
 
-        <h2>Qué tipo de contenido funciona para negocios</h2>
-        <p>El error más común es intentar replicar en TikTok lo que funciona en Instagram — fotos bonitas, frases motivacionales, catálogo de productos. Ese contenido no funciona en TikTok porque la plataforma está construida alrededor del video y la autenticidad.</p>
-        <p>Lo que sí funciona:</p>
+    <h2>El momento de entrar es ahora</h2>
+    <p>TikTok para negocios todavía está en una etapa temprana comparado con lo que fue Instagram en 2015. Los negocios que entren ahora, construyan audiencia y aprendan el algoritmo van a tener una ventaja enorme sobre los que esperen.</p>
+    <p>En dos o tres años, el alcance orgánico de TikTok va a caer — como cayó el de Facebook e Instagram. Siempre pasa. La pregunta es si vas a construir tu presencia antes o después de ese momento.</p>
 
-        <h3>Detrás de cámaras honesto</h3>
-        <p>Mostrar cómo se hace lo que haces, sin editar demasiado. Un taller mecánico mostrando una reparación difícil. Un restaurante mostrando cómo prepara su plato más popular. La gente consume ese contenido porque se siente auténtico.</p>
+    <h2>¿Por dónde empezar sin perder tiempo?</h2>
+    <p>Empieza con un video a la semana. No necesitas producción elaborada — necesitas consistencia y contenido que responda preguntas reales de tus clientes. El teléfono que tienes en el bolsillo es suficiente para empezar.</p>
+  </div>
 
-        <h3>Responder preguntas del sector</h3>
-        <p>"¿Cuánto cuesta realmente remodelar un baño?" "¿Qué pasa si no llevo mis impuestos al día?" Los videos que responden preguntas que la gente tiene pero no sabe a quién hacerle generan confianza y posicionan al negocio como experto.</p>
+  <!-- ========== EN ========== -->
+  <div class="blog-article" data-lang-en>
+    <p>Two years ago, when we told a business owner they should be on TikTok, the reaction was almost always the same: "That's for teenagers who dance." That conversation has completely changed today.</p>
+    <p>TikTok has over one billion active users. And most importantly for a business: its algorithm is the only one in social media that still lets you reach people who don't follow you, without paying for ads.</p>
+    <p>In marketing, that's worth gold.</p>
 
-        <h3>Mostrar resultados antes y después</h3>
-        <p>Funciona en casi cualquier industria — construcción, estética, fitness, marketing. El cerebro humano está programado para comparar.</p>
+    <h2>Why TikTok Is Different from Instagram or Facebook</h2>
+    <p>On Instagram and Facebook, organic reach for a business page is dead. If you have 10,000 followers and post something, 300 people see it if you're lucky. The rest only see it if you pay.</p>
+    <p>TikTok works the opposite way. The algorithm distributes your content to people who don't know you, based on how much they interact with it in the first few minutes. A business with 200 followers can have a video with 50,000 views if the content hooks people.</p>
+    <p>That doesn't exist on any other platform today.</p>
 
-        <h2>El momento de entrar es ahora</h2>
-        <p>TikTok para negocios todavía está en una etapa temprana comparado con lo que fue Instagram en 2015. Los negocios que entren ahora, construyan audiencia y aprendan el algoritmo van a tener una ventaja enorme sobre los que esperen.</p>
-        <p>En dos o tres años, el alcance orgánico de TikTok va a caer — como cayó el de Facebook e Instagram. Siempre pasa. La pregunta es si vas a construir tu presencia antes o después de ese momento.</p>
+    <h2>What Type of Content Works for Businesses</h2>
+    <p>The most common mistake is trying to replicate on TikTok what works on Instagram — pretty photos, motivational quotes, product catalogs. That content doesn't work on TikTok because the platform is built around video and authenticity.</p>
+    <p>What does work:</p>
 
-        <h2>¿Por dónde empezar sin perder tiempo?</h2>
-        <p>Empieza con un video a la semana. No necesitas producción elaborada — necesitas consistencia y contenido que responda preguntas reales de tus clientes. El teléfono que tienes en el bolsillo es suficiente para empezar.</p>
-      </div>
+    <h3>Honest Behind-the-Scenes</h3>
+    <p>Showing how you do what you do, without over-editing. A mechanic shop showing a difficult repair. A restaurant showing how they prepare their most popular dish. People consume that content because it feels authentic.</p>
 
-      <!-- ========== EN ========== -->
-      <div class="blog-article" data-lang-en>
-        <p>Two years ago, when we told a business owner they should be on TikTok, the reaction was almost always the same: "That's for teenagers who dance." That conversation has completely changed today.</p>
-        <p>TikTok has over one billion active users. And most importantly for a business: its algorithm is the only one in social media that still lets you reach people who don't follow you, without paying for ads.</p>
-        <p>In marketing, that's worth gold.</p>
+    <h3>Answering Industry Questions</h3>
+    <p>"How much does it really cost to remodel a bathroom?" "What happens if I don't file my taxes on time?" Videos that answer questions people have but don't know who to ask build trust and position the business as an expert.</p>
 
-        <h2>Why TikTok Is Different from Instagram or Facebook</h2>
-        <p>On Instagram and Facebook, organic reach for a business page is dead. If you have 10,000 followers and post something, 300 people see it if you're lucky. The rest only see it if you pay.</p>
-        <p>TikTok works the opposite way. The algorithm distributes your content to people who don't know you, based on how much they interact with it in the first few minutes. A business with 200 followers can have a video with 50,000 views if the content hooks people.</p>
-        <p>That doesn't exist on any other platform today.</p>
+    <h3>Before and After Results</h3>
+    <p>Works in almost any industry — construction, beauty, fitness, marketing. The human brain is wired to compare.</p>
 
-        <h2>What Type of Content Works for Businesses</h2>
-        <p>The most common mistake is trying to replicate on TikTok what works on Instagram — pretty photos, motivational quotes, product catalogs. That content doesn't work on TikTok because the platform is built around video and authenticity.</p>
-        <p>What does work:</p>
+    <h2>The Time to Enter Is Now</h2>
+    <p>TikTok for business is still in an early stage compared to what Instagram was in 2015. Businesses that enter now, build an audience and learn the algorithm will have a massive advantage over those who wait.</p>
+    <p>In two or three years, TikTok's organic reach will drop — just like Facebook's and Instagram's did. It always happens. The question is whether you'll build your presence before or after that moment.</p>
 
-        <h3>Honest Behind-the-Scenes</h3>
-        <p>Showing how you do what you do, without over-editing. A mechanic shop showing a difficult repair. A restaurant showing how they prepare their most popular dish. People consume that content because it feels authentic.</p>
-
-        <h3>Answering Industry Questions</h3>
-        <p>"How much does it really cost to remodel a bathroom?" "What happens if I don't file my taxes on time?" Videos that answer questions people have but don't know who to ask build trust and position the business as an expert.</p>
-
-        <h3>Before and After Results</h3>
-        <p>Works in almost any industry — construction, beauty, fitness, marketing. The human brain is wired to compare.</p>
-
-        <h2>The Time to Enter Is Now</h2>
-        <p>TikTok for business is still in an early stage compared to what Instagram was in 2015. Businesses that enter now, build an audience and learn the algorithm will have a massive advantage over those who wait.</p>
-        <p>In two or three years, TikTok's organic reach will drop — just like Facebook's and Instagram's did. It always happens. The question is whether you'll build your presence before or after that moment.</p>
-
-        <h2>Where to Start Without Wasting Time</h2>
-        <p>Start with one video a week. You don't need elaborate production — you need consistency and content that answers real questions from your customers. The phone in your pocket is enough to get started.</p>
-      </div>
-
-      <!-- CTA -->
-      <aside class="blog-cta">
-        <p class="blog-cta-text">
-          <span data-lang-es>¿Quieres una estrategia de contenido para TikTok específica para tu industria? Hablemos.</span>
-          <span data-lang-en>Want a TikTok content strategy specific to your industry? Let's talk.</span>
-        </p>
-        <a href="/#contacto" class="btn-gold text-base md:text-lg">
-          <span data-lang-es>Quiero mi estrategia</span>
-          <span data-lang-en>I want my strategy</span>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-          </svg>
-        </a>
-      </aside>
-      <div style="text-align:center; margin-top: 2rem;">
-        <a href="/blog" style="color: #C9A84C; text-decoration: none; font-size: 0.9rem; border: 1px solid rgba(201,168,76,0.3); padding: 0.75rem 1.5rem; border-radius: 9999px;">
-          &larr; Ver todos los artículos
-        </a>
-      </div>
-    </div>
-  </article>
-
-  <script type="application/ld+json" set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "Por qué tu negocio necesita estar en TikTok en 2026",
-    "alternativeHeadline": "Why Your Business Needs to Be on TikTok in 2026",
-    "description": metaDescEs,
-    "image": ogImage,
-    "datePublished": publishedDate,
-    "dateModified": publishedDate,
-    "author": { "@type": "Organization", "name": "Addendo Growth Partner", "url": "https://addendo.io" },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Addendo Growth Partner",
-      "logo": { "@type": "ImageObject", "url": "https://res.cloudinary.com/dokzw376u/image/upload/f_auto,q_auto/v1774995924/VECTOR_ADDENDO_FINAL_zuw6te.jpg" }
-    },
-    "mainEntityOfPage": { "@type": "WebPage", "@id": canonical },
-    "articleSection": "Redes Sociales",
-    "inLanguage": ["es", "en"]
-  })} />
-</Layout>
+    <h2>Where to Start Without Wasting Time</h2>
+    <p>Start with one video a week. You don't need elaborate production — you need consistency and content that answers real questions from your customers. The phone in your pocket is enough to get started.</p>
+  </div>
+</BlogPostLayout>

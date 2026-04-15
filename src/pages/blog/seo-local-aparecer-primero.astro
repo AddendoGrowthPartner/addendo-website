@@ -1,178 +1,83 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-
-const metaTitleEs = 'SEO Local: Aparece primero cuando te buscan en tu ciudad | Addendo';
-const metaTitleEn = 'Local SEO: Rank First When They Search in Your City | Addendo';
-const metaDescEs = 'Aprende los tres pilares del SEO local que posicionan tu negocio en Google cuando clientes cercanos buscan lo que ofreces.';
-const metaDescEn = 'Learn the three pillars of local SEO that position your business on Google when nearby customers search for what you offer.';
-
-const canonical = 'https://addendo.io/blog/seo-local-aparecer-primero';
-const ogImage = 'https://addendo.io/blog/seo-local.jpg';
-const heroImage = '/blog/seo-local.jpg';
-
-const publishedDate = '2026-04-08';
+import BlogPostLayout from '../../layouts/BlogPostLayout.astro';
 ---
 
-<Layout
-  title={metaTitleEs}
-  description={metaDescEs}
-  ogImage={ogImage}
-  canonical={canonical}
-  preloadImage={heroImage}
+<BlogPostLayout
+  titleEs="SEO Local: Aparece primero cuando te buscan en tu ciudad"
+  titleEn="Local SEO: Rank First When They Search in Your City"
+  descEs="Aprende los tres pilares del SEO local que posicionan tu negocio en Google cuando clientes cercanos buscan lo que ofreces."
+  descEn="Learn the three pillars of local SEO that position your business on Google when nearby customers search for what you offer."
+  category="SEO"
+  date="2026-04-08"
+  readTime={9}
+  heroImg="/blog/seo-local.jpg"
+  heroWidth={1200}
+  heroHeight={797}
+  slug="seo-local-aparecer-primero"
 >
-  <article class="blog-post">
-    <header class="blog-hero">
-      <img
-        src={heroImage}
-        alt=""
-        width="1200"
-        height="797"
-        fetchpriority="high"
-        decoding="async"
-        aria-hidden="true"
-      />
-      <div class="blog-hero-overlay"></div>
-      <div class="blog-hero-inner">
-        <a href="/" class="blog-back" aria-label="Volver al inicio / Back to home">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-            <line x1="19" y1="12" x2="5" y2="12"></line>
-            <polyline points="12 19 5 12 12 5"></polyline>
-          </svg>
-          <span data-lang-es>Volver al inicio</span>
-          <span data-lang-en>Back to home</span>
-        </a>
+  <!-- ========== ES ========== -->
+  <div class="blog-article" data-lang-es>
+    <p>Hay un momento específico en que un negocio local pierde una venta y nunca se entera. Es cuando alguien escribe en Google "dentista cerca de mí" o "abogado de inmigración en Orlando" y el resultado que aparece primero no es el tuyo.</p>
+    <p>Esa persona va a llamar al primero que ve. Así funciona el comportamiento de búsqueda — el 70% de los clics van a los tres primeros resultados.</p>
+    <p>SEO local es exactamente eso: asegurarte de que cuando alguien en tu ciudad busca lo que tú ofreces, eres tú quien aparece.</p>
 
-        <span class="blog-category">
-          <span data-lang-es>SEO</span>
-          <span data-lang-en>SEO</span>
-        </span>
+    <h2>La diferencia entre SEO local y SEO general</h2>
+    <p>El SEO general compite a nivel nacional o global. Es difícil, lento y caro para un negocio pequeño o mediano.</p>
+    <p>El SEO local compite dentro de una ciudad o área geográfica específica. Es más alcanzable, los resultados llegan más rápido, y los clientes que llegan están listos para comprar porque están buscando algo específico cerca de ellos.</p>
+    <p>Un dentista en Kissimmee no necesita aparecer en Nueva York. Necesita aparecer cuando alguien en Kissimmee busca "dentista" o "limpieza dental" o "emergencia dental cerca."</p>
 
-        <h1 class="blog-title">
-          <span data-lang-es>SEO Local: Aparece primero cuando te buscan en tu ciudad</span>
-          <span data-lang-en>Local SEO: Rank First When They Search in Your City</span>
-        </h1>
+    <h2>Los tres pilares del SEO local</h2>
 
-        <div class="blog-meta">
-          <time datetime={publishedDate}>
-            <span data-lang-es>Abril 2026</span>
-            <span data-lang-en>April 2026</span>
-          </time>
-          <span class="blog-meta-sep" aria-hidden="true">•</span>
-          <span>
-            <span data-lang-es>9 min de lectura</span>
-            <span data-lang-en>9 min read</span>
-          </span>
-        </div>
-      </div>
-    </header>
+    <h3>1. Google Business Profile optimizado</h3>
+    <p>Este es el punto de partida y el que más impacto tiene en el corto plazo. Tu perfil de Google Business es lo que aparece en el mapa cuando alguien te busca. Si está incompleto, desactualizado o sin reseñas, Google lo va a mostrar menos que a la competencia.</p>
+    <p>Lo mínimo para tener un perfil competitivo: nombre, dirección y teléfono exactamente iguales en todos los directorios, categoría principal correcta, descripción con palabras clave naturales, mínimo 10 fotos actualizadas, y responder todas las reseñas — positivas y negativas.</p>
 
-    <div class="blog-article-wrap">
-      <!-- ========== ES ========== -->
-      <div class="blog-article" data-lang-es>
-        <p>Hay un momento específico en que un negocio local pierde una venta y nunca se entera. Es cuando alguien escribe en Google "dentista cerca de mí" o "abogado de inmigración en Orlando" y el resultado que aparece primero no es el tuyo.</p>
-        <p>Esa persona va a llamar al primero que ve. Así funciona el comportamiento de búsqueda — el 70% de los clics van a los tres primeros resultados.</p>
-        <p>SEO local es exactamente eso: asegurarte de que cuando alguien en tu ciudad busca lo que tú ofreces, eres tú quien aparece.</p>
+    <h3>2. Páginas de servicio por ciudad</h3>
+    <p>Si atiendes varias ciudades o zonas, necesitas una página específica para cada una. No basta con decir en la página principal "atendemos todo el sur de Florida." Google necesita páginas dedicadas con contenido específico para cada ubicación.</p>
+    <p>Una empresa de limpieza que atiende Miami, Doral y Hialeah debería tener tres páginas: una para cada ciudad, con contenido diferente, con el nombre de la ciudad en el título y en el texto de forma natural.</p>
 
-        <h2>La diferencia entre SEO local y SEO general</h2>
-        <p>El SEO general compite a nivel nacional o global. Es difícil, lento y caro para un negocio pequeño o mediano.</p>
-        <p>El SEO local compite dentro de una ciudad o área geográfica específica. Es más alcanzable, los resultados llegan más rápido, y los clientes que llegan están listos para comprar porque están buscando algo específico cerca de ellos.</p>
-        <p>Un dentista en Kissimmee no necesita aparecer en Nueva York. Necesita aparecer cuando alguien en Kissimmee busca "dentista" o "limpieza dental" o "emergencia dental cerca."</p>
+    <h3>3. Reseñas consistentes</h3>
+    <p>Las reseñas son el factor de confianza más importante en SEO local. No solo para Google — para los clientes. Una empresa con 4.8 estrellas y 80 reseñas siempre va a ganarle a una con 5 estrellas y 4 reseñas.</p>
+    <p>El problema es que pedir reseñas se siente incómodo. La solución es sistematizarlo: un mensaje automático que va al cliente 24 horas después del servicio, con el enlace directo a Google. Simple, no invasivo, y con el tiempo construye una ventaja competitiva que es muy difícil de replicar.</p>
 
-        <h2>Los tres pilares del SEO local</h2>
+    <h2>Cuánto tiempo tarda en funcionar</h2>
+    <p>SEO local no es inmediato. Los primeros resultados visibles suelen aparecer entre 60 y 90 días con una estrategia consistente. Pero a diferencia de Google Ads, el tráfico que genera no para cuando dejas de pagar — sigue llegando.</p>
+    <p>Es la diferencia entre alquilar visibilidad y construirla.</p>
 
-        <h3>1. Google Business Profile optimizado</h3>
-        <p>Este es el punto de partida y el que más impacto tiene en el corto plazo. Tu perfil de Google Business es lo que aparece en el mapa cuando alguien te busca. Si está incompleto, desactualizado o sin reseñas, Google lo va a mostrar menos que a la competencia.</p>
-        <p>Lo mínimo para tener un perfil competitivo: nombre, dirección y teléfono exactamente iguales en todos los directorios, categoría principal correcta, descripción con palabras clave naturales, mínimo 10 fotos actualizadas, y responder todas las reseñas — positivas y negativas.</p>
+    <h2>El primer paso concreto</h2>
+    <p>Entra a tu perfil de Google Business ahora mismo y verifica que tu nombre, dirección y teléfono sean exactamente iguales a los que aparecen en tu página web. Ese detalle solo, cuando está mal, puede estar frenando tu posicionamiento sin que lo sepas.</p>
+  </div>
 
-        <h3>2. Páginas de servicio por ciudad</h3>
-        <p>Si atiendes varias ciudades o zonas, necesitas una página específica para cada una. No basta con decir en la página principal "atendemos todo el sur de Florida." Google necesita páginas dedicadas con contenido específico para cada ubicación.</p>
-        <p>Una empresa de limpieza que atiende Miami, Doral y Hialeah debería tener tres páginas: una para cada ciudad, con contenido diferente, con el nombre de la ciudad en el título y en el texto de forma natural.</p>
+  <!-- ========== EN ========== -->
+  <div class="blog-article" data-lang-en>
+    <p>There's a specific moment when a local business loses a sale and never finds out. It's when someone types into Google "dentist near me" or "immigration lawyer in Orlando" and the first result isn't yours.</p>
+    <p>That person is going to call the first one they see. That's how search behavior works — 70% of clicks go to the top three results.</p>
+    <p>Local SEO is exactly that: making sure that when someone in your city searches for what you offer, you're the one who shows up.</p>
 
-        <h3>3. Reseñas consistentes</h3>
-        <p>Las reseñas son el factor de confianza más importante en SEO local. No solo para Google — para los clientes. Una empresa con 4.8 estrellas y 80 reseñas siempre va a ganarle a una con 5 estrellas y 4 reseñas.</p>
-        <p>El problema es que pedir reseñas se siente incómodo. La solución es sistematizarlo: un mensaje automático que va al cliente 24 horas después del servicio, con el enlace directo a Google. Simple, no invasivo, y con el tiempo construye una ventaja competitiva que es muy difícil de replicar.</p>
+    <h2>The Difference Between Local SEO and General SEO</h2>
+    <p>General SEO competes at a national or global level. It's difficult, slow and expensive for a small or medium business.</p>
+    <p>Local SEO competes within a specific city or geographic area. It's more achievable, results come faster, and the customers who arrive are ready to buy because they're searching for something specific near them.</p>
+    <p>A dentist in Kissimmee doesn't need to show up in New York. They need to show up when someone in Kissimmee searches "dentist" or "dental cleaning" or "emergency dental near me."</p>
 
-        <h2>Cuánto tiempo tarda en funcionar</h2>
-        <p>SEO local no es inmediato. Los primeros resultados visibles suelen aparecer entre 60 y 90 días con una estrategia consistente. Pero a diferencia de Google Ads, el tráfico que genera no para cuando dejas de pagar — sigue llegando.</p>
-        <p>Es la diferencia entre alquilar visibilidad y construirla.</p>
+    <h2>The Three Pillars of Local SEO</h2>
 
-        <h2>El primer paso concreto</h2>
-        <p>Entra a tu perfil de Google Business ahora mismo y verifica que tu nombre, dirección y teléfono sean exactamente iguales a los que aparecen en tu página web. Ese detalle solo, cuando está mal, puede estar frenando tu posicionamiento sin que lo sepas.</p>
-      </div>
+    <h3>1. Optimized Google Business Profile</h3>
+    <p>This is the starting point and the one with the most short-term impact. Your Google Business profile is what appears on the map when someone searches for you. If it's incomplete, outdated or without reviews, Google will show it less than your competition.</p>
+    <p>The minimum for a competitive profile: name, address and phone number exactly the same across all directories, correct primary category, description with natural keywords, at least 10 updated photos, and responding to all reviews — positive and negative.</p>
 
-      <!-- ========== EN ========== -->
-      <div class="blog-article" data-lang-en>
-        <p>There's a specific moment when a local business loses a sale and never finds out. It's when someone types into Google "dentist near me" or "immigration lawyer in Orlando" and the first result isn't yours.</p>
-        <p>That person is going to call the first one they see. That's how search behavior works — 70% of clicks go to the top three results.</p>
-        <p>Local SEO is exactly that: making sure that when someone in your city searches for what you offer, you're the one who shows up.</p>
+    <h3>2. Service Pages by City</h3>
+    <p>If you serve multiple cities or areas, you need a specific page for each one. It's not enough to say on your homepage "we serve all of South Florida." Google needs dedicated pages with specific content for each location.</p>
+    <p>A cleaning company that serves Miami, Doral and Hialeah should have three pages: one for each city, with different content, with the city name in the title and in the text naturally.</p>
 
-        <h2>The Difference Between Local SEO and General SEO</h2>
-        <p>General SEO competes at a national or global level. It's difficult, slow and expensive for a small or medium business.</p>
-        <p>Local SEO competes within a specific city or geographic area. It's more achievable, results come faster, and the customers who arrive are ready to buy because they're searching for something specific near them.</p>
-        <p>A dentist in Kissimmee doesn't need to show up in New York. They need to show up when someone in Kissimmee searches "dentist" or "dental cleaning" or "emergency dental near me."</p>
+    <h3>3. Consistent Reviews</h3>
+    <p>Reviews are the most important trust factor in local SEO. Not just for Google — for customers. A business with 4.8 stars and 80 reviews will always beat one with 5 stars and 4 reviews.</p>
+    <p>The problem is that asking for reviews feels uncomfortable. The solution is to systematize it: an automatic message that goes to the customer 24 hours after the service, with the direct link to Google. Simple, non-invasive, and over time it builds a competitive advantage that's very hard to replicate.</p>
 
-        <h2>The Three Pillars of Local SEO</h2>
+    <h2>How Long Does It Take to Work</h2>
+    <p>Local SEO isn't immediate. The first visible results usually appear between 60 and 90 days with a consistent strategy. But unlike Google Ads, the traffic it generates doesn't stop when you stop paying — it keeps coming.</p>
+    <p>It's the difference between renting visibility and building it.</p>
 
-        <h3>1. Optimized Google Business Profile</h3>
-        <p>This is the starting point and the one with the most short-term impact. Your Google Business profile is what appears on the map when someone searches for you. If it's incomplete, outdated or without reviews, Google will show it less than your competition.</p>
-        <p>The minimum for a competitive profile: name, address and phone number exactly the same across all directories, correct primary category, description with natural keywords, at least 10 updated photos, and responding to all reviews — positive and negative.</p>
-
-        <h3>2. Service Pages by City</h3>
-        <p>If you serve multiple cities or areas, you need a specific page for each one. It's not enough to say on your homepage "we serve all of South Florida." Google needs dedicated pages with specific content for each location.</p>
-        <p>A cleaning company that serves Miami, Doral and Hialeah should have three pages: one for each city, with different content, with the city name in the title and in the text naturally.</p>
-
-        <h3>3. Consistent Reviews</h3>
-        <p>Reviews are the most important trust factor in local SEO. Not just for Google — for customers. A business with 4.8 stars and 80 reviews will always beat one with 5 stars and 4 reviews.</p>
-        <p>The problem is that asking for reviews feels uncomfortable. The solution is to systematize it: an automatic message that goes to the customer 24 hours after the service, with the direct link to Google. Simple, non-invasive, and over time it builds a competitive advantage that's very hard to replicate.</p>
-
-        <h2>How Long Does It Take to Work</h2>
-        <p>Local SEO isn't immediate. The first visible results usually appear between 60 and 90 days with a consistent strategy. But unlike Google Ads, the traffic it generates doesn't stop when you stop paying — it keeps coming.</p>
-        <p>It's the difference between renting visibility and building it.</p>
-
-        <h2>The Concrete First Step</h2>
-        <p>Go to your Google Business profile right now and verify that your name, address and phone number are exactly the same as what appears on your website. That detail alone, when it's wrong, can be holding back your ranking without you knowing it.</p>
-      </div>
-
-      <!-- CTA -->
-      <aside class="blog-cta">
-        <p class="blog-cta-text">
-          <span data-lang-es>¿Quieres saber en qué posición apareces ahora mismo para las búsquedas más importantes de tu negocio? Te hacemos el diagnóstico gratis.</span>
-          <span data-lang-en>Want to know where you rank right now for your most important business searches? We'll do the diagnosis for free.</span>
-        </p>
-        <a href="/#contacto" class="btn-gold text-base md:text-lg">
-          <span data-lang-es>Quiero mi diagnóstico gratis</span>
-          <span data-lang-en>Get my free diagnosis</span>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-          </svg>
-        </a>
-      </aside>
-      <div style="text-align:center; margin-top: 2rem;">
-        <a href="/blog" style="color: #C9A84C; text-decoration: none; font-size: 0.9rem; border: 1px solid rgba(201,168,76,0.3); padding: 0.75rem 1.5rem; border-radius: 9999px;">
-          &larr; Ver todos los artículos
-        </a>
-      </div>
-    </div>
-  </article>
-
-  <script type="application/ld+json" set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "SEO Local: Aparece primero cuando te buscan en tu ciudad",
-    "alternativeHeadline": "Local SEO: Rank First When They Search in Your City",
-    "description": metaDescEs,
-    "image": ogImage,
-    "datePublished": publishedDate,
-    "dateModified": publishedDate,
-    "author": { "@type": "Organization", "name": "Addendo Growth Partner", "url": "https://addendo.io" },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Addendo Growth Partner",
-      "logo": { "@type": "ImageObject", "url": "https://res.cloudinary.com/dokzw376u/image/upload/f_auto,q_auto/v1774995924/VECTOR_ADDENDO_FINAL_zuw6te.jpg" }
-    },
-    "mainEntityOfPage": { "@type": "WebPage", "@id": canonical },
-    "articleSection": "SEO",
-    "inLanguage": ["es", "en"]
-  })} />
-</Layout>
+    <h2>The Concrete First Step</h2>
+    <p>Go to your Google Business profile right now and verify that your name, address and phone number are exactly the same as what appears on your website. That detail alone, when it's wrong, can be holding back your ranking without you knowing it.</p>
+  </div>
+</BlogPostLayout>

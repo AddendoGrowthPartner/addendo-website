@@ -1,178 +1,81 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-
-const metaTitleEs = 'Cómo duplicar tus leads en 30 días con Google Ads | Addendo';
-const metaTitleEn = 'How to Double Your Leads in 30 Days with Google Ads | Addendo';
-const metaDescEs = 'Aprende las estrategias exactas de estructura, segmentación y optimización que usamos para multiplicar los resultados de nuestros clientes en Google Ads.';
-const metaDescEn = 'Learn the exact structure, targeting and optimization strategies we use to multiply results for our clients with Google Ads.';
-
-const canonical = 'https://addendo.io/blog/duplicar-leads-google-ads';
-const ogImage = 'https://addendo.io/blog/google-ads-leads.jpg';
-const heroImage = '/blog/google-ads-leads.jpg';
-
-const publishedDate = '2026-04-08';
+import BlogPostLayout from '../../layouts/BlogPostLayout.astro';
 ---
 
-<Layout
-  title={metaTitleEs}
-  description={metaDescEs}
-  ogImage={ogImage}
-  canonical={canonical}
-  preloadImage={heroImage}
+<BlogPostLayout
+  titleEs="Cómo duplicar tus leads en 30 días con Google Ads"
+  titleEn="How to Double Your Leads in 30 Days with Google Ads"
+  descEs="Aprende las estrategias exactas de estructura, segmentación y optimización que usamos para multiplicar los resultados de nuestros clientes en Google Ads."
+  descEn="Learn the exact structure, targeting and optimization strategies we use to multiply results for our clients with Google Ads."
+  category="Marketing Digital"
+  date="2026-04-08"
+  readTime={8}
+  heroImg="/blog/google-ads-leads.jpg"
+  heroWidth={1200}
+  heroHeight={855}
+  slug="duplicar-leads-google-ads"
 >
-  <article class="blog-post">
-    <!-- Hero -->
-    <header class="blog-hero">
-      <img
-        src={heroImage}
-        alt=""
-        width="1200"
-        height="855"
-        fetchpriority="high"
-        decoding="async"
-        aria-hidden="true"
-      />
-      <div class="blog-hero-overlay"></div>
-      <div class="blog-hero-inner">
-        <a href="/" class="blog-back" aria-label="Volver al inicio / Back to home">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-            <line x1="19" y1="12" x2="5" y2="12"></line>
-            <polyline points="12 19 5 12 12 5"></polyline>
-          </svg>
-          <span data-lang-es>Volver al inicio</span>
-          <span data-lang-en>Back to home</span>
-        </a>
+  <!-- ========== ES ========== -->
+  <div class="blog-article" data-lang-es>
+    <p>Si llevas un tiempo corriendo Google Ads y sientes que el dinero se va pero los resultados no llegan, no estás solo. Es el problema más común que vemos cuando auditamos cuentas nuevas: presupuesto activo, clics que entran, y formularios que no suenan.</p>
+    <p>La buena noticia es que en la mayoría de los casos, el problema no es el presupuesto. Es la estructura.</p>
 
-        <span class="blog-category">
-          <span data-lang-es>Marketing Digital</span>
-          <span data-lang-en>Digital Marketing</span>
-        </span>
+    <h2>El error más caro que cometen los negocios</h2>
+    <p>La mayoría arranca Google Ads con una campaña genérica que apunta a todo el mundo. Un plomero en Miami que anuncia "servicios de plomería" en todo el estado de Florida está pagando por clics de personas que están a tres horas de distancia y nunca van a llamarlo.</p>
+    <p>El dinero no se fue a Google. Se fue a la falta de segmentación.</p>
 
-        <h1 class="blog-title">
-          <span data-lang-es>Cómo duplicar tus leads en 30 días con Google Ads</span>
-          <span data-lang-en>How to Double Your Leads in 30 Days with Google Ads</span>
-        </h1>
+    <h2>Lo que realmente mueve la aguja</h2>
+    <p>Después de gestionar cientos de cuentas, hay tres palancas que consistentemente duplican los leads sin tocar el presupuesto:</p>
 
-        <div class="blog-meta">
-          <time datetime={publishedDate}>
-            <span data-lang-es>Abril 2026</span>
-            <span data-lang-en>April 2026</span>
-          </time>
-          <span class="blog-meta-sep" aria-hidden="true">•</span>
-          <span>
-            <span data-lang-es>8 min de lectura</span>
-            <span data-lang-en>8 min read</span>
-          </span>
-        </div>
-      </div>
-    </header>
+    <h3>1. Segmentación por intención, no por interés</h3>
+    <p>Hay una diferencia enorme entre alguien que busca "ideas para remodelar cocina" y alguien que busca "empresa remodelación cocina Miami presupuesto". El primero está soñando. El segundo tiene la tarjeta en la mano.</p>
+    <p>Enfoca tu presupuesto en palabras clave de alta intención — las que incluyen ubicación, urgencia o intención de compra clara. Elimina las palabras clave informativas y ponlas en lista negativa.</p>
 
-    <div class="blog-article-wrap">
-      <!-- ========== ES ========== -->
-      <div class="blog-article" data-lang-es>
-        <p>Si llevas un tiempo corriendo Google Ads y sientes que el dinero se va pero los resultados no llegan, no estás solo. Es el problema más común que vemos cuando auditamos cuentas nuevas: presupuesto activo, clics que entran, y formularios que no suenan.</p>
-        <p>La buena noticia es que en la mayoría de los casos, el problema no es el presupuesto. Es la estructura.</p>
+    <h3>2. Message match entre anuncio y landing page</h3>
+    <p>Si tu anuncio dice "Plomero de emergencia 24/7" y el usuario llega a tu página principal donde hay cinco servicios diferentes, perdiste la venta. El cerebro humano tarda menos de tres segundos en decidir si está en el lugar correcto.</p>
+    <p>Crea una landing page específica para cada grupo de anuncios. El título de la página debe repetir exactamente lo que prometió el anuncio.</p>
 
-        <h2>El error más caro que cometen los negocios</h2>
-        <p>La mayoría arranca Google Ads con una campaña genérica que apunta a todo el mundo. Un plomero en Miami que anuncia "servicios de plomería" en todo el estado de Florida está pagando por clics de personas que están a tres horas de distancia y nunca van a llamarlo.</p>
-        <p>El dinero no se fue a Google. Se fue a la falta de segmentación.</p>
+    <h3>3. Extensiones de anuncio como arma de conversión</h3>
+    <p>Las extensiones de llamada, ubicación y fragmentos estructurados no son opcionales — son la diferencia entre un anuncio que se ve profesional y uno que parece aficionado. Google también las premia con mejor Quality Score, lo que baja tu costo por clic.</p>
 
-        <h2>Lo que realmente mueve la aguja</h2>
-        <p>Después de gestionar cientos de cuentas, hay tres palancas que consistentemente duplican los leads sin tocar el presupuesto:</p>
+    <h2>El ciclo de optimización que nadie te cuenta</h2>
+    <p>Google Ads no es una campaña que se lanza y se olvida. Los primeros 30 días son de aprendizaje: el algoritmo está entendiendo quién convierte y quién no. Si apagas la campaña antes de ese período porque "no está funcionando", perdiste toda la inversión del aprendizaje.</p>
+    <p>Lo que sí debes hacer en esos 30 días: revisar el informe de términos de búsqueda cada semana y agregar a lista negativa todo lo que no sea relevante. Eso solo puede reducir el gasto desperdiciado en un 20-30%.</p>
 
-        <h3>1. Segmentación por intención, no por interés</h3>
-        <p>Hay una diferencia enorme entre alguien que busca "ideas para remodelar cocina" y alguien que busca "empresa remodelación cocina Miami presupuesto". El primero está soñando. El segundo tiene la tarjeta en la mano.</p>
-        <p>Enfoca tu presupuesto en palabras clave de alta intención — las que incluyen ubicación, urgencia o intención de compra clara. Elimina las palabras clave informativas y ponlas en lista negativa.</p>
+    <h2>¿Por dónde empezar?</h2>
+    <p>Si tienes una cuenta activa, empieza por el informe de términos de búsqueda esta semana. Si estás empezando desde cero, define primero las tres o cuatro palabras clave de mayor intención de tu negocio antes de pensar en el presupuesto.</p>
+    <p>El dinero no es el problema. La estructura sí.</p>
+  </div>
 
-        <h3>2. Message match entre anuncio y landing page</h3>
-        <p>Si tu anuncio dice "Plomero de emergencia 24/7" y el usuario llega a tu página principal donde hay cinco servicios diferentes, perdiste la venta. El cerebro humano tarda menos de tres segundos en decidir si está en el lugar correcto.</p>
-        <p>Crea una landing page específica para cada grupo de anuncios. El título de la página debe repetir exactamente lo que prometió el anuncio.</p>
+  <!-- ========== EN ========== -->
+  <div class="blog-article" data-lang-en>
+    <p>If you've been running Google Ads for a while and feel like money is going out but results aren't coming in, you're not alone. It's the most common problem we see when auditing new accounts: active budget, clicks coming in, and forms that never ring.</p>
+    <p>The good news is that in most cases, the problem isn't the budget. It's the structure.</p>
 
-        <h3>3. Extensiones de anuncio como arma de conversión</h3>
-        <p>Las extensiones de llamada, ubicación y fragmentos estructurados no son opcionales — son la diferencia entre un anuncio que se ve profesional y uno que parece aficionado. Google también las premia con mejor Quality Score, lo que baja tu costo por clic.</p>
+    <h2>The Most Expensive Mistake Businesses Make</h2>
+    <p>Most businesses start Google Ads with a generic campaign targeting everyone. A plumber in Miami advertising "plumbing services" across the entire state of Florida is paying for clicks from people who are three hours away and will never call.</p>
+    <p>The money didn't go to Google. It went to a lack of targeting.</p>
 
-        <h2>El ciclo de optimización que nadie te cuenta</h2>
-        <p>Google Ads no es una campaña que se lanza y se olvida. Los primeros 30 días son de aprendizaje: el algoritmo está entendiendo quién convierte y quién no. Si apagas la campaña antes de ese período porque "no está funcionando", perdiste toda la inversión del aprendizaje.</p>
-        <p>Lo que sí debes hacer en esos 30 días: revisar el informe de términos de búsqueda cada semana y agregar a lista negativa todo lo que no sea relevante. Eso solo puede reducir el gasto desperdiciado en un 20-30%.</p>
+    <h2>What Actually Moves the Needle</h2>
+    <p>After managing hundreds of accounts, there are three levers that consistently double leads without touching the budget:</p>
 
-        <h2>¿Por dónde empezar?</h2>
-        <p>Si tienes una cuenta activa, empieza por el informe de términos de búsqueda esta semana. Si estás empezando desde cero, define primero las tres o cuatro palabras clave de mayor intención de tu negocio antes de pensar en el presupuesto.</p>
-        <p>El dinero no es el problema. La estructura sí.</p>
-      </div>
+    <h3>1. Target by Intent, Not Interest</h3>
+    <p>There's a huge difference between someone searching "kitchen remodel ideas" and someone searching "kitchen remodel company Miami quote." The first is dreaming. The second has their card in hand.</p>
+    <p>Focus your budget on high-intent keywords — those that include location, urgency, or clear purchase intent. Eliminate informational keywords and add them to your negative keyword list.</p>
 
-      <!-- ========== EN ========== -->
-      <div class="blog-article" data-lang-en>
-        <p>If you've been running Google Ads for a while and feel like money is going out but results aren't coming in, you're not alone. It's the most common problem we see when auditing new accounts: active budget, clicks coming in, and forms that never ring.</p>
-        <p>The good news is that in most cases, the problem isn't the budget. It's the structure.</p>
+    <h3>2. Message Match Between Ad and Landing Page</h3>
+    <p>If your ad says "Emergency Plumber 24/7" and the user lands on your homepage with five different services, you lost the sale. The human brain takes less than three seconds to decide if it's in the right place.</p>
+    <p>Create a specific landing page for each ad group. The page headline should repeat exactly what the ad promised.</p>
 
-        <h2>The Most Expensive Mistake Businesses Make</h2>
-        <p>Most businesses start Google Ads with a generic campaign targeting everyone. A plumber in Miami advertising "plumbing services" across the entire state of Florida is paying for clicks from people who are three hours away and will never call.</p>
-        <p>The money didn't go to Google. It went to a lack of targeting.</p>
+    <h3>3. Ad Extensions as a Conversion Weapon</h3>
+    <p>Call extensions, location extensions and structured snippets aren't optional — they're the difference between an ad that looks professional and one that looks amateur. Google also rewards them with a better Quality Score, which lowers your cost per click.</p>
 
-        <h2>What Actually Moves the Needle</h2>
-        <p>After managing hundreds of accounts, there are three levers that consistently double leads without touching the budget:</p>
+    <h2>The Optimization Cycle Nobody Tells You About</h2>
+    <p>Google Ads isn't a set-it-and-forget-it campaign. The first 30 days are a learning phase: the algorithm is figuring out who converts and who doesn't. If you turn off the campaign before that period because "it's not working," you lost the entire learning investment.</p>
+    <p>What you should do in those 30 days: review the search terms report every week and add anything irrelevant to your negative keyword list. That alone can reduce wasted spend by 20-30%.</p>
 
-        <h3>1. Target by Intent, Not Interest</h3>
-        <p>There's a huge difference between someone searching "kitchen remodel ideas" and someone searching "kitchen remodel company Miami quote." The first is dreaming. The second has their card in hand.</p>
-        <p>Focus your budget on high-intent keywords — those that include location, urgency, or clear purchase intent. Eliminate informational keywords and add them to your negative keyword list.</p>
-
-        <h3>2. Message Match Between Ad and Landing Page</h3>
-        <p>If your ad says "Emergency Plumber 24/7" and the user lands on your homepage with five different services, you lost the sale. The human brain takes less than three seconds to decide if it's in the right place.</p>
-        <p>Create a specific landing page for each ad group. The page headline should repeat exactly what the ad promised.</p>
-
-        <h3>3. Ad Extensions as a Conversion Weapon</h3>
-        <p>Call extensions, location extensions and structured snippets aren't optional — they're the difference between an ad that looks professional and one that looks amateur. Google also rewards them with a better Quality Score, which lowers your cost per click.</p>
-
-        <h2>The Optimization Cycle Nobody Tells You About</h2>
-        <p>Google Ads isn't a set-it-and-forget-it campaign. The first 30 days are a learning phase: the algorithm is figuring out who converts and who doesn't. If you turn off the campaign before that period because "it's not working," you lost the entire learning investment.</p>
-        <p>What you should do in those 30 days: review the search terms report every week and add anything irrelevant to your negative keyword list. That alone can reduce wasted spend by 20-30%.</p>
-
-        <h2>Where to Start</h2>
-        <p>If you have an active account, start with the search terms report this week. If you're starting from scratch, define the three or four highest-intent keywords for your business before thinking about budget.</p>
-        <p>Money isn't the problem. Structure is.</p>
-      </div>
-
-      <!-- CTA -->
-      <aside class="blog-cta">
-        <p class="blog-cta-text">
-          <span data-lang-es>¿Quieres que revisemos tu cuenta actual? Agenda una llamada y en 30 minutos te decimos exactamente dónde se está yendo tu presupuesto.</span>
-          <span data-lang-en>Want us to review your current account? Schedule a call and in 30 minutes we'll tell you exactly where your budget is going.</span>
-        </p>
-        <a href="/#contacto" class="btn-gold text-base md:text-lg">
-          <span data-lang-es>Agenda tu llamada gratuita</span>
-          <span data-lang-en>Schedule your free call</span>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-          </svg>
-        </a>
-      </aside>
-      <div style="text-align:center; margin-top: 2rem;">
-        <a href="/blog" style="color: #C9A84C; text-decoration: none; font-size: 0.9rem; border: 1px solid rgba(201,168,76,0.3); padding: 0.75rem 1.5rem; border-radius: 9999px;">
-          &larr; Ver todos los artículos
-        </a>
-      </div>
-    </div>
-  </article>
-
-  <!-- Article schema.org JSON-LD -->
-  <script type="application/ld+json" set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "Cómo duplicar tus leads en 30 días con Google Ads",
-    "alternativeHeadline": "How to Double Your Leads in 30 Days with Google Ads",
-    "description": metaDescEs,
-    "image": ogImage,
-    "datePublished": publishedDate,
-    "dateModified": publishedDate,
-    "author": { "@type": "Organization", "name": "Addendo Growth Partner", "url": "https://addendo.io" },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Addendo Growth Partner",
-      "logo": { "@type": "ImageObject", "url": "https://res.cloudinary.com/dokzw376u/image/upload/f_auto,q_auto/v1774995924/VECTOR_ADDENDO_FINAL_zuw6te.jpg" }
-    },
-    "mainEntityOfPage": { "@type": "WebPage", "@id": canonical },
-    "articleSection": "Marketing Digital",
-    "inLanguage": ["es", "en"]
-  })} />
-</Layout>
+    <h2>Where to Start</h2>
+    <p>If you have an active account, start with the search terms report this week. If you're starting from scratch, define the three or four highest-intent keywords for your business before thinking about budget.</p>
+    <p>Money isn't the problem. Structure is.</p>
+  </div>
+</BlogPostLayout>

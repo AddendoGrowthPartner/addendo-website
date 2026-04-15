@@ -1,0 +1,147 @@
+---
+import Layout from './Layout.astro';
+
+interface Props {
+  titleEs: string;
+  titleEn: string;
+  descEs: string;
+  descEn: string;
+  category: string;
+  date: string;            // YYYY-MM-DD
+  readTime: number;        // minutos
+  heroImg: string;         // URL completa o ruta relativa al sitio
+  heroAlt?: string;        // descriptivo SEO; si no se pasa, hero queda decorativo
+  heroWidth?: number;      // default 1200
+  heroHeight?: number;     // default 800
+  slug: string;
+}
+
+const {
+  titleEs,
+  titleEn,
+  descEs,
+  descEn,
+  category,
+  date,
+  readTime,
+  heroImg,
+  heroAlt,
+  heroWidth = 1200,
+  heroHeight = 800,
+  slug,
+} = Astro.props;
+
+const SITE = 'https://addendo.io';
+
+const canonical = `${SITE}/blog/${slug}`;
+const ogImage = heroImg.startsWith('http') ? heroImg : `${SITE}${heroImg}`;
+const metaTitleEs = `${titleEs} | Addendo`;
+const metaTitleEn = `${titleEn} | Addendo`;
+
+const monthsEs = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+const monthsEn = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const [yyyy, mm] = date.split('-');
+const monthIdx = parseInt(mm, 10) - 1;
+const monthYearEs = `${monthsEs[monthIdx][0].toUpperCase()}${monthsEs[monthIdx].slice(1)} ${yyyy}`;
+const monthYearEn = `${monthsEn[monthIdx]} ${yyyy}`;
+---
+
+<Layout
+  title={metaTitleEs}
+  description={descEs}
+  ogImage={ogImage}
+  canonical={canonical}
+  preloadImage={heroImg}
+>
+  <article class="blog-post">
+    <!-- Hero -->
+    <header class="blog-hero">
+      <img
+        src={heroImg}
+        alt={heroAlt ?? ''}
+        width={heroWidth}
+        height={heroHeight}
+        fetchpriority="high"
+        decoding="async"
+        aria-hidden={heroAlt ? undefined : 'true'}
+      />
+      <div class="blog-hero-overlay"></div>
+      <div class="blog-hero-inner">
+        <a href="/" class="blog-back" aria-label="Volver al inicio / Back to home">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span data-lang-es>Volver al inicio</span>
+          <span data-lang-en>Back to home</span>
+        </a>
+
+        <span class="blog-category">{category}</span>
+
+        <h1 class="blog-title">
+          <span data-lang-es>{titleEs}</span>
+          <span data-lang-en>{titleEn}</span>
+        </h1>
+
+        <div class="blog-meta">
+          <time datetime={date}>
+            <span data-lang-es>{monthYearEs}</span>
+            <span data-lang-en>{monthYearEn}</span>
+          </time>
+          <span class="blog-meta-sep" aria-hidden="true">•</span>
+          <span>
+            <span data-lang-es>{readTime} min de lectura</span>
+            <span data-lang-en>{readTime} min read</span>
+          </span>
+        </div>
+      </div>
+    </header>
+
+    <div class="blog-article-wrap">
+      <slot />
+
+      <!-- CTA estándar -->
+      <aside class="blog-cta">
+        <p class="blog-cta-text">
+          <span data-lang-es>¿Listo para automatizar tu marketing con IA?</span>
+          <span data-lang-en>Ready to automate your marketing with AI?</span>
+        </p>
+        <a href="https://addendo.io/#contacto" class="btn-gold text-base md:text-lg">
+          <span data-lang-es>Agenda tu llamada gratuita</span>
+          <span data-lang-en>Schedule your free call</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </aside>
+
+      <div style="text-align:center; margin-top: 2rem;">
+        <a href="/blog" style="color: #C9A84C; text-decoration: none; font-size: 0.9rem; border: 1px solid rgba(201,168,76,0.3); padding: 0.75rem 1.5rem; border-radius: 9999px;">
+          &larr; <span data-lang-es>Ver todos los artículos</span><span data-lang-en>View all articles</span>
+        </a>
+      </div>
+    </div>
+  </article>
+
+  <!-- Article schema.org JSON-LD -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": titleEs,
+    "alternativeHeadline": titleEn,
+    "description": descEs,
+    "image": ogImage,
+    "datePublished": date,
+    "dateModified": date,
+    "author": { "@type": "Organization", "name": "Addendo Growth Partner", "url": SITE },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Addendo Growth Partner",
+      "logo": { "@type": "ImageObject", "url": "https://res.cloudinary.com/dokzw376u/image/upload/f_auto,q_auto/v1774995924/VECTOR_ADDENDO_FINAL_zuw6te.jpg" }
+    },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": canonical },
+    "articleSection": category,
+    "inLanguage": ["es", "en"]
+  })} />
+</Layout>
