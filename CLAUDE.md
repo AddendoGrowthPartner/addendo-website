@@ -3,6 +3,37 @@
 
 ---
 
+## ⚠️ REGLA #1 — OBLIGATORIA ANTES DE CUALQUIER TAREA
+
+Antes de ejecutar CUALQUIER tarea, Claude Code DEBE:
+
+1. Identificar qué agente es responsable de esa tarea
+2. Leer el archivo completo del agente en:
+   `/Users/Mac/addendo-website/.claude/agents/skills-globales/[nombre-agente].md`
+3. Ejecutar la tarea usando ese agente como guía
+
+**NUNCA ejecutar tareas sin haber leído el agente correspondiente primero.**
+Si no está claro qué agente aplica, leer el agente #4 `project-manager` para que él decida.
+
+### MAPA RÁPIDO DE AGENTES POR TAREA
+
+- Workflows N8N → `agente-constructor-workflows` (#50)
+- Investigación de cliente/mercado → `agente-investigacion` (#8)
+- Sitios web / código → `agente-desarrollo-web` (#20) + `agente-frontend` (#21)
+- SEO y blog → `agente-seo` (#27) + `agente-copywriting-seo` (#16)
+- Deploy / GitHub / servidor → `agente-deployment` (#38)
+- Seguridad → `agente-seguridad` (#37)
+- Meta Ads → `agente-meta-ads` (#11)
+- Google Ads → `agente-google-ads` (#12)
+- Diseño / imágenes → `agente-diseno-imagen` (#23)
+- Onboarding nuevo cliente → `onboarding-cliente` (#2) + `director-cuenta` (#3)
+- Revisión de calidad → `revisor-qa` (#39)
+- Automatización general → `agente-n8n-automatizacion` (#25)
+- Reportes → `agente-reportes` (#36)
+- Ventas / prospección → `agente-prospector` (#35)
+
+---
+
 ## IDENTIDAD DEL SISTEMA
 
 - **Empresa:** Addendo Growth Partner (Addendo LLC)
@@ -217,9 +248,10 @@ Cuando Jose da una orden, seguir este proceso:
 ### Servidor y desarrollo
 - **AWS EC2:** ubuntu@18.233.117.68 (t3.small, Ubuntu 24)
 - **SSH:** `ssh -i ~/Desktop/addendo-server-key.pem ubuntu@18.233.117.68`
-- **N8N:** https://n8n.addendo.io (PM2, puerto 5678)
+- **N8N:** https://n8n.addendo.io (PM2) — puerto 5678 (UI) y 5679 (Task Broker interno)
 - **Claude Code AWS:** `/home/ubuntu/addendo-website/`
 - **Claude Code Mac:** `/Users/Mac/addendo-website/`
+- **Claude Code Don Jacinto Mac:** `/Users/Mac/don-jacinto-nahual/`
 - **GitHub:** AddendoGrowthPartner
 - **Vercel:** sitios de clientes
 - **Cloudflare:** DNS y CDN
@@ -236,12 +268,22 @@ Cuando Jose da una orden, seguir este proceso:
 
 | Cliente | Estado |
 |---------|--------|
-| Don Jacinto Nahual | donjacintonahual.com — sitio live |
-| Bebe Genial | sitio pendiente |
-| Neuron Kids | sitio pendiente |
-| Creditos Experto | sitio pendiente |
-| CreditBridge | proyecto de Jose — pendiente |
-| Ciudad Maderas | proyecto de Jose — pendiente |
+| Don Jacinto Nahual | donjacintonahual.com — **LIVE**, blog automático funcionando, 2 artículos publicados, menú y página `/blog` activos |
+| Neurokids | PENDIENTE onboarding |
+| Bebe Genial | PENDIENTE onboarding |
+| CreditBridge | PENDIENTE onboarding |
+
+---
+
+## PROYECTOS Y REPOS ACTIVOS
+
+| Cliente | Repo GitHub | Path Mac | Path AWS | Estado |
+|---|---|---|---|---|
+| Don Jacinto Nahual | AddendoGrowthPartner/don-jacinto-nahual | /Users/Mac/don-jacinto-nahual | No clonado en AWS | LIVE |
+| Addendo website | AddendoGrowthPartner/addendo-website | /Users/Mac/addendo-website | /home/ubuntu/addendo-website | LIVE |
+| Neurokids | Pendiente crear | Pendiente | Pendiente | ONBOARDING |
+| Bebe Genial | Pendiente crear | Pendiente | Pendiente | ONBOARDING |
+| CreditBridge | Pendiente crear | Pendiente | Pendiente | ONBOARDING |
 
 ---
 
