@@ -19,7 +19,7 @@ const SITE_PASSWORD = 'AddendoPulse2026';
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=DM+Mono:wght@300;400;500&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cinzel:wght@400;500;600&family=IBM+Plex+Mono:wght@300;400;500&display=swap" />
 
   <style>
     :root {
@@ -33,8 +33,10 @@ const SITE_PASSWORD = 'AddendoPulse2026';
       --text: rgba(255, 255, 255, 0.92);
       --text-soft: rgba(255, 255, 255, 0.55);
       --danger: #b94a4a;
-      --font-display: 'Fraunces', Georgia, serif;
-      --font-mono: 'DM Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      --font-display: 'Playfair Display', 'Times New Roman', Georgia, serif;
+      --font-numeric: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+      --font-caps: 'Cinzel', 'Trajan Pro', 'Optima', 'Palatino Linotype', serif;
+      --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
       --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -66,42 +68,42 @@ const SITE_PASSWORD = 'AddendoPulse2026';
     /* === LOGIN === */
     #screen-login { display: flex; align-items: center; justify-content: center; padding: 2rem 1rem; }
     .login-card { width: 100%; max-width: 420px; text-align: center; }
-    .brand-mark { font-family: var(--font-display); letter-spacing: 0.42em; font-size: 0.78rem; color: var(--gold); text-transform: uppercase; margin-bottom: 1.6rem; font-weight: 400; }
-    .brand-name { font-family: var(--font-display); font-weight: 300; font-size: clamp(2.6rem, 7vw, 4rem); line-height: 1; letter-spacing: 0.01em; color: #fff; margin-bottom: 0.5rem; }
+    .brand-mark { font-family: var(--font-caps); letter-spacing: 0.55em; font-size: 0.72rem; color: var(--gold); text-transform: uppercase; margin-bottom: 1.8rem; font-weight: 500; padding-left: 0.55em; /* compensate trailing letter-spacing */ }
+    .brand-name { font-family: var(--font-display); font-weight: 300; font-size: clamp(3rem, 8.5vw, 5.2rem); line-height: 0.95; letter-spacing: -0.015em; color: #fff; margin-bottom: 0.6rem; }
     .brand-name em { color: var(--gold); font-style: italic; font-weight: 400; }
-    .brand-sub { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--text-soft); margin-bottom: 3.5rem; }
+    .brand-sub { font-family: var(--font-caps); font-weight: 400; font-size: 0.7rem; letter-spacing: 0.42em; text-transform: uppercase; color: var(--text-soft); margin-bottom: 3.5rem; padding-left: 0.42em; }
     .pw-input {
       width: 100%; background: transparent; border: none;
       border-bottom: 1px solid var(--gold-dim); padding: 1rem 0.25rem;
-      color: var(--text); font-family: var(--font-mono); font-size: 1.05rem;
-      letter-spacing: 0.18em; text-align: center; outline: none;
+      color: var(--text); font-family: var(--font-mono); font-weight: 300; font-size: 1.05rem;
+      letter-spacing: 0.22em; text-align: center; outline: none;
       transition: border-color 250ms ease;
     }
-    .pw-input::placeholder { color: var(--text-soft); letter-spacing: 0.2em; font-size: 0.78rem; }
+    .pw-input::placeholder { color: var(--text-soft); letter-spacing: 0.24em; font-size: 0.78rem; }
     .pw-input:focus { border-bottom-color: var(--gold); }
-    .pw-error { color: var(--danger); font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; margin-top: 1rem; min-height: 1.2em; opacity: 0; transition: opacity 200ms; }
+    .pw-error { color: var(--danger); font-family: var(--font-caps); font-weight: 400; font-size: 0.66rem; letter-spacing: 0.32em; text-transform: uppercase; margin-top: 1.2rem; min-height: 1.2em; opacity: 0; transition: opacity 200ms; padding-left: 0.32em; }
     .pw-error.show { opacity: 1; }
-    .login-hint { margin-top: 2.5rem; font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(255,255,255,0.32); }
+    .login-hint { margin-top: 2.5rem; font-family: var(--font-caps); font-weight: 400; font-size: 0.62rem; letter-spacing: 0.42em; text-transform: uppercase; color: rgba(255,255,255,0.32); padding-left: 0.42em; }
 
     /* === CONFIG === */
     #screen-config { padding: 3rem 1rem 5rem; }
     .config-wrap { max-width: 880px; margin: 0 auto; }
     .config-header { text-align: center; margin-bottom: 3rem; }
-    .config-header .brand-name { font-size: clamp(2rem, 5vw, 3rem); }
-    .config-header .brand-sub { margin-bottom: 0; font-size: 0.68rem; }
-    .mode-toggle { display: inline-flex; align-items: center; gap: 0; padding: 4px; background: rgba(201,168,76,0.05); border: 1px solid var(--line); border-radius: 999px; margin: 1.5rem 0 0; }
+    .config-header .brand-name { font-size: clamp(2.4rem, 6vw, 3.6rem); }
+    .config-header .brand-sub { margin-bottom: 0; font-size: 0.66rem; }
+    .mode-toggle { display: inline-flex; align-items: center; gap: 0; padding: 4px; background: rgba(201,168,76,0.05); border: 1px solid var(--line); border-radius: 999px; margin: 1.8rem 0 0; }
     .mode-toggle button {
-      background: transparent; border: none; color: var(--text-soft); font-family: var(--font-mono);
-      font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; padding: 0.6rem 1.4rem;
-      border-radius: 999px; cursor: pointer; transition: all 200ms ease;
+      background: transparent; border: none; color: var(--text-soft); font-family: var(--font-caps); font-weight: 500;
+      font-size: 0.62rem; letter-spacing: 0.32em; text-transform: uppercase; padding: 0.65rem 1.6rem;
+      border-radius: 999px; cursor: pointer; transition: all 200ms ease; padding-left: 1.92em;
     }
     .mode-toggle button.active { background: var(--gold); color: #0a0a0a; }
     .tab-row { display: flex; gap: 1px; margin-bottom: 0; border: 1px solid var(--line); border-bottom: none; border-radius: 0.7rem 0.7rem 0 0; overflow: hidden; background: rgba(201,168,76,0.04); }
     .tab-row button {
       flex: 1; background: transparent; border: none; color: var(--text-soft);
-      padding: 1rem 1rem; font-family: var(--font-mono); font-size: 0.7rem;
-      letter-spacing: 0.22em; text-transform: uppercase; cursor: pointer;
-      transition: all 200ms ease; border-bottom: 2px solid transparent;
+      padding: 1.1rem 1rem; font-family: var(--font-caps); font-weight: 500; font-size: 0.66rem;
+      letter-spacing: 0.32em; text-transform: uppercase; cursor: pointer;
+      transition: all 200ms ease; border-bottom: 2px solid transparent; padding-left: 1.32em;
     }
     .tab-row button.active { color: var(--gold); border-bottom-color: var(--gold); background: rgba(201,168,76,0.08); }
     .tab-panel { display: none; padding: 2.5rem 1.5rem; border: 1px solid var(--line); border-top: none; border-radius: 0 0 0.7rem 0.7rem; background: var(--bg-card); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
@@ -113,14 +115,14 @@ const SITE_PASSWORD = 'AddendoPulse2026';
       background: rgba(201,168,76,0.02);
     }
     .dropzone:hover, .dropzone.drag { border-color: var(--gold); background: rgba(201,168,76,0.06); }
-    .dropzone-title { font-family: var(--font-display); font-size: 1.15rem; color: var(--gold); margin-bottom: 0.4rem; }
-    .dropzone-sub { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-soft); }
+    .dropzone-title { font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: 1.4rem; color: var(--gold); margin-bottom: 0.5rem; letter-spacing: -0.005em; }
+    .dropzone-sub { font-family: var(--font-caps); font-weight: 400; font-size: 0.62rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--text-soft); padding-left: 0.32em; }
     .dropzone-icon { font-size: 2.2rem; color: var(--gold); margin-bottom: 1rem; opacity: 0.7; }
-    .file-preview { margin-top: 1.5rem; padding: 1.2rem; background: rgba(0,0,0,0.25); border: 1px solid var(--line); border-radius: 0.5rem; font-family: var(--font-mono); font-size: 0.78rem; line-height: 1.7; color: var(--text-soft); max-height: 260px; overflow-y: auto; white-space: pre-wrap; word-break: break-word; }
+    .file-preview { margin-top: 1.5rem; padding: 1.2rem; background: rgba(0,0,0,0.25); border: 1px solid var(--line); border-radius: 0.5rem; font-family: var(--font-mono); font-weight: 300; font-size: 0.78rem; line-height: 1.7; color: var(--text-soft); max-height: 260px; overflow-y: auto; white-space: pre-wrap; word-break: break-word; }
     .file-preview.hidden { display: none; }
 
     .field { margin-bottom: 1.5rem; }
-    .field label { display: block; font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem; }
+    .field label { display: block; font-family: var(--font-caps); font-weight: 500; font-size: 0.62rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.7rem; padding-left: 0.32em; }
     .field input[type=text], .field textarea {
       width: 100%; background: rgba(0,0,0,0.25); border: 1px solid var(--line);
       color: var(--text); padding: 0.85rem 1rem; border-radius: 0.4rem;
@@ -137,15 +139,16 @@ const SITE_PASSWORD = 'AddendoPulse2026';
     }
     .slider-wrap input[type=range]::-webkit-slider-thumb { appearance: none; width: 16px; height: 16px; background: var(--gold); border-radius: 50%; cursor: pointer; box-shadow: 0 0 12px rgba(201,168,76,0.6); }
     .slider-wrap input[type=range]::-moz-range-thumb { width: 16px; height: 16px; background: var(--gold); border-radius: 50%; cursor: pointer; border: none; }
-    .slider-value { font-family: var(--font-mono); font-size: 1.1rem; color: var(--gold); min-width: 80px; text-align: right; letter-spacing: 0.05em; }
+    .slider-value { font-family: var(--font-numeric); font-weight: 400; font-size: 1.55rem; color: var(--gold); min-width: 95px; text-align: right; letter-spacing: 0; line-height: 1; }
+    .slider-value .unit { font-family: var(--font-caps); font-weight: 400; font-size: 0.6rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--text-soft); margin-left: 0.4rem; padding-left: 0.28em; }
 
-    .cta-row { text-align: center; margin-top: 2.5rem; }
+    .cta-row { text-align: center; margin-top: 2.8rem; }
     .cta-pulse {
       display: inline-block; background: transparent; color: var(--gold);
-      font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.32em;
-      text-transform: uppercase; padding: 1.1rem 3rem;
+      font-family: var(--font-caps); font-weight: 500; font-size: 0.74rem; letter-spacing: 0.42em;
+      text-transform: uppercase; padding: 1.15rem 3.4rem;
       border: 1px solid var(--gold); border-radius: 999px;
-      cursor: pointer; transition: all 250ms ease; position: relative;
+      cursor: pointer; transition: all 250ms ease; position: relative; padding-left: calc(3.4rem + 0.42em);
     }
     .cta-pulse:hover { background: var(--gold); color: #0a0a0a; box-shadow: 0 0 0 6px rgba(201,168,76,0.12), 0 0 30px rgba(201,168,76,0.3); }
     .cta-pulse:disabled { opacity: 0.4; cursor: not-allowed; }
@@ -158,65 +161,69 @@ const SITE_PASSWORD = 'AddendoPulse2026';
     .sim-grid { display: grid; grid-template-columns: 1fr; gap: 1.2rem; padding: 1.2rem; position: relative; z-index: 2; min-height: 100vh; }
     @media (min-width: 980px) { .sim-grid { grid-template-columns: 320px 1fr 320px; } }
     .sim-panel { background: rgba(6,9,15,0.62); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid var(--line); border-radius: 0.7rem; padding: 1.4rem 1.2rem; }
-    .sim-panel h3 { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.4rem; }
+    .sim-panel h3 { font-family: var(--font-caps); font-weight: 500; font-size: 0.66rem; letter-spacing: 0.42em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.6rem; padding-left: 0.42em; }
 
-    .phase { margin-bottom: 1.4rem; font-family: var(--font-mono); font-size: 0.72rem; }
-    .phase-label { display: flex; justify-content: space-between; color: var(--text-soft); margin-bottom: 0.45rem; letter-spacing: 0.04em; }
-    .phase-label .pct { color: var(--gold); }
-    .phase-bar { height: 3px; background: rgba(255,255,255,0.06); border-radius: 999px; overflow: hidden; }
+    .phase { margin-bottom: 1.6rem; }
+    .phase-label { display: flex; justify-content: space-between; align-items: baseline; color: var(--text-soft); margin-bottom: 0.5rem; }
+    .phase-label .name { font-family: var(--font-caps); font-weight: 400; font-size: 0.62rem; letter-spacing: 0.28em; text-transform: uppercase; padding-left: 0.28em; }
+    .phase-label .pct { font-family: var(--font-numeric); font-weight: 400; font-size: 1rem; color: var(--gold); letter-spacing: 0; }
+    .phase-bar { height: 2px; background: rgba(255,255,255,0.06); border-radius: 999px; overflow: hidden; }
     .phase-fill { height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-soft)); width: 0%; transition: width 800ms ease; box-shadow: 0 0 10px rgba(201,168,76,0.5); }
     .phase.active .phase-label .name { color: var(--gold); }
 
-    .timer { position: absolute; top: 1.5rem; right: 1.5rem; z-index: 3; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.18em; color: var(--gold); background: rgba(6,9,15,0.7); padding: 0.5rem 0.9rem; border: 1px solid var(--line); border-radius: 999px; }
+    .timer { position: absolute; top: 1.5rem; right: 1.5rem; z-index: 3; font-family: var(--font-mono); font-weight: 400; font-size: 0.78rem; letter-spacing: 0.12em; color: var(--gold); background: rgba(6,9,15,0.7); padding: 0.55rem 1rem; border: 1px solid var(--line); border-radius: 999px; }
 
-    .metrics-list { display: flex; flex-direction: column; gap: 0.9rem; }
-    .metric-item { padding: 0.9rem 1rem; background: rgba(0,0,0,0.28); border-left: 2px solid var(--gold); border-radius: 0.3rem; opacity: 0; transform: translateY(8px); transition: all 500ms ease; }
+    .metrics-list { display: flex; flex-direction: column; gap: 1rem; }
+    .metric-item { padding: 1rem 1.1rem; background: rgba(0,0,0,0.28); border-left: 2px solid var(--gold); border-radius: 0.3rem; opacity: 0; transform: translateY(8px); transition: all 500ms ease; }
     .metric-item.show { opacity: 1; transform: translateY(0); }
-    .metric-num { font-family: var(--font-mono); font-size: 1.35rem; color: var(--gold); font-weight: 500; line-height: 1; }
-    .metric-name { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-soft); margin-top: 0.4rem; }
+    .metric-num { font-family: var(--font-numeric); font-size: 1.85rem; color: var(--gold); font-weight: 400; line-height: 1; letter-spacing: -0.005em; }
+    .metric-name { font-family: var(--font-caps); font-weight: 400; font-size: 0.6rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--text-soft); margin-top: 0.55rem; padding-left: 0.28em; }
 
-    .terminal { position: relative; z-index: 2; margin: 0 1.2rem 1.2rem; max-width: calc(100% - 2.4rem); padding: 1rem 1.2rem; background: rgba(0,0,0,0.55); border: 1px solid var(--line); border-radius: 0.5rem; font-family: var(--font-mono); font-size: 0.72rem; line-height: 1.65; color: rgba(255,255,255,0.62); height: 140px; overflow: hidden; }
+    .terminal { position: relative; z-index: 2; margin: 0 1.2rem 1.2rem; max-width: calc(100% - 2.4rem); padding: 1rem 1.2rem; background: rgba(0,0,0,0.55); border: 1px solid var(--line); border-radius: 0.5rem; font-family: var(--font-mono); font-weight: 300; font-size: 0.72rem; line-height: 1.7; color: rgba(255,255,255,0.62); height: 140px; overflow: hidden; }
     .terminal-line { white-space: pre-wrap; word-break: break-word; }
-    .terminal-line .ts { color: var(--gold); margin-right: 0.7rem; opacity: 0.75; }
+    .terminal-line .ts { color: var(--gold); margin-right: 0.8rem; opacity: 0.75; font-weight: 400; }
 
     /* === RESULTS === */
     #screen-results { padding: 3rem 1.2rem 5rem; overflow-y: auto; }
     .results-wrap { max-width: 1080px; margin: 0 auto; }
-    .results-headline { font-family: var(--font-display); font-weight: 300; font-size: clamp(2.4rem, 6vw, 3.8rem); line-height: 1.05; text-align: center; margin: 1rem 0 3rem; letter-spacing: 0.005em; opacity: 0; transform: translateY(14px); transition: all 900ms ease; }
-    .results-headline em { color: var(--gold); font-style: italic; font-weight: 400; }
+    .results-headline { font-family: var(--font-display); font-weight: 300; font-size: clamp(3.4rem, 8.5vw, 6rem); line-height: 1; text-align: center; margin: 1.5rem 0 4.5rem; letter-spacing: -0.02em; opacity: 0; transform: translateY(14px); transition: all 900ms ease; color: #fff; }
+    .results-headline em { color: var(--gold); font-style: italic; font-weight: 300; }
     .results-headline.show { opacity: 1; transform: translateY(0); }
 
-    .gauge-wrap { display: flex; flex-direction: column; align-items: center; margin: 0 0 4rem; }
-    .gauge { position: relative; width: 240px; height: 240px; }
+    .gauge-wrap { display: flex; flex-direction: column; align-items: center; margin: 0 0 5rem; }
+    .gauge { position: relative; width: 320px; height: 320px; }
     .gauge svg { transform: rotate(-90deg); width: 100%; height: 100%; }
-    .gauge-track { fill: none; stroke: rgba(201,168,76,0.12); stroke-width: 8; }
-    .gauge-fill { fill: none; stroke: var(--gold); stroke-width: 8; stroke-linecap: round; transition: stroke-dashoffset 2.4s cubic-bezier(.2,.7,.2,1); filter: drop-shadow(0 0 10px rgba(201,168,76,0.5)); }
+    .gauge-track { fill: none; stroke: rgba(201,168,76,0.12); stroke-width: 6; }
+    .gauge-fill { fill: none; stroke: var(--gold); stroke-width: 6; stroke-linecap: round; transition: stroke-dashoffset 2.4s cubic-bezier(.2,.7,.2,1); filter: drop-shadow(0 0 14px rgba(201,168,76,0.55)); }
     .gauge-text { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-    .gauge-num { font-family: var(--font-display); font-size: 3.5rem; line-height: 1; color: var(--gold); font-weight: 300; }
-    .gauge-label { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-soft); margin-top: 0.5rem; }
+    .gauge-num { font-family: var(--font-numeric); font-size: 7rem; line-height: 0.85; color: var(--gold); font-weight: 300; letter-spacing: -0.03em; }
+    .gauge-num .pct { font-size: 3rem; vertical-align: super; margin-left: 0.1em; opacity: 0.7; font-weight: 300; }
+    .gauge-label { font-family: var(--font-caps); font-weight: 400; font-size: 0.6rem; letter-spacing: 0.42em; text-transform: uppercase; color: var(--text-soft); margin-top: 0.9rem; padding-left: 0.42em; }
 
-    .metric-trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-bottom: 4rem; }
-    @media (max-width: 700px) { .metric-trio { grid-template-columns: 1fr; } }
-    .metric-trio-item { text-align: center; padding: 2rem 1rem; border: 1px solid var(--line); border-radius: 0.7rem; background: var(--bg-card); }
-    .metric-trio-num { font-family: var(--font-display); font-size: 3.2rem; font-weight: 300; color: var(--gold); line-height: 1; margin-bottom: 0.8rem; }
-    .metric-trio-name { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-soft); }
+    .metric-trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; margin-bottom: 5rem; }
+    @media (max-width: 700px) { .metric-trio { grid-template-columns: 1fr; gap: 1rem; } }
+    .metric-trio-item { text-align: center; padding: 2.4rem 1rem 2rem; border: 1px solid var(--line); border-radius: 0.7rem; background: var(--bg-card); }
+    .metric-trio-num { font-family: var(--font-numeric); font-size: 4.6rem; font-weight: 300; color: var(--gold); line-height: 0.9; margin-bottom: 1.1rem; letter-spacing: -0.025em; }
+    .metric-trio-num .pct { font-size: 2rem; vertical-align: super; opacity: 0.65; margin-left: 0.05em; }
+    .metric-trio-name { font-family: var(--font-caps); font-weight: 400; font-size: 0.6rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--text-soft); padding-left: 0.32em; }
 
-    .insights { margin-bottom: 3rem; }
-    .insights-title, .recos-title { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.4rem; text-align: center; }
-    .insight-card { padding: 1.4rem 1.6rem; background: var(--bg-card); border: 1px solid var(--line); border-radius: 0.5rem; margin-bottom: 0.9rem; font-family: var(--font-display); font-size: 1.08rem; line-height: 1.55; color: var(--text); font-weight: 300; }
-    .insight-card::before { content: '—'; color: var(--gold); margin-right: 0.6rem; }
-    .reco-card { padding: 1.3rem 1.6rem; border: 1px solid var(--gold); background: rgba(201,168,76,0.06); border-radius: 0.5rem; margin-bottom: 0.8rem; color: var(--gold); font-family: var(--font-display); font-style: italic; font-size: 1.05rem; line-height: 1.5; }
-    .reco-card::before { content: '◆'; margin-right: 0.7rem; font-size: 0.7rem; opacity: 0.7; vertical-align: middle; }
+    .insights { margin-bottom: 3.5rem; }
+    .insights-title, .recos-title { font-family: var(--font-caps); font-weight: 500; font-size: 0.66rem; letter-spacing: 0.5em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.8rem; text-align: center; padding-left: 0.5em; }
+    .insight-card { padding: 1.6rem 1.8rem; background: var(--bg-card); border: 1px solid var(--line); border-radius: 0.5rem; margin-bottom: 0.9rem; font-family: var(--font-display); font-size: 1.18rem; line-height: 1.55; color: var(--text); font-weight: 300; letter-spacing: -0.005em; }
+    .insight-card::before { content: '—'; color: var(--gold); margin-right: 0.7rem; }
+    .reco-card { padding: 1.5rem 1.8rem; border: 1px solid var(--gold); background: rgba(201,168,76,0.06); border-radius: 0.5rem; margin-bottom: 0.8rem; color: var(--gold); font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: 1.18rem; line-height: 1.5; letter-spacing: -0.005em; }
+    .reco-card::before { content: '◆'; margin-right: 0.8rem; font-size: 0.7rem; opacity: 0.7; vertical-align: middle; }
 
-    .real-banner { margin: 2.5rem 0 3rem; padding: 1.4rem 1.6rem; border: 1px solid var(--gold); border-radius: 0.5rem; background: rgba(201,168,76,0.08); text-align: center; font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.06em; line-height: 1.7; color: var(--gold); }
-    .demo-banner { margin: 1rem 0 2.5rem; padding: 0.8rem; border: 1px dashed var(--line); border-radius: 999px; text-align: center; font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-soft); max-width: 360px; margin-left: auto; margin-right: auto; }
+    .real-banner { margin: 2.5rem 0 3rem; padding: 1.5rem 1.8rem; border: 1px solid var(--gold); border-radius: 0.5rem; background: rgba(201,168,76,0.08); text-align: center; font-family: var(--font-mono); font-weight: 300; font-size: 0.82rem; letter-spacing: 0.02em; line-height: 1.75; color: var(--gold); }
+    .real-banner strong { font-weight: 500; }
+    .demo-banner { margin: 1rem auto 2.5rem; padding: 0.85rem; border: 1px dashed var(--line); border-radius: 999px; text-align: center; font-family: var(--font-caps); font-weight: 400; font-size: 0.6rem; letter-spacing: 0.42em; text-transform: uppercase; color: var(--text-soft); max-width: 380px; padding-left: calc(0.85rem + 0.42em); }
 
     .results-cta { display: flex; gap: 1rem; justify-content: center; margin-top: 3rem; flex-wrap: wrap; }
     .results-cta button {
       background: transparent; color: var(--gold); border: 1px solid var(--gold);
-      padding: 1rem 2rem; font-family: var(--font-mono); font-size: 0.7rem;
-      letter-spacing: 0.24em; text-transform: uppercase; cursor: pointer;
-      border-radius: 999px; transition: all 200ms;
+      padding: 1.05rem 2.2rem; font-family: var(--font-caps); font-weight: 500; font-size: 0.66rem;
+      letter-spacing: 0.42em; text-transform: uppercase; cursor: pointer;
+      border-radius: 999px; transition: all 200ms; padding-left: calc(2.2rem + 0.42em);
     }
     .results-cta button.primary { background: var(--gold); color: #0a0a0a; }
     .results-cta button:hover { box-shadow: 0 0 0 4px rgba(201,168,76,0.15); }
@@ -237,10 +244,14 @@ const SITE_PASSWORD = 'AddendoPulse2026';
 
     /* Mobile tweaks */
     @media (max-width: 700px) {
-      .timer { top: 0.8rem; right: 0.8rem; font-size: 0.65rem; padding: 0.4rem 0.7rem; }
+      .timer { top: 0.8rem; right: 0.8rem; font-size: 0.7rem; padding: 0.4rem 0.8rem; }
       .terminal { height: 110px; font-size: 0.66rem; }
-      .gauge { width: 200px; height: 200px; }
-      .gauge-num { font-size: 2.8rem; }
+      .gauge { width: 240px; height: 240px; }
+      .gauge-num { font-size: 5rem; }
+      .gauge-num .pct { font-size: 2.2rem; }
+      .metric-trio-num { font-size: 3.6rem; }
+      .metric-trio-num .pct { font-size: 1.6rem; }
+      .insight-card, .reco-card { font-size: 1.05rem; padding: 1.3rem 1.4rem; }
     }
   </style>
 </head>
@@ -305,7 +316,7 @@ const SITE_PASSWORD = 'AddendoPulse2026';
           <label>Número de agentes simulados <span style="color: var(--text-soft); letter-spacing: 0;">— densidad de la muestra</span></label>
           <div class="slider-wrap">
             <input id="m-agentes" type="range" min="50" max="1000" value="300" step="10" />
-            <div class="slider-value"><span id="agentes-val">300</span> ag.</div>
+            <div class="slider-value"><span id="agentes-val">300</span><span class="unit">agentes</span></div>
           </div>
         </div>
       </div>
@@ -364,7 +375,7 @@ const SITE_PASSWORD = 'AddendoPulse2026';
                     stroke-dasharray="578.05" stroke-dashoffset="578.05" />
           </svg>
           <div class="gauge-text">
-            <div class="gauge-num"><span id="gauge-num">0</span>%</div>
+            <div class="gauge-num"><span id="gauge-num">0.0</span><span class="pct">%</span></div>
             <div class="gauge-label">Respuesta positiva</div>
           </div>
         </div>
@@ -372,15 +383,15 @@ const SITE_PASSWORD = 'AddendoPulse2026';
 
       <div class="metric-trio">
         <div class="metric-trio-item">
-          <div class="metric-trio-num"><span id="r-resonancia">0</span>%</div>
+          <div class="metric-trio-num"><span id="r-resonancia">0.0</span><span class="pct">%</span></div>
           <div class="metric-trio-name">Resonancia del mensaje</div>
         </div>
         <div class="metric-trio-item">
-          <div class="metric-trio-num"><span id="r-adopcion">0</span>%</div>
+          <div class="metric-trio-num"><span id="r-adopcion">0.0</span><span class="pct">%</span></div>
           <div class="metric-trio-name">Tasa de adopción</div>
         </div>
         <div class="metric-trio-item">
-          <div class="metric-trio-num"><span id="r-resistencia">0</span>%</div>
+          <div class="metric-trio-num"><span id="r-resistencia">0.0</span><span class="pct">%</span></div>
           <div class="metric-trio-name">Índice de resistencia</div>
         </div>
       </div>
@@ -653,7 +664,7 @@ const SITE_PASSWORD = 'AddendoPulse2026';
         { at: 8000,   num: Math.round(N * 1.2),  name: 'Conexiones establecidas' },
         { at: 18000,  num: Math.round(N * 0.85), name: 'Perfiles psicográficos generados' },
         { at: 35000,  num: Math.round(N * 7.8),  name: 'Interacciones procesadas' },
-        { at: 60000,  num: '73%',                name: 'Resonancia detectada' },
+        { at: 60000,  num: '72.8%',              name: 'Resonancia detectada' },
         { at: 95000,  num: Math.round(N * 0.34), name: 'Adoptantes potenciales' },
         { at: 120000, num: Math.round(N * 12.4), name: 'Microreacciones registradas' },
         { at: 145000, num: '4',                  name: 'Clusters de opinión identificados' }
@@ -847,17 +858,21 @@ const SITE_PASSWORD = 'AddendoPulse2026';
     // =========== Finish & results ===========
     function finishSimulation() {
       if (timerInt) clearInterval(timerInt);
-      // numbers — semi-deterministic given input length so it doesn't feel random
+      // Numbers — semi-deterministic given input so it doesn't feel random.
+      // Decimal precision (xx.x%) reads like a financial report (Bloomberg/Goldman style).
       const seed = (state.input.mensaje + state.input.perfil).length;
-      function r(min, max) { return min + Math.floor(((seed * 9301 + 49297) % 233280) / 233280 * (max - min)); }
-      const resonancia = 70 + (r(0, 22));
-      const adopcion = 20 + (r(0, 28));
-      const resistencia = 5 + (r(0, 18));
-      const positivo = Math.round((resonancia + (100 - resistencia) + adopcion * 1.2) / 3.2);
+      function jit(salt) {
+        const s = (seed * 9301 + 49297 + salt * 7919) % 233280;
+        return s / 233280;
+      }
+      const resonancia = +(70 + jit(1) * 22).toFixed(1);
+      const adopcion   = +(20 + jit(2) * 28).toFixed(1);
+      const resistencia = +(5  + jit(3) * 18).toFixed(1);
+      const positivo   = +((resonancia + (100 - resistencia) + adopcion * 1.2) / 3.2).toFixed(1);
 
-      document.getElementById('r-resonancia').textContent = resonancia;
-      document.getElementById('r-adopcion').textContent = adopcion;
-      document.getElementById('r-resistencia').textContent = resistencia;
+      document.getElementById('r-resonancia').textContent = resonancia.toFixed(1);
+      document.getElementById('r-adopcion').textContent = adopcion.toFixed(1);
+      document.getElementById('r-resistencia').textContent = resistencia.toFixed(1);
 
       // Insights — adaptados ligeramente al input
       const segmentos = ['35-45', '25-34', '45-55', '18-24'];
@@ -871,7 +886,7 @@ const SITE_PASSWORD = 'AddendoPulse2026';
       const recos = [
         'Ajustar el CTA hacia urgencia y resultado tangible.',
         'Segmentar campaña inicial para ' + seg + ' antes de escalar.',
-        'Re-trabajar el ángulo de credibilidad para reducir el ' + resistencia + '% de resistencia.'
+        'Re-trabajar el ángulo de credibilidad para reducir el ' + resistencia.toFixed(1) + '% de resistencia.'
       ];
       const il = document.getElementById('insights-list'); il.innerHTML = '';
       insights.forEach(t => { const c = document.createElement('div'); c.className = 'insight-card'; c.textContent = t; il.appendChild(c); });
@@ -902,16 +917,15 @@ const SITE_PASSWORD = 'AddendoPulse2026';
         void fill.getBoundingClientRect();
         fill.style.strokeDashoffset = target;
 
-        // Number count-up
+        // Number count-up — preserve decimal precision throughout
         const numEl = document.getElementById('gauge-num');
-        let n = 0;
-        const dur = 2200;
+        const dur = 2400;
         const t0 = performance.now();
         function step(now) {
           const p = Math.min(1, (now - t0) / dur);
           const eased = 1 - Math.pow(1 - p, 3);
-          n = Math.round(positivo * eased);
-          numEl.textContent = n;
+          const v = positivo * eased;
+          numEl.textContent = v.toFixed(1);
           if (p < 1) requestAnimationFrame(step);
         }
         requestAnimationFrame(step);
