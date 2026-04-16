@@ -137,9 +137,9 @@ const {
             var stored = localStorage.getItem('addendo-lang');
             if (stored === 'es' || stored === 'en') return stored;
             var browser = (navigator.language || '').toLowerCase();
-            return browser.indexOf('es') === 0 ? 'es' : 'en';
+            return browser.indexOf('en') === 0 ? 'en' : 'es';
           } catch (e) {
-            return 'en';
+            return 'es';
           }
         }
         function apply(l) { document.documentElement.setAttribute('data-lang', l); }
