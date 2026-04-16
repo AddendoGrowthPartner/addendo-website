@@ -1,8 +1,7 @@
 ---
 // Addendo Pulse — herramienta interna de simulación predictiva.
 // Standalone (sin Layout.astro): control total sobre robots/meta y carga ligera.
-const PULSE_WEBHOOK_URL = 'https://n8n.addendo.io/webhook/addendo-pulse-simulacion';
-const PULSE_WEBHOOK_SECRET = 'v6xZtF-Kxz3cr6y7x87ARvIk9qcoKdsxIYc3dAWe1gI';
+// Las llamadas reales pasan por /api/pulse/* (server-side) — sin secrets en cliente.
 const SITE_PASSWORD = 'AddendoPulse2026';
 ---
 <!doctype html>
@@ -442,7 +441,7 @@ const SITE_PASSWORD = 'AddendoPulse2026';
     </div>
   </div>
 
-  <script is:inline define:vars={{ PULSE_WEBHOOK_URL, PULSE_WEBHOOK_SECRET, SITE_PASSWORD }}>
+  <script is:inline define:vars={{ SITE_PASSWORD }}>
   (function () {
     'use strict';
 
@@ -459,7 +458,20 @@ const SITE_PASSWORD = 'AddendoPulse2026';
       simStart: null,
       simAborted: false,
       animationId: null,
-      realRequestSent: false
+      // Demo mode
+      demoData: null,
+      demoConversations: null,
+      demoConvoIdx: 0,
+      // Real mode
+      ids: { project_id: '', task_id: '', simulation_id: '', prep_task_id: '', report_id: '' },
+      realStatusInt: null,
+      realLogsInt: null,
+      realLogsSince: 0,
+      realData: null,
+      realCompleted: false,
+      lastRealPhase: -1,
+      lastRealProgress: 0,
+      errorCount: 0
     };
 
     // =========== Screen transitions ===========
@@ -619,14 +631,31 @@ const SITE_PASSWORD = 'AddendoPulse2026';
     function startSimulation() {
       state.simStart = Date.now();
       state.simAborted = false;
-      state.realRequestSent = false;
+      state.demoData = null;
+      state.demoConversations = null;
+      state.demoConvoIdx = 0;
+      state.realData = null;
+      state.realCompleted = false;
+      state.lastRealPhase = -1;
+      state.lastRealProgress = 0;
+      state.errorCount = 0;
+      state.realLogsSince = 0;
+      state.ids = { project_id: '', task_id: '', simulation_id: '', prep_task_id: '', report_id: '' };
+      stopRealPolling();
       resetSimUI();
       show('screen-sim');
       initCanvas();
       runTimer();
-      runPhases();
-      runMetricsAndLogs();
-      if (state.mode === 'real') triggerRealWebhook();
+      if (state.mode === 'demo') {
+        // 90s visual sim + analysis in parallel; finish uses analysis data when available.
+        runPhases();
+        runMetricsAndLogs();
+        kickoffDemoFetch();
+      } else {
+        // Real mode: visual phase bars are driven by /api/pulse/status polling, not timers.
+        runMetricsAndLogs();
+        kickoffRealStart();
+      }
     }
 
     function resetSimUI() {
@@ -652,8 +681,8 @@ const SITE_PASSWORD = 'AddendoPulse2026';
       }, 200);
     }
 
-    // Phases — total ~165s in demo
-    const PHASE_DURATIONS = [25000, 30000, 75000, 30000]; // ms each
+    // Phases — total ~90s for demo mode (real mode is driven by polling, ignores these).
+    const PHASE_DURATIONS = [15000, 20000, 35000, 20000]; // ms each
     function runPhases() {
       const phases = document.querySelectorAll('.phase');
       let idx = 0;
@@ -756,13 +785,13 @@ const SITE_PASSWORD = 'AddendoPulse2026';
       const total = PHASE_DURATIONS.reduce((a, b) => a + b, 0);
       const N = Math.max(50, Math.min(1000, state.input.agentes));
       const metricsPlan = [
-        { at: 8000,   num: Math.round(N * 1.2),  name: 'Conexiones establecidas' },
-        { at: 18000,  num: Math.round(N * 0.85), name: 'Perfiles psicográficos generados' },
-        { at: 35000,  num: Math.round(N * 7.8),  name: 'Interacciones procesadas' },
-        { at: 60000,  num: '72.8%',              name: 'Resonancia detectada' },
-        { at: 95000,  num: Math.round(N * 0.34), name: 'Adoptantes potenciales' },
-        { at: 120000, num: Math.round(N * 12.4), name: 'Microreacciones registradas' },
-        { at: 145000, num: '4',                  name: 'Clusters de opinión identificados' }
+        { at:  4000, num: Math.round(N * 1.2),  name: 'Conexiones establecidas' },
+        { at: 11000, num: Math.round(N * 0.85), name: 'Perfiles psicográficos generados' },
+        { at: 22000, num: Math.round(N * 7.8),  name: 'Interacciones procesadas' },
+        { at: 38000, num: '72.8%',              name: 'Resonancia detectada' },
+        { at: 55000, num: Math.round(N * 0.34), name: 'Adoptantes potenciales' },
+        { at: 70000, num: Math.round(N * 12.4), name: 'Microreacciones registradas' },
+        { at: 84000, num: '4',                  name: 'Clusters de opinión identificados' }
       ];
       const list = document.getElementById('metrics-list');
       metricsPlan.forEach((m) => {
@@ -777,44 +806,205 @@ const SITE_PASSWORD = 'AddendoPulse2026';
         logTimers.push(t);
       });
 
-      // Conversational + event logs — interleaved at irregular cadence (1.2-2.4s)
+      // Conversational + event logs — interleaved at irregular cadence (1.2-2.4s).
+      // If demo data with real conversations arrives, drop into queue and prefer those.
       let cursor = 1500;
       while (cursor < total) {
         const isEvent = Math.random() < 0.32;
         const localCursor = cursor;
         const t = setTimeout(() => {
           if (state.simAborted) return;
-          if (isEvent) pushEventLog(fillEvent(EVENT_TEMPLATES[Math.floor(Math.random()*EVENT_TEMPLATES.length)]));
-          else pushPairLog(rndId(), rndId(), PAIR_PHRASES[Math.floor(Math.random()*PAIR_PHRASES.length)]);
+          // If analysis conversations arrived, prefer the next one
+          if (state.demoConversations && state.demoConvoIdx < state.demoConversations.length && !isEvent) {
+            emitConversationLine(state.demoConversations[state.demoConvoIdx++]);
+          } else if (isEvent) {
+            pushEventLog(fillEvent(EVENT_TEMPLATES[Math.floor(Math.random()*EVENT_TEMPLATES.length)]));
+          } else {
+            pushPairLog(rndId(), rndId(), PAIR_PHRASES[Math.floor(Math.random()*PAIR_PHRASES.length)]);
+          }
         }, localCursor);
         logTimers.push(t);
         cursor += 1200 + Math.random() * 1200;
       }
     }
 
-    // =========== Real webhook ===========
-    function triggerRealWebhook() {
-      if (state.realRequestSent) return;
-      state.realRequestSent = true;
+    // Emits a conversation line using a raw "Agente #X → Agente #Y: text" string.
+    // Falls back to event style if format doesn't match.
+    function emitConversationLine(raw) {
+      const m = String(raw || '').match(/^Agente\s*#?(\d+)\s*[→\-to]+\s*Agente\s*#?(\d+)\s*:\s*(.+)$/i);
+      if (m) pushPairLog(m[1].padStart(3,'0'), m[2].padStart(3,'0'), m[3]);
+      else emitLog(String(raw || '').replace(/^([^:]+:)/, '<span class="agent">$1</span>'), true);
+    }
+
+    // =========== Demo mode — kick off analysis in background ===========
+    function kickoffDemoFetch() {
       const body = {
         proyecto: state.input.proyecto,
         cliente: state.input.cliente,
         mensaje: state.input.mensaje,
-        num_agentes: state.input.agentes,
-        perfil_publico: state.input.perfil
+        perfil_publico: state.input.perfil,
+        num_agentes: state.input.agentes
       };
-      fetch(PULSE_WEBHOOK_URL, {
+      fetch('/api/pulse/demo', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Addendo-Secret': PULSE_WEBHOOK_SECRET
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body)
-      }).then(r => {
-        emitLog('Motor Addendo Pulse conectado — backend respondió HTTP ' + r.status + ' · Simulación real iniciada', true);
+      }).then(async r => {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        const j = await r.json();
+        if (!j.ok || !j.data) throw new Error('Análisis incompleto');
+        state.demoData = j.data;
+        if (Array.isArray(j.data.conversaciones)) state.demoConversations = j.data.conversaciones;
       }).catch(err => {
-        emitLog('Error conectando backend: ' + err.message, true);
+        emitLog('Aviso: análisis profundo no disponible — usando proyección estándar (' + err.message + ')', true);
       });
+    }
+
+    // =========== Real mode — orchestrated polling against /api/pulse/* ===========
+    function kickoffRealStart() {
+      const body = {
+        proyecto: state.input.proyecto,
+        cliente: state.input.cliente,
+        mensaje: state.input.mensaje,
+        perfil_publico: state.input.perfil,
+        num_agentes: state.input.agentes
+      };
+      emitLog('Conectando con motor de simulación real…', true);
+      fetch('/api/pulse/start', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      }).then(async r => {
+        const j = await r.json().catch(() => null);
+        if (!r.ok || !j?.ok) throw new Error(j?.error || ('HTTP ' + r.status));
+        state.ids.project_id = j.project_id;
+        state.ids.task_id = j.task_id;
+        emitLog('Motor conectado — construyendo grafo social del público objetivo', true);
+        startRealPolling();
+      }).catch(err => {
+        showRealError('No se pudo iniciar la simulación real: ' + err.message);
+      });
+    }
+
+    function startRealPolling() {
+      // Status every 15s
+      pollStatus(); // immediate
+      state.realStatusInt = setInterval(pollStatus, 15000);
+      // Logs every 20s
+      state.realLogsInt = setInterval(pollLogs, 20000);
+    }
+
+    function stopRealPolling() {
+      if (state.realStatusInt) { clearInterval(state.realStatusInt); state.realStatusInt = null; }
+      if (state.realLogsInt) { clearInterval(state.realLogsInt); state.realLogsInt = null; }
+    }
+
+    function buildIdsQuery() {
+      const p = new URLSearchParams();
+      Object.entries(state.ids).forEach(([k, v]) => { if (v) p.set(k, v); });
+      return p.toString();
+    }
+
+    function pollStatus() {
+      if (state.simAborted || state.realCompleted) return;
+      fetch('/api/pulse/status?' + buildIdsQuery()).then(async r => {
+        const j = await r.json().catch(() => null);
+        if (!r.ok || !j?.ok) {
+          state.errorCount++;
+          if (state.errorCount >= 3) showRealError(j?.error || 'Backend de simulación no responde');
+          return;
+        }
+        state.errorCount = 0;
+        // Persist any new IDs returned
+        ['project_id','task_id','simulation_id','prep_task_id','report_id'].forEach(k => {
+          if (j[k]) state.ids[k] = j[k];
+        });
+        applyRealPhase(j.phase, j.progress, j.message, j.current_round, j.total_rounds);
+        if (j.completed) {
+          stopRealPolling();
+          state.realCompleted = true;
+          fetchRealReport();
+        }
+      }).catch(() => {
+        state.errorCount++;
+        if (state.errorCount >= 3) showRealError('Conexión perdida con el motor');
+      });
+    }
+
+    function pollLogs() {
+      if (state.simAborted || state.realCompleted) return;
+      const p = new URLSearchParams();
+      if (state.ids.simulation_id) p.set('simulation_id', state.ids.simulation_id);
+      if (state.ids.report_id) p.set('report_id', state.ids.report_id);
+      p.set('since', String(state.realLogsSince));
+      if (!p.get('simulation_id')) return;
+      fetch('/api/pulse/logs?' + p.toString()).then(async r => {
+        const j = await r.json().catch(() => null);
+        if (!r.ok || !j?.ok) return;
+        state.realLogsSince = j.next_since || state.realLogsSince;
+        if (Array.isArray(j.logs)) {
+          for (let i = 0; i < j.logs.length; i++) {
+            const L = j.logs[i];
+            if (L.type === 'pair') emitConversationLine(L.text);
+            else pushEventLog(L.text);
+          }
+        }
+      }).catch(() => {});
+    }
+
+    function applyRealPhase(phase, progress, msg, currentRound, totalRounds) {
+      const phases = document.querySelectorAll('.phase');
+      // mark earlier phases as 100% complete
+      for (let i = 0; i < phases.length; i++) {
+        const p = phases[i];
+        const fill = p.querySelector('.phase-fill');
+        const pct = p.querySelector('.pct');
+        if (i < phase) {
+          fill.style.width = '100%';
+          pct.textContent = '100%';
+          p.classList.remove('active');
+        } else if (i === phase) {
+          p.classList.add('active');
+          const v = Math.max(0, Math.min(100, Math.round(progress || 0)));
+          fill.style.width = v + '%';
+          pct.textContent = v + '%';
+        } else {
+          fill.style.width = '0%';
+          pct.textContent = '0%';
+          p.classList.remove('active');
+        }
+      }
+      if (msg && (phase !== state.lastRealPhase || Math.abs(progress - state.lastRealProgress) >= 10)) {
+        emitLog(msg, true);
+        state.lastRealPhase = phase;
+        state.lastRealProgress = progress;
+      }
+    }
+
+    function fetchRealReport() {
+      emitLog('Reporte listo — extrayendo métricas finales', true);
+      const p = new URLSearchParams();
+      if (state.ids.simulation_id) p.set('simulation_id', state.ids.simulation_id);
+      if (state.ids.report_id) p.set('report_id', state.ids.report_id);
+      fetch('/api/pulse/report?' + p.toString()).then(async r => {
+        const j = await r.json().catch(() => null);
+        if (!r.ok || !j?.ok || !j.ready) {
+          showRealError('No se pudo procesar el reporte final');
+          return;
+        }
+        state.realData = j.data;
+        if (Array.isArray(j.data?.conversaciones)) state.demoConversations = j.data.conversaciones;
+        finishSimulation();
+      }).catch(err => {
+        showRealError('Reporte no disponible: ' + err.message);
+      });
+    }
+
+    function showRealError(msg) {
+      stopRealPolling();
+      emitLog('⚠ ' + msg, true);
+      // Show a subtle banner inside results screen if the user navigates there;
+      // for now, surface in canvas-logs and allow them to click "Nueva simulación".
     }
 
     // =========== Canvas animation ===========
@@ -1059,66 +1249,90 @@ const SITE_PASSWORD = 'AddendoPulse2026';
     // =========== Finish & results ===========
     function finishSimulation() {
       if (timerInt) clearInterval(timerInt);
-      // Numbers — semi-deterministic given input so it doesn't feel random.
-      // Decimal precision (xx.x%) reads like a financial report (Bloomberg/Goldman style).
-      const seed = (state.input.mensaje + state.input.perfil).length;
-      function jit(salt) {
-        const s = (seed * 9301 + 49297 + salt * 7919) % 233280;
-        return s / 233280;
+      stopRealPolling();
+
+      // Source of truth: real > demo > seeded fallback.
+      const remote = state.realData || state.demoData;
+
+      let resonancia, adopcion, resistencia, positivo, insights, recos, segDesc, palabraClave;
+
+      if (remote) {
+        const num = (v, fb) => {
+          const n = Number(v);
+          return isFinite(n) ? Math.max(0, Math.min(100, +n.toFixed(1))) : fb;
+        };
+        resonancia = num(remote.resonancia_mensaje, 70);
+        adopcion   = num(remote.tasa_adopcion, 28);
+        resistencia = num(remote.indice_resistencia, 14);
+        positivo   = num(remote.respuesta_positiva, +((resonancia + (100 - resistencia) + adopcion * 1.2) / 3.2).toFixed(1));
+        insights = Array.isArray(remote.insights) && remote.insights.length ? remote.insights.slice(0, 6) : null;
+        recos = Array.isArray(remote.recomendaciones) && remote.recomendaciones.length ? remote.recomendaciones.slice(0, 6) : null;
+        segDesc = remote.segmento_dominante || '';
+        palabraClave = remote.palabra_clave_resonancia || '';
       }
-      const resonancia = +(70 + jit(1) * 22).toFixed(1);
-      const adopcion   = +(20 + jit(2) * 28).toFixed(1);
-      const resistencia = +(5  + jit(3) * 18).toFixed(1);
-      const positivo   = +((resonancia + (100 - resistencia) + adopcion * 1.2) / 3.2).toFixed(1);
+
+      if (!remote) {
+        // Seeded fallback (used only if backend analysis is unavailable)
+        const seed = (state.input.mensaje + state.input.perfil).length;
+        function jit(salt) {
+          const s = (seed * 9301 + 49297 + salt * 7919) % 233280;
+          return s / 233280;
+        }
+        resonancia = +(70 + jit(1) * 22).toFixed(1);
+        adopcion   = +(20 + jit(2) * 28).toFixed(1);
+        resistencia = +(5  + jit(3) * 18).toFixed(1);
+        positivo   = +((resonancia + (100 - resistencia) + adopcion * 1.2) / 3.2).toFixed(1);
+        const segs = ['35-45', '25-34', '45-55', '18-24'];
+        const seg = segs[seed % segs.length];
+        insights = [
+          'El mensaje conecta fuertemente con el segmento ' + seg + '.',
+          'Resistencia detectada en usuarios con experiencia previa o expectativas no alineadas.',
+          'Oportunidad: énfasis en resultados inmediatos resuena con el cluster amplificador.',
+          'Subgrafo de 7 nodos centrales actúa como punto de viralización potencial.'
+        ];
+        recos = [
+          'Ajustar el CTA hacia urgencia y resultado tangible.',
+          'Segmentar campaña inicial para ' + seg + ' antes de escalar.',
+          'Re-trabajar el ángulo de credibilidad para reducir el ' + resistencia.toFixed(1) + '% de resistencia.'
+        ];
+        segDesc = seg;
+        palabraClave = '';
+      }
 
       document.getElementById('r-resonancia').textContent = resonancia.toFixed(1);
       document.getElementById('r-adopcion').textContent = adopcion.toFixed(1);
       document.getElementById('r-resistencia').textContent = resistencia.toFixed(1);
 
-      // Insights — adaptados ligeramente al input
-      const segmentos = ['35-45', '25-34', '45-55', '18-24'];
-      const seg = segmentos[seed % segmentos.length];
-      const insights = [
-        'El mensaje conecta fuertemente con el segmento ' + seg + '.',
-        'Resistencia detectada en usuarios con experiencia previa o expectativas no alineadas.',
-        'Oportunidad: énfasis en resultados inmediatos resuena con el cluster amplificador.',
-        'Subgrafo de 7 nodos centrales actúa como punto de viralización potencial.'
-      ];
-      const recos = [
-        'Ajustar el CTA hacia urgencia y resultado tangible.',
-        'Segmentar campaña inicial para ' + seg + ' antes de escalar.',
-        'Re-trabajar el ángulo de credibilidad para reducir el ' + resistencia.toFixed(1) + '% de resistencia.'
-      ];
       const il = document.getElementById('insights-list'); il.innerHTML = '';
-      insights.forEach(t => { const c = document.createElement('div'); c.className = 'insight-card'; c.textContent = t; il.appendChild(c); });
+      insights.forEach(t => { const c = document.createElement('div'); c.className = 'insight-card'; c.textContent = String(t); il.appendChild(c); });
       const rl = document.getElementById('recos-list'); rl.innerHTML = '';
-      recos.forEach(t => { const c = document.createElement('div'); c.className = 'reco-card'; c.textContent = t; rl.appendChild(c); });
+      recos.forEach(t => { const c = document.createElement('div'); c.className = 'reco-card'; c.textContent = String(t); rl.appendChild(c); });
 
-      // Real banner
+      // Banner
       const rb = document.getElementById('real-banner');
-      if (state.mode === 'real') {
+      if (state.mode === 'real' && state.realData) {
         rb.hidden = false;
-        rb.innerHTML = 'Simulación real disparada en N8N. Estos números son una previsualización.<br>El reporte completo con análisis del backend llega por correo a <strong>admin@addendo.io</strong> en 10–25 minutos.';
+        rb.innerHTML = '<strong>SIMULACIÓN COMPLETA — DATOS REALES</strong><br>Análisis derivado del motor de simulación con ' + state.input.agentes + ' agentes simulados' + (palabraClave ? ' · Palabra clave de mayor resonancia: <em>"' + palabraClave + '"</em>' : '') + (segDesc ? '<br>Segmento dominante: ' + segDesc : '');
+      } else if (state.mode === 'demo' && state.demoData) {
+        rb.hidden = false;
+        rb.innerHTML = (palabraClave ? 'Palabra clave de mayor resonancia: <em>"' + palabraClave + '"</em>' : 'Análisis específico generado para tu mensaje y público') + (segDesc ? '<br>Segmento dominante: ' + segDesc : '');
+      } else if (state.mode === 'real') {
+        rb.hidden = false;
+        rb.innerHTML = 'Modo real solicitado — el reporte profundo se está generando en background. Este resumen es una previsualización.';
       } else {
         rb.hidden = true;
       }
 
-      // Show results screen
       show('screen-results');
       stopCanvas();
       requestAnimationFrame(() => {
         document.getElementById('results-headline').classList.add('show');
-        // Gauge animate
         const circumference = 2 * Math.PI * 92;
         const fill = document.getElementById('gauge-fill');
         const target = circumference * (1 - positivo / 100);
-        // Set initial then animate
         fill.style.strokeDashoffset = circumference;
-        // Force reflow then animate
         void fill.getBoundingClientRect();
         fill.style.strokeDashoffset = target;
-
-        // Number count-up — preserve decimal precision throughout
         const numEl = document.getElementById('gauge-num');
         const dur = 2400;
         const t0 = performance.now();
@@ -1140,6 +1354,7 @@ const SITE_PASSWORD = 'AddendoPulse2026';
     // =========== Result CTAs ===========
     document.getElementById('cta-new').addEventListener('click', () => {
       state.simAborted = true;
+      stopRealPolling();
       stopCanvas();
       show('screen-config');
     });
