@@ -72,8 +72,11 @@ export const POST: APIRoute = async ({ request }) => {
       return bad(502, 'ontology/generate no devolvió project_id', { resp: j });
     }
   } catch (e) {
-    await notifyAlert('start.ontology', (e as Error).message, { proyecto });
-    return bad(502, 'No se pudo conectar con el motor de simulación: ' + (e as Error).message);
+    const err = e as Error & { cause?: any };
+    const cause = err.cause ? (err.cause.code || err.cause.message || String(err.cause)) : '';
+    const detail = err.message + (cause ? ' (cause: ' + cause + ')' : '');
+    await notifyAlert('start.ontology', detail, { proyecto });
+    return bad(502, 'No se pudo conectar con el motor de simulación: ' + detail);
   }
 
   // Step 2: graph/build (async — devuelve task_id rápido).
