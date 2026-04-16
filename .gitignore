@@ -17,6 +17,9 @@ pnpm-debug.log*
 .env
 .env.production
 
+# MCP config (contiene paths / env refs; mantener per-host)
+.mcp.json
+
 # macOS-specific files
 .DS_Store
 

@@ -34,6 +34,27 @@ Si no está claro qué agente aplica, leer el agente #4 `project-manager` para q
 
 ---
 
+## ⚠️ REGLA #2 — USO SEGURO DEL MCP DE N8N
+
+El MCP de n8n (`czlonkowski/n8n-mcp`) está instalado y configurado en dos ubicaciones vía `.mcp.json` (stdio transport, `npx` on-demand):
+
+- **Mac**: `/Users/Mac/addendo-website/.mcp.json` — para sesiones interactivas de Jose
+- **AWS**: `/home/ubuntu/addendo-website/.mcp.json` — para agentes headless Claude Code 24/7
+
+Ambos archivos son idénticos y cargan `N8N_API_KEY` desde variable de entorno del host (ya existe en `~/.bashrc` del servidor y en `~/.zshrc` del Mac).
+
+### Reglas de uso
+
+1. **Por defecto solo lectura**: listar workflows, describir nodos, revisar ejecuciones, consultar docs. Estas operaciones son seguras e idempotentes.
+2. **Para escribir workflows activos en producción** (crear, modificar, activar, desactivar, eliminar):
+   - Backup del workflow **antes** de cualquier cambio (convención `workflows/<nombre>.json.bak-<timestamp>` en AWS)
+   - Confirmación explícita de Jose en chat antes de ejecutar la operación
+3. **Secretos**: `N8N_API_KEY` nunca se expone en logs, commits, echos ni archivos públicos. El `.mcp.json` está en `.gitignore` como defensa en profundidad; el key viaja vía env var substitution `${N8N_API_KEY}`.
+4. **Alcance**: el MCP puede tocar cualquier workflow de la instancia `n8n.addendo.io`. Los workflows críticos conocidos hoy son `blog-don-jacinto` (ID `NKyH6etI3cF8En7n`) y `blog-addendo` (ID `vjejHZvJa2PtTLYh`).
+5. **Incompatibilidades conocidas**: n8n CLI reporta `2.8.4` (versioning no-mainline). Operaciones de lectura funcionan; build/edit podría tener quirks — probar en workflow staging antes de aplicar a producción.
+
+---
+
 ## IDENTIDAD DEL SISTEMA
 
 - **Empresa:** Addendo Growth Partner (Addendo LLC)
