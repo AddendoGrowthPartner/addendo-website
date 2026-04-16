@@ -1,0 +1,954 @@
+{
+  "name": "Addendo Pulse — Simulacion Completa",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "addendo-pulse-simulacion",
+        "authentication": "headerAuth",
+        "responseMode": "onReceived",
+        "responseData": "firstEntryJson",
+        "responseCode": 202,
+        "options": {}
+      },
+      "id": "eda45f39-b78e-4b75-9d77-991bdc39b0b6",
+      "name": "Webhook Entry",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        200,
+        300
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "9THsbLoTLfuu29Tt",
+          "name": "Addendo Pulse Webhook Secret"
+        }
+      },
+      "webhookId": "508c7719-fec8-4a3e-9c6b-a9b142ba0078"
+    },
+    {
+      "parameters": {
+        "language": "javaScript",
+        "jsCode": "const body = $input.first().json.body || $input.first().json;\nconst required = ['proyecto', 'cliente', 'mensaje', 'num_agentes', 'perfil_publico'];\nconst missing = required.filter(k => !body[k] && body[k] !== 0);\nif (missing.length > 0) {\n  throw new Error('Faltan campos requeridos: ' + missing.join(', '));\n}\nreturn [{\n  json: {\n    proyecto: String(body.proyecto),\n    cliente: String(body.cliente),\n    mensaje: String(body.mensaje),\n    num_agentes: parseInt(body.num_agentes, 10),\n    perfil_publico: String(body.perfil_publico)\n  }\n}];"
+      },
+      "id": "63b9584b-1759-465b-9038-0b3a986eab90",
+      "name": "Validar Request",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        420,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "language": "javaScript",
+        "jsCode": "const d = $input.first().json;\nconst simReq = `OBJETIVO DE SIMULACION\n${d.mensaje}\n\nPUBLICO OBJETIVO\n${d.perfil_publico}\n\nAGENTES: Simular ${d.num_agentes} agentes representativos del publico descrito.\nCLIENTE: ${d.cliente}\nPROYECTO: ${d.proyecto}`;\n\nconst fileContent = `PERFIL DEL PUBLICO\n===================\n${d.perfil_publico}\n\nMENSAJE A SIMULAR\n===================\n${d.mensaje}\n\nNUMERO DE AGENTES SOLICITADOS: ${d.num_agentes}\nCLIENTE: ${d.cliente}\nPROYECTO: ${d.proyecto}\n`;\n\nreturn [{\n  json: {\n    ...d,\n    simulation_requirement: simReq\n  },\n  binary: {\n    perfil: {\n      data: Buffer.from(fileContent, 'utf8').toString('base64'),\n      mimeType: 'text/plain',\n      fileName: 'perfil_publico.txt',\n      fileExtension: 'txt'\n    }\n  }\n}];"
+      },
+      "id": "b3e8226f-9993-4991-bf48-da4b4756177c",
+      "name": "Preparar Input",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        640,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://3.231.126.70:5001/api/graph/ontology/generate",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "files",
+              "inputDataFieldName": "perfil"
+            },
+            {
+              "name": "simulation_requirement",
+              "value": "={{ $json.simulation_requirement }}"
+            },
+            {
+              "name": "project_name",
+              "value": "={{ $json.proyecto }}"
+            },
+            {
+              "name": "additional_context",
+              "value": "={{ $json.cliente }}"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 180000,
+          "retry": {
+            "maxTries": 2,
+            "waitBetweenTries": 5000
+          }
+        }
+      },
+      "id": "dc538caf-2da0-4863-9f9b-d645cf189e04",
+      "name": "Addendo Pulse — Generar Ontologia",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        860,
+        300
+      ],
+      "onError": "stopWorkflow"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://3.231.126.70:5001/api/graph/build",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { project_id: $json.data.project_id, graph_name: $('Preparar Input').item.json.proyecto } }}",
+        "options": {
+          "timeout": 60000,
+          "retry": {
+            "maxTries": 2,
+            "waitBetweenTries": 5000
+          }
+        }
+      },
+      "id": "0cf4db4c-03cb-4109-8871-cd57132642a4",
+      "name": "Addendo Pulse — Construir Grafo",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1080,
+        300
+      ],
+      "onError": "stopWorkflow"
+    },
+    {
+      "parameters": {
+        "amount": 15,
+        "unit": "seconds"
+      },
+      "id": "7d8807d5-28ce-4271-9ad9-54485bc6da59",
+      "name": "Esperar Grafo",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1300,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{ 'http://3.231.126.70:5001/api/graph/task/' + $('Addendo Pulse — Construir Grafo').item.json.data.task_id }}",
+        "options": {
+          "timeout": 30000,
+          "retry": {
+            "maxTries": 2,
+            "waitBetweenTries": 5000
+          }
+        }
+      },
+      "id": "35909811-8dea-4904-a48e-d11637b8e634",
+      "name": "Addendo Pulse — Estado Grafo",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1520,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "language": "javaScript",
+        "jsCode": "const body = $input.first().json;\nconst data = body?.data || {};\nconst status = (data.status || data.runner_status || 'unknown').toString().toLowerCase();\nconst tries = $runIndex + 1;\nconst maxTries = 40;\nconst terminalSuccess = ['completed','ready','finished','success','done'].includes(status);\nconst terminalFailure = ['failed','error','cancelled','stopped'].includes(status);\nif (terminalFailure) {\n  throw new Error('grafo fallo con status: ' + status + ' (intento ' + tries + ')');\n}\nif (!terminalSuccess && tries >= maxTries) {\n  throw new Error('Timeout en grafo despues de ' + tries + ' intentos. Ultimo status: ' + status);\n}\nreturn [{ json: { ...body, _tries: tries, _done: terminalSuccess, _status: status } }];"
+      },
+      "id": "77f83760-2d0d-4c70-b209-a4ad33d016bd",
+      "name": "Check Poll Grafo",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1740,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json._done }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "1e52d703-c43d-4756-918d-b03d38db7ff5",
+      "name": "Grafo Listo?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1960,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://3.231.126.70:5001/api/simulation/create",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { project_id: $('Addendo Pulse — Generar Ontologia').item.json.data.project_id } }}",
+        "options": {
+          "timeout": 60000,
+          "retry": {
+            "maxTries": 2,
+            "waitBetweenTries": 5000
+          }
+        }
+      },
+      "id": "ca210233-7868-4f6d-b2c8-b16ee802650c",
+      "name": "Addendo Pulse — Crear Simulacion",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        200,
+        500
+      ],
+      "onError": "stopWorkflow"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://3.231.126.70:5001/api/simulation/prepare",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { simulation_id: $('Addendo Pulse — Crear Simulacion').item.json.data.simulation_id } }}",
+        "options": {
+          "timeout": 60000,
+          "retry": {
+            "maxTries": 2,
+            "waitBetweenTries": 5000
+          }
+        }
+      },
+      "id": "efb929f8-a360-4656-b587-d059da2e53b6",
+      "name": "Addendo Pulse — Preparar Simulacion",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        420,
+        500
+      ],
+      "onError": "stopWorkflow"
+    },
+    {
+      "parameters": {
+        "amount": 10,
+        "unit": "seconds"
+      },
+      "id": "dfa055e3-4ae4-4654-b611-e947facafcc8",
+      "name": "Esperar Prepare",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        640,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://3.231.126.70:5001/api/simulation/prepare/status",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { simulation_id: $('Addendo Pulse — Crear Simulacion').item.json.data.simulation_id } }}",
+        "options": {
+          "timeout": 30000,
+          "retry": {
+            "maxTries": 2,
+            "waitBetweenTries": 5000
+          }
+        }
+      },
+      "id": "816ec8dd-69db-4185-b390-12294e1a3969",
+      "name": "Addendo Pulse — Estado Prepare",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        860,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "language": "javaScript",
+        "jsCode": "const body = $input.first().json;\nconst data = body?.data || {};\nconst status = (data.status || data.runner_status || 'unknown').toString().toLowerCase();\nconst tries = $runIndex + 1;\nconst maxTries = 40;\nconst terminalSuccess = ['completed','ready','finished','success','done'].includes(status);\nconst terminalFailure = ['failed','error','cancelled','stopped'].includes(status);\nif (terminalFailure) {\n  throw new Error('prepare fallo con status: ' + status + ' (intento ' + tries + ')');\n}\nif (!terminalSuccess && tries >= maxTries) {\n  throw new Error('Timeout en prepare despues de ' + tries + ' intentos. Ultimo status: ' + status);\n}\nreturn [{ json: { ...body, _tries: tries, _done: terminalSuccess, _status: status } }];"
+      },
+      "id": "da05b9d3-8a84-4ec4-8f75-585e28765ab6",
+      "name": "Check Poll Prepare",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1080,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json._done }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "e6b02635-fe98-4fbd-8896-3a37c7013b05",
+      "name": "Prepare Listo?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1300,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://3.231.126.70:5001/api/simulation/start",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { simulation_id: $('Addendo Pulse — Crear Simulacion').item.json.data.simulation_id, platform: 'parallel' } }}",
+        "options": {
+          "timeout": 60000,
+          "retry": {
+            "maxTries": 2,
+            "waitBetweenTries": 5000
+          }
+        }
+      },
+      "id": "9cab04d7-5342-43d3-aeef-85420a1a2975",
+      "name": "Addendo Pulse — Correr Simulacion",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1520,
+        500
+      ],
+      "onError": "stopWorkflow"
+    },
+    {
+      "parameters": {
+        "amount": 30,
+        "unit": "seconds"
+      },
+      "id": "60d419cc-82d2-4874-9375-4f653582cd54",
+      "name": "Esperar Run",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1740,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{ 'http://3.231.126.70:5001/api/simulation/' + $('Addendo Pulse — Crear Simulacion').item.json.data.simulation_id + '/run-status' }}",
+        "options": {
+          "timeout": 30000,
+          "retry": {
+            "maxTries": 2,
+            "waitBetweenTries": 5000
+          }
+        }
+      },
+      "id": "25a58484-7494-4790-8b18-99d8108d8858",
+      "name": "Addendo Pulse — Estado Run",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1960,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "language": "javaScript",
+        "jsCode": "const body = $input.first().json;\nconst data = body?.data || {};\nconst rs = (data.runner_status || '').toString().toLowerCase();\nconst cur = data.current_round || 0;\nconst tot = data.total_rounds || 0;\nconst pct = data.progress_percent || 0;\nconst tries = $runIndex + 1;\nconst maxTries = 40;\nconst terminalFailure = ['error','failed','stopped','crashed'].includes(rs);\nif (terminalFailure) {\n  throw new Error('Simulacion fallo con runner_status: ' + rs + ' (intento ' + tries + ')');\n}\nconst roundsDone = tot > 0 && cur >= tot;\nconst notBusy = rs && !['running','idle','preparing','starting'].includes(rs);\nconst done = notBusy || roundsDone || pct >= 100;\nif (!done && tries >= maxTries) {\n  throw new Error('Timeout en simulacion despues de ' + tries + ' intentos. runner_status=' + rs + ' round=' + cur + '/' + tot + ' pct=' + pct);\n}\nreturn [{ json: { ...body, _tries: tries, _done: done, _runner_status: rs, _round: cur, _total_rounds: tot, _pct: pct } }];"
+      },
+      "id": "8b982d50-3275-4d29-a11b-2e9e38570b41",
+      "name": "Check Poll Run",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        200,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json._done }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "41791938-7875-4bd5-af51-70724b4d767d",
+      "name": "Simulacion Terminada?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        420,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://3.231.126.70:5001/api/report/generate",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { simulation_id: $('Addendo Pulse — Crear Simulacion').item.json.data.simulation_id } }}",
+        "options": {
+          "timeout": 60000,
+          "retry": {
+            "maxTries": 2,
+            "waitBetweenTries": 5000
+          }
+        }
+      },
+      "id": "9280d9e8-265f-4ddf-874c-84fa29b32d44",
+      "name": "Addendo Pulse — Generar Reporte",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        640,
+        700
+      ],
+      "onError": "stopWorkflow"
+    },
+    {
+      "parameters": {
+        "amount": 20,
+        "unit": "seconds"
+      },
+      "id": "d74e3790-6d30-4759-9c1f-138c310f0153",
+      "name": "Esperar Reporte",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        860,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{ 'http://3.231.126.70:5001/api/report/' + $('Addendo Pulse — Generar Reporte').item.json.data.report_id + '/progress' }}",
+        "options": {
+          "timeout": 30000,
+          "retry": {
+            "maxTries": 2,
+            "waitBetweenTries": 5000
+          }
+        }
+      },
+      "id": "07214ef3-2ff8-493f-9b23-d2823e876648",
+      "name": "Addendo Pulse — Progreso Reporte",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1080,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "language": "javaScript",
+        "jsCode": "const body = $input.first().json;\nconst data = body?.data || {};\nconst status = (data.status || data.runner_status || 'unknown').toString().toLowerCase();\nconst tries = $runIndex + 1;\nconst maxTries = 15;\nconst terminalSuccess = ['completed','ready','finished','success','done'].includes(status);\nconst terminalFailure = ['failed','error','cancelled','stopped'].includes(status);\nif (terminalFailure) {\n  throw new Error('reporte fallo con status: ' + status + ' (intento ' + tries + ')');\n}\nif (!terminalSuccess && tries >= maxTries) {\n  throw new Error('Timeout en reporte despues de ' + tries + ' intentos. Ultimo status: ' + status);\n}\nreturn [{ json: { ...body, _tries: tries, _done: terminalSuccess, _status: status } }];"
+      },
+      "id": "3f455bfa-50be-4d3e-8cbb-ccb94b28868f",
+      "name": "Check Poll Reporte",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1300,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json._done }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "5be5f2fc-ce17-40a0-be24-a0211fcaed9b",
+      "name": "Reporte Listo?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1520,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{ 'http://3.231.126.70:5001/api/report/' + $('Addendo Pulse — Generar Reporte').item.json.data.report_id }}",
+        "options": {
+          "timeout": 60000,
+          "retry": {
+            "maxTries": 2,
+            "waitBetweenTries": 5000
+          }
+        }
+      },
+      "id": "91ee4620-03d1-48a9-b7e3-1836a6fc9314",
+      "name": "Addendo Pulse — Obtener Reporte Final",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1740,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "language": "javaScript",
+        "jsCode": "const report = $input.first().json?.data || {};\nconst input = $('Preparar Input').item.json;\nconst sim = $('Addendo Pulse — Crear Simulacion').item.json?.data || {};\nconst escapeHtml = (s) => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');\nconst md = report.markdown_content || 'Sin contenido generado.';\nconst html = `<div style=\"font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto;\">\n  <h1 style=\"color: #0a2540;\">Addendo Pulse — Simulacion Completada</h1>\n  <table style=\"border-collapse: collapse; width: 100%; margin-bottom: 20px;\">\n    <tr><td style=\"padding: 6px; font-weight: bold; width: 180px;\">Proyecto</td><td style=\"padding: 6px;\">${escapeHtml(input.proyecto)}</td></tr>\n    <tr><td style=\"padding: 6px; font-weight: bold;\">Cliente</td><td style=\"padding: 6px;\">${escapeHtml(input.cliente)}</td></tr>\n    <tr><td style=\"padding: 6px; font-weight: bold;\">Mensaje simulado</td><td style=\"padding: 6px;\">${escapeHtml(input.mensaje)}</td></tr>\n    <tr><td style=\"padding: 6px; font-weight: bold;\">Agentes solicitados</td><td style=\"padding: 6px;\">${input.num_agentes}</td></tr>\n    <tr><td style=\"padding: 6px; font-weight: bold;\">Simulation ID</td><td style=\"padding: 6px; font-family: monospace;\">${escapeHtml(sim.simulation_id)}</td></tr>\n    <tr><td style=\"padding: 6px; font-weight: bold;\">Report ID</td><td style=\"padding: 6px; font-family: monospace;\">${escapeHtml(report.report_id)}</td></tr>\n  </table>\n  <hr/>\n  <h2 style=\"color: #0a2540;\">Reporte</h2>\n  <pre style=\"white-space: pre-wrap; font-family: Georgia, serif; font-size: 14px; line-height: 1.6; background: #f7f9fc; padding: 16px; border-radius: 6px;\">${escapeHtml(md)}</pre>\n</div>`;\nconst subject = `Addendo Pulse — Simulacion \"${input.proyecto}\" completada`;\nreturn [{ json: { html, subject, report_id: report.report_id, simulation_id: sim.simulation_id } }];"
+      },
+      "id": "9d1c36d2-9e30-49a6-bd95-7d231a2f0231",
+      "name": "Formatear Email HTML",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1960,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "sendTo": "admin@addendo.io",
+        "subject": "={{ $json.subject }}",
+        "emailType": "html",
+        "message": "={{ $json.html }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "id": "80db082e-eb5a-4c5d-a6c6-d55f88628cfb",
+      "name": "Addendo Pulse — Entregar Resultados",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        200,
+        900
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "rD8DDJhSiG1dpOwO",
+          "name": "Gmail API"
+        }
+      },
+      "onError": "continueErrorOutput"
+    }
+  ],
+  "connections": {
+    "Webhook Entry": {
+      "main": [
+        [
+          {
+            "node": "Validar Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validar Request": {
+      "main": [
+        [
+          {
+            "node": "Preparar Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar Input": {
+      "main": [
+        [
+          {
+            "node": "Addendo Pulse — Generar Ontologia",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Addendo Pulse — Generar Ontologia": {
+      "main": [
+        [
+          {
+            "node": "Addendo Pulse — Construir Grafo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Addendo Pulse — Construir Grafo": {
+      "main": [
+        [
+          {
+            "node": "Esperar Grafo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Esperar Grafo": {
+      "main": [
+        [
+          {
+            "node": "Addendo Pulse — Estado Grafo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Addendo Pulse — Estado Grafo": {
+      "main": [
+        [
+          {
+            "node": "Check Poll Grafo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Poll Grafo": {
+      "main": [
+        [
+          {
+            "node": "Grafo Listo?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Grafo Listo?": {
+      "main": [
+        [
+          {
+            "node": "Addendo Pulse — Crear Simulacion",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Esperar Grafo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Addendo Pulse — Crear Simulacion": {
+      "main": [
+        [
+          {
+            "node": "Addendo Pulse — Preparar Simulacion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Addendo Pulse — Preparar Simulacion": {
+      "main": [
+        [
+          {
+            "node": "Esperar Prepare",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Esperar Prepare": {
+      "main": [
+        [
+          {
+            "node": "Addendo Pulse — Estado Prepare",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Addendo Pulse — Estado Prepare": {
+      "main": [
+        [
+          {
+            "node": "Check Poll Prepare",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Poll Prepare": {
+      "main": [
+        [
+          {
+            "node": "Prepare Listo?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Listo?": {
+      "main": [
+        [
+          {
+            "node": "Addendo Pulse — Correr Simulacion",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Esperar Prepare",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Addendo Pulse — Correr Simulacion": {
+      "main": [
+        [
+          {
+            "node": "Esperar Run",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Esperar Run": {
+      "main": [
+        [
+          {
+            "node": "Addendo Pulse — Estado Run",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Addendo Pulse — Estado Run": {
+      "main": [
+        [
+          {
+            "node": "Check Poll Run",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Poll Run": {
+      "main": [
+        [
+          {
+            "node": "Simulacion Terminada?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simulacion Terminada?": {
+      "main": [
+        [
+          {
+            "node": "Addendo Pulse — Generar Reporte",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Esperar Run",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Addendo Pulse — Generar Reporte": {
+      "main": [
+        [
+          {
+            "node": "Esperar Reporte",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Esperar Reporte": {
+      "main": [
+        [
+          {
+            "node": "Addendo Pulse — Progreso Reporte",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Addendo Pulse — Progreso Reporte": {
+      "main": [
+        [
+          {
+            "node": "Check Poll Reporte",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Poll Reporte": {
+      "main": [
+        [
+          {
+            "node": "Reporte Listo?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reporte Listo?": {
+      "main": [
+        [
+          {
+            "node": "Addendo Pulse — Obtener Reporte Final",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Esperar Reporte",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Addendo Pulse — Obtener Reporte Final": {
+      "main": [
+        [
+          {
+            "node": "Formatear Email HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Formatear Email HTML": {
+      "main": [
+        [
+          {
+            "node": "Addendo Pulse — Entregar Resultados",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "America/New_York",
+    "saveExecutionProgress": true,
+    "saveManualExecutions": true,
+    "saveDataErrorExecution": "all",
+    "saveDataSuccessExecution": "all",
+    "executionTimeout": 2100,
+    "callerPolicy": "workflowsFromSameOwner"
+  }
+}
