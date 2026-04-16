@@ -179,9 +179,35 @@ const SITE_PASSWORD = 'AddendoPulse2026';
     .metric-num { font-family: var(--font-numeric); font-size: 1.85rem; color: var(--gold); font-weight: 400; line-height: 1; letter-spacing: -0.005em; }
     .metric-name { font-family: var(--font-caps); font-weight: 400; font-size: 0.6rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--text-soft); margin-top: 0.55rem; padding-left: 0.28em; }
 
-    .terminal { position: relative; z-index: 2; margin: 0 1.2rem 1.2rem; max-width: calc(100% - 2.4rem); padding: 1rem 1.2rem; background: rgba(0,0,0,0.55); border: 1px solid var(--line); border-radius: 0.5rem; font-family: var(--font-mono); font-weight: 300; font-size: 0.72rem; line-height: 1.7; color: rgba(255,255,255,0.62); height: 140px; overflow: hidden; }
-    .terminal-line { white-space: pre-wrap; word-break: break-word; }
-    .terminal-line .ts { color: var(--gold); margin-right: 0.8rem; opacity: 0.75; font-weight: 400; }
+    /* Conversational log overlay — sits inside the canvas region, semi-transparent. */
+    .canvas-logs {
+      position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+      padding: 4rem 2rem 1.4rem;
+      max-height: 200px;
+      pointer-events: none;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      gap: 0.35rem;
+      background: linear-gradient(0deg, rgba(6,9,15,0.72) 0%, rgba(6,9,15,0.35) 60%, transparent 100%);
+      font-family: var(--font-mono); font-weight: 300;
+      font-size: 11px; line-height: 1.65;
+      color: rgba(201,168,76,0.62);
+      overflow: hidden;
+    }
+    .canvas-log-line {
+      opacity: 0; transform: translateY(10px);
+      transition: opacity 500ms ease, transform 500ms ease;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      letter-spacing: 0.02em;
+    }
+    .canvas-log-line.show { opacity: 1; transform: translateY(0); }
+    .canvas-log-line.fade { opacity: 0; transform: translateY(-10px); }
+    .canvas-log-line .arrow { color: rgba(232,201,103,0.95); margin: 0 0.45rem; }
+    .canvas-log-line .agent { color: rgba(232,201,103,0.95); }
+    .canvas-log-line.event { color: rgba(255,255,255,0.55); }
+    .canvas-log-line.event::before { content: '◆ '; color: rgba(232,201,103,0.7); margin-right: 0.3rem; }
+    @media (max-width: 700px) {
+      .canvas-logs { padding: 3rem 1rem 1rem; font-size: 10px; max-height: 150px; }
+    }
 
     /* === RESULTS === */
     #screen-results { padding: 3rem 1.2rem 5rem; overflow-y: auto; }
@@ -359,7 +385,7 @@ const SITE_PASSWORD = 'AddendoPulse2026';
         <div id="metrics-list" class="metrics-list"></div>
       </aside>
     </div>
-    <div class="terminal" id="terminal"></div>
+    <div class="canvas-logs" id="canvas-logs"></div>
   </div>
 
   <!-- ============ SCREEN 3 — RESULTS ============ -->
@@ -599,7 +625,7 @@ const SITE_PASSWORD = 'AddendoPulse2026';
       initCanvas();
       runTimer();
       runPhases();
-      runMetricsAndTerminal();
+      runMetricsAndLogs();
       if (state.mode === 'real') triggerRealWebhook();
     }
 
@@ -610,7 +636,8 @@ const SITE_PASSWORD = 'AddendoPulse2026';
         el.querySelector('.pct').textContent = '0%';
       });
       document.getElementById('metrics-list').innerHTML = '';
-      document.getElementById('terminal').innerHTML = '';
+      document.getElementById('canvas-logs').innerHTML = '';
+      logTimers.forEach(t => clearTimeout(t)); logTimers = [];
     }
 
     let timerInt = null;
@@ -656,8 +683,76 @@ const SITE_PASSWORD = 'AddendoPulse2026';
       nextPhase();
     }
 
-    // Metrics drip + terminal log
-    function runMetricsAndTerminal() {
+    // ============ Metrics drip + conversational logs ============
+    let logTimers = [];
+    const MAX_VISIBLE_LOGS = 4;
+    const visibleLogs = []; // DOM elements currently shown
+
+    function emitLog(html, isEvent) {
+      const root = document.getElementById('canvas-logs');
+      if (!root) return;
+      const div = document.createElement('div');
+      div.className = 'canvas-log-line' + (isEvent ? ' event' : '');
+      div.innerHTML = html;
+      root.appendChild(div);
+      visibleLogs.push(div);
+      requestAnimationFrame(() => div.classList.add('show'));
+      // remove oldest if over cap
+      while (visibleLogs.length > MAX_VISIBLE_LOGS) {
+        const old = visibleLogs.shift();
+        old.classList.add('fade');
+        setTimeout(() => { if (old.parentNode) old.parentNode.removeChild(old); }, 600);
+      }
+    }
+    function pushPairLog(aId, bId, phrase) {
+      emitLog(
+        'Agente <span class="agent">#' + aId + '</span><span class="arrow">→</span>Agente <span class="agent">#' + bId + '</span>: ' + phrase,
+        false
+      );
+    }
+    function pushEventLog(text) { emitLog(text, true); }
+
+    const PAIR_PHRASES = [
+      'El mensaje genera confianza inmediata',
+      '¿Has visto resultados similares antes?',
+      'La oferta resuena pero el precio confunde',
+      'Esto encaja con lo que estaba buscando',
+      'Necesito más prueba social antes de decidir',
+      'El timing es perfecto para mi situación actual',
+      'Tengo dudas sobre la garantía',
+      'Comparto esto con mi equipo',
+      'Me recuerda algo que vi la semana pasada',
+      'Convencido — pediré más información',
+      'Suena demasiado bueno para ser verdad',
+      'El segundo párrafo me hizo cambiar de opinión',
+      'Necesito ver casos en mi industria',
+      'Esto cambia la conversación con mi jefe'
+    ];
+    const EVENT_TEMPLATES = [
+      'Cluster {n} forma consenso — {k} nodos alineados',
+      'Red neuronal: patrón de adopción emergente en segmento {seg}',
+      'Nodo líder #{a} amplifica señal — {k} conexiones activas',
+      'Subgrafo #{n} converge hacia decisión positiva',
+      'Disonancia cognitiva detectada en cluster {n}',
+      'Pico de actividad — {k} interacciones en últimos 30s',
+      'Cluster de resistencia identificado — {k} agentes',
+      'Agente #{a}: Resistencia detectada — precio percibido alto',
+      'Polarización emergente entre cluster {n} y cluster {m}',
+      'Difusión viral confirmada — propagación {k}x baseline'
+    ];
+
+    function rndId() { return String(Math.floor(Math.random() * 1000)).padStart(3, '0'); }
+    function rndSegment() { return ['A','B','C','D'][Math.floor(Math.random()*4)]; }
+    function fillEvent(tpl) {
+      return tpl
+        .replace('{n}', String(1 + Math.floor(Math.random()*9)))
+        .replace('{m}', String(1 + Math.floor(Math.random()*9)))
+        .replace('{a}', rndId())
+        .replace('{seg}', rndSegment())
+        .replace('{k}', String(15 + Math.floor(Math.random()*120)));
+    }
+
+    function runMetricsAndLogs() {
       const total = PHASE_DURATIONS.reduce((a, b) => a + b, 0);
       const N = Math.max(50, Math.min(1000, state.input.agentes));
       const metricsPlan = [
@@ -671,7 +766,7 @@ const SITE_PASSWORD = 'AddendoPulse2026';
       ];
       const list = document.getElementById('metrics-list');
       metricsPlan.forEach((m) => {
-        setTimeout(() => {
+        const t = setTimeout(() => {
           if (state.simAborted) return;
           const div = document.createElement('div');
           div.className = 'metric-item';
@@ -679,59 +774,22 @@ const SITE_PASSWORD = 'AddendoPulse2026';
           list.appendChild(div);
           requestAnimationFrame(() => div.classList.add('show'));
         }, m.at);
+        logTimers.push(t);
       });
 
-      const terminalSeed = [
-        'Conectando con grafo de Zep...',
-        'Ontología base generada — 14 entidades + 23 relaciones',
-        'Construyendo nodos de agentes — batch 1/4',
-        'Construyendo nodos de agentes — batch 2/4',
-        'Construyendo nodos de agentes — batch 3/4',
-        'Construyendo nodos de agentes — batch 4/4',
-        'Grafo persistido — task completed',
-        'Generando perfiles psicográficos vía LLM',
-        'Perfiles batch 1 — 75 agentes',
-        'Perfiles batch 2 — 75 agentes',
-        'Perfiles batch 3 — 75 agentes',
-        'Perfiles batch 4 — 75 agentes',
-        'Configuración de simulación lista',
-        'Lanzando OASIS runner — platform=parallel',
-        'Round 1/144 — 23% agentes activos',
-        'Agente #047 reacciona positivamente',
-        'Agente #112 retransmite con modificación',
-        'Cluster de adopción formado — 23 nodos',
-        'Round 24/144 — sentimiento +14%',
-        'Agente #201 muestra resistencia explícita',
-        'Resistencia detectada en segmento 3',
-        'Round 48/144 — momentum sostenido',
-        'Subgrafo de influencia detectado — 7 nodos centrales',
-        'Round 72/144 — pico de interacciones',
-        'Agente #298 actúa como amplificador',
-        'Round 96/144 — saturación parcial detectada',
-        'Round 120/144 — convergencia',
-        'Round 144/144 — simulación finalizada',
-        'Generando reporte final con LLM',
-        'Sección 1: resumen ejecutivo — completada',
-        'Sección 2: métricas clave — completada',
-        'Sección 3: insights por segmento — completada',
-        'Sección 4: recomendaciones — completada',
-        'Reporte ensamblado — listo para entrega'
-      ];
-      const term = document.getElementById('terminal');
-      const interval = total / terminalSeed.length;
-      terminalSeed.forEach((line, i) => {
-        setTimeout(() => {
+      // Conversational + event logs — interleaved at irregular cadence (1.2-2.4s)
+      let cursor = 1500;
+      while (cursor < total) {
+        const isEvent = Math.random() < 0.32;
+        const localCursor = cursor;
+        const t = setTimeout(() => {
           if (state.simAborted) return;
-          const ms = Date.now() - state.simStart;
-          const min = String(Math.floor(ms / 60000)).padStart(2, '0');
-          const sec = String(Math.floor((ms % 60000) / 1000)).padStart(2, '0');
-          const div = document.createElement('div');
-          div.className = 'terminal-line';
-          div.innerHTML = '<span class="ts">[' + min + ':' + sec + ']</span>' + line;
-          term.appendChild(div);
-          term.scrollTop = term.scrollHeight;
-        }, i * interval + Math.random() * 400);
-      });
+          if (isEvent) pushEventLog(fillEvent(EVENT_TEMPLATES[Math.floor(Math.random()*EVENT_TEMPLATES.length)]));
+          else pushPairLog(rndId(), rndId(), PAIR_PHRASES[Math.floor(Math.random()*PAIR_PHRASES.length)]);
+        }, localCursor);
+        logTimers.push(t);
+        cursor += 1200 + Math.random() * 1200;
+      }
     }
 
     // =========== Real webhook ===========
@@ -753,71 +811,172 @@ const SITE_PASSWORD = 'AddendoPulse2026';
         },
         body: JSON.stringify(body)
       }).then(r => {
-        const term = document.getElementById('terminal');
-        const tag = document.createElement('div');
-        tag.className = 'terminal-line';
-        tag.style.color = r.ok ? 'var(--gold)' : 'var(--danger)';
-        tag.innerHTML = '<span class="ts">[real]</span>Webhook real disparado — HTTP ' + r.status;
-        term.appendChild(tag);
-        term.scrollTop = term.scrollHeight;
+        emitLog('Motor Addendo Pulse conectado — backend respondió HTTP ' + r.status + ' · Simulación real iniciada', true);
       }).catch(err => {
-        const term = document.getElementById('terminal');
-        const tag = document.createElement('div');
-        tag.className = 'terminal-line';
-        tag.style.color = 'var(--danger)';
-        tag.innerHTML = '<span class="ts">[real]</span>Error disparando webhook: ' + err.message;
-        term.appendChild(tag);
+        emitLog('Error conectando backend: ' + err.message, true);
       });
     }
 
     // =========== Canvas animation ===========
-    let canvas, ctx, nodes = [], rafId = null;
+    // Dense neural network feel: 300 nodes desktop / 140 mobile, varied sizes,
+    // graduated link visibility, periodic pair "conversations" with bright lines
+    // and node pulses, soft attraction to leader nodes that form loose clusters.
+    let canvas, ctx, nodes = [], leaders = [], rafId = null;
+    let conversations = []; // { a, b, start, until }
+    let lastConvoSpawn = 0;
+    let lastLeaderRefresh = 0;
+    let canvasW = 0, canvasH = 0;
+
     function initCanvas() {
       canvas = document.getElementById('sim-canvas');
       ctx = canvas.getContext('2d');
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       function resize() {
-        canvas.width = canvas.clientWidth * dpr;
-        canvas.height = canvas.clientHeight * dpr;
+        canvasW = canvas.clientWidth;
+        canvasH = canvas.clientHeight;
+        canvas.width = canvasW * dpr;
+        canvas.height = canvasH * dpr;
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
         ctx.scale(dpr, dpr);
       }
       resize();
       window.addEventListener('resize', resize, { passive: true });
+
       const isMobile = window.innerWidth < 768;
-      const N = isMobile ? Math.min(120, state.input.agentes) : Math.min(state.input.agentes, 320);
+      const N = isMobile ? 140 : 300;
+
       nodes = [];
+      leaders = [];
+      conversations = [];
+      lastConvoSpawn = 0;
+      lastLeaderRefresh = 0;
+
       for (let i = 0; i < N; i++) {
-        nodes.push({
-          x: Math.random() * canvas.clientWidth,
-          y: Math.random() * canvas.clientHeight,
+        // Size distribution — 8% leaders (4-6px), 30% medium (2.4-3.6px), 62% small (1-2.2px)
+        const roll = Math.random();
+        let baseR, isLeader = false;
+        if (roll < 0.08) { isLeader = true; baseR = 4 + Math.random() * 2; }
+        else if (roll < 0.38) { baseR = 2.4 + Math.random() * 1.2; }
+        else { baseR = 1 + Math.random() * 1.2; }
+
+        const n = {
+          x: Math.random() * canvasW,
+          y: Math.random() * canvasH,
           vx: (Math.random() - 0.5) * 0.35,
           vy: (Math.random() - 0.5) * 0.35,
-          r: 1 + Math.random() * 2.4,
-          base: 1 + Math.random() * 2.4,
+          baseR,
+          isLeader,
+          opacity: isLeader ? 0.95 : (0.55 + Math.random() * 0.35),
           phase: Math.random() * Math.PI * 2,
-          glow: Math.random() < 0.06
-        });
+          pulseSpeed: 0.6 + Math.random() * 0.7,
+          convoUntil: 0,
+          leader: null
+        };
+        nodes.push(n);
+        if (isLeader) leaders.push(n);
       }
+      assignLeaders();
       cancelAnimationFrame(rafId);
       tick();
     }
+
+    function assignLeaders() {
+      // Each follower picks closest leader as its anchor
+      for (let i = 0; i < nodes.length; i++) {
+        const n = nodes[i];
+        if (n.isLeader) continue;
+        let bestD2 = Infinity, bestL = null;
+        for (let j = 0; j < leaders.length; j++) {
+          const L = leaders[j];
+          const dx = L.x - n.x, dy = L.y - n.y;
+          const d2 = dx * dx + dy * dy;
+          if (d2 < bestD2) { bestD2 = d2; bestL = L; }
+        }
+        n.leader = bestL;
+      }
+    }
+
+    function maybeSpawnConversation(now) {
+      const interval = 1800 + Math.random() * 1400; // 1.8-3.2s
+      if (now - lastConvoSpawn < interval) return;
+      lastConvoSpawn = now;
+      // pick a random node, find a near neighbor within 220px
+      const a = nodes[Math.floor(Math.random() * nodes.length)];
+      let best = null, bestD2 = Infinity;
+      const maxD2 = 220 * 220;
+      for (let i = 0; i < nodes.length; i++) {
+        const b = nodes[i];
+        if (b === a || b.convoUntil > now) continue;
+        const dx = b.x - a.x;
+        if (Math.abs(dx) > 220) continue;
+        const dy = b.y - a.y;
+        if (Math.abs(dy) > 220) continue;
+        const d2 = dx * dx + dy * dy;
+        if (d2 < maxD2 && d2 < bestD2) { bestD2 = d2; best = b; }
+      }
+      if (!best) return;
+      const dur = 1500;
+      a.convoUntil = now + dur;
+      best.convoUntil = now + dur;
+      conversations.push({ a, b: best, start: now, until: now + dur });
+    }
+
     function tick() {
-      const w = canvas.clientWidth, h = canvas.clientHeight;
+      const now = performance.now();
+      const w = canvasW, h = canvasH;
+
+      // periodic refresh of leader assignments (cheap, ~every 4s)
+      if (now - lastLeaderRefresh > 4000) {
+        assignLeaders();
+        lastLeaderRefresh = now;
+      }
+      maybeSpawnConversation(now);
+
       ctx.clearRect(0, 0, w, h);
-      const t = Date.now() * 0.001;
-      // links
-      const linkDist = window.innerWidth < 768 ? 70 : 110;
+
+      // ---- update positions ----
+      for (let i = 0; i < nodes.length; i++) {
+        const n = nodes[i];
+        // soft attraction toward leader
+        if (n.leader && !n.isLeader) {
+          const dx = n.leader.x - n.x;
+          const dy = n.leader.y - n.y;
+          const d2 = dx * dx + dy * dy;
+          if (d2 > 100) {
+            const f = 0.0018 / Math.sqrt(d2);
+            n.vx += dx * f;
+            n.vy += dy * f;
+          }
+        }
+        // mild jitter + damping (Brownian-ish)
+        n.vx = (n.vx + (Math.random() - 0.5) * 0.018) * 0.985;
+        n.vy = (n.vy + (Math.random() - 0.5) * 0.018) * 0.985;
+        n.x += n.vx;
+        n.y += n.vy;
+        // wrap-bounce
+        if (n.x < 0) { n.x = 0; n.vx = Math.abs(n.vx); }
+        else if (n.x > w) { n.x = w; n.vx = -Math.abs(n.vx); }
+        if (n.y < 0) { n.y = 0; n.vy = Math.abs(n.vy); }
+        else if (n.y > h) { n.y = h; n.vy = -Math.abs(n.vy); }
+      }
+
+      // ---- background connections ----
+      const linkDist = window.innerWidth < 768 ? 95 : 120;
       const linkDist2 = linkDist * linkDist;
-      ctx.lineWidth = 0.6;
       for (let i = 0; i < nodes.length; i++) {
         const a = nodes[i];
         for (let j = i + 1; j < nodes.length; j++) {
           const b = nodes[j];
-          const dx = a.x - b.x, dy = a.y - b.y;
+          const dx = a.x - b.x;
+          if (dx > linkDist || dx < -linkDist) continue;
+          const dy = a.y - b.y;
+          if (dy > linkDist || dy < -linkDist) continue;
           const d2 = dx * dx + dy * dy;
           if (d2 < linkDist2) {
-            const alpha = (1 - d2 / linkDist2) * 0.22;
+            const t = 1 - Math.sqrt(d2) / linkDist; // 0..1, 1 = touching
+            const alpha = t * 0.42;
             ctx.strokeStyle = 'rgba(201,168,76,' + alpha.toFixed(3) + ')';
+            ctx.lineWidth = 0.3 + t * 0.5; // 0.3..0.8
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
@@ -825,29 +984,71 @@ const SITE_PASSWORD = 'AddendoPulse2026';
           }
         }
       }
-      // nodes
+
+      // ---- conversation lines (thick, bright, with glow) ----
+      conversations = conversations.filter(c => c.until > now);
+      ctx.shadowColor = 'rgba(232,201,103,0.7)';
+      for (let i = 0; i < conversations.length; i++) {
+        const c = conversations[i];
+        const p = (c.until - now) / 1500; // 1 → 0
+        const intensity = Math.sin((1 - p) * Math.PI); // peaks mid-life
+        ctx.strokeStyle = 'rgba(255,235,180,' + (0.55 + intensity * 0.4).toFixed(3) + ')';
+        ctx.lineWidth = 1.4 + intensity * 1.0;
+        ctx.shadowBlur = 10 + intensity * 6;
+        ctx.beginPath();
+        ctx.moveTo(c.a.x, c.a.y);
+        ctx.lineTo(c.b.x, c.b.y);
+        ctx.stroke();
+      }
+      ctx.shadowBlur = 0;
+
+      // ---- nodes ----
+      const tSec = now * 0.001;
       for (let i = 0; i < nodes.length; i++) {
         const n = nodes[i];
-        n.x += n.vx;
-        n.y += n.vy;
-        if (n.x < 0 || n.x > w) n.vx *= -1;
-        if (n.y < 0 || n.y > h) n.vy *= -1;
-        const pulse = n.glow ? 1 + Math.sin(t * 2 + n.phase) * 0.45 : 1;
-        const r = n.base * pulse;
-        if (n.glow) {
-          const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r * 6);
-          grad.addColorStop(0, 'rgba(201,168,76,0.55)');
-          grad.addColorStop(1, 'rgba(201,168,76,0)');
+        const inConvo = n.convoUntil > now;
+        const convoT = inConvo ? (n.convoUntil - now) / 1500 : 0;
+        const convoIntensity = inConvo ? Math.sin((1 - convoT) * Math.PI) : 0;
+
+        const leaderPulse = n.isLeader ? 1 + Math.sin(tSec * n.pulseSpeed + n.phase) * 0.22 : 1;
+        const r = n.baseR * leaderPulse * (1 + convoIntensity * 0.7);
+
+        // halo for leaders + active-convo nodes
+        if (n.isLeader || inConvo) {
+          const haloR = r * (n.isLeader ? 5 : 4);
+          const haloAlpha = inConvo ? 0.55 + convoIntensity * 0.35 : 0.32 * leaderPulse;
+          const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, haloR);
+          if (inConvo) {
+            grad.addColorStop(0, 'rgba(255,240,200,' + haloAlpha.toFixed(3) + ')');
+            grad.addColorStop(1, 'rgba(232,201,103,0)');
+          } else {
+            grad.addColorStop(0, 'rgba(232,201,103,' + haloAlpha.toFixed(3) + ')');
+            grad.addColorStop(1, 'rgba(201,168,76,0)');
+          }
           ctx.fillStyle = grad;
           ctx.beginPath();
-          ctx.arc(n.x, n.y, r * 6, 0, Math.PI * 2);
+          ctx.arc(n.x, n.y, haloR, 0, Math.PI * 2);
           ctx.fill();
         }
-        ctx.fillStyle = n.glow ? '#E8C967' : 'rgba(201,168,76,0.85)';
+
+        // core dot color
+        if (inConvo) {
+          // gold → white → gold across lifetime
+          const wm = convoIntensity;
+          const r255 = Math.round(232 + (255 - 232) * wm);
+          const g255 = Math.round(201 + (255 - 201) * wm);
+          const b255 = Math.round(103 + (210 - 103) * wm);
+          ctx.fillStyle = 'rgba(' + r255 + ',' + g255 + ',' + b255 + ',1)';
+        } else if (n.isLeader) {
+          ctx.fillStyle = 'rgba(232,201,103,' + n.opacity.toFixed(3) + ')';
+        } else {
+          ctx.fillStyle = 'rgba(201,168,76,' + n.opacity.toFixed(3) + ')';
+        }
         ctx.beginPath();
         ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
         ctx.fill();
       }
+
       rafId = requestAnimationFrame(tick);
     }
     document.addEventListener('visibilitychange', () => {
