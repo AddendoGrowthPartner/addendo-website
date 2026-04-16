@@ -181,15 +181,15 @@ const SITE_PASSWORD = 'AddendoPulse2026';
     /* Conversational log overlay — sits inside the canvas region, semi-transparent. */
     .canvas-logs {
       position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
-      padding: 4rem 2rem 1.4rem;
-      max-height: 200px;
+      padding: 2.2rem 2rem 1.2rem;
+      height: 120px;
       pointer-events: none;
       display: flex; flex-direction: column; justify-content: flex-end;
-      gap: 0.35rem;
-      background: linear-gradient(0deg, rgba(6,9,15,0.72) 0%, rgba(6,9,15,0.35) 60%, transparent 100%);
+      gap: 0.3rem;
+      background: linear-gradient(0deg, rgba(6,9,15,0.92) 0%, rgba(6,9,15,0.6) 40%, rgba(6,9,15,0.2) 75%, transparent 100%);
       font-family: var(--font-mono); font-weight: 300;
-      font-size: 11px; line-height: 1.65;
-      color: rgba(201,168,76,0.62);
+      font-size: 11px; line-height: 1.55;
+      color: rgba(201,168,76,0.68);
       overflow: hidden;
     }
     .canvas-log-line {
@@ -205,7 +205,7 @@ const SITE_PASSWORD = 'AddendoPulse2026';
     .canvas-log-line.event { color: rgba(255,255,255,0.55); }
     .canvas-log-line.event::before { content: '◆ '; color: rgba(232,201,103,0.7); margin-right: 0.3rem; }
     @media (max-width: 700px) {
-      .canvas-logs { padding: 3rem 1rem 1rem; font-size: 10px; max-height: 150px; }
+      .canvas-logs { padding: 1.5rem 1rem 0.9rem; font-size: 10px; height: 100px; }
     }
 
     /* === RESULTS === */
@@ -714,7 +714,7 @@ const SITE_PASSWORD = 'AddendoPulse2026';
 
     // ============ Metrics drip + conversational logs ============
     let logTimers = [];
-    const MAX_VISIBLE_LOGS = 4;
+    const MAX_VISIBLE_LOGS = 5;
     const visibleLogs = []; // DOM elements currently shown
 
     function emitLog(html, isEvent) {
@@ -1008,14 +1008,20 @@ const SITE_PASSWORD = 'AddendoPulse2026';
     }
 
     // =========== Canvas animation ===========
-    // Dense neural network feel: 300 nodes desktop / 140 mobile, varied sizes,
-    // graduated link visibility, periodic pair "conversations" with bright lines
-    // and node pulses, soft attraction to leader nodes that form loose clusters.
+    // Cinematic neural network — 3 depth layers, organic sinusoidal motion,
+    // dramatic conversation pulses, leader clusters, collective thought waves,
+    // staged fade-in appearance. 400 nodes desktop / 180 mobile.
     let canvas, ctx, nodes = [], leaders = [], rafId = null;
-    let conversations = []; // { a, b, start, until }
+    let conversations = []; // { a, b, start, until, dramatic }
+    let pulses = [];        // { x, y, start, dur, maxR, baseR }
+    let waves = [];         // { x, y, start, speed }
     let lastConvoSpawn = 0;
+    let lastWaveSpawn = 0;
     let lastLeaderRefresh = 0;
     let canvasW = 0, canvasH = 0;
+    let canvasMobile = false;
+    let simStartTime = 0;
+    let lastFrameTime = 0;
 
     function initCanvas() {
       canvas = document.getElementById('sim-canvas');
@@ -1024,6 +1030,7 @@ const SITE_PASSWORD = 'AddendoPulse2026';
       function resize() {
         canvasW = canvas.clientWidth;
         canvasH = canvas.clientHeight;
+        canvasMobile = canvasW < 768;
         canvas.width = canvasW * dpr;
         canvas.height = canvasH * dpr;
         ctx.setTransform(1, 0, 0, 1, 0, 0);
@@ -1032,46 +1039,97 @@ const SITE_PASSWORD = 'AddendoPulse2026';
       resize();
       window.addEventListener('resize', resize, { passive: true });
 
-      const isMobile = window.innerWidth < 768;
-      const N = isMobile ? 140 : 300;
+      const N = canvasMobile ? 180 : 400;
+      const LEADER_COUNT = canvasMobile ? 6 : 9;
 
-      nodes = [];
-      leaders = [];
-      conversations = [];
-      lastConvoSpawn = 0;
-      lastLeaderRefresh = 0;
+      nodes = []; leaders = []; conversations = []; pulses = []; waves = [];
+      lastConvoSpawn = 0; lastWaveSpawn = 0; lastLeaderRefresh = 0;
+      simStartTime = performance.now();
+      lastFrameTime = simStartTime;
+
+      // Uniform distribution via jittered grid
+      const aspect = canvasW / Math.max(canvasH, 1);
+      const cols = Math.max(1, Math.ceil(Math.sqrt(N * aspect)));
+      const rows = Math.max(1, Math.ceil(N / cols));
+      const cellW = canvasW / cols;
+      const cellH = canvasH / rows;
+      const slots = [];
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          slots.push({
+            x: (c + 0.15 + Math.random() * 0.7) * cellW,
+            y: (r + 0.15 + Math.random() * 0.7) * cellH
+          });
+        }
+      }
+      // Shuffle so layer-by-index doesn't produce row-banding
+      for (let i = slots.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const tmp = slots[i]; slots[i] = slots[j]; slots[j] = tmp;
+      }
 
       for (let i = 0; i < N; i++) {
-        // Size distribution — 8% leaders (4-6px), 30% medium (2.4-3.6px), 62% small (1-2.2px)
-        const roll = Math.random();
-        let baseR, isLeader = false;
-        if (roll < 0.08) { isLeader = true; baseR = 4 + Math.random() * 2; }
-        else if (roll < 0.38) { baseR = 2.4 + Math.random() * 1.2; }
-        else { baseR = 1 + Math.random() * 1.2; }
+        const pos = slots[i] || { x: Math.random() * canvasW, y: Math.random() * canvasH };
+        let layer, baseR, opacity, ampScale, appearDelay;
+        if (i < N * 0.50) {
+          layer = 0; // back
+          baseR = 1 + Math.random() * 0.5;
+          opacity = 0.20 + Math.random() * 0.15;
+          ampScale = 0.55;
+          appearDelay = Math.random() * 1000;
+        } else if (i < N * 0.85) {
+          layer = 1; // mid
+          baseR = 2 + Math.random();
+          opacity = 0.50 + Math.random() * 0.20;
+          ampScale = 0.85;
+          appearDelay = 1000 + Math.random() * 1000;
+        } else {
+          layer = 2; // front
+          baseR = 4 + Math.random() * 3;
+          opacity = 0.85 + Math.random() * 0.15;
+          ampScale = 1.0;
+          appearDelay = 2000 + Math.random() * 1000;
+        }
+        nodes.push({
+          x: pos.x, y: pos.y,
+          baseX: pos.x, baseY: pos.y,
+          baseR, layer, opacity, appearDelay,
+          freqX: (0.00025 + Math.random() * 0.0004),
+          freqY: (0.00025 + Math.random() * 0.0004),
+          phaseX: Math.random() * Math.PI * 2,
+          phaseY: Math.random() * Math.PI * 2,
+          ampX: (18 + Math.random() * 42) * ampScale,
+          ampY: (18 + Math.random() * 42) * ampScale,
+          breatheFreq: 0.0009 + Math.random() * 0.0008,
+          breathePhase: Math.random() * Math.PI * 2,
+          convoUntil: 0, convoStart: 0, convoDramatic: false,
+          isLeader: false, leader: null,
+          waveBoostUntil: 0
+        });
+      }
 
-        const n = {
-          x: Math.random() * canvasW,
-          y: Math.random() * canvasH,
-          vx: (Math.random() - 0.5) * 0.35,
-          vy: (Math.random() - 0.5) * 0.35,
-          baseR,
-          isLeader,
-          opacity: isLeader ? 0.95 : (0.55 + Math.random() * 0.35),
-          phase: Math.random() * Math.PI * 2,
-          pulseSpeed: 0.6 + Math.random() * 0.7,
-          convoUntil: 0,
-          leader: null
-        };
-        nodes.push(n);
-        if (isLeader) leaders.push(n);
+      // Promote front-layer nodes to leaders
+      const frontNodes = nodes.filter(n => n.layer === 2);
+      for (let i = frontNodes.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const tmp = frontNodes[i]; frontNodes[i] = frontNodes[j]; frontNodes[j] = tmp;
+      }
+      const lc = Math.min(LEADER_COUNT, frontNodes.length);
+      for (let i = 0; i < lc; i++) {
+        const n = frontNodes[i];
+        n.isLeader = true;
+        n.baseR = 6 + Math.random() * 2;
+        n.opacity = 1.0;
+        leaders.push(n);
       }
       assignLeaders();
+
       cancelAnimationFrame(rafId);
+      lastFrameTime = performance.now();
       tick();
     }
 
     function assignLeaders() {
-      // Each follower picks closest leader as its anchor
       for (let i = 0; i < nodes.length; i++) {
         const n = nodes[i];
         if (n.isLeader) continue;
@@ -1086,131 +1144,241 @@ const SITE_PASSWORD = 'AddendoPulse2026';
       }
     }
 
-    function maybeSpawnConversation(now) {
-      const interval = 1800 + Math.random() * 1400; // 1.8-3.2s
-      if (now - lastConvoSpawn < interval) return;
-      lastConvoSpawn = now;
-      // pick a random node, find a near neighbor within 220px
+    function spawnConversationPair(now) {
       const a = nodes[Math.floor(Math.random() * nodes.length)];
+      if (a.convoUntil > now) return false;
       let best = null, bestD2 = Infinity;
-      const maxD2 = 220 * 220;
+      const R = 220, R2 = R * R;
       for (let i = 0; i < nodes.length; i++) {
         const b = nodes[i];
         if (b === a || b.convoUntil > now) continue;
         const dx = b.x - a.x;
-        if (Math.abs(dx) > 220) continue;
+        if (dx > R || dx < -R) continue;
         const dy = b.y - a.y;
-        if (Math.abs(dy) > 220) continue;
+        if (dy > R || dy < -R) continue;
         const d2 = dx * dx + dy * dy;
-        if (d2 < maxD2 && d2 < bestD2) { bestD2 = d2; best = b; }
+        if (d2 < R2 && d2 < bestD2) { bestD2 = d2; best = b; }
       }
-      if (!best) return;
-      const dur = 1500;
-      a.convoUntil = now + dur;
-      best.convoUntil = now + dur;
-      conversations.push({ a, b: best, start: now, until: now + dur });
+      if (!best) return false;
+      const dur = 2000;
+      const dramatic = a.isLeader || best.isLeader;
+      a.convoUntil = now + dur; a.convoStart = now; a.convoDramatic = dramatic;
+      best.convoUntil = now + dur; best.convoStart = now; best.convoDramatic = dramatic;
+      conversations.push({ a, b: best, start: now, until: now + dur, dramatic });
+      const maxR = dramatic ? 72 : 40;
+      pulses.push({ x: a.x, y: a.y, start: now, dur: 1400, maxR, baseR: a.baseR });
+      pulses.push({ x: best.x, y: best.y, start: now + 180, dur: 1400, maxR, baseR: best.baseR });
+      return true;
+    }
+
+    function maybeSpawnConversations(now) {
+      const interval = 3000 + Math.random() * 1000; // 3-4s
+      if (now - lastConvoSpawn < interval) return;
+      lastConvoSpawn = now;
+      const pairs = 2 + Math.floor(Math.random() * 2); // 2-3
+      for (let p = 0; p < pairs; p++) spawnConversationPair(now);
+    }
+
+    function maybeSpawnWave(now) {
+      if (now - simStartTime < 4500) return;
+      const interval = 8000 + Math.random() * 2000; // 8-10s
+      if (now - lastWaveSpawn < interval) return;
+      lastWaveSpawn = now;
+      waves.push({
+        x: Math.random() * canvasW,
+        y: Math.random() * canvasH,
+        start: now,
+        speed: 200
+      });
     }
 
     function tick() {
       const now = performance.now();
+      const dt = Math.min(100, now - lastFrameTime);
+      lastFrameTime = now;
+      const elapsed = now - simStartTime;
       const w = canvasW, h = canvasH;
 
-      // periodic refresh of leader assignments (cheap, ~every 4s)
       if (now - lastLeaderRefresh > 4000) {
         assignLeaders();
         lastLeaderRefresh = now;
       }
-      maybeSpawnConversation(now);
+      maybeSpawnConversations(now);
+      maybeSpawnWave(now);
 
       ctx.clearRect(0, 0, w, h);
 
-      // ---- update positions ----
+      // ---- update positions: sinusoidal orbit around drifting base ----
+      const margin = 24;
       for (let i = 0; i < nodes.length; i++) {
         const n = nodes[i];
-        // soft attraction toward leader
+        // Soft leader anchor drift
         if (n.leader && !n.isLeader) {
-          const dx = n.leader.x - n.x;
-          const dy = n.leader.y - n.y;
+          const dx = n.leader.baseX - n.baseX;
+          const dy = n.leader.baseY - n.baseY;
           const d2 = dx * dx + dy * dy;
-          if (d2 > 100) {
-            const f = 0.0018 / Math.sqrt(d2);
-            n.vx += dx * f;
-            n.vy += dy * f;
+          if (d2 > 2500) {
+            const pull = 0.00003 * dt;
+            n.baseX += dx * pull;
+            n.baseY += dy * pull;
           }
         }
-        // mild jitter + damping (Brownian-ish)
-        n.vx = (n.vx + (Math.random() - 0.5) * 0.018) * 0.985;
-        n.vy = (n.vy + (Math.random() - 0.5) * 0.018) * 0.985;
-        n.x += n.vx;
-        n.y += n.vy;
-        // wrap-bounce
-        if (n.x < 0) { n.x = 0; n.vx = Math.abs(n.vx); }
-        else if (n.x > w) { n.x = w; n.vx = -Math.abs(n.vx); }
-        if (n.y < 0) { n.y = 0; n.vy = Math.abs(n.vy); }
-        else if (n.y > h) { n.y = h; n.vy = -Math.abs(n.vy); }
+        // Soft re-center when base wanders past margin (no hard bounce)
+        if (n.baseX < margin) n.baseX += (margin - n.baseX) * 0.002 * dt;
+        else if (n.baseX > w - margin) n.baseX += (w - margin - n.baseX) * 0.002 * dt;
+        if (n.baseY < margin) n.baseY += (margin - n.baseY) * 0.002 * dt;
+        else if (n.baseY > h - margin) n.baseY += (h - margin - n.baseY) * 0.002 * dt;
+
+        n.x = n.baseX + Math.sin(now * n.freqX + n.phaseX) * n.ampX;
+        n.y = n.baseY + Math.cos(now * n.freqY * 0.7 + n.phaseY) * n.ampY;
       }
 
-      // ---- background connections ----
-      const linkDist = window.innerWidth < 768 ? 95 : 120;
+      // ---- collective thought waves ----
+      const diag = Math.sqrt(w * w + h * h);
+      for (let i = waves.length - 1; i >= 0; i--) {
+        const wv = waves[i];
+        const ageSec = (now - wv.start) / 1000;
+        const radius = ageSec * wv.speed;
+        if (radius > diag) { waves.splice(i, 1); continue; }
+        const ringAlpha = Math.max(0, 1 - radius / diag) * 0.22;
+        if (ringAlpha > 0.01) {
+          ctx.strokeStyle = 'rgba(201,168,76,' + ringAlpha.toFixed(3) + ')';
+          ctx.lineWidth = 1.2;
+          ctx.beginPath();
+          ctx.arc(wv.x, wv.y, radius, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+        const inner = Math.max(0, radius - 22);
+        const outer = radius + 22;
+        const inner2 = inner * inner, outer2 = outer * outer;
+        for (let k = 0; k < nodes.length; k++) {
+          const n = nodes[k];
+          const dx = n.x - wv.x, dy = n.y - wv.y;
+          const d2 = dx * dx + dy * dy;
+          if (d2 >= inner2 && d2 <= outer2 && n.waveBoostUntil < now + 200) {
+            n.waveBoostUntil = now + 500;
+          }
+        }
+      }
+
+      // ---- connections: per-node cap (leaders 8, others 3), distance-weighted alpha ----
+      const linkDist = canvasMobile ? 120 : 150;
       const linkDist2 = linkDist * linkDist;
-      for (let i = 0; i < nodes.length; i++) {
+      const connCount = new Int16Array(nodes.length);
+      const NL = nodes.length;
+      for (let i = 0; i < NL; i++) {
         const a = nodes[i];
-        for (let j = i + 1; j < nodes.length; j++) {
+        const maxA = a.isLeader ? 8 : 3;
+        if (connCount[i] >= maxA) continue;
+        const appearA = elapsed < a.appearDelay ? 0 : Math.min(1, (elapsed - a.appearDelay) / 800);
+        if (appearA <= 0) continue;
+        for (let j = i + 1; j < NL; j++) {
+          if (connCount[i] >= maxA) break;
           const b = nodes[j];
+          const maxB = b.isLeader ? 8 : 3;
+          if (connCount[j] >= maxB) continue;
           const dx = a.x - b.x;
           if (dx > linkDist || dx < -linkDist) continue;
           const dy = a.y - b.y;
           if (dy > linkDist || dy < -linkDist) continue;
           const d2 = dx * dx + dy * dy;
-          if (d2 < linkDist2) {
-            const t = 1 - Math.sqrt(d2) / linkDist; // 0..1, 1 = touching
-            const alpha = t * 0.42;
-            ctx.strokeStyle = 'rgba(201,168,76,' + alpha.toFixed(3) + ')';
-            ctx.lineWidth = 0.3 + t * 0.5; // 0.3..0.8
-            ctx.beginPath();
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
-            ctx.stroke();
-          }
+          if (d2 >= linkDist2) continue;
+          const appearB = elapsed < b.appearDelay ? 0 : Math.min(1, (elapsed - b.appearDelay) / 800);
+          if (appearB <= 0) continue;
+
+          const t = 1 - Math.sqrt(d2) / linkDist;
+          let baseAlpha;
+          if (a.layer === 2 || b.layer === 2) baseAlpha = 0.38;
+          else if (a.layer === 0 && b.layer === 0) baseAlpha = 0.08;
+          else baseAlpha = 0.18;
+          const alpha = t * baseAlpha * appearA * appearB;
+          if (alpha < 0.015) continue;
+          ctx.strokeStyle = 'rgba(201,168,76,' + alpha.toFixed(3) + ')';
+          ctx.lineWidth = 0.2 + t * 0.8;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.stroke();
+          connCount[i]++;
+          connCount[j]++;
         }
       }
 
-      // ---- conversation lines (thick, bright, with glow) ----
+      // ---- conversation lines with "writing" animation ----
       conversations = conversations.filter(c => c.until > now);
-      ctx.shadowColor = 'rgba(232,201,103,0.7)';
+      ctx.shadowColor = 'rgba(255,235,180,0.75)';
       for (let i = 0; i < conversations.length; i++) {
         const c = conversations[i];
-        const p = (c.until - now) / 1500; // 1 → 0
-        const intensity = Math.sin((1 - p) * Math.PI); // peaks mid-life
-        ctx.strokeStyle = 'rgba(255,235,180,' + (0.55 + intensity * 0.4).toFixed(3) + ')';
-        ctx.lineWidth = 1.4 + intensity * 1.0;
-        ctx.shadowBlur = 10 + intensity * 6;
+        const age = now - c.start;
+        const total = c.until - c.start;
+        const p = age / total; // 0→1
+        let drawP = 1, alpha = 1;
+        if (p < 0.3) { drawP = p / 0.3; alpha = drawP; }
+        else if (p > 0.7) { alpha = 1 - (p - 0.7) / 0.3; }
+        const intensity = Math.sin(Math.min(1, p * 1.4) * Math.PI);
+        const ex = c.a.x + (c.b.x - c.a.x) * drawP;
+        const ey = c.a.y + (c.b.y - c.a.y) * drawP;
+        ctx.shadowBlur = 10 + intensity * 8;
+        ctx.strokeStyle = 'rgba(255,245,215,' + (0.8 * alpha).toFixed(3) + ')';
+        ctx.lineWidth = 2.6 + intensity * 0.8 + (c.dramatic ? 0.6 : 0);
         ctx.beginPath();
         ctx.moveTo(c.a.x, c.a.y);
-        ctx.lineTo(c.b.x, c.b.y);
+        ctx.lineTo(ex, ey);
         ctx.stroke();
       }
       ctx.shadowBlur = 0;
 
+      // ---- expanding pulses ----
+      for (let i = pulses.length - 1; i >= 0; i--) {
+        const pl = pulses[i];
+        if (now < pl.start) continue;
+        const age = now - pl.start;
+        if (age > pl.dur) { pulses.splice(i, 1); continue; }
+        const p = age / pl.dur;
+        const r = pl.baseR + (pl.maxR - pl.baseR) * p;
+        const alpha = (1 - p) * 0.85;
+        ctx.strokeStyle = 'rgba(201,168,76,' + alpha.toFixed(3) + ')';
+        ctx.lineWidth = 1.6 * (1 - p * 0.55);
+        ctx.beginPath();
+        ctx.arc(pl.x, pl.y, r, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+
       // ---- nodes ----
-      const tSec = now * 0.001;
-      for (let i = 0; i < nodes.length; i++) {
+      for (let i = 0; i < NL; i++) {
         const n = nodes[i];
+        if (elapsed < n.appearDelay) continue;
+        const appear = Math.min(1, (elapsed - n.appearDelay) / 800);
+
         const inConvo = n.convoUntil > now;
-        const convoT = inConvo ? (n.convoUntil - now) / 1500 : 0;
-        const convoIntensity = inConvo ? Math.sin((1 - convoT) * Math.PI) : 0;
+        let convoIntensity = 0;
+        if (inConvo) {
+          const cp = (now - n.convoStart) / (n.convoUntil - n.convoStart);
+          convoIntensity = Math.sin(cp * Math.PI); // 0→1→0
+        }
 
-        const leaderPulse = n.isLeader ? 1 + Math.sin(tSec * n.pulseSpeed + n.phase) * 0.22 : 1;
-        const r = n.baseR * leaderPulse * (1 + convoIntensity * 0.7);
+        const breathe = 1 + Math.sin(now * n.breatheFreq + n.breathePhase) * 0.2;
+        const convoGrow = 1 + convoIntensity * 2; // up to 3x
+        const r = n.baseR * breathe * convoGrow;
 
-        // halo for leaders + active-convo nodes
+        let waveBoost = 0;
+        if (n.waveBoostUntil > now) {
+          waveBoost = 0.5 * ((n.waveBoostUntil - now) / 500);
+        }
+
+        // Halo
         if (n.isLeader || inConvo) {
-          const haloR = r * (n.isLeader ? 5 : 4);
-          const haloAlpha = inConvo ? 0.55 + convoIntensity * 0.35 : 0.32 * leaderPulse;
+          const dramaticHalo = n.convoDramatic && inConvo;
+          const haloR = r * (inConvo ? (dramaticHalo ? 6 : 4.5) : 4);
+          const leaderPulse = n.isLeader ? (1 + Math.sin(now * 0.0014 + n.phaseX) * 0.3) : 1;
+          const haloAlpha = inConvo
+            ? (0.6 + convoIntensity * 0.35) * appear
+            : 0.28 * leaderPulse * appear;
           const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, haloR);
           if (inConvo) {
-            grad.addColorStop(0, 'rgba(255,240,200,' + haloAlpha.toFixed(3) + ')');
-            grad.addColorStop(1, 'rgba(232,201,103,0)');
+            grad.addColorStop(0, 'rgba(255,245,215,' + haloAlpha.toFixed(3) + ')');
+            grad.addColorStop(0.45, 'rgba(232,201,103,' + (haloAlpha * 0.45).toFixed(3) + ')');
+            grad.addColorStop(1, 'rgba(201,168,76,0)');
           } else {
             grad.addColorStop(0, 'rgba(232,201,103,' + haloAlpha.toFixed(3) + ')');
             grad.addColorStop(1, 'rgba(201,168,76,0)');
@@ -1221,29 +1389,48 @@ const SITE_PASSWORD = 'AddendoPulse2026';
           ctx.fill();
         }
 
-        // core dot color
+        // Core
+        let fillAlpha = (n.opacity + waveBoost) * appear;
+        if (fillAlpha > 1) fillAlpha = 1;
         if (inConvo) {
-          // gold → white → gold across lifetime
-          const wm = convoIntensity;
-          const r255 = Math.round(232 + (255 - 232) * wm);
-          const g255 = Math.round(201 + (255 - 201) * wm);
-          const b255 = Math.round(103 + (210 - 103) * wm);
-          ctx.fillStyle = 'rgba(' + r255 + ',' + g255 + ',' + b255 + ',1)';
+          const r255 = Math.round(232 + (255 - 232) * convoIntensity);
+          const g255 = Math.round(201 + (255 - 201) * convoIntensity);
+          const b255 = Math.round(103 + (220 - 103) * convoIntensity);
+          ctx.fillStyle = 'rgba(' + r255 + ',' + g255 + ',' + b255 + ',' + appear.toFixed(3) + ')';
         } else if (n.isLeader) {
-          ctx.fillStyle = 'rgba(232,201,103,' + n.opacity.toFixed(3) + ')';
+          ctx.fillStyle = 'rgba(232,201,103,' + fillAlpha.toFixed(3) + ')';
         } else {
-          ctx.fillStyle = 'rgba(201,168,76,' + n.opacity.toFixed(3) + ')';
+          ctx.fillStyle = 'rgba(201,168,76,' + fillAlpha.toFixed(3) + ')';
         }
         ctx.beginPath();
         ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
         ctx.fill();
+
+        // Leader appearance flash (first 700ms after appearDelay)
+        if (n.isLeader) {
+          const sinceAppear = elapsed - n.appearDelay;
+          if (sinceAppear < 700) {
+            const fp = sinceAppear / 700;
+            const flashR = r * (2 + fp * 3.5);
+            const flashAlpha = (1 - fp) * 0.85;
+            ctx.strokeStyle = 'rgba(255,245,215,' + flashAlpha.toFixed(3) + ')';
+            ctx.lineWidth = 1.4;
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, flashR, 0, Math.PI * 2);
+            ctx.stroke();
+          }
+        }
       }
 
       rafId = requestAnimationFrame(tick);
     }
+
     document.addEventListener('visibilitychange', () => {
       if (document.hidden && rafId) { cancelAnimationFrame(rafId); rafId = null; }
-      else if (!document.hidden && screens[2].classList.contains('visible') && !rafId) tick();
+      else if (!document.hidden && screens[2].classList.contains('visible') && !rafId) {
+        lastFrameTime = performance.now();
+        tick();
+      }
     });
 
     // =========== Finish & results ===========
