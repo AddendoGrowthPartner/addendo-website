@@ -1,0 +1,937 @@
+---
+// Addendo Pulse — herramienta interna de simulación predictiva.
+// Standalone (sin Layout.astro): control total sobre robots/meta y carga ligera.
+const PULSE_WEBHOOK_URL = 'https://n8n.addendo.io/webhook/addendo-pulse-simulacion';
+const PULSE_WEBHOOK_SECRET = 'v6xZtF-Kxz3cr6y7x87ARvIk9qcoKdsxIYc3dAWe1gI';
+const SITE_PASSWORD = 'AddendoPulse2026';
+---
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+  <meta name="googlebot" content="noindex, nofollow" />
+  <title>Addendo Pulse — Simulación predictiva</title>
+  <meta name="description" content="Sala de control de simulación predictiva de mercado para Addendo Growth Partner." />
+  <link rel="canonical" href="https://addendo.io/pulse" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=DM+Mono:wght@300;400;500&display=swap" />
+
+  <style>
+    :root {
+      --bg: #06090F;
+      --bg-soft: #0B1018;
+      --bg-card: rgba(20, 26, 38, 0.55);
+      --gold: #C9A84C;
+      --gold-soft: #D4B96A;
+      --gold-dim: rgba(201, 168, 76, 0.42);
+      --line: rgba(201, 168, 76, 0.18);
+      --text: rgba(255, 255, 255, 0.92);
+      --text-soft: rgba(255, 255, 255, 0.55);
+      --danger: #b94a4a;
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-mono: 'DM Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; background: var(--bg); color: var(--text); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-weight: 300;
+      letter-spacing: -0.005em;
+      background-image:
+        radial-gradient(ellipse 1200px 600px at 50% -10%, rgba(201,168,76,0.08), transparent 70%),
+        radial-gradient(ellipse 800px 400px at 100% 100%, rgba(201,168,76,0.05), transparent 70%);
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.35;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.79  0 0 0 0 0.66  0 0 0 0 0.30  0 0 0 0.06 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    }
+
+    /* Screens */
+    .screen { position: fixed; inset: 0; z-index: 2; opacity: 0; visibility: hidden; transition: opacity 600ms ease, transform 600ms cubic-bezier(.2,.8,.2,1); transform: translateY(12px); overflow-y: auto; }
+    .screen.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+
+    /* === LOGIN === */
+    #screen-login { display: flex; align-items: center; justify-content: center; padding: 2rem 1rem; }
+    .login-card { width: 100%; max-width: 420px; text-align: center; }
+    .brand-mark { font-family: var(--font-display); letter-spacing: 0.42em; font-size: 0.78rem; color: var(--gold); text-transform: uppercase; margin-bottom: 1.6rem; font-weight: 400; }
+    .brand-name { font-family: var(--font-display); font-weight: 300; font-size: clamp(2.6rem, 7vw, 4rem); line-height: 1; letter-spacing: 0.01em; color: #fff; margin-bottom: 0.5rem; }
+    .brand-name em { color: var(--gold); font-style: italic; font-weight: 400; }
+    .brand-sub { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--text-soft); margin-bottom: 3.5rem; }
+    .pw-input {
+      width: 100%; background: transparent; border: none;
+      border-bottom: 1px solid var(--gold-dim); padding: 1rem 0.25rem;
+      color: var(--text); font-family: var(--font-mono); font-size: 1.05rem;
+      letter-spacing: 0.18em; text-align: center; outline: none;
+      transition: border-color 250ms ease;
+    }
+    .pw-input::placeholder { color: var(--text-soft); letter-spacing: 0.2em; font-size: 0.78rem; }
+    .pw-input:focus { border-bottom-color: var(--gold); }
+    .pw-error { color: var(--danger); font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; margin-top: 1rem; min-height: 1.2em; opacity: 0; transition: opacity 200ms; }
+    .pw-error.show { opacity: 1; }
+    .login-hint { margin-top: 2.5rem; font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(255,255,255,0.32); }
+
+    /* === CONFIG === */
+    #screen-config { padding: 3rem 1rem 5rem; }
+    .config-wrap { max-width: 880px; margin: 0 auto; }
+    .config-header { text-align: center; margin-bottom: 3rem; }
+    .config-header .brand-name { font-size: clamp(2rem, 5vw, 3rem); }
+    .config-header .brand-sub { margin-bottom: 0; font-size: 0.68rem; }
+    .mode-toggle { display: inline-flex; align-items: center; gap: 0; padding: 4px; background: rgba(201,168,76,0.05); border: 1px solid var(--line); border-radius: 999px; margin: 1.5rem 0 0; }
+    .mode-toggle button {
+      background: transparent; border: none; color: var(--text-soft); font-family: var(--font-mono);
+      font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; padding: 0.6rem 1.4rem;
+      border-radius: 999px; cursor: pointer; transition: all 200ms ease;
+    }
+    .mode-toggle button.active { background: var(--gold); color: #0a0a0a; }
+    .tab-row { display: flex; gap: 1px; margin-bottom: 0; border: 1px solid var(--line); border-bottom: none; border-radius: 0.7rem 0.7rem 0 0; overflow: hidden; background: rgba(201,168,76,0.04); }
+    .tab-row button {
+      flex: 1; background: transparent; border: none; color: var(--text-soft);
+      padding: 1rem 1rem; font-family: var(--font-mono); font-size: 0.7rem;
+      letter-spacing: 0.22em; text-transform: uppercase; cursor: pointer;
+      transition: all 200ms ease; border-bottom: 2px solid transparent;
+    }
+    .tab-row button.active { color: var(--gold); border-bottom-color: var(--gold); background: rgba(201,168,76,0.08); }
+    .tab-panel { display: none; padding: 2.5rem 1.5rem; border: 1px solid var(--line); border-top: none; border-radius: 0 0 0.7rem 0.7rem; background: var(--bg-card); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+    .tab-panel.active { display: block; }
+
+    .dropzone {
+      border: 1.5px dashed var(--gold-dim); border-radius: 0.5rem; padding: 3.5rem 1.5rem;
+      text-align: center; cursor: pointer; transition: all 250ms ease;
+      background: rgba(201,168,76,0.02);
+    }
+    .dropzone:hover, .dropzone.drag { border-color: var(--gold); background: rgba(201,168,76,0.06); }
+    .dropzone-title { font-family: var(--font-display); font-size: 1.15rem; color: var(--gold); margin-bottom: 0.4rem; }
+    .dropzone-sub { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-soft); }
+    .dropzone-icon { font-size: 2.2rem; color: var(--gold); margin-bottom: 1rem; opacity: 0.7; }
+    .file-preview { margin-top: 1.5rem; padding: 1.2rem; background: rgba(0,0,0,0.25); border: 1px solid var(--line); border-radius: 0.5rem; font-family: var(--font-mono); font-size: 0.78rem; line-height: 1.7; color: var(--text-soft); max-height: 260px; overflow-y: auto; white-space: pre-wrap; word-break: break-word; }
+    .file-preview.hidden { display: none; }
+
+    .field { margin-bottom: 1.5rem; }
+    .field label { display: block; font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem; }
+    .field input[type=text], .field textarea {
+      width: 100%; background: rgba(0,0,0,0.25); border: 1px solid var(--line);
+      color: var(--text); padding: 0.85rem 1rem; border-radius: 0.4rem;
+      font-family: var(--font-sans); font-size: 0.95rem; line-height: 1.5;
+      outline: none; transition: border-color 200ms;
+      resize: vertical;
+    }
+    .field input:focus, .field textarea:focus { border-color: var(--gold); }
+    .field textarea { min-height: 90px; }
+
+    .slider-wrap { display: flex; align-items: center; gap: 1.2rem; }
+    .slider-wrap input[type=range] {
+      flex: 1; appearance: none; height: 2px; background: var(--line); outline: none; border-radius: 999px;
+    }
+    .slider-wrap input[type=range]::-webkit-slider-thumb { appearance: none; width: 16px; height: 16px; background: var(--gold); border-radius: 50%; cursor: pointer; box-shadow: 0 0 12px rgba(201,168,76,0.6); }
+    .slider-wrap input[type=range]::-moz-range-thumb { width: 16px; height: 16px; background: var(--gold); border-radius: 50%; cursor: pointer; border: none; }
+    .slider-value { font-family: var(--font-mono); font-size: 1.1rem; color: var(--gold); min-width: 80px; text-align: right; letter-spacing: 0.05em; }
+
+    .cta-row { text-align: center; margin-top: 2.5rem; }
+    .cta-pulse {
+      display: inline-block; background: transparent; color: var(--gold);
+      font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.32em;
+      text-transform: uppercase; padding: 1.1rem 3rem;
+      border: 1px solid var(--gold); border-radius: 999px;
+      cursor: pointer; transition: all 250ms ease; position: relative;
+    }
+    .cta-pulse:hover { background: var(--gold); color: #0a0a0a; box-shadow: 0 0 0 6px rgba(201,168,76,0.12), 0 0 30px rgba(201,168,76,0.3); }
+    .cta-pulse:disabled { opacity: 0.4; cursor: not-allowed; }
+    @keyframes pulse-ring { 0% { box-shadow: 0 0 0 0 rgba(201,168,76,0.45); } 100% { box-shadow: 0 0 0 18px rgba(201,168,76,0); } }
+    .cta-pulse:not(:disabled):hover { animation: pulse-ring 1.4s infinite; }
+
+    /* === SIM === */
+    #screen-sim { padding: 0; background: var(--bg); display: flex; flex-direction: column; }
+    #sim-canvas { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; }
+    .sim-grid { display: grid; grid-template-columns: 1fr; gap: 1.2rem; padding: 1.2rem; position: relative; z-index: 2; min-height: 100vh; }
+    @media (min-width: 980px) { .sim-grid { grid-template-columns: 320px 1fr 320px; } }
+    .sim-panel { background: rgba(6,9,15,0.62); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid var(--line); border-radius: 0.7rem; padding: 1.4rem 1.2rem; }
+    .sim-panel h3 { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.4rem; }
+
+    .phase { margin-bottom: 1.4rem; font-family: var(--font-mono); font-size: 0.72rem; }
+    .phase-label { display: flex; justify-content: space-between; color: var(--text-soft); margin-bottom: 0.45rem; letter-spacing: 0.04em; }
+    .phase-label .pct { color: var(--gold); }
+    .phase-bar { height: 3px; background: rgba(255,255,255,0.06); border-radius: 999px; overflow: hidden; }
+    .phase-fill { height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-soft)); width: 0%; transition: width 800ms ease; box-shadow: 0 0 10px rgba(201,168,76,0.5); }
+    .phase.active .phase-label .name { color: var(--gold); }
+
+    .timer { position: absolute; top: 1.5rem; right: 1.5rem; z-index: 3; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.18em; color: var(--gold); background: rgba(6,9,15,0.7); padding: 0.5rem 0.9rem; border: 1px solid var(--line); border-radius: 999px; }
+
+    .metrics-list { display: flex; flex-direction: column; gap: 0.9rem; }
+    .metric-item { padding: 0.9rem 1rem; background: rgba(0,0,0,0.28); border-left: 2px solid var(--gold); border-radius: 0.3rem; opacity: 0; transform: translateY(8px); transition: all 500ms ease; }
+    .metric-item.show { opacity: 1; transform: translateY(0); }
+    .metric-num { font-family: var(--font-mono); font-size: 1.35rem; color: var(--gold); font-weight: 500; line-height: 1; }
+    .metric-name { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-soft); margin-top: 0.4rem; }
+
+    .terminal { position: relative; z-index: 2; margin: 0 1.2rem 1.2rem; max-width: calc(100% - 2.4rem); padding: 1rem 1.2rem; background: rgba(0,0,0,0.55); border: 1px solid var(--line); border-radius: 0.5rem; font-family: var(--font-mono); font-size: 0.72rem; line-height: 1.65; color: rgba(255,255,255,0.62); height: 140px; overflow: hidden; }
+    .terminal-line { white-space: pre-wrap; word-break: break-word; }
+    .terminal-line .ts { color: var(--gold); margin-right: 0.7rem; opacity: 0.75; }
+
+    /* === RESULTS === */
+    #screen-results { padding: 3rem 1.2rem 5rem; overflow-y: auto; }
+    .results-wrap { max-width: 1080px; margin: 0 auto; }
+    .results-headline { font-family: var(--font-display); font-weight: 300; font-size: clamp(2.4rem, 6vw, 3.8rem); line-height: 1.05; text-align: center; margin: 1rem 0 3rem; letter-spacing: 0.005em; opacity: 0; transform: translateY(14px); transition: all 900ms ease; }
+    .results-headline em { color: var(--gold); font-style: italic; font-weight: 400; }
+    .results-headline.show { opacity: 1; transform: translateY(0); }
+
+    .gauge-wrap { display: flex; flex-direction: column; align-items: center; margin: 0 0 4rem; }
+    .gauge { position: relative; width: 240px; height: 240px; }
+    .gauge svg { transform: rotate(-90deg); width: 100%; height: 100%; }
+    .gauge-track { fill: none; stroke: rgba(201,168,76,0.12); stroke-width: 8; }
+    .gauge-fill { fill: none; stroke: var(--gold); stroke-width: 8; stroke-linecap: round; transition: stroke-dashoffset 2.4s cubic-bezier(.2,.7,.2,1); filter: drop-shadow(0 0 10px rgba(201,168,76,0.5)); }
+    .gauge-text { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .gauge-num { font-family: var(--font-display); font-size: 3.5rem; line-height: 1; color: var(--gold); font-weight: 300; }
+    .gauge-label { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-soft); margin-top: 0.5rem; }
+
+    .metric-trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-bottom: 4rem; }
+    @media (max-width: 700px) { .metric-trio { grid-template-columns: 1fr; } }
+    .metric-trio-item { text-align: center; padding: 2rem 1rem; border: 1px solid var(--line); border-radius: 0.7rem; background: var(--bg-card); }
+    .metric-trio-num { font-family: var(--font-display); font-size: 3.2rem; font-weight: 300; color: var(--gold); line-height: 1; margin-bottom: 0.8rem; }
+    .metric-trio-name { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-soft); }
+
+    .insights { margin-bottom: 3rem; }
+    .insights-title, .recos-title { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.4rem; text-align: center; }
+    .insight-card { padding: 1.4rem 1.6rem; background: var(--bg-card); border: 1px solid var(--line); border-radius: 0.5rem; margin-bottom: 0.9rem; font-family: var(--font-display); font-size: 1.08rem; line-height: 1.55; color: var(--text); font-weight: 300; }
+    .insight-card::before { content: '—'; color: var(--gold); margin-right: 0.6rem; }
+    .reco-card { padding: 1.3rem 1.6rem; border: 1px solid var(--gold); background: rgba(201,168,76,0.06); border-radius: 0.5rem; margin-bottom: 0.8rem; color: var(--gold); font-family: var(--font-display); font-style: italic; font-size: 1.05rem; line-height: 1.5; }
+    .reco-card::before { content: '◆'; margin-right: 0.7rem; font-size: 0.7rem; opacity: 0.7; vertical-align: middle; }
+
+    .real-banner { margin: 2.5rem 0 3rem; padding: 1.4rem 1.6rem; border: 1px solid var(--gold); border-radius: 0.5rem; background: rgba(201,168,76,0.08); text-align: center; font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.06em; line-height: 1.7; color: var(--gold); }
+    .demo-banner { margin: 1rem 0 2.5rem; padding: 0.8rem; border: 1px dashed var(--line); border-radius: 999px; text-align: center; font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-soft); max-width: 360px; margin-left: auto; margin-right: auto; }
+
+    .results-cta { display: flex; gap: 1rem; justify-content: center; margin-top: 3rem; flex-wrap: wrap; }
+    .results-cta button {
+      background: transparent; color: var(--gold); border: 1px solid var(--gold);
+      padding: 1rem 2rem; font-family: var(--font-mono); font-size: 0.7rem;
+      letter-spacing: 0.24em; text-transform: uppercase; cursor: pointer;
+      border-radius: 999px; transition: all 200ms;
+    }
+    .results-cta button.primary { background: var(--gold); color: #0a0a0a; }
+    .results-cta button:hover { box-shadow: 0 0 0 4px rgba(201,168,76,0.15); }
+
+    /* Print styles for PDF export */
+    @media print {
+      body::before, body { background: white !important; color: black !important; }
+      #screen-login, #screen-config, #screen-sim, .results-cta, .real-banner, .demo-banner { display: none !important; }
+      #screen-results { position: static !important; opacity: 1 !important; visibility: visible !important; padding: 0 !important; }
+      .results-headline { color: black !important; }
+      .results-headline em, .gauge-num, .metric-trio-num, .insights-title, .recos-title { color: #8a7838 !important; }
+      .gauge-fill { stroke: #8a7838 !important; }
+      .insight-card, .metric-trio-item, .reco-card { background: white !important; border-color: #ccc !important; color: black !important; }
+      .gauge-track { stroke: #eee !important; }
+      .reco-card { color: #8a7838 !important; }
+      .metric-trio-name, .gauge-label { color: #555 !important; }
+    }
+
+    /* Mobile tweaks */
+    @media (max-width: 700px) {
+      .timer { top: 0.8rem; right: 0.8rem; font-size: 0.65rem; padding: 0.4rem 0.7rem; }
+      .terminal { height: 110px; font-size: 0.66rem; }
+      .gauge { width: 200px; height: 200px; }
+      .gauge-num { font-size: 2.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ SCREEN 0 — LOGIN ============ -->
+  <div id="screen-login" class="screen visible">
+    <div class="login-card">
+      <div class="brand-mark">A D D E N D O</div>
+      <h1 class="brand-name">Pulse<em>.</em></h1>
+      <div class="brand-sub">Acceso restringido</div>
+      <form id="login-form" autocomplete="off">
+        <input id="pw" class="pw-input" type="password" placeholder="contraseña" autocomplete="off" />
+        <div id="pw-error" class="pw-error">Contraseña incorrecta</div>
+      </form>
+      <div class="login-hint">Sistema de simulación predictiva</div>
+    </div>
+  </div>
+
+  <!-- ============ SCREEN 1 — CONFIG ============ -->
+  <div id="screen-config" class="screen">
+    <div class="config-wrap">
+      <div class="config-header">
+        <div class="brand-mark">A D D E N D O</div>
+        <h1 class="brand-name">Pulse<em>.</em></h1>
+        <div class="brand-sub">Simulación predictiva de mercado</div>
+        <div class="mode-toggle" role="tablist">
+          <button id="mode-demo" class="active" type="button">Modo demo</button>
+          <button id="mode-real" type="button">Simulación real</button>
+        </div>
+      </div>
+
+      <div class="tab-row">
+        <button id="tab-brief-btn" class="active" type="button">Subir Brief</button>
+        <button id="tab-manual-btn" type="button">Ingresar Manualmente</button>
+      </div>
+
+      <div id="tab-brief" class="tab-panel active">
+        <div id="dropzone" class="dropzone">
+          <div class="dropzone-icon">↥</div>
+          <div class="dropzone-title">Arrastra el brief o haz clic para subir</div>
+          <div class="dropzone-sub">.txt — extracción automática · .pdf / .docx — preview por nombre</div>
+          <input id="file-input" type="file" accept=".txt,.pdf,.docx,.md" hidden />
+        </div>
+        <div id="file-preview" class="file-preview hidden"></div>
+      </div>
+
+      <div id="tab-manual" class="tab-panel">
+        <div class="field">
+          <label>Proyecto / Cliente</label>
+          <input id="m-proyecto" type="text" placeholder="Lanzamiento Don Jacinto Q2" />
+        </div>
+        <div class="field">
+          <label>Mensaje o copy a simular</label>
+          <textarea id="m-mensaje" placeholder="Tu mensaje publicitario, tweet, copy de landing, oferta..."></textarea>
+        </div>
+        <div class="field">
+          <label>Perfil del público objetivo</label>
+          <textarea id="m-publico" placeholder="Mujeres 35-55 con interés en bienestar emocional, viven en ciudades del Bajío, ingreso medio-alto..."></textarea>
+        </div>
+        <div class="field">
+          <label>Número de agentes simulados <span style="color: var(--text-soft); letter-spacing: 0;">— densidad de la muestra</span></label>
+          <div class="slider-wrap">
+            <input id="m-agentes" type="range" min="50" max="1000" value="300" step="10" />
+            <div class="slider-value"><span id="agentes-val">300</span> ag.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-row">
+        <button id="cta-start" class="cta-pulse" type="button">Iniciar simulación</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SCREEN 2 — SIMULATION ============ -->
+  <div id="screen-sim" class="screen">
+    <canvas id="sim-canvas"></canvas>
+    <div class="timer" id="timer">00:00</div>
+    <div class="sim-grid">
+      <aside class="sim-panel">
+        <h3>Fases del proceso</h3>
+        <div class="phase" data-phase="0">
+          <div class="phase-label"><span class="name">FASE 01 — Construyendo grafo social</span><span class="pct">0%</span></div>
+          <div class="phase-bar"><div class="phase-fill"></div></div>
+        </div>
+        <div class="phase" data-phase="1">
+          <div class="phase-label"><span class="name">FASE 02 — Generando perfiles</span><span class="pct">0%</span></div>
+          <div class="phase-bar"><div class="phase-fill"></div></div>
+        </div>
+        <div class="phase" data-phase="2">
+          <div class="phase-label"><span class="name">FASE 03 — Simulando interacciones</span><span class="pct">0%</span></div>
+          <div class="phase-bar"><div class="phase-fill"></div></div>
+        </div>
+        <div class="phase" data-phase="3">
+          <div class="phase-label"><span class="name">FASE 04 — Analizando resultados</span><span class="pct">0%</span></div>
+          <div class="phase-bar"><div class="phase-fill"></div></div>
+        </div>
+      </aside>
+
+      <div></div>
+
+      <aside class="sim-panel">
+        <h3>Métricas en tiempo real</h3>
+        <div id="metrics-list" class="metrics-list"></div>
+      </aside>
+    </div>
+    <div class="terminal" id="terminal"></div>
+  </div>
+
+  <!-- ============ SCREEN 3 — RESULTS ============ -->
+  <div id="screen-results" class="screen">
+    <div class="results-wrap">
+      <h1 id="results-headline" class="results-headline">Tu mercado <em>ha hablado.</em></h1>
+
+      <div class="gauge-wrap">
+        <div class="gauge">
+          <svg viewBox="0 0 200 200">
+            <circle class="gauge-track" cx="100" cy="100" r="92" />
+            <circle id="gauge-fill" class="gauge-fill" cx="100" cy="100" r="92"
+                    stroke-dasharray="578.05" stroke-dashoffset="578.05" />
+          </svg>
+          <div class="gauge-text">
+            <div class="gauge-num"><span id="gauge-num">0</span>%</div>
+            <div class="gauge-label">Respuesta positiva</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="metric-trio">
+        <div class="metric-trio-item">
+          <div class="metric-trio-num"><span id="r-resonancia">0</span>%</div>
+          <div class="metric-trio-name">Resonancia del mensaje</div>
+        </div>
+        <div class="metric-trio-item">
+          <div class="metric-trio-num"><span id="r-adopcion">0</span>%</div>
+          <div class="metric-trio-name">Tasa de adopción</div>
+        </div>
+        <div class="metric-trio-item">
+          <div class="metric-trio-num"><span id="r-resistencia">0</span>%</div>
+          <div class="metric-trio-name">Índice de resistencia</div>
+        </div>
+      </div>
+
+      <div class="insights">
+        <div class="insights-title">Insights del mercado</div>
+        <div id="insights-list"></div>
+      </div>
+
+      <div>
+        <div class="recos-title">Recomendaciones de Addendo</div>
+        <div id="recos-list"></div>
+      </div>
+
+      <div id="real-banner" class="real-banner" hidden></div>
+      <div class="demo-banner">— Datos generados por motor de simulación —</div>
+
+      <div class="results-cta">
+        <button id="cta-new" type="button">Nueva simulación</button>
+        <button id="cta-pdf" class="primary" type="button">Exportar reporte PDF</button>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline define:vars={{ PULSE_WEBHOOK_URL, PULSE_WEBHOOK_SECRET, SITE_PASSWORD }}>
+  (function () {
+    'use strict';
+
+    // =========== State ===========
+    const state = {
+      mode: 'demo',
+      input: {
+        proyecto: '',
+        cliente: '',
+        mensaje: '',
+        perfil: '',
+        agentes: 300
+      },
+      simStart: null,
+      simAborted: false,
+      animationId: null,
+      realRequestSent: false
+    };
+
+    // =========== Screen transitions ===========
+    const screens = ['screen-login', 'screen-config', 'screen-sim', 'screen-results']
+      .map(id => document.getElementById(id));
+    function show(id) {
+      screens.forEach(s => s.classList.toggle('visible', s.id === id));
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+
+    // =========== Login ===========
+    if (sessionStorage.getItem('addendo-pulse-auth') === 'ok') show('screen-config');
+    document.getElementById('login-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const v = document.getElementById('pw').value;
+      const err = document.getElementById('pw-error');
+      if (v === SITE_PASSWORD) {
+        sessionStorage.setItem('addendo-pulse-auth', 'ok');
+        err.classList.remove('show');
+        show('screen-config');
+      } else {
+        err.classList.add('show');
+        document.getElementById('pw').value = '';
+        document.getElementById('pw').focus();
+      }
+    });
+    document.getElementById('pw').addEventListener('input', () => {
+      document.getElementById('pw-error').classList.remove('show');
+    });
+
+    // =========== Mode toggle ===========
+    document.getElementById('mode-demo').addEventListener('click', () => {
+      state.mode = 'demo';
+      document.getElementById('mode-demo').classList.add('active');
+      document.getElementById('mode-real').classList.remove('active');
+    });
+    document.getElementById('mode-real').addEventListener('click', () => {
+      state.mode = 'real';
+      document.getElementById('mode-real').classList.add('active');
+      document.getElementById('mode-demo').classList.remove('active');
+    });
+
+    // =========== Tabs ===========
+    function setTab(which) {
+      const tabs = ['brief', 'manual'];
+      tabs.forEach(t => {
+        document.getElementById('tab-' + t + '-btn').classList.toggle('active', t === which);
+        document.getElementById('tab-' + t).classList.toggle('active', t === which);
+      });
+    }
+    document.getElementById('tab-brief-btn').addEventListener('click', () => setTab('brief'));
+    document.getElementById('tab-manual-btn').addEventListener('click', () => setTab('manual'));
+
+    // =========== File upload ===========
+    const dropzone = document.getElementById('dropzone');
+    const fileInput = document.getElementById('file-input');
+    const filePreview = document.getElementById('file-preview');
+    let extractedFromFile = null;
+
+    function handleFile(file) {
+      if (!file) return;
+      const ext = (file.name.split('.').pop() || '').toLowerCase();
+      if (ext === 'txt' || ext === 'md') {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const text = String(e.target.result || '').slice(0, 50000);
+          showPreview(file.name, text);
+          extractedFromFile = parseText(file.name, text);
+        };
+        reader.readAsText(file);
+      } else {
+        // .pdf / .docx — sin parser cliente; usamos heurística por nombre
+        const heur = filenameHeuristic(file.name);
+        showPreview(file.name, '[Archivo binario — extracción heurística por nombre del archivo]\n\nProyecto: ' + heur.proyecto + '\nCliente: ' + heur.cliente);
+        extractedFromFile = { ...heur, mensaje: '', perfil: '' };
+      }
+    }
+    function showPreview(name, body) {
+      filePreview.classList.remove('hidden');
+      filePreview.textContent = '◆ ' + name + '\n\n' + body;
+    }
+    function filenameHeuristic(name) {
+      const base = name.replace(/\.[^.]+$/, '').replace(/[_\-]+/g, ' ').trim();
+      return { proyecto: base, cliente: base.split(' ')[0] };
+    }
+    function parseText(name, text) {
+      // Heurística simple: busca lineas tipo "Cliente: x" / "Proyecto: x" / "Publico: x" / "Mensaje: x"
+      const out = filenameHeuristic(name);
+      out.mensaje = '';
+      out.perfil = '';
+      const lower = text.toLowerCase();
+      const grab = (label) => {
+        const re = new RegExp('(?:^|\\n)\\s*' + label + '\\s*:\\s*([^\\n]+)', 'i');
+        const m = text.match(re);
+        return m ? m[1].trim() : '';
+      };
+      const c = grab('cliente') || grab('marca') || grab('negocio'); if (c) out.cliente = c;
+      const p = grab('proyecto') || grab('campa[ñn]a'); if (p) out.proyecto = p;
+      const m = grab('mensaje') || grab('copy') || grab('texto'); if (m) out.mensaje = m;
+      const u = grab('p[uú]blico') || grab('audiencia') || grab('target'); if (u) out.perfil = u;
+      // Fallback: si no hay perfil, intenta extraer un párrafo que mencione audiencia
+      if (!out.perfil) {
+        const paras = text.split(/\n\s*\n/).filter(x => x.length > 50);
+        const audPara = paras.find(x => /audiencia|p[uú]blico|target|cliente ideal/i.test(x));
+        if (audPara) out.perfil = audPara.trim().slice(0, 600);
+      }
+      if (!out.mensaje) {
+        const firstPara = text.split(/\n\s*\n/).find(x => x.length > 30);
+        if (firstPara) out.mensaje = firstPara.trim().slice(0, 400);
+      }
+      return out;
+    }
+    dropzone.addEventListener('click', () => fileInput.click());
+    dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('drag'); });
+    dropzone.addEventListener('dragleave', () => dropzone.classList.remove('drag'));
+    dropzone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropzone.classList.remove('drag');
+      const f = e.dataTransfer.files && e.dataTransfer.files[0];
+      if (f) { fileInput.files = e.dataTransfer.files; handleFile(f); }
+    });
+    fileInput.addEventListener('change', () => handleFile(fileInput.files[0]));
+
+    // =========== Slider ===========
+    const slider = document.getElementById('m-agentes');
+    const sliderVal = document.getElementById('agentes-val');
+    slider.addEventListener('input', () => { sliderVal.textContent = slider.value; });
+
+    // =========== CTA Start ===========
+    document.getElementById('cta-start').addEventListener('click', () => {
+      const tabActive = document.getElementById('tab-brief').classList.contains('active') ? 'brief' : 'manual';
+      let data;
+      if (tabActive === 'brief') {
+        if (!extractedFromFile) {
+          alert('Sube un archivo o usa la pestaña "Ingresar Manualmente".');
+          return;
+        }
+        data = {
+          proyecto: extractedFromFile.proyecto || 'Simulación sin nombre',
+          cliente: extractedFromFile.cliente || 'Cliente',
+          mensaje: extractedFromFile.mensaje || 'Mensaje no especificado',
+          perfil: extractedFromFile.perfil || 'Público no especificado',
+          agentes: parseInt(slider.value, 10)
+        };
+      } else {
+        const p = document.getElementById('m-proyecto').value.trim();
+        const m = document.getElementById('m-mensaje').value.trim();
+        const u = document.getElementById('m-publico').value.trim();
+        if (!p || !m || !u) { alert('Completa los 3 campos antes de iniciar.'); return; }
+        data = { proyecto: p, cliente: p, mensaje: m, perfil: u, agentes: parseInt(slider.value, 10) };
+      }
+      state.input = data;
+      startSimulation();
+    });
+
+    // =========== Simulation orchestration ===========
+    function startSimulation() {
+      state.simStart = Date.now();
+      state.simAborted = false;
+      state.realRequestSent = false;
+      resetSimUI();
+      show('screen-sim');
+      initCanvas();
+      runTimer();
+      runPhases();
+      runMetricsAndTerminal();
+      if (state.mode === 'real') triggerRealWebhook();
+    }
+
+    function resetSimUI() {
+      document.querySelectorAll('.phase').forEach((el) => {
+        el.classList.remove('active');
+        el.querySelector('.phase-fill').style.width = '0%';
+        el.querySelector('.pct').textContent = '0%';
+      });
+      document.getElementById('metrics-list').innerHTML = '';
+      document.getElementById('terminal').innerHTML = '';
+    }
+
+    let timerInt = null;
+    function runTimer() {
+      const tEl = document.getElementById('timer');
+      if (timerInt) clearInterval(timerInt);
+      timerInt = setInterval(() => {
+        const ms = Date.now() - state.simStart;
+        const m = String(Math.floor(ms / 60000)).padStart(2, '0');
+        const s = String(Math.floor((ms % 60000) / 1000)).padStart(2, '0');
+        tEl.textContent = m + ':' + s;
+      }, 200);
+    }
+
+    // Phases — total ~165s in demo
+    const PHASE_DURATIONS = [25000, 30000, 75000, 30000]; // ms each
+    function runPhases() {
+      const phases = document.querySelectorAll('.phase');
+      let idx = 0;
+      function nextPhase() {
+        if (state.simAborted || idx >= phases.length) {
+          if (!state.simAborted) finishSimulation();
+          return;
+        }
+        const phase = phases[idx];
+        phase.classList.add('active');
+        const fill = phase.querySelector('.phase-fill');
+        const pctEl = phase.querySelector('.pct');
+        const dur = PHASE_DURATIONS[idx];
+        const t0 = Date.now();
+        const interval = setInterval(() => {
+          const elapsed = Date.now() - t0;
+          const pct = Math.min(100, Math.round((elapsed / dur) * 100));
+          fill.style.width = pct + '%';
+          pctEl.textContent = pct + '%';
+          if (pct >= 100) {
+            clearInterval(interval);
+            idx++;
+            setTimeout(nextPhase, 250);
+          }
+        }, 200);
+      }
+      nextPhase();
+    }
+
+    // Metrics drip + terminal log
+    function runMetricsAndTerminal() {
+      const total = PHASE_DURATIONS.reduce((a, b) => a + b, 0);
+      const N = Math.max(50, Math.min(1000, state.input.agentes));
+      const metricsPlan = [
+        { at: 8000,   num: Math.round(N * 1.2),  name: 'Conexiones establecidas' },
+        { at: 18000,  num: Math.round(N * 0.85), name: 'Perfiles psicográficos generados' },
+        { at: 35000,  num: Math.round(N * 7.8),  name: 'Interacciones procesadas' },
+        { at: 60000,  num: '73%',                name: 'Resonancia detectada' },
+        { at: 95000,  num: Math.round(N * 0.34), name: 'Adoptantes potenciales' },
+        { at: 120000, num: Math.round(N * 12.4), name: 'Microreacciones registradas' },
+        { at: 145000, num: '4',                  name: 'Clusters de opinión identificados' }
+      ];
+      const list = document.getElementById('metrics-list');
+      metricsPlan.forEach((m) => {
+        setTimeout(() => {
+          if (state.simAborted) return;
+          const div = document.createElement('div');
+          div.className = 'metric-item';
+          div.innerHTML = '<div class="metric-num">' + m.num + '</div><div class="metric-name">' + m.name + '</div>';
+          list.appendChild(div);
+          requestAnimationFrame(() => div.classList.add('show'));
+        }, m.at);
+      });
+
+      const terminalSeed = [
+        'Conectando con grafo de Zep...',
+        'Ontología base generada — 14 entidades + 23 relaciones',
+        'Construyendo nodos de agentes — batch 1/4',
+        'Construyendo nodos de agentes — batch 2/4',
+        'Construyendo nodos de agentes — batch 3/4',
+        'Construyendo nodos de agentes — batch 4/4',
+        'Grafo persistido — task completed',
+        'Generando perfiles psicográficos vía LLM',
+        'Perfiles batch 1 — 75 agentes',
+        'Perfiles batch 2 — 75 agentes',
+        'Perfiles batch 3 — 75 agentes',
+        'Perfiles batch 4 — 75 agentes',
+        'Configuración de simulación lista',
+        'Lanzando OASIS runner — platform=parallel',
+        'Round 1/144 — 23% agentes activos',
+        'Agente #047 reacciona positivamente',
+        'Agente #112 retransmite con modificación',
+        'Cluster de adopción formado — 23 nodos',
+        'Round 24/144 — sentimiento +14%',
+        'Agente #201 muestra resistencia explícita',
+        'Resistencia detectada en segmento 3',
+        'Round 48/144 — momentum sostenido',
+        'Subgrafo de influencia detectado — 7 nodos centrales',
+        'Round 72/144 — pico de interacciones',
+        'Agente #298 actúa como amplificador',
+        'Round 96/144 — saturación parcial detectada',
+        'Round 120/144 — convergencia',
+        'Round 144/144 — simulación finalizada',
+        'Generando reporte final con LLM',
+        'Sección 1: resumen ejecutivo — completada',
+        'Sección 2: métricas clave — completada',
+        'Sección 3: insights por segmento — completada',
+        'Sección 4: recomendaciones — completada',
+        'Reporte ensamblado — listo para entrega'
+      ];
+      const term = document.getElementById('terminal');
+      const interval = total / terminalSeed.length;
+      terminalSeed.forEach((line, i) => {
+        setTimeout(() => {
+          if (state.simAborted) return;
+          const ms = Date.now() - state.simStart;
+          const min = String(Math.floor(ms / 60000)).padStart(2, '0');
+          const sec = String(Math.floor((ms % 60000) / 1000)).padStart(2, '0');
+          const div = document.createElement('div');
+          div.className = 'terminal-line';
+          div.innerHTML = '<span class="ts">[' + min + ':' + sec + ']</span>' + line;
+          term.appendChild(div);
+          term.scrollTop = term.scrollHeight;
+        }, i * interval + Math.random() * 400);
+      });
+    }
+
+    // =========== Real webhook ===========
+    function triggerRealWebhook() {
+      if (state.realRequestSent) return;
+      state.realRequestSent = true;
+      const body = {
+        proyecto: state.input.proyecto,
+        cliente: state.input.cliente,
+        mensaje: state.input.mensaje,
+        num_agentes: state.input.agentes,
+        perfil_publico: state.input.perfil
+      };
+      fetch(PULSE_WEBHOOK_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Addendo-Secret': PULSE_WEBHOOK_SECRET
+        },
+        body: JSON.stringify(body)
+      }).then(r => {
+        const term = document.getElementById('terminal');
+        const tag = document.createElement('div');
+        tag.className = 'terminal-line';
+        tag.style.color = r.ok ? 'var(--gold)' : 'var(--danger)';
+        tag.innerHTML = '<span class="ts">[real]</span>Webhook real disparado — HTTP ' + r.status;
+        term.appendChild(tag);
+        term.scrollTop = term.scrollHeight;
+      }).catch(err => {
+        const term = document.getElementById('terminal');
+        const tag = document.createElement('div');
+        tag.className = 'terminal-line';
+        tag.style.color = 'var(--danger)';
+        tag.innerHTML = '<span class="ts">[real]</span>Error disparando webhook: ' + err.message;
+        term.appendChild(tag);
+      });
+    }
+
+    // =========== Canvas animation ===========
+    let canvas, ctx, nodes = [], rafId = null;
+    function initCanvas() {
+      canvas = document.getElementById('sim-canvas');
+      ctx = canvas.getContext('2d');
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      function resize() {
+        canvas.width = canvas.clientWidth * dpr;
+        canvas.height = canvas.clientHeight * dpr;
+        ctx.scale(dpr, dpr);
+      }
+      resize();
+      window.addEventListener('resize', resize, { passive: true });
+      const isMobile = window.innerWidth < 768;
+      const N = isMobile ? Math.min(120, state.input.agentes) : Math.min(state.input.agentes, 320);
+      nodes = [];
+      for (let i = 0; i < N; i++) {
+        nodes.push({
+          x: Math.random() * canvas.clientWidth,
+          y: Math.random() * canvas.clientHeight,
+          vx: (Math.random() - 0.5) * 0.35,
+          vy: (Math.random() - 0.5) * 0.35,
+          r: 1 + Math.random() * 2.4,
+          base: 1 + Math.random() * 2.4,
+          phase: Math.random() * Math.PI * 2,
+          glow: Math.random() < 0.06
+        });
+      }
+      cancelAnimationFrame(rafId);
+      tick();
+    }
+    function tick() {
+      const w = canvas.clientWidth, h = canvas.clientHeight;
+      ctx.clearRect(0, 0, w, h);
+      const t = Date.now() * 0.001;
+      // links
+      const linkDist = window.innerWidth < 768 ? 70 : 110;
+      const linkDist2 = linkDist * linkDist;
+      ctx.lineWidth = 0.6;
+      for (let i = 0; i < nodes.length; i++) {
+        const a = nodes[i];
+        for (let j = i + 1; j < nodes.length; j++) {
+          const b = nodes[j];
+          const dx = a.x - b.x, dy = a.y - b.y;
+          const d2 = dx * dx + dy * dy;
+          if (d2 < linkDist2) {
+            const alpha = (1 - d2 / linkDist2) * 0.22;
+            ctx.strokeStyle = 'rgba(201,168,76,' + alpha.toFixed(3) + ')';
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+      }
+      // nodes
+      for (let i = 0; i < nodes.length; i++) {
+        const n = nodes[i];
+        n.x += n.vx;
+        n.y += n.vy;
+        if (n.x < 0 || n.x > w) n.vx *= -1;
+        if (n.y < 0 || n.y > h) n.vy *= -1;
+        const pulse = n.glow ? 1 + Math.sin(t * 2 + n.phase) * 0.45 : 1;
+        const r = n.base * pulse;
+        if (n.glow) {
+          const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r * 6);
+          grad.addColorStop(0, 'rgba(201,168,76,0.55)');
+          grad.addColorStop(1, 'rgba(201,168,76,0)');
+          ctx.fillStyle = grad;
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, r * 6, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.fillStyle = n.glow ? '#E8C967' : 'rgba(201,168,76,0.85)';
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      rafId = requestAnimationFrame(tick);
+    }
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden && rafId) { cancelAnimationFrame(rafId); rafId = null; }
+      else if (!document.hidden && screens[2].classList.contains('visible') && !rafId) tick();
+    });
+
+    // =========== Finish & results ===========
+    function finishSimulation() {
+      if (timerInt) clearInterval(timerInt);
+      // numbers — semi-deterministic given input length so it doesn't feel random
+      const seed = (state.input.mensaje + state.input.perfil).length;
+      function r(min, max) { return min + Math.floor(((seed * 9301 + 49297) % 233280) / 233280 * (max - min)); }
+      const resonancia = 70 + (r(0, 22));
+      const adopcion = 20 + (r(0, 28));
+      const resistencia = 5 + (r(0, 18));
+      const positivo = Math.round((resonancia + (100 - resistencia) + adopcion * 1.2) / 3.2);
+
+      document.getElementById('r-resonancia').textContent = resonancia;
+      document.getElementById('r-adopcion').textContent = adopcion;
+      document.getElementById('r-resistencia').textContent = resistencia;
+
+      // Insights — adaptados ligeramente al input
+      const segmentos = ['35-45', '25-34', '45-55', '18-24'];
+      const seg = segmentos[seed % segmentos.length];
+      const insights = [
+        'El mensaje conecta fuertemente con el segmento ' + seg + '.',
+        'Resistencia detectada en usuarios con experiencia previa o expectativas no alineadas.',
+        'Oportunidad: énfasis en resultados inmediatos resuena con el cluster amplificador.',
+        'Subgrafo de 7 nodos centrales actúa como punto de viralización potencial.'
+      ];
+      const recos = [
+        'Ajustar el CTA hacia urgencia y resultado tangible.',
+        'Segmentar campaña inicial para ' + seg + ' antes de escalar.',
+        'Re-trabajar el ángulo de credibilidad para reducir el ' + resistencia + '% de resistencia.'
+      ];
+      const il = document.getElementById('insights-list'); il.innerHTML = '';
+      insights.forEach(t => { const c = document.createElement('div'); c.className = 'insight-card'; c.textContent = t; il.appendChild(c); });
+      const rl = document.getElementById('recos-list'); rl.innerHTML = '';
+      recos.forEach(t => { const c = document.createElement('div'); c.className = 'reco-card'; c.textContent = t; rl.appendChild(c); });
+
+      // Real banner
+      const rb = document.getElementById('real-banner');
+      if (state.mode === 'real') {
+        rb.hidden = false;
+        rb.innerHTML = 'Simulación real disparada en N8N. Estos números son una previsualización.<br>El reporte completo con análisis del backend llega por correo a <strong>admin@addendo.io</strong> en 10–25 minutos.';
+      } else {
+        rb.hidden = true;
+      }
+
+      // Show results screen
+      show('screen-results');
+      stopCanvas();
+      requestAnimationFrame(() => {
+        document.getElementById('results-headline').classList.add('show');
+        // Gauge animate
+        const circumference = 2 * Math.PI * 92;
+        const fill = document.getElementById('gauge-fill');
+        const target = circumference * (1 - positivo / 100);
+        // Set initial then animate
+        fill.style.strokeDashoffset = circumference;
+        // Force reflow then animate
+        void fill.getBoundingClientRect();
+        fill.style.strokeDashoffset = target;
+
+        // Number count-up
+        const numEl = document.getElementById('gauge-num');
+        let n = 0;
+        const dur = 2200;
+        const t0 = performance.now();
+        function step(now) {
+          const p = Math.min(1, (now - t0) / dur);
+          const eased = 1 - Math.pow(1 - p, 3);
+          n = Math.round(positivo * eased);
+          numEl.textContent = n;
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      });
+    }
+
+    function stopCanvas() {
+      if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+    }
+
+    // =========== Result CTAs ===========
+    document.getElementById('cta-new').addEventListener('click', () => {
+      state.simAborted = true;
+      stopCanvas();
+      show('screen-config');
+    });
+    document.getElementById('cta-pdf').addEventListener('click', () => {
+      window.print();
+    });
+  })();
+  </script>
+</body>
+</html>
