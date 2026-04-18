@@ -385,7 +385,7 @@ LA REGLA:
 
 | NO es | Por que se confunde |
 |-------|---------------------|
-| Copywriter | Define la estrategia, copywriting (#16) ejecuta el contenido |
+| Copywriter | Define la estrategia, copywriting-seo (#16) ejecuta el contenido |
 | Frontend developer | Define los requisitos tecnicos, frontend-dev (#21) los implementa |
 | Magico que rankea sin esfuerzo | SEO toma 3-6 meses minimo para ver resultados serios |
 | Especialista en Google Ads | Google Ads es paid (otro agente). SEO es organico |
@@ -1809,13 +1809,13 @@ PROCESAMIENTO:
   1. Auditoria SEO tecnica inicial
   2. Keyword research
   3. Plan de optimizacion
-  4. Coordinacion con copywriting (#16) para contenido
+  4. Coordinacion con copywriting-seo (#16) para contenido
   5. Coordinacion con frontend-dev (#21) para implementacion
   6. Coordinacion con agente-rp (#46) para link building
   7. Monitoring y optimizacion continua
 
 OUTPUT:
-  copywriting (#16) -> briefs SEO para articulos
+  copywriting-seo (#16) -> briefs SEO para articulos
   frontend-dev (#21) -> requisitos tecnicos
   agente-gbp (#32) -> coordinacion SEO local
   growth-content-specialist (#47) -> oportunidades de contenido
@@ -1823,7 +1823,7 @@ OUTPUT:
   director-cuenta (#3) -> reportes para el cliente
 ```
 
-### 9.2 Workflow con copywriting (#16)
+### 9.2 Workflow con copywriting-seo (#16)
 
 ```
 COORDINACION ESTRECHA:
@@ -1838,7 +1838,7 @@ El agente SEO entrega briefs a copywriting con:
   - Tono y estilo (del director-creativo)
   - Internal links sugeridos
 
-copywriting (#16) escribe el articulo
+copywriting-seo (#16) escribe el articulo
 SEO revisa y optimiza on-page
 frontend-dev publica
 SEO monitorea performance
@@ -2068,7 +2068,7 @@ SEO en silo. Resultado: contenido no optimizado, tecnica no implementada, links 
 
 19. **Contenido con datos especificos y fuentes citadas.**
 
-20. **Coordinacion obligatoria con copywriting (#16), frontend-dev (#21), agente-rp (#46), agente-gbp (#32), agente-analytics (#42).**
+20. **Coordinacion obligatoria con copywriting-seo (#16), frontend-dev (#21), agente-rp (#46), agente-gbp (#32), agente-analytics (#42).**
 
 21. **Reportes mensuales con metricas claras y plan para el siguiente mes.**
 

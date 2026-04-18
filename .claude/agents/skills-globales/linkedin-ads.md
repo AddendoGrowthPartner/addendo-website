@@ -1324,7 +1324,7 @@ Cada semana, exportar la pestaña Demographics y:
 ```
 INPUT DEL TRAFIKERO LINKEDIN ADS:
   director-creativo (#15) -> brief visual
-  copywriting (#16) -> copy de los ads
+  copywriting-seo (#16) -> copy de los ads
   director-estrategia (#9) -> objetivos del cliente B2B
   agente-investigacion -> insights de competidores
   agente-cro (#33) -> optimizaciones de landing pages
@@ -1344,7 +1344,7 @@ OUTPUT:
   director-cuenta (#3) -> resultados al cliente
 ```
 
-### 7.2 Workflow con copywriting (#16)
+### 7.2 Workflow con copywriting-seo (#16)
 
 ```
 PROCESO DE COPY:

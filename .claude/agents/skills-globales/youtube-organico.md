@@ -293,7 +293,7 @@ REGLA: 50% del tiempo de produccion al video. 50% al thumbnail + titulo.
        Sin esa proporcion, los videos buenos mueren con pocas vistas.
 ```
 
-**Regla operativa:** ningun video se publica sin un thumbnail diseñado por diseno-imagen (#17) y un titulo optimizado por copywriting (#16). Cero videos con thumbnails autogenerados.
+**Regla operativa:** ningun video se publica sin un thumbnail diseñado por diseno-imagen (#17) y un titulo optimizado por copywriting-seo (#16). Cero videos con thumbnails autogenerados.
 
 **PRINCIPIO 5: YouTube favorece a los canales que retienen a los usuarios — el Watch Time es la metrica mas importante.**
 
@@ -411,7 +411,7 @@ REGLA: el agente youtube-organico optimiza para WATCH TIME, no para vistas.
 "La retencion objetivo es [X]%"
 "Vamos a hacer A/B test del thumbnail con [X] variantes"
 "El video se agrega a la playlist [nombre]"
-"Coordinacion con copywriting (#16) para el guion"
+"Coordinacion con copywriting-seo (#16) para el guion"
 "Coordinacion con diseno-imagen (#17) para el thumbnail"
 ```
 
@@ -1619,7 +1619,7 @@ HORARIO OPTIMO DE PUBLICACION:
 ```
 INPUT DEL AGENTE YOUTUBE-ORGANICO:
   director-creativo (#15) -> brief de tono y estilo
-  copywriting (#16) -> guiones de videos y descripciones
+  copywriting-seo (#16) -> guiones de videos y descripciones
   diseno-imagen (#17) -> thumbnails y banners
   contenido-redes (#28) -> calendario de contenido coordinado
   seo (#27) -> keywords coordinadas con SEO general
@@ -1644,7 +1644,7 @@ OUTPUT:
   growth-content-specialist (#47) -> contenido reutilizable
 ```
 
-### 7.2 Workflow con copywriting (#16)
+### 7.2 Workflow con copywriting-seo (#16)
 
 ```
 COORDINACION PARA GUIONES:
@@ -2062,7 +2062,7 @@ Hacer videos sin analizar que funciona y que no. Resultado: el canal estancado.
 
 19. **Responder TODOS los comentarios en 24 horas.** El algoritmo lo premia.
 
-20. **Coordinar con copywriting (#16) para guiones, diseno-imagen (#17) para thumbnails.**
+20. **Coordinar con copywriting-seo (#16) para guiones, diseno-imagen (#17) para thumbnails.**
 
 21. **Coordinar con seo (#27)** para distribuir keywords entre Google y YouTube.
 

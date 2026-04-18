@@ -1670,7 +1670,7 @@ INPUT DEL GESTOR DE ASSETS:
   diseno-imagen (#17) -> assets generados con IA
   diseno-web (#18) -> mockups y exports de Figma
   onboarding-cliente (#2) -> assets recibidos del cliente
-  copywriting (#16) -> documentos de texto
+  copywriting-seo (#16) -> documentos de texto
   director-creativo (#15) -> briefs y guias de marca
   Todos los agentes que producen archivos
 

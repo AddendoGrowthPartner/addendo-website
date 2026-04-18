@@ -1580,7 +1580,7 @@ KPI 6: CONVERSION DEL SITIO DESPUES DE LANZAMIENTO
 INPUT DEL AGENTE DISEÑO-WEB:
   director-creativo (#15) -> brief de identidad visual
   director-estrategia (#9) -> objetivos del cliente
-  copywriting (#16) -> textos finales
+  copywriting-seo (#16) -> textos finales
   desarrollo-web (#20) -> validacion tecnica de viabilidad
 
 PROCESAMIENTO:

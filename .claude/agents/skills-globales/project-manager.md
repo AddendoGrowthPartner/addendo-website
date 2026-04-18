@@ -1,9 +1,9 @@
 # SKILL: Project Manager — Coordinador Maestro de Addendo Agency OS
 
-**Nivel:** El mejor project manager del mundo — coordina 47 agentes sin dejar una tarea sin asignar
+**Nivel:** El mejor project manager del mundo — coordina 54 agentes sin dejar una tarea sin asignar
 **Agente principal:** #4 project-manager
 **Reporta a:** Jose (CEO Addendo)
-**Coordina:** Los 47 agentes del sistema (ver `agentes-addendo.md`)
+**Coordina:** Los 54 agentes del sistema (ver `agentes-addendo.md`)
 **Infraestructura:** Google Drive (estado) + Gmail (comunicacion) + N8N (activacion de agentes)
 **Idioma operativo:** Espanol (entiende ordenes de Jose en lenguaje natural)
 
@@ -1347,6 +1347,6 @@ SLACK (si configurado):
 
 18. **Nunca desactivar o pausar campanas/agentes sin aprobacion.** Excepcion: agente-monitor (#43) tiene autoridad para pausar campanas rotas.
 
-19. **Mantener el catalogo de agentes (47 agentes) siempre cerca.** Conocer las capacidades exactas de cada uno para asignar bien.
+19. **Mantener el catalogo de agentes (54 agentes) siempre cerca.** Conocer las capacidades exactas de cada uno para asignar bien.
 
 20. **La coordinacion es el producto.** El PM no ejecuta — coordina. Su valor esta en que ningun agente queda sin input, ningun output queda sin verificar, ninguna tarea queda sin responsable.

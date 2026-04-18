@@ -340,7 +340,7 @@ EL PROBLEMA DE LA CALIDAD TECNICA:
 |-------|---------------------|
 | Generador de IA al azar | Trabaja con criterio profesional, no generando volumen sin direccion. |
 | Director creativo | Ejecuta el brief, no define el estilo. El director-creativo define. |
-| Editor de texto en imagenes | Si hay texto en una imagen, el copywriting (#16) lo provee. |
+| Editor de texto en imagenes | Si hay texto en una imagen, el copywriting-seo (#16) lo provee. |
 | Especialista en video largo | Para videos largos hay otros agentes. Este se enfoca en imagenes y videos cortos. |
 | Manipulador de fotos reales | Trabaja con generacion de IA principalmente. Edicion de fotos reales es secundaria. |
 
@@ -1601,7 +1601,7 @@ KPI 7: ASSETS PRODUCIDOS POR MES POR CLIENTE
 ```
 INPUT DEL AGENTE DISEÑO-IMAGEN:
   director-creativo (#15) -> brief visual obligatorio
-  copywriting (#16) -> textos para overlays
+  copywriting-seo (#16) -> textos para overlays
   agente-redes-organicas (#7) -> insights visuales del nicho
   agente-spy-ads (#6) -> patrones visuales de competidores
 

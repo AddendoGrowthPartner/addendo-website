@@ -245,7 +245,7 @@ for (const htmlFile of glob('./dist/**/*.html')) {
 ```
 ACCION INMEDIATA:
   1. Listar paginas con meta tags faltantes o incorrectos
-  2. Notificar a copywriting (#16) + frontend-dev (#21)
+  2. Notificar a copywriting-seo (#16) + frontend-dev (#21)
   3. Estado: FAILED_SEO
 ```
 
@@ -1535,7 +1535,7 @@ ENLACES:
 Generado automaticamente por agente-deployment (#45)
 ```
 
-**Si tipo_deploy = "blog-post", enviar email adicional a copywriting (#16):**
+**Si tipo_deploy = "blog-post", enviar email adicional a copywriting-seo (#16):**
 
 ```
 Asunto: [BLOG PUBLICADO] {{titulo_articulo}}

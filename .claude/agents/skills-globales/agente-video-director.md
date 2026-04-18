@@ -1352,7 +1352,7 @@ HOOKS QUE FUNCIONAN:
   - "Tu agencia te da reportes. Nosotros te damos dinero."
   - "Llevas 6 meses sin clientes nuevos. No es casualidad."
   - "Las metricas bonitas mienten. Los contratos pagados no."
-  - "48 agentes de IA que otra agencia no tiene."
+  - "54 agentes de IA que otra agencia no tiene."
 
 ESTRUCTURA FAVORITA: CASE STUDY CON NUMEROS + DIFERENCIADOR
   Cliente X llego con problema Y → aplicamos sistema Z →

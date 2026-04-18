@@ -595,7 +595,7 @@ MEDIOS:
 
 ```
 LA HISTORIA:
-  Behind the scenes de como Addendo opera con 47 agentes IA en lugar
+  Behind the scenes de como Addendo opera con 54 agentes IA en lugar
   de empleados. Es un caso de estudio de transformacion empresarial
   con IA.
 
@@ -1831,7 +1831,7 @@ KPI 10: ROI DE PR (estimado)
 ```
 INPUT DEL AGENTE RP:
   director-estrategia (#9) -> objetivos de posicionamiento por cliente
-  copywriting (#16) -> contenido de calidad para guest posts
+  copywriting-seo (#16) -> contenido de calidad para guest posts
   ventas-atencion -> casos de exito de clientes
   agente-monitor (#43) -> alertas de cobertura ganada
   Brand24 -> menciones en tiempo real
@@ -1855,7 +1855,7 @@ OUTPUT DEL AGENTE RP:
   agente-reputacion (#34) -> coberturas que afectan reputacion
 ```
 
-### 8.2 Workflow con copywriting (#16)
+### 8.2 Workflow con copywriting-seo (#16)
 
 ```
 COLABORACION ESTRECHA:

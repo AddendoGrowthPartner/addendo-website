@@ -2885,7 +2885,7 @@ Addendo Growth Partner — agente-investigacion #8
 
 Este reporte es la aplicacion del framework de Felipe Vergara al
 contexto especifico del cliente, ejecutado como parte del sistema
-operativo de 48 agentes de Addendo. El merito metodologico es de
+operativo de 54 agentes de Addendo. El merito metodologico es de
 Felipe Vergara; la ejecucion sistematizada es de Addendo.
 ```
 
@@ -4106,7 +4106,7 @@ Referencias:
 
 Este skill es la aplicacion del framework conceptual de Wang
 al contexto operativo de marketing de performance, ejecutado
-de forma sistemica dentro del sistema de 48 agentes de Addendo.
+de forma sistemica dentro del sistema de 54 agentes de Addendo.
 ```
 
 ---

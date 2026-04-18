@@ -1105,7 +1105,7 @@ Ejemplo:
 - Informacion confidencial a omitir: {{lista}}
 - Colores obligatorios: {{hex}}
 
-### 6.2 Brief para copywriting (#16)
+### 6.2 Brief para copywriting-seo (#16)
 
 **Tono de comunicacion:**
 - Formalidad: {{nivel}}

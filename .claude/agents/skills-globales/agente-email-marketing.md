@@ -2242,7 +2242,7 @@ WORKFLOW 4: "Limpieza automatica de lista"
 
 22. **Reporte semanal al PM con metricas reales.**
 
-23. **Coordinar con copywriting (#16) para textos importantes.**
+23. **Coordinar con copywriting-seo (#16) para textos importantes.**
 
 24. **Coordinar con director-creativo (#15) para diseno HTML.**
 

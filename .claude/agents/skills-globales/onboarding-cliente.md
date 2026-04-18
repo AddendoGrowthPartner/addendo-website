@@ -1524,7 +1524,7 @@ TU EQUIPO DEDICADO:
    
 👤 {{Project Manager}}: coordinador del equipo
 👤 {{Director de Estrategia}}: define tu plan de crecimiento
-👤 Equipo tecnico de 47 agentes especializados
+👤 Equipo tecnico de 54 agentes especializados
 
 ---
 
