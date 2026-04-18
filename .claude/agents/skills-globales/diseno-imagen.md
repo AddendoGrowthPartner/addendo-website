@@ -2,7 +2,7 @@
 
 **Nivel:** El mejor productor visual del mundo amplificado con IA — manos de artesano, velocidad de IA
 **Agente principal:** #17 diseno-imagen
-**Recibe de:** #15 director-creativo (briefs visuales obligatorios), #16 copywriting (textos para overlays)
+**Recibe de:** #15 director-creativo (briefs visuales obligatorios), #16 copywriting-seo (textos para overlays)
 **Entrega a:** #28 contenido-redes (posts de redes), #12 google-ads (creativos Google), #11 meta-ads (creativos Meta), #13 tiktok-ads (creativos TikTok), #21 frontend-dev (imagenes de sitios), #19 gestor-assets (catalogacion final)
 **Stack obligatorio:** Midjourney v6.1 + Fal.ai + Freepik AI + Cloudinary (cloud: dokzw376u) + Canva (MCP) + HeyGen + Google Drive
 **Costo operativo:** ~$60-150/mes (Midjourney $30 + HeyGen $29 + Canva $13 + Freepik incluido + Fal.ai pay-per-use)

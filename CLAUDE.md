@@ -171,7 +171,7 @@ Cuando Jose da una orden, seguir este proceso:
 
 ---
 
-## LOS 51 AGENTES DEL SISTEMA
+## LOS 54 AGENTES DEL SISTEMA
 
 ### CAPA 01 — ENTRADA
 | # | Agente | Skill |
@@ -251,6 +251,13 @@ Cuando Jose da una orden, seguir este proceso:
 | #45 | agente-deployment | `agente-deployment.md` |
 | #46 | agente-rp | `agente-rp.md` |
 
+### CAPA 09 — GOBERNANZA Y ESTRATEGIA DE CLIENTE
+| # | Agente | Skill |
+|---|--------|-------|
+| #52 | agente-legal | `agente-legal.md` |
+| #53 | agente-branding | `agente-branding.md` |
+| #54 | agente-estrategia-comercial | `agente-estrategia-comercial.md` |
+
 ### AGENTES ESPECIALES
 | # | Agente | Skill |
 |---|--------|-------|
@@ -260,7 +267,18 @@ Cuando Jose da una orden, seguir este proceso:
 | #50 | agente-constructor-workflows | `agente-constructor-workflows.md` |
 | #51 | agente-video-director | `agente-video-director.md` |
 
-**Total: 51 agentes** — todos los skills estan en `.claude/agents/skills-globales/`
+**Total: 54 agentes** — todos los skills estan en `.claude/agents/skills-globales/`
+
+### DETALLE CAPA 09 — GOBERNANZA Y ESTRATEGIA DE CLIENTE
+
+**#52 — agente-legal**
+Guardián regulatorio world-class. Revisa todo copy/marketing/contratos antes de publicación contra marcos CROA, FDUTPA, CSO Florida, FTC, TSR, TILA, UDAAP, GLBA y leyes aplicables. Puede BLOQUEAR publicación. 2977 líneas. Outputs por cliente en `/brand-briefs/` (revisión compliance) y `/strategy-docs/` (revisión estratégica).
+
+**#53 — agente-branding**
+Arquitecto de identidad visual world-class. Define paletas, tipografías, sistemas de diseño, brand briefs por cliente. Universal — aplica a cualquier industria. 2599 líneas. Outputs por cliente en `/brand-briefs/[cliente].md`.
+
+**#54 — agente-estrategia-comercial**
+Arquitecto de go-to-market world-class. Convierte brief macro en plan operativo por cliente: posicionamiento, buyer persona, customer journey, arquitectura de funnel, arquitectura de páginas web, plan GTM 90 días. Universal. 2910 líneas. Outputs por cliente en `/strategy-docs/[cliente].md`.
 
 ---
 
@@ -364,8 +382,10 @@ Consolidacion → agente-investigacion (#8)
 
 > "Nunca actuar sin contexto. Nunca improvisar sin skill. Nunca entregar sin verificar. La calidad de Addendo se construye con disciplina sistematica, no con velocidad sin metodo."
 
-El sistema de 51 agentes existe para que cada decision se tome con la misma rigurosidad que tomaria el mejor especialista del mundo en cada area. La forma de honrar ese diseño es **leyendo el skill, siguiendo el proceso, y respetando las dependencias entre agentes**.
+El sistema de 54 agentes existe para que cada decision se tome con la misma rigurosidad que tomaria el mejor especialista del mundo en cada area. La forma de honrar ese diseño es **leyendo el skill, siguiendo el proceso, y respetando las dependencias entre agentes**.
 
 ---
 
-*Sistema operativo de Addendo Growth Partner — 51 agentes especializados, 1 mision: ser la agencia mas automatizada de America Latina.*
+*Sistema operativo de Addendo Growth Partner — 54 agentes especializados, 1 mision: ser la agencia mas automatizada de America Latina.*
+
+*Última actualización: 18 de abril de 2026 — consolidación del sistema con Capa 09 (Gobernanza y Estrategia de Cliente).*

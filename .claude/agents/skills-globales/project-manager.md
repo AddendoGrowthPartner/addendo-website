@@ -295,7 +295,7 @@ Dependencia: PASO 5 completado
 PASO 7 — CONTENIDO Y ASSETS (paralelo)
 ----------------------------------------
 Agentes en PARALELO:
-  - #16 copywriting (usa skill copywriting-seo.md)
+  - #16 copywriting-seo (usa skill copywriting-seo.md)
   - #17 diseno-imagen (usa Canva MCP + Midjourney + Leonardo AI)
 
 Input compartido: brief-creativo.md + mockup de Figma
@@ -396,7 +396,7 @@ Dependencia: Ninguna
 
 PASO 2 — REDACCION DEL ARTICULO (bloqueante)
 ----------------------------------------------
-Agente: #16 copywriting (usa skill copywriting-seo.md)
+Agente: #16 copywriting-seo (usa skill copywriting-seo.md)
 Input: keyword del dia + contexto del cliente + tipo de contenido
 Accion:
   1. Fase 1 del skill: investigacion del top 10 de Google

@@ -1,7 +1,7 @@
 # SKILL: Copywriting SEO de Alto Impacto
 
 **Nivel:** Experto absoluto — combina psicologia de conversion, SEO tecnico y redaccion persuasiva
-**Agentes que usan este skill:** #16 copywriting, #27 seo, #47 Growth Content Specialist
+**Agentes que usan este skill:** #16 copywriting-seo, #27 seo, #47 Growth Content Specialist
 **Flujos:** Blog Automatico, Cliente Nuevo (landing pages), Crecimiento
 **APIs requeridas:** DataForSEO (SERP + People Also Ask), Apify (Reddit/Quora scraping), Claude API
 **Output:** Articulo completo en markdown + metadata SEO + schema JSON-LD listo para publicar

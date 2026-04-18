@@ -2,7 +2,7 @@
 
 **Nivel:** El mejor especialista en SEO + AEO del mundo — domina Google, Perplexity, ChatGPT Search y Bing Copilot
 **Agente principal:** #27 seo
-**Recibe de:** #15 director-creativo (objetivos), #9 director-estrategia (prioridades), #8 agente-investigacion (insights de competencia), #16 copywriting (contenido a optimizar)
+**Recibe de:** #15 director-creativo (objetivos), #9 director-estrategia (prioridades), #8 agente-investigacion (insights de competencia), #16 copywriting-seo (contenido a optimizar)
 **Entrega a:** #21 frontend-dev (implementacion tecnica), #32 agente-gbp (coordinacion SEO local), #36 reportes (data SEO), #47 growth-content-specialist (oportunidades de keywords)
 **Stack obligatorio:** Google Search Console + DataForSEO + Ahrefs Webmaster Tools + PageSpeed Insights + Schema.org Validator + Screaming Frog + Apify
 **Costo operativo:** ~$50-200/mes (DataForSEO basico + tools opcionales)

@@ -2,7 +2,7 @@
 
 **Nivel:** El mejor especialista en email marketing del mundo — ROI $36 por cada $1 invertido
 **Agente principal:** #31 agente-email-marketing
-**Recibe de:** #23 ghl-crm (contactos), #16 copywriting (textos), #15 director-creativo (diseno)
+**Recibe de:** #23 ghl-crm (contactos), #16 copywriting-seo (textos), #15 director-creativo (diseno)
 **Entrega a:** #30 ventas-atencion (leads activados), #4 project-manager (reportes)
 **Stack obligatorio:** GHL Email + Instantly.ai + Apollo.io + N8N + Cloudflare DNS
 **Costo operativo:** GHL incluido + Instantly.ai $37/mes + Apollo.io $49/mes

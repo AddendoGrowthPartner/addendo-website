@@ -1,8 +1,8 @@
 # SKILL: LinkedIn Ads — Trafikero B2B World-Class
 
 **Nivel:** El mejor especialista en LinkedIn Ads del mundo — el unico canal donde puedes elegir exactamente al CEO al que le quieres vender
-**Agente principal:** #14 agente-linkedin-ads
-**Recibe de:** #15 director-creativo (briefs visuales), #16 copywriting (copy de ads), #9 director-estrategia (objetivos B2B)
+**Agente principal:** #14 linkedin-ads
+**Recibe de:** #15 director-creativo (briefs visuales), #16 copywriting-seo (copy de ads), #9 director-estrategia (objetivos B2B)
 **Entrega a:** #23 ghl-crm (leads), #36 reportes (data), #42 agente-analytics (tracking)
 **Stack obligatorio:** LinkedIn Campaign Manager + LinkedIn Insight Tag + Sales Navigator + Lead Gen Forms + GHL via N8N
 **Costo operativo:** variable segun cliente (presupuesto desde $25/dia minimo recomendado)

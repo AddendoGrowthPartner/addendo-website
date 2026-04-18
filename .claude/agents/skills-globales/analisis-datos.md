@@ -1287,7 +1287,7 @@ Bajo. Si el cambio resulta peor de lo esperado, se puede revertir en 24 horas
 ajustando los bids back.
 
 ### ASIGNADO A
-google-ads (#10)
+google-ads (#12)
 
 ### PRIORIDAD
 P1 — implementar esta semana
@@ -1520,7 +1520,7 @@ Inversion inicial sin garantia de resultados inmediatos.
 Mitigacion: dividir en fases, validar con resultados de fase 1 antes de fase 2.
 
 ### ASIGNADO A
-director-estrategia (#9) + seo (#27) + google-ads (#10) + meta-ads (#11) + frontend-dev
+director-estrategia (#9) + seo (#27) + google-ads (#12) + meta-ads (#11) + frontend-dev
 
 ### PRIORIDAD
 P1 — presentar al cliente en proxima reunion

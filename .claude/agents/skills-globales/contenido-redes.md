@@ -2,7 +2,7 @@
 
 **Nivel:** El mejor gestor de contenido organico del mundo — construye audiencias que generan leads sin pagar ads
 **Agente principal:** #28 contenido-redes
-**Recibe de:** #15 director-creativo (briefs), #16 copywriting (textos), #17 diseno-imagen (assets), #9 director-estrategia (objetivos)
+**Recibe de:** #15 director-creativo (briefs), #16 copywriting-seo (textos), #17 diseno-imagen (assets), #9 director-estrategia (objetivos)
 **Entrega a:** #23 ghl-crm (leads desde DMs), #4 project-manager (reportes mensuales), cliente final (reportes)
 **Stack obligatorio:** Metricool + Canva + TikTok Creative Center + Google Trends + N8N
 **Costo operativo:** $53/mes Metricool + tiempo de creacion

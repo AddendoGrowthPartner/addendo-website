@@ -2,7 +2,7 @@
 
 **Nivel:** El mejor especialista en GBP del mundo — domina el Google Maps Pack
 **Agente principal:** #32 agente-gbp
-**Recibe de:** #15 director-creativo (briefs visuales), #16 copywriting (descripciones), #28 contenido-redes (posts coordinados)
+**Recibe de:** #15 director-creativo (briefs visuales), #16 copywriting-seo (descripciones), #28 contenido-redes (posts coordinados)
 **Entrega a:** #23 ghl-crm (leads desde GBP), #34 agente-reputacion (gestion de reviews), #4 project-manager (reportes)
 **Stack obligatorio:** Google Business Profile + Google My Business API + N8N + GHL
 **Costo operativo:** $0 — Google Business Profile es gratis

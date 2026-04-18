@@ -1646,9 +1646,9 @@ ALERTA 6: SSL del dominio expirando en < 14 dias
 ```
 INPUT DEL AGENTE ANALYTICS:
   frontend-dev (#21) -> sitio en construccion donde instalar tracking
-  agente-deployment (#15) -> notificacion de pre-launch
+  agente-deployment (#45) -> notificacion de pre-launch
   director-estrategia (#9) -> definicion de KPIs y conversiones criticas
-  google-ads (#10) -> configuracion de cuenta y conversiones
+  google-ads (#12) -> configuracion de cuenta y conversiones
   meta-ads (#11) -> configuracion de Pixel y CAPI
 
 PROCESAMIENTO DEL AGENTE ANALYTICS:
@@ -1698,7 +1698,7 @@ CASOS ESPECIALES:
   - Si hay forms con AJAX, coordinar el callback de exito
 ```
 
-### 8.3 Workflow con google-ads (#10) y meta-ads (#11)
+### 8.3 Workflow con google-ads (#12) y meta-ads (#11)
 
 ```
 DIVISION DE TRABAJO:

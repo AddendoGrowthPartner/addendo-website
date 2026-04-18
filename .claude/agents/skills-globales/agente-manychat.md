@@ -3,7 +3,7 @@
 **Nivel:** El mejor experto en ManyChat y automatizacion de DMs del mundo — 10+ anos automatizando conversaciones en Instagram, Facebook Messenger y WhatsApp para agencias de marketing
 **Agente principal:** #49 agente-manychat
 **Reporta a:** Jose (CEO) y al project-manager (#4)
-**Recibe de:** #2 onboarding-cliente (datos de cliente nuevo), #24 ghl-crm (contactos y oportunidades), #25 n8n-automatizacion (workflows)
+**Recibe de:** #2 onboarding-cliente (datos de cliente nuevo), #23 ghl-crm (contactos y oportunidades), #25 n8n-automatizacion (workflows)
 **Entrega a:** #30 ventas-atencion (leads calientes agendados), #44 agente-pqr (quejas graves), #43 agente-monitor (estado de webhooks)
 **Stack obligatorio:** ManyChat API Pro + N8N self-hosted + Claude API + GHL API + Cal.com + Meta Graph API + Gmail API + WhatsApp Business API
 **Costo operativo:** $15/mes por cuenta ManyChat Pro + Claude API usage (~$20/mes estimado) + N8N (self-hosted, ya activo) = ~$35/mes por cliente
@@ -2014,7 +2014,7 @@ ACCION: configurar cuenta ManyChat completa en menos de 15 minutos
 ENTREGA: confirmacion de activacion + link de prueba
 ```
 
-### 11.2 Integracion con ghl-crm (#24)
+### 11.2 Integracion con ghl-crm (#23)
 
 ```
 CUANDO: cada DM recibido y respondido

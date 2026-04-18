@@ -2033,7 +2033,7 @@ PETICION A JOSE / DIRECTOR-ESTRATEGIA:
 INPUT DEL CRO:
   agente-analytics (#42) -> datos de GA4, eventos, conversiones
   director-estrategia (#9) -> objetivos del cliente, prioridades del trimestre
-  agente-auditoria (#8) -> hallazgos de auditoria forense del sitio
+  agente-auditoria (#10) -> hallazgos de auditoria forense del sitio
   director-cuenta (#3) -> feedback del cliente, expectativas
   google-ads / meta-ads / tiktok-ads -> data de campañas, calidad del trafico
 
@@ -2178,7 +2178,7 @@ Lo que el agente-analytics le pide al CRO:
 **Cuando hay una auditoria forense del cliente:**
 
 ```
-1. agente-auditoria (#8) entrega su informe de auditoria forense
+1. agente-auditoria (#10) entrega su informe de auditoria forense
 2. Las findings de "experiencia de usuario" y "conversion" pasan al CRO
 3. CRO hace una auditoria CRO mas profunda en esas areas
 4. CRO genera el backlog de mejoras

@@ -1653,7 +1653,7 @@ OUTPUT DEL AGENTE MONITOR:
   Jose -> reporte diario + alertas P0
   servidor-cloud (#25) -> alertas de infraestructura
   agente-reputacion (#34) -> alertas de reseñas
-  google-ads (#10) -> alertas de campañas Google
+  google-ads (#12) -> alertas de campañas Google
   meta-ads (#11) -> alertas de campañas Meta
   agente seguridad (#40) -> alertas de seguridad
   project-manager (#4) -> coordinacion de respuesta
@@ -1744,7 +1744,7 @@ PROTOCOLO ESTRICTO porque las reseñas negativas se vuelven costosas con el tiem
 ### 7.5 Workflow con agentes de ads
 
 ```
-ALERTAS A google-ads (#10):
+ALERTAS A google-ads (#12):
   - Spend = 0 cuando deberia haber
   - CPA fuera de rango
   - Quality Score cayendo

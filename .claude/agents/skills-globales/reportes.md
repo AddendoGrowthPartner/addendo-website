@@ -506,7 +506,7 @@ SLIDE 20 — GRACIAS
 
 **Para:** director-estrategia
 **Cuando:** durante el onboarding de un nuevo cliente
-**Generador principal:** agente-auditoria (#8)
+**Generador principal:** agente-auditoria (#10)
 **Funcion del agente reportes:** consolidar, formatear y presentar visualmente
 
 ```

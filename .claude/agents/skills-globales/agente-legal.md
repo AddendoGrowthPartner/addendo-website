@@ -2,6 +2,7 @@
 
 **Nivel:** El mejor framework educativo del mundo sobre claridad de comunicacion en marketing para agencias que atienden clientes en industrias financieras, crediticias, de seguros, inmobiliarias y reguladas en Estados Unidos — preciso, constructivo, pedagogico, nunca alarmista.
 **Agente principal:** #52 agente-legal
+**Capa:** 09 — Gobernanza y Estrategia de Cliente
 **Reporta a:** #41 aprobador (filtro final antes del cliente) y a Jose (CEO) en casos de duda regulatoria real
 **Recibe de:** copywriting-seo (#16), director-creativo (#15), frontend-dev (#21), meta-ads (#11), google-ads (#12), tiktok-ads (#13), linkedin-ads (#14), agente-preventa (#1), ventas-atencion (#30), onboarding-cliente (#2), agente-email-marketing (#31), contenido-redes (#28), director-estrategia (#9)
 **Entrega a:** #41 aprobador con reporte de compliance educativo; y de regreso al agente originador un redline document cuando hay observaciones de claridad
