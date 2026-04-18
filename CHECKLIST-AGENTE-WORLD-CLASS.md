@@ -1,14 +1,16 @@
 # CHECKLIST DE AGENTE WORLD-CLASS ADDENDO
 
-**Versión 1.0 — 18 de abril de 2026**
+**Versión 1.1 — 18 de abril de 2026**
 **Basado en:** análisis comparativo de agentes #52 agente-legal, #53 agente-branding, #54 agente-estrategia-comercial (estándar de referencia)
 **Propósito:** vara de medir objetiva para auditar agentes existentes y nivelarlos al estándar world-class.
+
+**Changelog v1.1 (18 abril 2026):** Añadida Sección G — Multi-Idioma / Language-Agnostic (10 pts). Total pasa de 100 a 110 puntos. 3 idiomas oficiales: ES + EN + PT. Modo agnóstico para otros idiomas vía parámetro del brief.
 
 ---
 
 ## CÓMO USAR ESTE CHECKLIST
 
-Cualquier agente del sistema Addendo Agency OS que aspire al estándar world-class debe cumplir los criterios de las 6 secciones. Cada sección otorga puntos según cumplimiento. El agente final debe alcanzar mínimo 90/100 puntos.
+Cualquier agente del sistema Addendo Agency OS que aspire al estándar world-class debe cumplir los criterios de las 7 secciones. Cada sección otorga puntos según cumplimiento. El agente final debe alcanzar mínimo 95/110 puntos.
 
 Proceso estándar de nivelación:
 1. Auditoría: aplicar checklist al agente actual, calcular puntaje
@@ -115,13 +117,57 @@ Declaración de humildad frente a profesionales senior en proyectos multi-millon
 
 ---
 
-## PUNTAJE TOTAL: 100 puntos
+## SECCIÓN G — MULTI-IDIOMA / LANGUAGE-AGNOSTIC (10 puntos)
 
-**Clasificación:**
-- 90-100 puntos → World-Class (estándar #52, #53, #54)
-- 75-89 puntos → Bueno, requiere refinamiento
-- 60-74 puntos → Aceptable, requiere nivelación
-- Menos de 60 → Delgado, requiere reconstrucción
+Los agentes world-class del sistema Addendo deben estar diseñados para atender clientes en múltiples idiomas. Esta sección define el estándar.
+
+**Filosofía:** enfoque híbrido inteligente. Idiomas oficiales con profundidad nativa + modo agnóstico para cualquier otro idioma vía parámetro del brief + disclaimers honestos.
+
+**Idiomas oficiales del sistema Addendo (Abril 2026):**
+- Español (ES) — incluye variantes regionales: ES-MX, ES-ES, ES-AR, ES-CO, ES-CL
+- Inglés (EN) — incluye variantes: EN-US, EN-UK
+- Portugués (PT) — incluye variantes: PT-BR, PT-PT
+
+**Idiomas no-oficiales (cualquier otro):** se atienden vía parámetro del brief con disclaimer honesto y recomendación de revisor nativo para copy crítico.
+
+**G1 — Idiomas oficiales con profundidad** (4 pts)
+El agente tiene ejemplos reales, frameworks aplicados, catálogos y plantillas en los 3 idiomas oficiales (ES + EN + PT). No son traducciones del español — son ejemplos nativos en cada idioma.
+
+**G2 — Idioma como parámetro del brief** (2 pts)
+El agente reconoce explícitamente que el idioma del output viene especificado en el brief del cliente. NO asume español por default. Tiene sección explícita tipo "Al recibir el brief, identificar: idioma(s) objetivo del output + variante regional".
+
+**G3 — Modo agnóstico para idiomas no-oficiales** (2 pts)
+El agente tiene protocolo explícito para idiomas fuera de los 3 oficiales: usar conocimiento base del modelo Claude + disclaimer honesto en el output + escalación a revisor nativo humano cuando sea crítico. Debe haber sección tipo "Si el brief pide idioma no-oficial".
+
+**G4 — Diferencias regionales dentro de cada idioma** (2 pts)
+El agente sabe que ES-MX ≠ ES-ES ≠ ES-AR; EN-US ≠ EN-UK; PT-BR ≠ PT-PT. Y sabe cuándo importa (copywriting culturalmente relevante, SEO local, idioms, referencias culturales). Debe haber tabla o catálogo de diferencias regionales relevantes para su disciplina.
+
+**Evaluación:**
+- 4/4 criterios con profundidad = 10 pts (world-class multi-idioma)
+- 3/4 criterios = 7-8 pts (sólido, requiere refinamiento menor)
+- 2/4 criterios = 4-5 pts (básico, requiere expansión)
+- <2/4 = 0-3 pts (monolingüe o insuficiente, requiere reconstrucción de capa multi-idioma)
+
+---
+
+## PUNTAJE TOTAL: 110 puntos (6 secciones + Sección G nueva)
+
+**Distribución:**
+- Sección A (Estructura y Metadata): 20 pts
+- Sección B (Profundidad de Conocimiento): 30 pts
+- Sección C (Integración con Sistema): 20 pts
+- Sección D (Universalidad): 15 pts
+- Sección E (Limitaciones Honestas): 10 pts
+- Sección F (Calidad Editorial): 5 pts
+- Sección G (Multi-Idioma): 10 pts ← NUEVA
+
+**Clasificación actualizada:**
+- 95-110 puntos → World-Class (estándar #52, #53, #54 + multi-idioma nativo)
+- 82-94 puntos → Bueno, requiere refinamiento
+- 66-81 puntos → Aceptable, requiere nivelación
+- Menos de 66 → Delgado, requiere reconstrucción
+
+**Nota:** los agentes existentes #52, #53, #54 fueron auditados en la versión v1.0 del checklist (100 puntos). En versión v1.1 (con Sección G), el puntaje objetivo es 95+. Estos 3 agentes tienen deuda técnica de ~6-7 puntos en Sección G que se resolverá en una segunda ola de nivelación cuando terminen los 6 agentes críticos de la primera ola.
 
 ---
 
