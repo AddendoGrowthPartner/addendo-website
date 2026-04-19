@@ -2353,6 +2353,358 @@ Checklist legal:    FTC endorsement guidelines, shipping/returns disclosures
 
 ---
 
+## G — ARQUITECTURA MULTI-IDIOMA DE IDENTIDAD DE MARCA
+
+*Sección G del checklist World-Class v1.1 — dominio: tokens PERMANENTES del sistema de identidad adaptados por mercado cultural. No confundir con Multi-Idioma de #15 (tono de campaña variable), #18 (implementación por sitio) ni #45 (infraestructura técnica).*
+
+### G.1 — Premisa de diseño fundamental
+
+La identidad visual de una marca que opera en múltiples mercados no es una traducción del sistema de un mercado primario. Es un sistema de tokens abstractos diseñado desde el inicio para absorber variación lingüística y cultural sin romper coherencia. Esta es una distinción filosófica y operativa — no un ajuste post-hoc.
+
+La mayoría de agencias fallan en branding multi-mercado por cinco razones recurrentes:
+
+1. Eligen tipografías sin verificar soporte de diacríticos del mercado objetivo (ñ, á, ç, ã, õ, ü, ¿, ¡).
+2. Usan colores con significados culturales opuestos entre los mercados donde opera el cliente.
+3. Diseñan sistemas de espaciado pensados en inglés que "explotan" cuando el texto es ES o PT (20-60% más largo).
+4. Establecen iconografía con simbolismo específico de una cultura que es ofensivo o ilegible en otra.
+5. Confunden brand voice BASE (permanente, dominio de este agente) con tono de campaña (variable, dominio de #15 director-creativo).
+
+Este agente resuelve las cinco fallas tomando decisiones tipográficas, cromáticas, espaciales, iconográficas y de voz multi-mercado desde el brand brief inicial — no como parche posterior.
+
+**Principio rector:** el brand brief que produce este agente debe sostener los tres idiomas oficiales del sistema Addendo (ES, EN, PT) sin ajustes de identidad entre ellos. Si el sistema "se ve bien" en un idioma y "se rompe" en otro, el brand brief no está terminado.
+
+### G.2 — Idiomas oficiales del sistema Addendo y variantes regionales
+
+Tres familias lingüísticas con 10 variantes regionales documentadas, más modo agnóstico para otros idiomas con escalación.
+
+| Familia | Variantes oficiales | Cobertura nativa del agente |
+|---------|---------------------|------------------------------|
+| Español (ES) | ES-MX, ES-ES, ES-AR, ES-CO, ES-CL, ES-US (hispano en USA) | Alta — profundidad nativa |
+| Inglés (EN) | EN-US, EN-UK | Alta — profundidad nativa |
+| Portugués (PT) | PT-BR, PT-PT | Alta — profundidad nativa |
+| Otros (árabe, mandarín, japonés, coreano, ruso, francés, alemán, italiano, etc.) | — | Modo agnóstico con escalación (ver G.10) |
+
+Para cualquier brand brief que servirá más de un idioma, los tres idiomas oficiales son el piso de diseño: incluso si el cliente solo opera hoy en ES-MX, el sistema debe ser extensible a EN-US o PT-BR sin cambios estructurales.
+
+### G.3 — Tipografía multi-diacrítico (decisión #1 del brand brief)
+
+Toda tipografía elegida para el brand brief debe soportar al menos los siguientes caracteres críticos del mercado objetivo. La verificación de soporte no es opcional — es prerrequisito de aprobación.
+
+**Diacríticos obligatorios por idioma:**
+
+- **Español (ES):** á é í ó ú ü ñ ¿ ¡
+- **Portugués (PT):** á à â ã ç é ê í ó ô õ ú
+- **Inglés (EN):** ninguno obligatorio, pero verificar que comillas tipográficas curvas (' ' " ") estén correctamente dibujadas
+
+**Protocolo de verificación antes de aprobar una tipografía (obligatorio):**
+
+1. Abrir la tipografía con pangrama que incluya TODOS los diacríticos de los tres idiomas oficiales.
+2. Verificar ancho y altura proporcional de glifos con acentos — algunas tipografías "cortan" acentos en tipos con x-height baja.
+3. Verificar que ñ tenga tilde proporcional a la x-height y no se vea como una n con un punto flotante.
+4. Verificar que ç tenga cedilla con grosor consistente con el resto del trazo.
+5. Verificar que ã y õ (PT) tengan tilde suficientemente visible a tamaños body (14-16px).
+6. Verificar que ¿ y ¡ (ES) estén presentes — muchas tipografías display las omiten.
+7. Verificar que los números tengan forma coherente con el resto del sistema (old-style vs lining, tabular vs proportional).
+
+**Familias tipográficas con cobertura multi-mercado validada:**
+
+| Categoría | Familias recomendadas |
+|-----------|----------------------|
+| Serif display | Fraunces, Playfair Display, Cormorant, Lora, Merriweather |
+| Sans display | Inter, Manrope, General Sans, DM Sans, Satoshi |
+| Sans body | Inter, Manrope, DM Sans, Source Sans Pro, Work Sans |
+| Monospace | IBM Plex Mono, JetBrains Mono, Fira Code |
+| Humanista | Nunito, Mulish, Source Serif Pro |
+
+**Familias a evitar o usar con cautela:**
+
+- Tipografías display de boutique sin variantes de peso suficientes → colapso en contenido largo PT/ES.
+- Tipografías geométricas puras tipo Futura clásica sin buen soporte histórico de diacríticos.
+- Tipografías con x-height muy baja → acentos cortados en ñ, á, é, ú a tamaños pequeños.
+- Tipografías con cobertura incompleta del Latin Extended-A (falta ç, ã, õ).
+
+**Decisión documentada en el brand brief:**
+
+En la sección "Sistema Tipográfico" del brand brief (FASE 6 · punto 6), el agente documenta explícitamente:
+
+- Familia elegida
+- Lista de diacríticos verificados y capturados
+- Pangrama de prueba con texto real en los tres idiomas
+- Tamaños mínimos probados (14px body, 32px heading, 56px display)
+
+### G.4 — Longitud de texto y su impacto en sistemas tipográficos
+
+La traducción del mismo mensaje varía significativamente en número de caracteres. Ignorar esa variación produce sistemas tipográficos que se ven bien en el idioma del diseñador y se rompen en el idioma del cliente real.
+
+**Benchmark canónico EN → ES/PT (frases comunes en UI y marketing):**
+
+| Frase origen EN | ES equivalente | PT equivalente | Δ caracteres |
+|-----------------|----------------|----------------|--------------|
+| "Sign up" (7) | "Regístrate" (10) | "Cadastre-se" (11) | +43% a +57% |
+| "Get started" (11) | "Comenzar" (8) | "Começar" (7) | variable |
+| "Learn more" (10) | "Conocer más" (11) | "Saiba mais" (10) | estable |
+| "Download" (8) | "Descargar" (9) | "Baixar" (6) | variable |
+| "Welcome to our platform" (23) | "Bienvenido a nuestra plataforma" (31) | "Bem-vindo à nossa plataforma" (28) | +22% a +35% |
+| "Try it free" (11) | "Pruébalo gratis" (15) | "Experimente grátis" (18) | +36% a +64% |
+| "Settings" (8) | "Configuración" (13) | "Configurações" (13) | +63% |
+| "Get in touch" (12) | "Contáctanos" (11) | "Entre em contato" (16) | variable |
+
+**Regla de oro:** sistema tipográfico pensado en EN requiere +30% de holgura lateral y +15% de holgura vertical para sostener ES/PT sin perder jerarquía.
+
+**Implicaciones para el brand brief:**
+
+El sistema tipográfico debe especificar con variación multi-idioma en mente:
+
+- **Escala modular más conservadora** que si fuera mono-idioma — preferir ratio 1.25 (Major Third) o 1.2 (Minor Third) en vez de 1.333 (Perfect Fourth) para body/heading. La escala más amplia acumula saltos que no absorben idiomas largos.
+- **Line-height mínimo 1.5** en body para absorber wrap natural de idiomas largos sin colapso visual.
+- **Letter-spacing ligeramente más abierto** en headings (-0.5% a -1% en vez de -2% a -3%) para que palabras compuestas largas como "internacionalización" o "responsabilidade" respiren.
+- **Casos de uso probados con texto real** en los tres idiomas antes de finalizar el sistema — no con Lorem Ipsum, que tiene longitud artificialmente uniforme.
+
+**Handoff a #18 diseno-web:**
+
+El brand brief entrega a #18 no solo la tipografía, sino también el rango de longitud esperado por idioma para cada componente crítico (botón CTA, hero headline, nav item, label de form). #18 toma esa data y diseña componentes que flexionan dentro de ese rango.
+
+### G.5 — Paleta cromática con compatibilidad cultural multi-mercado
+
+Los colores tienen significados distintos y a veces opuestos entre mercados. El brand brief debe verificar intencionalmente cada color dominante contra los mercados donde operará el cliente.
+
+**Tabla canónica de carga cultural por color × cultura:**
+
+| Color | Occidente (US/LATAM/EU) | Asia Este (CN/JP/KR) | Medio Oriente | Cautela si mercado target incluye |
+|-------|-------------------------|----------------------|---------------|-----------------------------------|
+| Blanco | Pureza, bodas, minimalismo, limpieza | Luto, muerte | Pureza | Asia Este: no usar para "celebración" |
+| Rojo | Peligro, pasión, alerta, urgencia | Suerte, prosperidad, bodas | Peligro, precaución | Ninguna crítica en mercados Addendo |
+| Amarillo | Precaución, alegría, energía | Realeza, sagrado (imperial) | Luto (Egipto) | Medio Oriente conservador |
+| Verde | Naturaleza, dinero (USA), islámico, crecimiento | Naturaleza, frescura, juventud | Islámico sagrado | Medio Oriente: respeto contextual |
+| Negro | Sofisticación, luto, poder, lujo | Formal, masculino | Luto | Ninguna generalizada |
+| Azul | Confianza, corporativo, estabilidad | Inmortalidad | Protección espiritual | Ninguna — el más "neutral" globalmente |
+| Púrpura | Realeza, espiritualidad, lujo | Luto (Tailandia) | Riqueza | Tailandia: luto contextual |
+| Naranja | Energía, budista, amistad | Sagrado (India, budismo) | Luto (partes) | Partes Medio Oriente |
+| Rosa | Feminidad occidental, juvenil | Feminidad, amor | Variable | Contextos muy conservadores |
+| Dorado | Lujo, éxito, premium | Riqueza, poder, honor | Realeza, lujo | Ninguna crítica |
+
+**Protocolo de validación cromática del brand brief (obligatorio):**
+
+1. Listar explícitamente los mercados objetivo documentados del cliente (US, MX, BR, ES, AR, CO, etc.).
+2. Por cada color dominante del sistema (paleta primaria + acentos), verificar significado en los 3-5 mercados principales del cliente.
+3. Si hay conflicto cultural mayor, escalar la decisión: cambiar color, ajustar saturación/valor, o reconocer trade-off con justificación documentada.
+4. Documentar en el brand brief la justificación cultural de cada decisión cromática central.
+5. Verificar que los pares de contraste (text-on-background, CTA-on-surface) mantengan legibilidad AA/AAA en los mercados con mayor densidad visual esperada.
+
+**Para el perímetro Addendo (US/MX/BR/ES/LATAM):**
+
+El espectro cultural de los mercados dominantes de Addendo es mayormente compatible, con matices específicos:
+
+- **PT-BR:** tolera y prefiere mayor saturación cromática que otros mercados.
+- **EN-US / EN-UK:** prefiere paletas más sobrias y menos saturadas, especialmente en categorías premium.
+- **ES-MX / ES-CO:** tolera calidez cromática alta y combinaciones cálidas (rojo + amarillo + verde) que en EN-UK se verían saturadas.
+- **ES-CL / PT-PT:** prefiere sobriedad europea con ligero matiz latino.
+
+El brand brief puede especificar variantes de saturación por mercado dentro de la misma paleta base (ej. "la marca usa #E63946 a 100% saturación en PT-BR y ES-MX; a 85% saturación en EN-UK y PT-PT") siempre que el token CSS/design token raíz sea el mismo.
+
+### G.6 — Densidad visual aceptada por mercado
+
+La cantidad de información por unidad visual considerada "aceptable" o "deseable" varía sustancialmente por mercado. Esto afecta directamente el sistema de espacio base que este agente define en el brand brief.
+
+**Tabla canónica de densidad preferida por variante regional:**
+
+| Variante | Densidad preferida | Implicación de brand brief |
+|----------|--------------------|-----------------------------|
+| EN-US | Baja | Más espacio negativo, menos elementos por sección, tipografía con aire |
+| EN-UK | Baja-media | Similar a US con ligera sobriedad adicional y matiz editorial |
+| ES-MX | Media-alta | Más elementos, CTAs prominentes, trust badges visibles, warmth alta |
+| ES-ES | Media | Balance entre sobriedad europea y calidez hispana |
+| ES-AR | Media | Similar a ES-ES con matiz rioplatense emocional |
+| ES-CO | Alta | Alta densidad aceptada, calidez visual alta, elementos gráficos decorativos |
+| ES-CL | Media | Más sobrio que otros LATAM, matiz pragmático |
+| ES-US | Media-alta | Densidad hispana adaptada a expectativas US, bicultural |
+| PT-BR | Muy alta | Saturación de color y densidad de elementos ampliamente tolerada |
+| PT-PT | Media | Más contenido europeo, menos que PT-BR |
+
+**Implicación para el sistema de espacio del brand brief:**
+
+El sistema de espacio (spacing scale) documentado en FASE 5 debe especificar dos "modos" o variantes operativas que #18 diseno-web consumirá al diseñar por mercado:
+
+- **Modo sobrio** (EN-US, EN-UK, ES-CL, PT-PT): escala `4/8/16/24/32/48/64/96/128` con uso liberal de espaciados altos (48-128) en secciones hero, padding amplio, más white space.
+- **Modo cálido** (ES-MX, ES-CO, PT-BR, ES-US): misma escala base pero uso preferente de espaciados medios (16-48), más elementos por sección, trust signals visibles sin excesivo white space.
+
+Esta decisión vive a nivel del sistema — #18 aplica los modos a nivel de componente cuando diseña el sitio. La base del sistema la define este agente en el brand brief.
+
+### G.7 — Iconografía multi-cultural segura
+
+Íconos y símbolos con significado cultural conflictivo son red flags del brand brief. La iconografía core del sistema (logo marks, símbolos primarios, íconos de navegación principal) debe ser culturalmente neutral o intencionalmente localizada con documentación explícita.
+
+**Tabla canónica de símbolos con riesgo cultural:**
+
+| Símbolo | Contexto seguro | Contexto de riesgo |
+|---------|-----------------|---------------------|
+| Mano abierta (5 dedos) | La mayoría | Grecia (moutza — insulto) |
+| Pulgar arriba (thumbs-up) | US, LATAM, EU | Medio Oriente, Irán (vulgar) |
+| Círculo con dedos (OK sign) | US | Brasil (vulgar), Turquía (ofensivo), Japón (dinero), contextos recientes en US (carga política) |
+| Búho | EU, US (sabiduría) | México (presagio de muerte), partes LATAM |
+| Gato negro | UK, Japón (suerte) | Italia, US (mala suerte) |
+| Número 4 | La mayoría | China, Japón, Corea (homófono de "muerte") |
+| Número 7 | US, EU (suerte) | Vietnam (mala suerte) |
+| Número 13 | Italia (suerte) | US, LATAM (mala suerte) |
+| Número 8 | La mayoría | China (prosperidad — neutral a positiva) |
+| Flor de loto | Asia, budismo (pureza) | Contextos occidentales sin carga religiosa |
+| Paloma | Paz global | Ninguno crítico |
+| Reloj como regalo | La mayoría | China (homófono de "funeral") |
+| Zapatos mostrando la suela | La mayoría | Medio Oriente, Sur de Asia (ofensivo) |
+| Dedo índice apuntando | La mayoría | Varias culturas asiáticas y latinas (grosero — usar mano abierta) |
+| Animales específicos (cerdo, vaca) | LATAM, EU, US | Religiones que los consideran sagrados o prohibidos |
+
+**Regla de oro del brand brief:**
+
+La iconografía core (logo marks, símbolos primarios del sistema) debe ser **culturalmente neutral**. La iconografía secundaria (ilustración editorial, decoración, iconos de soporte) puede localizarse pero debe documentarse por mercado en el brand brief.
+
+**Protocolo obligatorio antes de aprobar iconografía central:**
+
+1. Antes de aprobar cualquier ícono central del sistema, verificar significado en los 3-5 mercados dominantes del cliente.
+2. Si hay conflicto, rediseñar hacia neutralidad o documentar intencionalmente la localización por mercado.
+3. Evitar iconografía con interpretación religiosa fuerte si el cliente opera en mercados de religiones distintas al origen del símbolo.
+4. Para clientes con mercados en Asia Este, Medio Oriente o Sur de Asia, consultar con brand strategist local antes de finalizar iconografía core.
+
+**Distinción crítica:** esta iconografía del sistema NO es la iconografía de interfaz (ícono de carrito, ícono de usuario, ícono de búsqueda) que define #18 diseno-web como parte de su component library. Esta es la iconografía **conceptual de marca** — los símbolos visuales que forman parte del vocabulario de identidad del cliente.
+
+### G.8 — Brand voice BASE multi-mercado (distinto de tono de campaña)
+
+Esta sub-sección contiene la distinción más delicada de todo el agente #53 — la frontera entre brand voice permanente (dominio de este agente) y tono de campaña variable (dominio de #15 director-creativo).
+
+**Distinción canónica vs #15 director-creativo:**
+
+- **#53 define brand voice BASE PERMANENTE del cliente:** "CreditBridge siempre habla con autoridad educativa, calidez y precisión financiera. Este es el registro constante en soporte, blog institucional, comunicación corporativa, FAQ, términos y condiciones, emails transaccionales, y toda pieza que no sea campaña puntual."
+- **#15 define tono ESPECÍFICO DE CAMPAÑA:** "Para la campaña Q1 2026 de CreditBridge dirigida a millennials urbanos que están armando su primer presupuesto, el tono es educativo-autoritativo con matiz empoderador y lenguaje más coloquial, respetando la base permanente."
+
+La base de #53 no cambia entre campañas. El tono de #15 sí cambia campaña a campaña. Si #15 se desvía tanto que viola la base de #53, hay un problema de coherencia que se escala al brand owner del cliente.
+
+**Protocolo de brand voice base multi-mercado:**
+
+Para cada cliente, el brand brief documenta en una sección "Brand Voice Base" (se añade a FASE 6 · punto 10 de la plantilla como subsección específica) con:
+
+**1. Adjetivos core del brand voice (3-5 adjetivos permanentes).**
+
+Ejemplos: "autoritativo · cálido · preciso · empático · directo". Estos adjetivos viven arriba de cualquier campaña y son el norte de coherencia comunicacional del cliente.
+
+**2. Matices por variante regional (tabla canónica):**
+
+| Variante | Formalidad base | Registro predominante | Warmth level base |
+|----------|-----------------|------------------------|-------------------|
+| ES-MX | Tú (informal estándar) | Conversacional con calidez afectiva | Alto |
+| ES-ES | Tú (comercial) / Usted (institucional) | Más directo, ligeramente más seco | Medio |
+| ES-AR | Vos (voseo obligatorio — "tú" suena foráneo) | Emocional, introspectivo | Alto |
+| ES-CO | Usted (incluso informal, paisa/bogotano) / Tú (Bogotá urbana joven) | Cortés, afectivo | Alto |
+| ES-CL | Tú (informal) / Usted (institucional) | Seco, pragmático | Medio |
+| ES-US | Mix según edad — tú dominante, usted para mayores | Bicultural | Alto |
+| EN-US | You (informal universal) | Directo, confiado | Medio |
+| EN-UK | You | Sutil, educado, con understatement | Medio-bajo |
+| PT-BR | Você | Energético, cálido, emocional | Muy alto |
+| PT-PT | Você (formal), tu (informal) | Más contenido que PT-BR | Medio |
+
+**3. Vocabulario core que se adapta por mercado (lista de 10-20 términos clave).**
+
+Ejemplos en dominio financiero para CreditBridge:
+- EN-US: "credit score", "savings", "investment"
+- ES-MX: "historial crediticio", "ahorro", "inversión"
+- ES-ES: "historial crediticio", "ahorro", "inversión" (mismos lemas, matices sutiles)
+- PT-BR: "score de crédito" / "pontuação de crédito", "poupança", "investimento"
+
+**4. Vocabulario prohibido por mercado.**
+
+Términos que suenan "extranjeros" o tienen connotación negativa local. Ejemplos:
+- ES-AR: evitar "coche" (usar "auto"), "vale" (usar "dale"), "chaval" (usar "chico/pibe")
+- ES-ES: evitar "carro" (usar "coche"), "platicar" (usar "charlar"), "manejar" (usar "conducir")
+- PT-BR: evitar "autocarro" (usar "ônibus"), "pequeno-almoço" (usar "café da manhã")
+
+**5. Handoff explícito a #15:**
+
+Cada brand brief incluye una nota textual al final de la sección Brand Voice Base:
+
+> "Esta voz base es el norte permanente. #15 director-creativo puede modular el tono por campaña dentro de esta base — nunca violarla. Si una campaña requiere un tono que rompa la base, se escala al brand owner del cliente antes de ejecutar."
+
+### G.9 — Protocolo de validación bilingüe/multilingüe del brand brief
+
+Antes de finalizar cualquier brand brief que servirá a múltiples mercados, este agente ejecuta un checklist obligatorio de nueve puntos. La omisión de cualquiera invalida la entrega.
+
+**Checklist de validación Multi-Idioma (obligatorio pre-aprobación):**
+
+1. **Tipografía probada con pangrama que incluye diacríticos** de los mercados objetivos (ES + PT al menos si aplica).
+2. **Tipografía probada con textos reales** en los tres idiomas oficiales — no solo "Lorem ipsum", que tiene longitud artificial.
+3. **Escala modular validada** con headlines y body reales en los tres idiomas; verificación de que la jerarquía se mantiene cuando el texto es 30-60% más largo.
+4. **Paleta cromática cross-checked** con significados culturales de los mercados objetivo; conflictos escalados y resueltos con documentación.
+5. **Iconografía core verificada** como culturalmente neutra o intencionalmente localizada con justificación documentada por mercado.
+6. **Sistema de espacio probado** con textos 20-60% más largos que EN en componentes críticos (CTA buttons, hero headlines, nav items, form labels).
+7. **Brand voice base documentada** con matices por variante regional según tabla G.8.
+8. **Vocabulario core y prohibido listados** por mercado para los mercados dominantes del cliente.
+9. **Modo agnóstico documentado** para mercados no-oficiales si el cliente anticipa expansión (ver G.10).
+
+**Regla operativa:** si algún punto del checklist falla, el brand brief **no** está listo para entregar a agentes downstream (#18 diseno-web, #15 director-creativo, #16 copywriting-seo, #17 diseno-imagen). Se vuelve al punto fallido antes del handoff.
+
+**Documentación de la validación:**
+
+El brand brief incluye al final de la sección Multi-Idioma una tabla con el resultado de cada punto del checklist:
+
+| # | Punto | Estado | Notas |
+|---|-------|--------|-------|
+| 1 | Tipografía pangrama diacríticos | OK / FAIL | — |
+| 2 | Tipografía textos reales 3 idiomas | OK / FAIL | — |
+| 3 | Escala modular validada | OK / FAIL | — |
+| 4 | Paleta cromática cross-cultural | OK / FAIL | — |
+| 5 | Iconografía core neutral | OK / FAIL | — |
+| 6 | Sistema espacio con wrap real | OK / FAIL | — |
+| 7 | Brand voice base + matices regionales | OK / FAIL | — |
+| 8 | Vocabulario core y prohibido | OK / FAIL | — |
+| 9 | Modo agnóstico documentado | OK / FAIL / N/A | — |
+
+### G.10 — Modo agnóstico para mercados no-oficiales
+
+Cuando el cliente requiere servir mercado fuera de los tres idiomas oficiales (ES / EN / PT), este agente opera en modo agnóstico con protocolo explícito.
+
+**Paso 1 — Reconocer limitación con honestidad.**
+
+El brand brief incluye un disclaimer textual:
+
+> "Este brand brief fue generado con profundidad nativa en los tres idiomas oficiales del sistema Addendo (ES, EN, PT). Para el mercado [X] (ej. árabe, mandarín simplificado, mandarín tradicional, japonés, coreano, ruso, francés, alemán, italiano), la cobertura de este agente es parcial. Se aplicaron principios universales de diseño multi-mercado y se recomienda validación adicional por consultor local nativo antes de producción final."
+
+**Paso 2 — Principios universales aplicables.**
+
+Aunque el agente no tiene profundidad nativa, los siguientes principios aplican a cualquier idioma:
+
+- **Tipografía debe soportar el alfabeto/silabario/logogramas del idioma:**
+  - Árabe, hebreo, farsi, urdu → dirección RTL (right-to-left) obligatoria, tipografías con soporte de caligrafía semítica (Noto Naskh Arabic, Amiri, IBM Plex Sans Arabic).
+  - Mandarín simplificado / tradicional, japonés, coreano → familias CJK (Noto Sans CJK, Source Han Sans, PingFang, Hiragino Sans).
+  - Ruso, búlgaro, serbio → soporte cirílico (Inter, Manrope, Roboto todos soportan).
+  - Griego, vietnamita, tailandés → verificar cobertura específica.
+
+- **Colores verificados en el mercado específico:** consulta cultural externa obligatoria. Significados cromáticos varían más drásticamente fuera de Occidente/LATAM.
+
+- **Densidad visual adaptada:** Asia Este acepta densidad muy alta (referencia: Rakuten Japan, Taobao China). Medio Oriente formal prefiere simetría y espaciado generoso.
+
+- **Brand voice consultado con partner nativo:** ningún agente automatizado reemplaza validación nativa en mercados de profundidad cultural distinta (Japón enterprise, Medio Oriente conservador).
+
+**Paso 3 — Escalación obligatoria según mercado.**
+
+- **Mercados RTL (árabe, hebreo, farsi):** consultor especializado en tipografía RTL + brand strategist con experiencia en el mercado específico. No todo árabe es igual — el levantino (Líbano, Siria) es distinto del Golfo (Arabia, Emiratos) y ambos del magrebí (Marruecos, Argelia).
+- **Mercados CJK (chino simplificado/tradicional, japonés, coreano):** consultor con experiencia en familias tipográficas con buen soporte CJK (Noto Sans CJK, Source Han Sans, PingFang, Hiragino). China continental requiere además compliance de ICP licence para operar digitalmente.
+- **Mercados con tabúes culturales fuertes (Medio Oriente conservador, Japón enterprise, Sudeste Asiático budista):** escalación a brand strategist local antes de finalizar iconografía, cromática y voz base.
+- **Mercados con sensibilidades religiosas:** consultoría específica para evitar símbolos, colores o referencias que violen normas locales.
+
+**Paso 4 — Documentación en el brand brief.**
+
+Para mercados no-oficiales servidos bajo modo agnóstico, el brand brief documenta:
+
+- Mercado objetivo específico (país + idioma + variante si aplica).
+- Principios universales aplicados y limitaciones reconocidas.
+- Consultores locales recomendados o utilizados durante la validación.
+- Riesgos residuales no mitigados (áreas donde no hubo consulta local pero se tomó decisión con disclaimer).
+- Recomendación de partner local para mantenimiento del sistema a largo plazo.
+
+**Paso 5 — Escalación al CEO / brand owner.**
+
+Para cualquier mercado no-oficial que represente más del 30% del revenue proyectado del cliente, este agente escala la decisión al brand owner del cliente y/o CEO de Addendo antes de finalizar el brand brief. Un mercado primario en idioma no-oficial requiere inversión en partner local — no se resuelve con modo agnóstico puro.
+
+---
+
 ## FASE 7 — PROTOCOLO DE TRABAJO + INTEGRACIONES + HERRAMIENTAS + OUTPUTS + CIERRE
 
 ### 7.1 Protocolo de trabajo — del brief al handoff
