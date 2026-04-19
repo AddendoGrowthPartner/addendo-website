@@ -2615,6 +2615,397 @@ agente-analytics (#42) y agente-reportes (#36).
 
 ---
 
+## G — ARQUITECTURA MULTI-IDIOMA DE ESTRATEGIA COMERCIAL OPERATIVA
+
+*Sección G del checklist World-Class v1.1 — dominio: estrategia comercial OPERATIVA adaptada por mercado (positioning por mercado, buyer persona 12D con variante regional, customer journey con touchpoints culturales, funnel operativo con CTAs transcreados, sitemap bilingüe/multilingüe, GTM 90 días por ciclos comerciales locales). No confundir con Multi-Idioma de #9 director-estrategia (MACRO: canales y presupuestos agregados), #53 agente-branding (IDENTITARIO: tokens visuales permanentes), #15 director-creativo (CULTURAL: tono de campaña variable), #18 diseno-web (IMPLEMENTATIVO: layouts por sitio) ni #45 agente-deployment (TÉCNICO: infraestructura).*
+
+### G.1 — Premisa estratégica fundamental
+
+La estrategia comercial de una marca que opera en múltiples mercados no es una traducción del plan del mercado primario. Es un sistema de decisiones estratégicas adaptadas a realidades culturales, regulatorias, económicas y de comportamiento de compra sustancialmente distintas en cada mercado. Traducir literalmente el strategy doc produce un plan que es técnicamente correcto y estratégicamente equivocado para el mercado específico.
+
+La mayoría de agencias fallan en estrategia multi-mercado por seis razones recurrentes:
+
+1. Traducen el positioning statement literalmente — pierde impacto, suena forzado, deja de diferenciar en el mercado target.
+2. Clonan el buyer persona del mercado primario asumiendo que "un millennial profesional es igual en todas partes" — ignoran que el proceso de decisión, los canales de consulta y las objeciones típicas varían dramáticamente.
+3. Mantienen el mismo customer journey sin reconocer que LATAM usa WhatsApp como canal primario de consideration y US usa email formal como canal dominante.
+4. Replican el funnel con CTAs que no convierten en otro mercado ("Book a demo" no es equivalente a "Agendar una llamada" ni a "Reservá tu demo" en términos de conversión local).
+5. Mantienen el mismo sitemap sin considerar hreflang, estructura bilingüe o URLs localizadas que afectan directamente SEO y UX.
+6. Usan el mismo GTM 90 días ignorando que los ciclos comerciales son distintos: Q4 es pico en US pero Enero post-Reyes es valle en LATAM; Hot Sale (Mayo) es el Black Friday argentino; Carnaval en Brasil pausa el ciclo comercial por 2 semanas.
+
+Este agente resuelve las seis fallas tomando decisiones estratégicas adaptadas por mercado desde el strategy doc inicial — no como ajuste posterior cuando las campañas ya están en mercado y el cliente se queja del CAC.
+
+**Principio rector:** el strategy doc que produce este agente debe sostener los tres idiomas oficiales del sistema Addendo (ES, EN, PT) con decisiones específicas por mercado — no con un plan genérico que "aplica a todos". Si dos mercados aparecen con las mismas decisiones estratégicas sin justificación documentada de equivalencia, el strategy doc no está terminado.
+
+### G.2 — Idiomas oficiales del sistema Addendo y variantes regionales
+
+Tres familias lingüísticas con 10 variantes regionales documentadas, consistente con el resto del sistema Addendo:
+
+| Familia | Variantes oficiales | Cobertura nativa del agente |
+|---------|---------------------|------------------------------|
+| Español (ES) | ES-MX, ES-ES, ES-AR, ES-CO, ES-CL, ES-US (hispano en USA) | Alta — profundidad nativa con calendario comercial documentado |
+| Inglés (EN) | EN-US, EN-UK | Alta — profundidad nativa con benchmarks de CAC/ROAS |
+| Portugués (PT) | PT-BR, PT-PT | Alta — profundidad nativa con Pix y Carnaval integrados |
+| Otros | — | Modo agnóstico con escalación obligatoria (ver G.10) |
+
+Para cualquier strategy doc que servirá más de un mercado, el agente documenta explícitamente cuáles variantes se atienden con profundidad nativa y cuáles (si aplica) bajo modo agnóstico.
+
+### G.3 — Positioning statement adaptado por mercado cultural
+
+El positioning statement es el ADN estratégico del cliente. No se traduce literal — se adapta culturalmente preservando la esencia competitiva.
+
+**Estructura canónica del positioning (4 componentes universales):**
+
+1. **Target** — para quién es
+2. **Frame of reference** — contra qué se mide
+3. **Point of difference** — qué es único
+4. **Reason to believe** — por qué creerlo
+
+Los 4 componentes son universales. Lo que cambia por mercado es cómo cada uno se articula, el tono con que se comunica, y el frame of reference preferido en cada cultura.
+
+**Tabla de adaptación del positioning por variante regional:**
+
+| Dimensión | ES-MX | ES-ES | ES-AR | ES-CO | ES-CL | ES-US | EN-US | EN-UK | PT-BR | PT-PT |
+|-----------|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|
+| Tono del statement | Cálido + directo | Sofisticado + racional | Emocional + irónico | Cortés + cálido | Seco + pragmático | Bicultural aspiracional | Directo + confiado | Sutil + educado | Energético + emocional | Contenido + elegante |
+| Frame of reference preferido | Familia y comunidad | Innovación/ventaja competitiva | Transformación personal | Cuidado y atención | Valor y eficiencia | Aspiración American Dream bicultural | Productividad y ROI | Calidad y craft heritage | Energía y alegría | Tradición y patrimonio |
+| Formato del RTB | Testimonios familiares | Casos de estudio + datos | Historias personales | Reviews + reputación local | Datos duros + comparativa | Bicultural + bilingüe | Datos + casos enterprise | Heritage + reviews sobrios | Cases + engagement visible | Heritage + craft |
+| Ejemplo CTA en positioning | "Descubre cómo" | "Compruébalo" | "Vení a verlo" | "Conózcalo usted mismo" | "Ver resultados" | "Mira cómo funciona" | "See how it works" | "Find out more" | "Veja agora" | "Descubra aqui" |
+
+**Protocolo de validación del positioning multi-mercado:**
+
+1. Escribir el positioning en el idioma maestro del cliente (ES o EN según origen).
+2. Adaptar culturalmente a cada mercado objetivo — nunca traducir literal. La meta es preservar la estrategia, no la sintaxis.
+3. Validar el "Point of difference" en cada mercado: algunos diferenciadores potentes en US ("AI-native" / "venture-backed") no resuenan en LATAM; diferenciadores potentes en LATAM ("empresa familiar mexicana" / "más de 30 años") no resuenan en EN-UK.
+4. Probar cada versión con hablante nativo del mercado cuando sea posible — si no, escalar a modo agnóstico.
+5. Documentar en `/strategy-docs/[cliente].md` las N versiones del positioning por mercado con justificación de las adaptaciones realizadas.
+
+### G.4 — Buyer persona 12D con variante regional
+
+El buyer persona 12D (12 dimensiones: demográfica, psicográfica, conductual, canales, proceso de decisión, objeciones, aspiraciones, etc.) debe tener variante regional documentada. Un millennial profesional de servicios financieros en CDMX no es equivalente al de Madrid, al de Buenos Aires, al de Bogotá, al de Santiago, al de Miami hispano o al de Londres — aunque los cuatro tengan la misma edad, cargo y rango de ingresos.
+
+**Dimensiones del buyer persona que cambian materialmente por mercado:**
+
+| Dimensión | Variación típica por mercado |
+|-----------|------------------------------|
+| Formalidad esperada | Alta en ES-CO / ES-US hispano conservador · Baja en ES-AR / PT-BR |
+| Proceso de decisión | Familia involucrada (LATAM) · Individual con validación de pareja (US/UK) · Consejo de socios (ES enterprise) |
+| Canales de consulta primarios | Google en US/UK · TikTok + Google en LATAM joven · LinkedIn en B2B global · WhatsApp de conocidos en LATAM |
+| Presencia de WhatsApp | Crítica (LATAM, ES, BR) · Casi nula (US/UK mainstream) · Emergente (UK hispano) |
+| Sensibilidad a precio | Alta (LATAM mass-market) · Moderada (ES/PT) · Baja-moderada (US/UK en premium) |
+| Tolerancia a fricción | Alta si trust es alto vía recomendación (LATAM) · Baja (US enterprise espera self-serve) · Muy baja (UK premium) |
+| Velocidad esperada de respuesta | Inmediata (WhatsApp LATAM, <30 min) · Asíncrona mismo día (email US/UK) · 24-48h aceptable (ES enterprise) |
+| Objeciones típicas | "¿Es legítimo? ¿No es estafa?" (LATAM) · "¿Cuál es el ROI documentado?" (US B2B) · "¿Hay garantía y términos claros?" (UK) |
+| Prueba social preferida | Testimonios emocionales con rostro (LATAM) · Case studies con métricas (US/UK) · Heritage e institucionalidad (PT-PT / ES-ES) |
+| Aspiraciones culturales dominantes | Estabilidad familiar (ES-MX / ES-CO) · Movilidad social intergeneracional (ES-US) · Independencia profesional (US/UK) · Alegría y disfrute (PT-BR) |
+| Uso de cash vs digital | Alto cash aún (MX informal) · Digital dominante (BR post-Pix) · Mixto (AR con inflación) · Digital total (US/UK) |
+| Influencia de referidos | Muy alta (LATAM) · Alta pero vía reviews (US/UK) · Alta vía boca a boca local (ES regional) |
+
+**Protocolo de buyer persona multi-mercado:**
+
+1. Crear buyer persona base del mercado primario del cliente (típicamente el mercado de mayor TAM o donde el cliente opera hoy).
+2. Para cada mercado adicional, documentar las 12 dimensiones con variación explícita — nunca escribir "mismo que primario"; si las dimensiones son equivalentes en dos mercados, documentar la justificación con data local.
+3. Documentar en `/strategy-docs/[cliente].md` una sección "Buyer Personas por Mercado" con N versiones del persona (una por mercado objetivo).
+4. Handoff a #18 diseno-web: cada ejecutor recibe buyer persona del mercado específico para diseñar landing y sitio.
+5. Handoff a #16 copywriting-seo: cada copy se escribe para el persona del mercado específico, no para el persona agregado.
+
+### G.5 — Customer journey con touchpoints culturales
+
+El customer journey mapea cómo el buyer persona se mueve desde awareness hasta advocacy. Los touchpoints varían radicalmente por mercado y esa variación determina la arquitectura del funnel operativo.
+
+**Tabla de touchpoints críticos por fase del journey y región:**
+
+| Fase del journey | LATAM (MX/CO/AR/CL) | ES (España) | US/UK | BR (Brasil) |
+|------------------|---------------------|-------------|-------|-------------|
+| Awareness | TikTok, Reels, Google, recomendación familiar | Instagram, Google, podcasts | Google, LinkedIn, YouTube, podcasts | TikTok, Instagram, WhatsApp Status |
+| Consideration | WhatsApp directo, reviews Google, referrals locales | Sitio web, comparadores, reviews | Sitio web, case studies, demos grabadas, reviews | WhatsApp Business, sitio, influencers locais |
+| Decision | WhatsApp + llamada + consulta familia | Sitio web + email + demo en vivo | Email + demo + contrato formal con T&Cs | WhatsApp + sitio + pagamento local |
+| Purchase | Transferencia, MercadoPago, OXXO (MX), efectivo informal | Transferencia SEPA, Bizum, tarjeta | Stripe tarjeta, ACH, Apple Pay | Pix, boleto, cartão parcelado |
+| Post-purchase | WhatsApp soporte conversacional, grupo comunidad | Email + sitio de soporte | Email + help desk + ticket system con SLA | WhatsApp Business + comunidade Telegram |
+| Advocacy | Referral a familia/amigos (verbal, WhatsApp) | Reviews online en Google/Trustpilot | Reviews + case study formal con permiso | Indicação no WhatsApp + posts en redes |
+
+**Tres decisiones clave del journey multi-mercado:**
+
+**1. WhatsApp como canal primario o secundario.**
+
+- LATAM / ES / BR: WhatsApp es canal primario de consideration y decision. El strategy doc debe especificar "WhatsApp-first journey" con número visible en el sitio, click-to-WhatsApp CTAs y SLA de respuesta <30 min.
+- US / UK: WhatsApp es casi inexistente en B2C mainstream. El strategy doc especifica "email-first journey" con forms de contacto, demos agendadas y SLA de respuesta mismo día.
+- Implicación de infraestructura: handoff explícito a #45 deployment para configurar WhatsApp Business API cuando aplique.
+
+**2. Métodos de pago locales obligatorios.**
+
+| Mercado | Métodos obligatorios | Métodos recomendados adicionales |
+|---------|---------------------|----------------------------------|
+| MX | OXXO, SPEI, tarjeta crédito/débito | Mercado Pago, Stripe con Mexican cards |
+| BR | Pix (obligatorio post-2020), boleto | Cartão de crédito parcelado, PicPay |
+| AR | Mercado Pago, transferencia | Efectivo (informal), cripto en algunos segmentos |
+| CO | PSE, Nequi, Daviplata, tarjeta | Efectivo en punto físico |
+| CL | WebPay, transferencia, tarjeta | Mach, Khipu |
+| ES | Bizum, transferencia SEPA, tarjeta | PayPal, Apple Pay |
+| US | Stripe, ACH, Apple Pay, Google Pay | PayPal, Affirm/Klarna (BNPL) |
+| UK | Stripe, BACS, Direct Debit | PayPal, Klarna |
+| PT | MB Way, transferencia SEPA, tarjeta | PayPal |
+
+**3. Formalidad del soporte post-venta.**
+
+- LATAM: conversacional, cálido, uso de primer nombre, WhatsApp como canal dominante, respuesta rápida esperada.
+- ES: semi-formal, email como canal dominante, respuesta mismo día.
+- US: formal, ticket system con número de caso, SLA documentado por tier, email dominante.
+- UK: formal-educado, telefónico o email según criticidad, proceso de escalación claro.
+- BR: conversacional cálido, WhatsApp Business dominante, tono energético.
+- PT: más contenido que BR, formal-conversacional.
+
+**Protocolo de customer journey multi-mercado:**
+
+1. Mapear customer journey completo por cada mercado — no un journey genérico "que aplica a todos".
+2. Documentar en `/strategy-docs/[cliente].md` los touchpoints específicos por mercado con canal y SLA esperado.
+3. Handoff a #45 para configurar pagos locales e infraestructura WhatsApp según mercado.
+4. Handoff a #18 para integrar WhatsApp CTAs y trust signals culturalmente relevantes.
+5. Handoff a #30 ventas-atención para alinear formalidad del soporte por mercado.
+
+### G.6 — Funnel operativo con CTAs y metáforas locales
+
+El funnel operativo (TOFU awareness / MOFU consideration / BOFU decision) necesita CTAs adaptados por mercado. Traducir CTAs literalmente reduce conversión; transcrear los adapta culturalmente manteniendo la intención.
+
+**Tabla canónica de CTAs transcreados por etapa × mercado:**
+
+| Etapa | ES-MX | ES-ES | ES-AR | ES-CO | PT-BR | EN-US | EN-UK |
+|-------|-------|-------|-------|-------|-------|-------|-------|
+| TOFU awareness | "Descubre cómo" | "Descúbrelo" | "Enterate" | "Conózcalo" | "Descubra já" | "Learn more" | "Find out more" |
+| TOFU lead magnet | "Descarga gratis" | "Descárgalo" | "Descargalo" | "Descárguelo" | "Baixe grátis" | "Download free" | "Get yours" |
+| MOFU demo | "Agenda una llamada" | "Reserva tu demo" | "Reservá tu demo" | "Agende una llamada" | "Agende uma ligação" | "Book a demo" | "Schedule a call" |
+| MOFU lead nurturing | "Quiero saber más" | "Infórmame" | "Quiero más info" | "Quiero saber más" | "Quero saber mais" | "Tell me more" | "I'd like to know more" |
+| BOFU conversion | "Empieza ya" | "Empiézalo" | "Arrancá ahora" | "Comience ahora" | "Comece já" | "Start now" | "Get started" |
+| BOFU high-commitment | "Contrata el plan" | "Contrátalo" | "Suscribite" | "Adquiéralo" | "Assine agora" | "Subscribe now" | "Sign up" |
+
+**Metáforas comerciales que transfieren vs las que no:**
+
+| Metáfora origen EN | Transfiere a ES | Transfiere a PT | Alternativa nativa por mercado |
+|--------------------|-----------------|-----------------|-------------------------------|
+| "Home run" (baseball) | No | No | "Jugada maestra" (ES) · "Gol de placa" (PT-BR) |
+| "No brainer" | No literal | No literal | "Pan comido" (ES) · "Moleza" (PT-BR) · "Obvio" (ES-AR) |
+| "Move the needle" | No | No | "Hacer la diferencia" · "Mover la aguja" (funciona en ES formal) |
+| "Game changer" | Sí (calco aceptado) | Sí (calco aceptado) | "Revolucionario" (más nativo ES) |
+| "Win-win" | Sí globalmente | Sí globalmente | Aceptado sin transcreación |
+| "Silver bullet" | Traduce literal | No | "Solución mágica" · "Bala de prata" (PT) |
+| "Low-hanging fruit" | No | No | "Lo más fácil primero" · "Empezar por lo obvio" |
+| "Deep dive" | Sí (calco aceptado en B2B) | Sí (calco aceptado) | "Análisis profundo" (más nativo ES formal) |
+| "ROI-positive" | Sí (B2B) | Sí (B2B) | "Rentable desde el inicio" |
+| "Scale" como verbo | Calco en B2B | Calco en B2B | "Escalar" funciona en B2B · "Crecer" en B2C |
+
+**Protocolo del funnel multi-mercado:**
+
+1. Nunca traducir CTAs literalmente — transcrear con hablante nativo del mercado o con protocolo agnóstico documentado.
+2. Probar 2-3 variantes de CTA clave (typically BOFU) en A/B test cuando el presupuesto lo permita — los deltas de conversión entre variantes transcreadas suelen ser 15-40%.
+3. Documentar en `/strategy-docs/[cliente].md` los CTAs finales por mercado en una tabla análoga a la canónica de arriba.
+4. Handoff a #16 copywriting-seo con CTAs aprobados por mercado como base no-negociable.
+5. Handoff a #11-14 (ads) con CTAs específicos por plataforma y mercado.
+6. Handoff a #15 director-creativo con los CTAs base para que el tono de campaña respete la transcreación.
+
+### G.7 — Sitemap con estructura bilingüe/multilingüe
+
+La arquitectura de URLs es decisión estratégica, no puramente técnica. Afecta SEO local, autoridad del dominio, experiencia de usuario y posibilidad de escalar a mercados adicionales en el futuro.
+
+**Tres estrategias de URL multi-idioma con trade-offs documentados:**
+
+| Estrategia | Estructura de ejemplo | Pro | Contra | Cuándo usar |
+|------------|----------------------|-----|--------|-------------|
+| ccTLD (country-code TLD) | `cliente.mx`, `cliente.com.br`, `cliente.es` | SEO local óptimo · señal clara de geolocalización · confianza local | Gestión de múltiples dominios · costos de DNS/SSL multiplicados · complejidad para escalar a nuevos países | Cliente con entidad legal local por país y presupuesto para gestión multi-dominio |
+| Subdirectorio | `cliente.com/mx/`, `cliente.com/es/`, `cliente.com/br/` | Gestión única · SEO aceptable · autoridad concentrada · fácil de escalar | Un solo dominio raíz para todos los mercados · señal geográfica más débil | Mayoría de casos SMB y mid-market |
+| Subdominio | `mx.cliente.com`, `es.cliente.com`, `br.cliente.com` | Separación clara por mercado · flexibilidad de hosting por región | SEO menos fuerte que ccTLD · Google trata cada subdominio como sitio separado · complejidad de tracking | Empresas con operaciones muy separadas por mercado o arquitecturas técnicas distintas |
+
+**Decisión de sitemap por escenario de mercado:**
+
+- **Mercado primario único (ej. solo ES-MX):** dominio `.mx`, sin hreflang, sin estructura bilingüe. Simplicidad total.
+- **Dos mercados ES + EN (común en Addendo):** `cliente.com` como raíz + `cliente.com/en/` para EN, con hreflang en todas las páginas. Primary locale en la raíz.
+- **LATAM multi-país:** decisión estratégica entre (a) un solo ES genérico con aceptación de mercado compartido o (b) variantes ES-MX/ES-CO/ES-AR en subdirectorios separados con contenido diferenciado por mercado.
+- **Multi-idioma pleno (ES + EN + PT):** estructura de tres carpetas con hreflang riguroso y language switcher visible en nav.
+
+**Estructura de sitemap multi-idioma (ejemplo canónico):**
+
+```
+cliente.com/
+├── [ES como default]
+│   ├── /
+│   ├── /servicios
+│   ├── /acerca
+│   └── /contacto
+├── /en/
+│   ├── /
+│   ├── /services
+│   ├── /about
+│   └── /contact
+└── /br/
+    ├── /
+    ├── /servicos
+    ├── /sobre
+    └── /contato
+```
+
+**Hreflang obligatorio:** cada página debe declarar hreflang alternates para todas sus versiones idiomáticas, incluyendo `x-default` para el fallback.
+
+**Protocolo de sitemap multi-mercado:**
+
+1. Decidir estrategia de URL (ccTLD / subdirectorio / subdominio) en `/strategy-docs/[cliente].md` con justificación documentada.
+2. Documentar sitemap completo con árbol de URLs por idioma.
+3. Handoff a #45 agente-deployment para configurar hreflang, dominios y redirects.
+4. Handoff a #18 diseno-web para diseñar language switcher culturalmente apropiado en nav.
+5. Handoff a #21 frontend-dev para implementación técnica del routing y SEO tags.
+6. Handoff a #27 agente-seo para configurar sitemap XML por idioma y Search Console propiedades.
+
+### G.8 — GTM 90 días con canales priorizados por mercado
+
+El Go-To-Market plan varía materialmente por mercado en canales priorizados, presupuesto distribuido, ciclos comerciales y mensajes dominantes. El GTM genérico que "aplica a todos" produce gasto publicitario ineficiente y pérdida de momentum local.
+
+**Calendario comercial por mercado (picos y valles críticos):**
+
+| Mercado | Picos de venta | Valles | Implicación GTM |
+|---------|----------------|--------|-----------------|
+| US | Black Friday (Nov), Q4 holiday, tax season (Q1) | Verano jun-ago | Lanzamiento fuerte Q4 · aprovechar tax season B2C |
+| UK | Boxing Day, Q4, Easter sales | Verano jul-ago | Similar a US con shift hacia finales de año |
+| MX | El Buen Fin (Nov), Navidad, Día del Niño, Día de la Madre | Enero post-Reyes | Evitar enero · fuerte noviembre-diciembre |
+| BR | Black Friday (Nov), Natal, Carnaval pré | Enero-fevereiro (Carnaval pausa) | Pico Nov-Dez · pausa Carnaval (10 días) |
+| ES | Rebajas enero + julio, Navidad, Black Friday | Agosto (vacaciones) | Dos picos de rebajas dominantes · agosto muerto |
+| AR | Hot Sale (Mayo), Cyber Monday, Navidad | Enero (vacaciones) · inflación afecta todo | Hot Sale es el Black Friday argentino · cuidado con pricing por inflación |
+| CO | Día sin IVA (3 fechas/año), Navidad, Madres | Enero | Planear alrededor de Días sin IVA |
+| CL | Cyber Day (Mar y Nov), Navidad | Febrero (vacaciones) | Cyber Day dominante · dos fechas/año |
+| PT | Black Friday, Natal, rebajas enero | Agosto (vacaciones) | Similar a ES con menor intensidad |
+
+**Canales priorizados por vertical × mercado:**
+
+| Vertical × Mercado | Canal dominante | Canal secundario |
+|--------------------|-----------------|-------------------|
+| SaaS B2B × US/UK | LinkedIn + Google Search | Podcasts sponsors + webinars |
+| SaaS B2B × LATAM | Google Search + LinkedIn | WhatsApp Business + eventos locales |
+| E-commerce × US | Meta + Google Shopping | TikTok + Pinterest |
+| E-commerce × BR | Meta + TikTok | WhatsApp + Pix checkout optimizado |
+| Servicios locales × LATAM | Google Local + Meta geo | WhatsApp Business + Instagram |
+| Servicios locales × US | Google Local Services + Yelp | Nextdoor + Meta geo |
+| Consulting × US/UK | LinkedIn Ads + newsletter | Podcasts B2B + thought leadership |
+| Consulting × LATAM | LinkedIn + Instagram | Eventos presenciales + referidos WhatsApp |
+| Education × LATAM | Meta + TikTok + WhatsApp | Instagram + Google |
+| Education × US | Meta + Google + YouTube | LinkedIn para B2B edu |
+| Health × LATAM | Meta + Google | WhatsApp + referidos |
+| Health × US | Google + LinkedIn | Meta con restricciones Medical Claims |
+
+**Estructura canónica del GTM 90 días multi-mercado:**
+
+**Días 1-30 — Awareness + Setup por mercado:**
+- Identificar 3 canales dominantes por cada mercado objetivo
+- Setup técnico (pixels de Meta, Google Tag Manager, analytics) por dominio/subdirectorio
+- Contenido inicial adaptado culturalmente (transcreado, no traducido) para cada mercado
+- Configuración de pagos locales (Pix, OXXO, Bizum, etc.) según aplique
+
+**Días 31-60 — Consideration + Optimización:**
+- Ads activos en canales priorizados por mercado con creatives específicos
+- Lead magnets por mercado (los intereses y dolores locales varían)
+- Optimización de CTAs por mercado basada en data inicial de CTR/CVR
+- Setup de WhatsApp Business API para mercados LATAM/ES/BR si aplica
+
+**Días 61-90 — Decision + Conversión:**
+- Retargeting agresivo en canales dominantes por mercado
+- Ofertas específicas alineadas con ciclos comerciales locales (Hot Sale, Buen Fin, Black Friday)
+- Handoff a equipo de ventas con protocolos culturales específicos por mercado
+- Análisis de CAC y LTV por mercado para decidir escalación
+
+**Protocolo del GTM multi-mercado:**
+
+1. Documentar calendario comercial completo de cada mercado en `/strategy-docs/[cliente].md` con picos y valles identificados.
+2. Asignar presupuesto por mercado basado en TAM/SAM/SOM (input de #9 director-estrategia).
+3. Especificar canales dominantes por mercado con justificación basada en buyer persona regional.
+4. Handoff a #11 meta-ads, #12 google-ads, #13 tiktok-ads, #14 linkedin-ads con plan de ejecución específico por mercado.
+5. Revisar performance semanal por mercado contra benchmarks locales — no mezclar mercados en el reporte.
+
+### G.9 — Checklist obligatorio de validación multi-mercado pre-aprobación
+
+Antes de finalizar cualquier `/strategy-docs/[cliente].md` que sirva a múltiples mercados, el agente ejecuta un checklist obligatorio de 14 puntos. La omisión de cualquiera invalida la entrega al resto del sistema.
+
+**Checklist de validación Multi-Idioma del strategy doc:**
+
+1. Positioning statement adaptado (transcreado, no traducido) para cada mercado objetivo con tabla comparativa de tono y frame of reference.
+2. Buyer persona 12D con variante regional documentada para cada mercado — nunca "mismo que primario" sin justificación.
+3. Customer journey mapeado con touchpoints específicos del mercado (awareness, consideration, decision, purchase, post-purchase, advocacy).
+4. Métodos de pago locales identificados y especificados por mercado con handoff a #45.
+5. CTAs del funnel transcreados con hablante nativo (TOFU awareness, TOFU lead magnet, MOFU demo, MOFU nurturing, BOFU conversion, BOFU high-commitment).
+6. Metáforas comerciales validadas — eliminar las que no transfieren, documentar alternativas nativas.
+7. Estrategia de URL decidida (ccTLD / subdirectorio / subdominio) con justificación documentada.
+8. Sitemap completo con hreflang documentado para todas las páginas.
+9. Calendario comercial con picos y valles por mercado.
+10. Canales priorizados con justificación por mercado basada en buyer persona regional.
+11. GTM 90 días con acciones específicas por mercado — nunca GTM genérico que "aplica a todos".
+12. KPIs benchmark ajustados por mercado (CAC, CPM, CPC, CVR, LTV) con rangos locales documentados.
+13. Documentación de ciclos comerciales locales (El Buen Fin, Hot Sale, Día sin IVA, Carnaval, etc.).
+14. Handoffs explícitos a #53 agente-branding, #15 director-creativo, #18 diseno-web, #45 agente-deployment, #11-14 ads con instrucciones específicas por mercado.
+
+**Regla operativa:** si algún punto del checklist falla, el strategy doc no está listo para entregar a agentes downstream. Se vuelve al punto fallido antes del handoff.
+
+**Documentación de la validación en el strategy doc:**
+
+| # | Punto | Estado | Notas |
+|---|-------|--------|-------|
+| 1 | Positioning transcreado por mercado | OK / FAIL | — |
+| 2 | Buyer persona 12D con variante regional | OK / FAIL | — |
+| 3 | Customer journey con touchpoints culturales | OK / FAIL | — |
+| 4 | Métodos de pago locales especificados | OK / FAIL | — |
+| 5 | CTAs transcreados con nativo | OK / FAIL | — |
+| 6 | Metáforas validadas | OK / FAIL | — |
+| 7 | Estrategia URL documentada | OK / FAIL | — |
+| 8 | Sitemap con hreflang | OK / FAIL | — |
+| 9 | Calendario comercial por mercado | OK / FAIL | — |
+| 10 | Canales priorizados justificados | OK / FAIL | — |
+| 11 | GTM 90 días por mercado | OK / FAIL | — |
+| 12 | KPIs benchmark locales | OK / FAIL | — |
+| 13 | Ciclos comerciales documentados | OK / FAIL | — |
+| 14 | Handoffs explícitos a downstream | OK / FAIL | — |
+
+### G.10 — Modo agnóstico para mercados no-oficiales
+
+Cuando el cliente requiere servir mercado fuera de los tres idiomas oficiales (ES / EN / PT), el agente opera en modo agnóstico con protocolo explícito de humildad epistémica y escalación.
+
+**Paso 1 — Reconocer limitación con honestidad.**
+
+El strategy doc incluye disclaimer textual:
+
+> "Este strategy doc fue generado con profundidad nativa en los tres idiomas oficiales del sistema Addendo (ES, EN, PT) y sus 10 variantes regionales documentadas. Para el mercado [X] (ej. alemán, japonés, árabe, mandarín, ruso, hindi, francés, italiano), la cobertura estratégica de este agente es parcial. Se aplicaron principios universales de estrategia comercial adaptada, pero se recomienda validación adicional por consultor estratégico local antes de ejecución. Los ciclos comerciales, touchpoints culturales, canales digitales dominantes y métodos de pago deben verificarse con data local."
+
+**Paso 2 — Principios universales aplicables en cualquier mercado.**
+
+Aunque el agente no tenga profundidad nativa en el idioma, los siguientes principios aplican universalmente:
+
+- **Buyer persona debe investigarse con data local** — nunca asumir equivalencia con un mercado conocido.
+- **Customer journey debe mapearse con consultor cultural del mercado** específico.
+- **Touchpoints digitales dominantes del mercado deben identificarse** con data local (Baidu y WeChat en China, LINE en Japón, VK en Rusia, Yandex en Rusia/CIS, Naver en Corea, KakaoTalk en Corea).
+- **Métodos de pago locales son obligatorios** (Alipay y WeChat Pay en China, Paytm y UPI en India, Yandex Money y Qiwi en Rusia, iDEAL en Holanda, Klarna en Nórdicos).
+- **Calendario comercial del mercado debe documentarse** (Diwali en India, Golden Week en Japón, Chuseok en Corea, Ramadan en mercados musulmanes, Singles Day en China).
+
+**Paso 3 — Escalación obligatoria según tipo de mercado.**
+
+- **Mercados con ecosistema digital cerrado (China, Rusia):** escalación a partner local especializado. Meta/Google/LinkedIn no funcionan con la misma efectividad; requiere estrategia sobre plataformas locales (WeChat, Baidu, Douyin para China; VK, Yandex para Rusia).
+- **Mercados con tabúes culturales fuertes (Medio Oriente conservador, Japón enterprise, Sudeste Asiático budista):** consultor estratégico nativo antes de finalizar positioning, customer journey y GTM.
+- **Mercados con compliance regulatorio complejo (India con GST + DPDP Act, China con ICP licence + Cybersecurity Law, EU con DSA + DMA):** consultor legal local con handoff a #52 agente-legal.
+- **Mercados RTL (árabe, hebreo, farsi, urdu):** handoff a #18 diseno-web para arquitectura de UI RTL; buyer persona debe considerar sensibilidades culturales específicas (Ramadan, festivos religiosos, roles de género en comunicación).
+
+**Paso 4 — Escalación a CEO / brand owner.**
+
+El agente escala la decisión al CEO de Addendo (José Raúl Ramírez) y/o al brand owner del cliente en los siguientes casos:
+
+- Mercado no-oficial representa más del 30% del revenue proyectado del cliente.
+- Cliente requiere estrategia detallada de mercado no-oficial como core del engagement comercial.
+- Cliente opera en mercado con sanciones internacionales (OFAC USA, EU sanctions lists) — requiere revisión legal obligatoria.
+- Cliente tiene presencia existente en mercado no-oficial con performance subóptima que requiere diagnóstico profundo.
+
+**Paso 5 — Documentación final del modo agnóstico en el strategy doc.**
+
+Para mercados no-oficiales atendidos bajo modo agnóstico, el strategy doc documenta:
+
+- Mercado objetivo específico (país + idioma + variante regional si aplica).
+- Principios universales aplicados y limitaciones reconocidas explícitamente.
+- Consultores locales recomendados o efectivamente utilizados durante la validación.
+- Riesgos residuales no mitigados (áreas donde no hubo consulta local pero se tomó decisión con disclaimer).
+- Recomendación de partner local para mantenimiento del strategy doc a largo plazo.
+- Criterios de re-evaluación a 60 y 90 días del mercado no-oficial (si performance no es la esperada, escalar).
+
+---
+
 ## FASE 6 — PROTOCOLO DE TRABAJO + INTEGRACIONES + HERRAMIENTAS + OUTPUTS + CIERRE
 
 ### 6.1 Protocolo de trabajo — del brief al strategy doc guardado
