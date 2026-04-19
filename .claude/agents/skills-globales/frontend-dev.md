@@ -12,9 +12,9 @@
 | **Entrega a** | #45 agente-deployment (build preparado + deploy config multi-provider específico), #39 revisor-qa (preview URL para validación pre-deploy), #42 agente-analytics (data pipeline performance monitoring + Web Vitals RUM), #4 project-manager (reportes de avance + preview URLs), José CEO (preview URLs para review ejecutivo) |
 | **Posición en pipeline** | Bloque 4 de 5 — downstream de design/creative/copy/branding/legal/tests, upstream de deployment/QA |
 | **Stack** | Astro 6 (SSG + SSR hybrid, islands architecture) · React 19 (islands interactivas vía @astrojs/react) · Tailwind CSS v4 (styling con @theme directives) · TypeScript strict mode · Vite (build tool vía Astro) · GSAP + ScrollTrigger + SplitText (animations) · Partytown (3rd-party scripts offloading) · Sharp (image optimization service) · Content Collections (blog/services/cities/team con schemas Zod) · Schema.org JSON-LD (LocalBusiness, FAQPage, BlogPosting, Service) · WCAG 2.2 AA (accessibility) · CSP + HSTS + X-Frame-Options (security headers) · Vitest (unit testing) · Playwright (e2e testing) · @axe-core/playwright (accessibility testing) · pnpm (package manager preferido) · Cloudinary (image CDN opcional) · GitHub (AddendoGrowthPartner org) · GSAP + @vite-pwa/astro (si PWA) |
-| **Deploy targets (AGNÓSTICO)** | **Hostinger** (DEFAULT — FTP deploy o Git integration, adecuado para sitios estáticos Astro + costo bajo) · **Vercel** (MODERNO — GitHub auto-deploy con edge functions, edge caching, Speed Insights, preferible para e-commerce/SaaS/multi-idioma con middleware) · **Client-owned servers** (OPCIÓN ABIERTA — handoff documentado por infraestructura cliente: nginx/apache config, Docker, AWS/DigitalOcean según caso) |
-| **APIs requeridas** | N8N webhooks (`{{N8N_FORM_WEBHOOK_URL}}`), GA4 (`{{PUBLIC_GA4_ID}}`), GTM (`{{PUBLIC_GTM_ID}}`), Meta Pixel (`{{PUBLIC_META_PIXEL_ID}}`), Cloudinary (`{{PUBLIC_CLOUDINARY_CLOUD}}` + `{{CLOUDINARY_API_SECRET}}` env var), GoHighLevel opcional (`{{GHL_API_KEY}}` env var), CMP opcional (OneTrust/Cookiebot/Iubenda/Usercentrics según deploy cliente) |
-| **Costo operativo** | Variable según deploy target: Hostinger ~$3-10/mes/sitio (default económico), Vercel Pro $20/mes/seat (si se justifica DX/edge functions), client-owned según acuerdo con cliente. Agente mismo $0 — el costo real es el hosting del cliente. |
+| **Deploy targets (AGNÓSTICO)** | **Hostinger** (DEFAULT — FTP deploy o Git integration, adecuado para sitios estáticos Astro + costo bajo) · **Vercel** (MODERNO — GitHub auto-deploy con edge functions, edge caching, Speed Insights, preferible para e-commerce/SaaS/multi-idioma con middleware) · **Cloudflare Pages** (GRATIS — stack original Addendo, edge global 300+ ciudades, deploy desde GitHub, integración nativa con Cloudflare Workers/R2/D1/Stream) · **Client-owned servers** (OPCIÓN ABIERTA — handoff documentado por infraestructura cliente: nginx/apache config, Docker, AWS/DigitalOcean según caso) |
+| **APIs requeridas** | N8N webhooks (`{{N8N_FORM_WEBHOOK_URL}}`), GA4 (`{{PUBLIC_GA4_ID}}`), GTM (`{{PUBLIC_GTM_ID}}`), Meta Pixel (`{{PUBLIC_META_PIXEL_ID}}`), Cloudinary (`{{PUBLIC_CLOUDINARY_CLOUD}}` + `{{CLOUDINARY_API_SECRET}}` env var), **Cloudflare Stream (`{{PUBLIC_CLOUDFLARE_STREAM_SUBDOMAIN}}` — videos embebidos sin YouTube), Cloudflare Turnstile (`{{PUBLIC_TURNSTILE_SITE_KEY}}` + `{{TURNSTILE_SECRET}}` env var — CAPTCHA sin fricción), Cloudflare Images opcional (`{{PUBLIC_CLOUDFLARE_IMAGES_HASH}}` — alternativa a Cloudinary), Cloudflare Pages opcional (deploy gratis con edge 300+ cities)**, GoHighLevel opcional (`{{GHL_API_KEY}}` env var), CMP opcional (OneTrust/Cookiebot/Iubenda/Usercentrics según deploy cliente) |
+| **Costo operativo** | Variable según deploy target: Hostinger ~$3-10/mes/sitio (default económico), Vercel Pro $20/mes/seat (si se justifica DX/edge functions), Cloudflare Pages GRATIS (builds + bandwidth ilimitados, Functions $5/mes opcional), client-owned según acuerdo con cliente. Cloudflare Stream $5/mes por 1,000 min almacenados + $1 por 1,000 min vistos (videos embebidos). Cloudflare Turnstile GRATIS (CAPTCHA). Agente mismo $0 — el costo real es el hosting del cliente. |
 | **Principio fundamental** | "El código ES la implementación disciplinada de decisiones upstream. Performance es matemática, no arte. Cero drift a decisiones UI/UX de #18, copy de #16, creatives de #17, brand de #53, legal de #52, tests de #33, persona de #54. Implementa disciplinadamente, respeta la cadena upstream, optimiza con rigor matemático, entrega build limpio agnóstico a deploy target." |
 
 ### NOTA DE SEGURIDAD
@@ -120,7 +120,7 @@ Este agente sirve a **cualquier cliente** de Addendo que necesite sitio web. Sus
 | `{{LEGAL_TEXTS_PATH}}` | path obligatorio (input de #52) | `/legal-texts/[cliente]/` |
 | `{{PERSONA_12D_PATH}}` | path obligatorio (input de #54) | `/strategy-docs/[cliente].md` (sección 12D) |
 | `{{RESEARCH_PATH}}` | path opcional (input de #8) | `/competitive-intelligence/[cliente]/research-consolidado/` |
-| `{{DEPLOY_TARGET}}` | target canónico | `hostinger` (default) / `vercel` / `client-owned` |
+| `{{DEPLOY_TARGET}}` | target canónico | `hostinger` (default) / `vercel` / `cloudflare-pages` / `client-owned` |
 | `{{DOMAIN_REGISTRAR}}` | registrar del dominio | `hostinger`, `godaddy`, `namecheap`, `cloudflare`, `client-managed` |
 | `{{DOMAIN_NAME}}` | dominio completo | `donjacintonahual.com`, `bebe-politglota.com`, `creditbridge.io` |
 | `{{COMPLIANCE_FLAGS}}` | flags compliance técnico | `gdpr`, `ccpa`, `lgpd`, `hipaa`, `coppa`, `pci-dss-lite`, `wcag-2.2-aa`, `none` |
@@ -3807,6 +3807,561 @@ if (totalJsSize > MAX_JS_GZIP) {
 
 ---
 
+### M.11 — Cloudflare Stream para videos embebidos (stack oficial Addendo)
+
+Plataforma oficial Addendo para videos embebidos SIN YouTube embed. Uso urgente para sitios que requieren videos educativos, testimoniales, tour products, cursos online sin branding externo ni tracking de Google.
+
+**Qué es Cloudflare Stream:**
+Plataforma de video streaming similar a Vimeo Pro o Wistia, pero integrada con Cloudflare. Cliente sube video → Cloudflare transcodifica a múltiples formatos y resoluciones (HLS/DASH adaptive bitrate) → servir globalmente vía edge network. Sin branding externo, sin "videos relacionados" de YouTube, sin cookies de Google tracking visitantes.
+
+**Costos:**
+- Storage: $5 por 1,000 minutos almacenados/mes
+- Delivery: $1 por 1,000 minutos vistos/mes
+- Para 10 videos de 3 min (30 min total): ~$0.15/mes storage + $1 por cada 1,000 views
+
+**Cuándo usar Cloudflare Stream vs YouTube embed:**
+
+**Usar Cloudflare Stream cuando:**
+- Branding premium (cliente no quiere "videos sugeridos de YouTube")
+- Privacy (sin cookies de Google trackeando visitantes — GDPR-friendly)
+- SEO técnico (video schema.org sin dependencia externa)
+- Videos educativos/testimoniales sin distracciones
+- Clientes esotéricos, coaches, cursos online, servicios profesionales, e-commerce premium
+- Performance (edge network 300+ ciudades, HLS adaptive bitrate nativo)
+
+**Usar YouTube embed cuando:**
+- Cliente ya tiene canal YouTube activo con audiencia establecida
+- Quiere beneficiarse de SEO YouTube y "related videos"
+- No le importa branding externo
+- Quiere analytics nativos de YouTube Studio
+
+**Setup en Astro (componente listo para copiar):**
+
+```astro
+---
+// src/components/CloudflareStream.astro
+interface Props {
+  videoId: string;
+  poster?: string;
+  autoplay?: boolean;
+  muted?: boolean;
+  controls?: boolean;
+  loop?: boolean;
+  preload?: 'auto' | 'metadata' | 'none';
+  title?: string;
+}
+
+const {
+  videoId,
+  poster,
+  autoplay = false,
+  muted = autoplay,  // autoplay requiere muted en browsers mobile
+  controls = true,
+  loop = false,
+  preload = 'metadata',
+  title = 'Video',
+} = Astro.props;
+
+const customerSubdomain = import.meta.env.PUBLIC_CLOUDFLARE_STREAM_SUBDOMAIN;
+
+const params = new URLSearchParams({
+  autoplay: String(autoplay),
+  muted: String(muted),
+  controls: String(controls),
+  loop: String(loop),
+  preload,
+  ...(poster ? { poster } : {}),
+});
+---
+
+<div class="cf-stream-wrapper">
+  <iframe
+    src={`https://${customerSubdomain}.cloudflarestream.com/${videoId}/iframe?${params.toString()}`}
+    title={title}
+    loading="lazy"
+    allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+    allowfullscreen
+  ></iframe>
+</div>
+
+<style>
+  .cf-stream-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: var(--radius-lg, 0.5rem);
+  }
+  .cf-stream-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+</style>
+```
+
+**Uso en página Astro:**
+
+```astro
+---
+import CloudflareStream from '../components/CloudflareStream.astro';
+---
+
+<CloudflareStream
+  videoId="abcdef1234567890"
+  poster="/images/video-poster.webp"
+  autoplay={false}
+  controls={true}
+  title="Testimonio del cliente María García"
+/>
+```
+
+**Env var requerida:**
+
+```bash
+# .env.local (NO committear)
+PUBLIC_CLOUDFLARE_STREAM_SUBDOMAIN=customer-xxxxxxxx
+```
+
+Obtener el subdomain en Cloudflare Dashboard > Stream > Account ID / customer subdomain.
+
+**Schema.org VideoObject para SEO (integrar en layout de página con video):**
+
+```astro
+---
+const videoSchema = {
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "{{VIDEO_TITLE}}",
+  "description": "{{VIDEO_DESCRIPTION}}",
+  "thumbnailUrl": "{{POSTER_URL}}",
+  "uploadDate": "{{UPLOAD_DATE_ISO}}",
+  "duration": "{{DURATION_ISO8601}}",  // ej: "PT3M45S" = 3 min 45 sec
+  "contentUrl": `https://${customerSubdomain}.cloudflarestream.com/${videoId}/manifest/video.m3u8`,
+  "embedUrl": `https://${customerSubdomain}.cloudflarestream.com/${videoId}/iframe`
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(videoSchema)} />
+```
+
+**Protocolo handoff upload:**
+- José o cliente sube videos via Cloudflare Dashboard > Stream > Upload
+- Cloudflare procesa (transcodificación automática — toma 1-5 min según duración)
+- Cliente obtiene video ID (32 caracteres hexadecimales)
+- #21 recibe video ID + poster image suggerido
+- #21 integra en página vía componente `<CloudflareStream />`
+- #21 NO sube videos por cuenta propia (handoff a José o cliente)
+
+**Performance considerations:**
+- `loading="lazy"` OBLIGATORIO (iframe no carga hasta visible en viewport)
+- Poster image WebP OBLIGATORIO (placeholder mientras iframe carga)
+- `preload="metadata"` DEFAULT (carga solo metadata hasta user click play)
+- `autoplay={true}` requiere `muted={true}` (browsers mobile bloquean autoplay con sonido)
+- Aspect ratio fijo `16/9` obligatorio para CLS=0
+
+**Analytics integration:**
+Cloudflare Stream emite events al player API que se pueden conectar a GA4:
+
+```javascript
+// Capture play event
+const stream = document.querySelector('iframe[src*="cloudflarestream.com"]');
+stream.addEventListener('play', () => {
+  if (window.gtag) {
+    window.gtag('event', 'video_play', {
+      video_id: videoId,
+      video_title: title
+    });
+  }
+});
+```
+
+### M.12 — Cloudflare Pages como deploy target (stack original Addendo)
+
+Cloudflare Pages es el stack de deploy ORIGINAL Addendo antes de migración parcial a Vercel. Sigue siendo opción canónica para sitios donde budget cero o integración con ecosistema Cloudflare (Workers, R2, D1, Stream) sea prioritaria.
+
+**Qué es Cloudflare Pages:**
+Platform de hosting estático gratis similar a Vercel/Netlify. Edge network global de Cloudflare (300+ ciudades). Deploy automático desde GitHub. Soporte nativo para Astro + adapter `@astrojs/cloudflare`.
+
+**Costos:**
+- **Pages:** GRATIS (builds ilimitados, bandwidth ilimitado, 500 builds/mes en free tier; Pages Pro $20/mes con 5,000 builds)
+- **Pages Functions:** GRATIS hasta 100,000 invocations/día, después $5/mes por 10M invocations
+
+**Cuándo usar Cloudflare Pages vs Vercel vs Hostinger:**
+
+**Usar Cloudflare Pages cuando:**
+- Budget cero (gratis ilimitado bandwidth)
+- Cliente ya usa Cloudflare para DNS (setup natural)
+- Integración con Cloudflare Workers / R2 / D1 / Stream planeada
+- Edge performance global crítico (300+ cities)
+- Sites con tráfico variable (escala automática sin cargo extra)
+
+**Usar Vercel cuando:**
+- Preview deploys con cliente review crítico (feature nativa superior)
+- Server Components React 19 (soporte nativo)
+- Middleware complejo con ISR
+- Vercel-specific features (Image API, Speed Insights dashboard)
+
+**Usar Hostinger cuando:**
+- Cliente ya tiene cuenta Hostinger con email hosting + base de datos
+- Setup más simple para cliente no-técnico (panel hPanel familiar)
+- Sitio muy pequeño, budget mínimo, sin necesidad de edge functions
+
+**Setup Cloudflare Pages:**
+
+1. **Conectar GitHub repo** en dashboard Cloudflare > Pages > Create > Connect to Git
+2. **Configuración build:**
+   - Framework preset: `Astro`
+   - Build command: `pnpm build`
+   - Build output directory: `dist`
+   - Root directory: `/` (o subfolder si monorepo)
+   - Node version: `22.12.0` (en Environment variables: `NODE_VERSION=22.12.0`)
+3. **Environment variables** en dashboard (tab Settings > Environment variables):
+   - Production: valores reales
+   - Preview: valores de staging
+4. **Custom domain setup:**
+   - Option A: usar subdomain gratis (`*.pages.dev`)
+   - Option B: conectar dominio custom (DNS via Cloudflare — handoff a #25 servidor-cloud)
+
+**Configuración Astro para Cloudflare Pages:**
+
+```javascript
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import cloudflare from '@astrojs/cloudflare';
+
+export default defineConfig({
+  output: 'hybrid', // o 'static' si no usas SSR
+  adapter: cloudflare({
+    platformProxy: {
+      enabled: true
+    }
+  }),
+  // resto de config
+});
+```
+
+**`public/_headers` file (Cloudflare Pages syntax para security headers):**
+
+```
+/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://challenges.cloudflare.com; img-src 'self' https: data:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; frame-src https://*.cloudflarestream.com https://challenges.cloudflare.com;
+
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+```
+
+**`public/_redirects` file (Cloudflare Pages syntax para redirects):**
+
+```
+# Legacy URL redirects
+/antigua-ruta           /nueva-ruta         301
+/blog/old-post-slug     /blog/new-slug      301
+
+# Catch-all para SPA (si aplica — Astro static no lo necesita)
+# /*                     /index.html         200
+
+# Proxy para APIs (si aplica)
+/api/*                  https://api.addendo.io/:splat     200
+```
+
+**Deploy a producción:**
+- `git push origin main` → auto-deploy
+- Preview deploys en branches: `git push origin feature-x` → URL preview única
+- Rollback: Cloudflare Dashboard > Pages > Deployments > Rollback to previous
+
+### M.13 — Cloudflare Turnstile (CAPTCHA alternativo)
+
+**Qué es Turnstile:**
+Alternativa a hCaptcha/reCAPTCHA sin puzzles visuales molestos. Verifica humanos vs bots en background sin fricción usuario. 95% de usuarios pasan invisiblemente.
+
+**Costos:** GRATIS ilimitado (parte del ecosistema Cloudflare).
+
+**Cuándo usar Turnstile vs reCAPTCHA:**
+
+| Aspecto | Turnstile | reCAPTCHA v3 |
+|---|---|---|
+| UX | Invisible 95% | A veces desafío visual |
+| Privacy | Sin cookies Google | Entrega data a Google |
+| Pricing | Gratis ilimitado | Gratis hasta 1M/mes |
+| Integración | Trivial Cloudflare | Google Cloud API |
+| GDPR | Friendly | Requiere disclosure |
+
+**Setup en form Astro:**
+
+```astro
+---
+// src/components/ContactForm.astro
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+---
+
+<form id="contact-form" action="/api/contact" method="POST">
+  <div>
+    <label for="nombre">Nombre *</label>
+    <input type="text" id="nombre" name="nombre" required autocomplete="name" />
+  </div>
+
+  <div>
+    <label for="email">Email *</label>
+    <input type="email" id="email" name="email" required autocomplete="email" />
+  </div>
+
+  <div>
+    <label for="mensaje">Mensaje</label>
+    <textarea id="mensaje" name="mensaje" rows="4"></textarea>
+  </div>
+
+  <!-- Turnstile widget -->
+  <div class="cf-turnstile" data-sitekey={turnstileSiteKey}></div>
+
+  <button type="submit">Enviar mensaje</button>
+</form>
+
+<script
+  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+  async
+  defer
+></script>
+```
+
+**Env var requerida:**
+
+```bash
+# .env.local
+PUBLIC_TURNSTILE_SITE_KEY=0x4XXXXXXXXXXXXXXXXXXXXX   # pública (client-side)
+TURNSTILE_SECRET=0x4XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  # privada (server-side only)
+```
+
+**Validación server-side (en Cloudflare Worker, N8N webhook, o API route):**
+
+```javascript
+// N8N webhook o Cloudflare Worker
+async function verifyTurnstile(token, ip) {
+  const formData = new URLSearchParams();
+  formData.append('secret', process.env.TURNSTILE_SECRET);
+  formData.append('response', token);
+  if (ip) formData.append('remoteip', ip);
+
+  const response = await fetch(
+    'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+    { method: 'POST', body: formData }
+  );
+  const data = await response.json();
+
+  if (!data.success) {
+    console.error('Turnstile verification failed:', data['error-codes']);
+    return { valid: false, errors: data['error-codes'] };
+  }
+  return { valid: true };
+}
+```
+
+**Protocolo #21:**
+1. Implementar widget Turnstile en todos los forms del sitio
+2. Coordinar con #22 backend-dev (o N8N webhook) validación server-side
+3. Si Turnstile falla, mostrar error user-friendly + opción retry
+
+### M.14 — Cloudflare Images (alternativa a Cloudinary)
+
+**Qué es Cloudflare Images:**
+Optimización automática de imágenes con edge delivery. Alternativa económica a Cloudinary con integración nativa al ecosistema Cloudflare.
+
+**Costos:**
+- $5/mes por 100,000 imágenes almacenadas
+- $1 por 100,000 delivery requests
+
+**Cuándo usar Cloudflare Images vs Cloudinary:**
+
+| Aspecto | Cloudflare Images | Cloudinary |
+|---|---|---|
+| Addendo status | Opción emergente | YA configurado (cloud: `dokzw376u`) |
+| Pricing | $5 + $1 per batch | Free tier 25GB bandwidth + $89 Plus |
+| Transformations | Básicas (resize, format, quality) | Avanzadas (AI, face detect, eager transforms) |
+| Integración stack | Natural si resto Cloudflare | Independiente |
+| Cuándo elegir | Sitios nuevos con stack Cloudflare | Sitios con Cloudinary existente o features avanzadas |
+
+**Setup en Astro:**
+
+```astro
+---
+// src/components/CloudflareImage.astro
+interface Props {
+  imageId: string;
+  alt: string;
+  variant?: 'public' | 'thumbnail' | 'hero';
+  width?: number;
+  height?: number;
+  loading?: 'eager' | 'lazy';
+  fetchpriority?: 'high' | 'low' | 'auto';
+}
+
+const {
+  imageId,
+  alt,
+  variant = 'public',
+  width,
+  height,
+  loading = 'lazy',
+  fetchpriority = 'auto',
+} = Astro.props;
+
+const cloudflareAccountHash = import.meta.env.PUBLIC_CLOUDFLARE_IMAGES_HASH;
+const imageUrl = `https://imagedelivery.net/${cloudflareAccountHash}/${imageId}/${variant}`;
+---
+
+<img
+  src={imageUrl}
+  alt={alt}
+  width={width}
+  height={height}
+  loading={loading}
+  fetchpriority={fetchpriority}
+  decoding={loading === 'eager' ? 'sync' : 'async'}
+/>
+```
+
+**Variants configurables en Cloudflare Dashboard:**
+- `public`: 1920px wide max, quality 85
+- `thumbnail`: 400px wide max, quality 75
+- `hero`: 2400px wide max, quality 90
+- Custom variants según necesidad del cliente
+
+**Protocolo decisión Cloudflare Images vs Cloudinary:**
+- Cliente nuevo sin Cloudinary → evaluar Cloudflare Images si el resto del stack es Cloudflare
+- Cliente existente con Cloudinary → mantener Cloudinary (no migrar sin razón operativa)
+- Addendo default actual: Cloudinary (cloud `dokzw376u`)
+
+### M.15 — Handoff a #25 servidor-cloud (Cloudflare DNS/CDN/WAF/R2/D1/DNSSEC/Email Security)
+
+**Principio de delimitación no-negociable:**
+
+#21 USA Cloudflare Stream/Pages/Turnstile/Images (integra como developer frontend).
+**#25 servidor-cloud es DUEÑO de**:
+- DNS zones + records (A, AAAA, CNAME, TXT, MX, SPF, DKIM, DMARC)
+- CDN caching rules
+- WAF (Web Application Firewall) security rules
+- R2 bucket provisioning (object storage)
+- D1 database provisioning (edge SQL)
+- DNSSEC activation
+- Email Security (SPF/DKIM/DMARC records)
+- Certificados SSL/TLS mode (Full Strict / Flexible)
+- Rate limiting rules
+- Bot Management
+- Access policies (Cloudflare Access para apps internas)
+
+#22 backend-dev USA Cloudflare Workers + R2 + D1 (para APIs y backend logic).
+
+**#21 NO configura:**
+- Cloudflare DNS records
+- Cache rules a nivel zone
+- WAF rules
+- R2 buckets
+- D1 databases
+- DNSSEC
+- Email records (SPF/DKIM/DMARC)
+
+**#21 SÍ entrega a #25 en `/websites/[cliente]/deploy-config/cloudflare-handoff-25.md`:**
+- Dominio primary + subdominios necesarios
+- DNS records requeridos (con target values pending #25 provision)
+- Cache rules sugeridas (que #25 aprueba o ajusta)
+- WAF/Security level sugerido
+- Certificados SSL mode requerido
+- Email records si cliente usa email @dominio
+
+**Template `/websites/[cliente]/deploy-config/cloudflare-handoff-25.md`:**
+
+```markdown
+# Handoff Cloudflare Setup — {{CLIENTE}}
+
+## Handoff destinatario: #25 servidor-cloud
+
+## Domain setup
+- **Primary domain:** {{dominio.com}}
+- **Subdomains needed:**
+  - `www.{{dominio.com}}` → redirect a apex
+  - `api.{{dominio.com}}` → Cloudflare Workers (si aplica, via #22)
+
+## DNS records required
+
+| Type | Name | Target | TTL | Proxy |
+|---|---|---|---|---|
+| A | @ | {{DEPLOY_TARGET_IP o CNAME}} | Auto | Proxied |
+| CNAME | www | @ | Auto | Proxied |
+| TXT | @ | `v=spf1 include:_spf.google.com ~all` | Auto | N/A |
+| TXT | _dmarc | `v=DMARC1; p=quarantine; rua=mailto:{{email}}` | Auto | N/A |
+| TXT | {{verification}} | `google-site-verification=XXX` | Auto | N/A |
+
+## CDN / Caching rules sugeridas
+
+- `/_astro/*` → Cache Everything, Edge TTL 1 year
+- `/images/*` → Cache Everything, Edge TTL 1 year
+- `/fonts/*` → Cache Everything, Edge TTL 1 year
+- `/api/*` → Bypass cache
+- `/*` → Standard caching (Cloudflare default)
+
+## WAF / Security
+
+- **DDoS protection:** ON (default gratis)
+- **Bot Fight Mode:** ON (recomendado)
+- **Security level:** Medium (ajustable por #25 según tráfico real)
+- **Challenge Passage:** 30 min (default)
+- **Browser Integrity Check:** ON
+
+## SSL / TLS
+
+- **Mode:** Full (strict) — requiere certificado válido en origen (Vercel/Hostinger lo proveen)
+- **Minimum TLS version:** 1.2
+- **Opportunistic Encryption:** ON
+- **TLS 1.3:** ON
+- **HSTS:** ON con `max-age=31536000; includeSubDomains; preload` (después de verificar que site funciona sin issues)
+
+## Email Security (si cliente usa email @dominio)
+
+- **SPF record:** coordinar con provider email del cliente
+- **DKIM record:** coordinar con provider email
+- **DMARC policy:** empezar con `p=quarantine` → escalar a `p=reject` después de 30 días sin falsos positivos
+
+## Rate limiting (si aplica — sitio con forms públicos)
+
+- `/api/contact` → 5 requests/min per IP
+- `/api/*` → 30 requests/min per IP
+
+## Page Rules vs Configuration Rules
+
+Usar **Configuration Rules** (nuevo sistema Cloudflare 2023+) en lugar de Page Rules legacy.
+
+## Deliverables esperados de #25
+
+1. Zone activa con nameservers Cloudflare
+2. DNS records configurados
+3. SSL mode Full (strict) activo
+4. WAF rules baseline configuradas
+5. Certificate installed en origen (Vercel/Hostinger — coordinar con #45 deployment)
+6. Notificación a #21 cuando DNS propagation completa (TTL 24h máx)
+
+## Timeline esperado
+
+- Provisioning: 1-4 horas desde handoff
+- DNS propagation: 1-24 horas (típicamente <6 horas)
+- SSL certificate: inmediato con Cloudflare
+- Email records: 4-48 horas según provider
+```
+
+---
+
 ## G — ARQUITECTURA MULTI-IDIOMA TÉCNICO FRONTEND
 
 *Sección G del checklist World-Class v1.1 — dominio: implementación técnica de sitios multi-idioma con Astro i18n routing, hreflang obligatorio, content negotiation, URL structure SEO-friendly, RTL support, font subsetting por script, Intl APIs para date/number/currency localization, y modo agnóstico para mercados no-oficiales. No confundir con Multi-Idioma de #53 (tokens visuales permanentes que #21 aplica), #54 (Buyer Persona 12D multi-regional que #21 consume para IA), #16 (copy transcreado por variante regional que #21 ingesta), #18 (layouts multi-idioma que #21 implementa), #17 (creatives culturalmente relevantes que #21 integra) ni #45 (deploy multi-región). Este Multi-Idioma es implementación técnica frontend — i18n routing, hreflang, Intl APIs, font subsetting.*
@@ -4841,10 +5396,16 @@ Todos los outputs del #21 viven en el repositorio, versionados, accesibles por e
 ├── deploy-config/
 │   ├── hostinger.md                        # instrucciones deploy Hostinger (FTP/Git)
 │   ├── vercel.json                         # Vercel config (si target Vercel)
+│   ├── cloudflare-pages.md                 # Cloudflare Pages config (si target CF Pages)
+│   ├── _headers                            # Cloudflare Pages security headers
+│   ├── _redirects                          # Cloudflare Pages redirects
+│   ├── cloudflare-handoff-25.md            # handoff a #25 servidor-cloud (DNS/CDN/WAF/SSL)
 │   ├── client-server.md                    # instrucciones para client-owned
 │   ├── .htaccess                           # Hostinger Apache config (security headers)
 │   ├── nginx.conf                          # client-owned nginx config
 │   └── env-vars.md                         # documentación env vars por provider
+├── videos/
+│   └── cloudflare-stream-manifest.md       # manifest de videos Cloudflare Stream + IDs + schema VideoObject
 ├── performance-baseline.md                 # Lighthouse results pre-deploy
 ├── rollback-plan.md                        # cómo revertir si deploy falla
 ├── monitoring-setup.md                     # qué monitorear post-deploy (Web Vitals, errors)
@@ -4883,9 +5444,9 @@ Todos los outputs del #21 viven en el repositorio, versionados, accesibles por e
 
 ---
 
-## 20 MANDAMIENTOS DEL AGENTE FRONTEND DEV
+## 22 MANDAMIENTOS DEL AGENTE FRONTEND DEV
 
-Los siguientes 20 principios cierran el skill del agente #21 y actúan como referencia rápida durante operación. Cualquier implementación que viole uno de los 20 se audita y rehace. Consistente con el formato de 20 mandamientos de #6, #8, #11, #12, #15, #17, #52 del sistema Addendo World-Class.
+Los siguientes 22 principios cierran el skill del agente #21 y actúan como referencia rápida durante operación. Cualquier implementación que viole uno de los 22 se audita y rehace. Consistente con el formato de 20 mandamientos de #6, #8, #11, #12, #15, #17, #52 del sistema Addendo World-Class, extendido con 2 mandamientos específicos de integración Cloudflare (M11-M15).
 
 1. **Sin design de #18 diseno-web no hay implementación.** Figma specs + UI layouts + wireframes + responsive breakpoints obligatorios pre-setup. Si design ambiguo, escalar a #18 (nunca decidir por cuenta).
 
@@ -4926,6 +5487,10 @@ Los siguientes 20 principios cierran el skill del agente #21 y actúan como refe
 19. **Images: Astro Image/Picture component + AVIF+WebP + responsive widths + lazy loading + width/height explícitos.** `loading="eager"` + `fetchpriority="high"` SOLO para hero LCP.
 
 20. **Escalación a Web Developer humano senior obligatoria en los 12 escenarios Z.2** — SaaS multi-tenant complejo, backends custom, integraciones enterprise, alta concurrencia >50K, security audits enterprise, performance <200ms TTFB global, GraphQL federation, apps móviles nativas, WebGL/3D, blockchain, ML inference, design systems enterprise.
+
+21. **Videos embebidos van a Cloudflare Stream, NO YouTube embed (salvo decisión explícita del cliente).** Preservar branding premium + privacy (sin cookies Google) + performance (edge 300+ cities) + SEO técnico (schema.org VideoObject sin dependencia externa). Setup via componente `<CloudflareStream videoId={...} />` con `loading="lazy"` + poster WebP + `preload="metadata"` + `aspect-ratio: 16/9` obligatorio. Upload de videos es handoff a José/cliente (no #21).
+
+22. **Cloudflare DNS/CDN/WAF/R2/D1/DNSSEC/Email Security es territorio exclusivo de #25 servidor-cloud.** #21 hace handoff vía `/websites/[cliente]/deploy-config/cloudflare-handoff-25.md` con dominio + DNS records requeridos + cache rules sugeridas + SSL mode + WAF level, pero NO configura. #22 backend-dev USA Workers + R2 + D1 para backend logic. #21 USA solo Stream + Pages + Turnstile + Images como consumer frontend.
 
 ---
 
