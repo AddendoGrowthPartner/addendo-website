@@ -1,0 +1,173 @@
+{
+  "name": "TEST-50-prueba-haiku-saludo",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "test-50-saludo",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook Saludo",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [200, 300],
+      "webhookId": "test-50-saludo-webhook"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "specifyHeaders": "keypair",
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({model:\"claude-haiku-4-5-20251001\",max_tokens:200,system:\"Eres un saludador entusiasta. Saluda al usuario por su nombre en espanol en 2-3 lineas amigables.\",messages:[{role:\"user\",content:`Saluda a ${$json.body?.nombre || $json.nombre || \"amigo\"}`}]}) }}",
+        "options": {
+          "timeout": 30000,
+          "retry": {
+            "maxTries": 3,
+            "waitBetweenTries": 2000
+          }
+        }
+      },
+      "id": "claude-haiku",
+      "name": "Claude Haiku Saludo",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [460, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "lNoaGe4mmKeabat6",
+          "name": "Anthropic API Key"
+        }
+      },
+      "onError": "continueErrorOutput",
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// Extraer texto del response Claude + log estructurado\nconst response = $input.item.json;\nconst saludo = response.content?.[0]?.text || 'Saludo no disponible';\nconst traceId = `test-50-${Date.now()}-${Math.random().toString(36).substr(2, 8)}`;\n\n// Log estructurado\nconsole.log(JSON.stringify({\n  level: 'INFO',\n  event: 'saludo_generado_ok',\n  trace_id: traceId,\n  timestamp: new Date().toISOString(),\n  input_usage: response.usage,\n  length: saludo.length\n}));\n\nreturn {\n  json: {\n    saludo: saludo,\n    trace_id: traceId,\n    status: 'success',\n    model: response.model,\n    tokens_used: response.usage?.output_tokens || 0\n  }\n};"
+      },
+      "id": "extract-saludo",
+      "name": "Extraer Saludo + Log",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [720, 220]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "id": "respond-success",
+      "name": "Respuesta OK",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [980, 220]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// Self-healing fallback: Anthropic API fallo tras 3 retries\nconst traceId = `test-50-fb-${Date.now()}-${Math.random().toString(36).substr(2, 8)}`;\nconst nombre = $('Webhook Saludo').item.json.body?.nombre || $('Webhook Saludo').item.json.nombre || 'amigo';\n\n// Log estructurado de fallo + fallback activado\nconsole.log(JSON.stringify({\n  level: 'WARNING',\n  event: 'anthropic_api_fallback_activated',\n  trace_id: traceId,\n  timestamp: new Date().toISOString(),\n  reason: 'anthropic_api_3_retries_failed',\n  fallback_used: 'static_message'\n}));\n\nreturn {\n  json: {\n    saludo: `Hola ${nombre}, el servicio de saludos esta temporalmente no disponible. Intentalo de nuevo en unos minutos.`,\n    trace_id: traceId,\n    status: 'fallback',\n    model: 'fallback-static',\n    tokens_used: 0\n  }\n};"
+      },
+      "id": "fallback-handler",
+      "name": "Fallback Self-Healing",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [720, 380]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}",
+        "options": {
+          "responseCode": 503
+        }
+      },
+      "id": "respond-fallback",
+      "name": "Respuesta Fallback 503",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [980, 380]
+    }
+  ],
+  "connections": {
+    "Webhook Saludo": {
+      "main": [
+        [
+          {
+            "node": "Claude Haiku Saludo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude Haiku Saludo": {
+      "main": [
+        [
+          {
+            "node": "Extraer Saludo + Log",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Fallback Self-Healing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extraer Saludo + Log": {
+      "main": [
+        [
+          {
+            "node": "Respuesta OK",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fallback Self-Healing": {
+      "main": [
+        [
+          {
+            "node": "Respuesta Fallback 503",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "America/New_York",
+    "saveExecutionProgress": true,
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null
+}
