@@ -61,8 +61,8 @@
       ],
       "credentials": {
         "httpBasicAuth": {
-          "id": "DATAFORSEO_CREDENTIAL_ID",
-          "name": "DataForSEO API"
+          "id": "ged1wEVjgqEGsjq0",
+          "name": "DATA FOR SEO API"
         }
       }
     },
@@ -82,45 +82,46 @@
     },
     {
       "parameters": {
-        "resource": "message",
-        "operation": "create",
-        "modelId": {
-          "__rl": true,
-          "value": "claude-sonnet-4-20250514",
-          "mode": "list"
-        },
-        "messages": {
-          "messageValues": [
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "specifyHeaders": "keypair",
+        "headerParameters": {
+          "parameters": [
             {
-              "role": "user",
-              "message": "=Eres un experto en SEO y copywriting para servicios esotericos en espanol. Vas a escribir un articulo de blog completo de minimo 1,500 palabras optimizado para SEO sobre la keyword principal: \"{{ $json.keyword_seleccionada }}\"\n\nCONTEXTO DEL CLIENTE:\n- Nombre: Don Jacinto Nahual\n- Sitio: donjacintonahual.com\n- Servicios: brujo, curandero, limpias espirituales, amarres de amor, tarot, rituales\n- Audiencia: hispanos en USA (Los Angeles, Houston, Chicago, Miami, Nueva York)\n- Tono: respetuoso, autoritativo, calido, sin sensacionalismo\n\nDATOS DE LA KEYWORD:\n- Keyword principal: {{ $json.keyword_seleccionada }}\n- Volumen mensual: {{ $json.volumen }}\n- Dificultad: {{ $json.dificultad }}\n\nREQUISITOS DEL ARTICULO:\n\n1. LONGITUD: minimo 1,500 palabras de contenido real (no contar el frontmatter)\n\n2. ESTRUCTURA:\n- Frontmatter Astro.js completo (ver formato abajo)\n- H1 con la keyword principal\n- Primer parrafo: respuesta directa con la keyword principal en las primeras 60 palabras\n- 5-7 secciones H2 que cubran sub-temas relacionados\n- H3 dentro de los H2 cuando aplique\n- FAQ al final con minimo 5 preguntas y respuestas\n- Conclusion con CTA hacia los servicios de Don Jacinto\n\n3. SEO:\n- Keyword principal en H1, primer parrafo, ultima parrafo, y minimo 8 veces naturalmente en el cuerpo\n- Keywords secundarias relacionadas con el nicho esoterico\n- Mencion de las ciudades target (LA, Houston, Chicago, Miami, NY)\n\n4. CTA FINAL:\n- Invitar a contactar a Don Jacinto Nahual\n- Mencionar consulta confidencial\n- Telefono / WhatsApp para contacto inmediato\n\n5. CONTENIDO:\n- Real y especifico, sin placeholders tipo [aqui va X]\n- Educativo y respetuoso\n- Sin promesas medicas o legales\n- Sin palabras tipo \"garantizado al 100%\"\n- Tono profesional pero accesible\n\nFORMATO DE FRONTMATTER ASTRO.JS (incluir EXACTAMENTE asi al inicio):\n\n---\ntitle: \"[titulo SEO con keyword - max 60 caracteres]\"\ndescription: \"[meta description con keyword - max 155 caracteres]\"\npubDate: \"{{ $json.fecha }}\"\nauthor: \"Don Jacinto Nahual\"\nimage: \"/blog/{{ $json.slug }}.jpg\"\ntags: [\"[tag1]\", \"[tag2]\", \"[tag3]\", \"[tag4]\", \"[tag5]\"]\nslug: \"{{ $json.slug }}\"\n---\n\n[Aqui empieza el articulo con H1, intro, contenido, FAQ, conclusion]\n\nIMPORTANTE: devuelve UNICAMENTE el contenido del archivo .md completo, empezando con --- del frontmatter. No agregues explicaciones, comentarios, ni texto adicional fuera del archivo."
+              "name": "anthropic-version",
+              "value": "2023-06-01"
             }
           ]
         },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({model:\"claude-sonnet-4-6\",max_tokens:12000,messages:[{role:\"user\",content:`Eres Don Jacinto Nahual, brujo y curandero con mas de 30 años de practica en la tradicion esoterica mexicana, heredero de una familia con cuatro generaciones de curanderos en Oaxaca. Actualmente atiendes a la comunidad hispana en Estados Unidos desde tu sitio donjacintonahual.com.\n\nVas a escribir un articulo de blog de minimo 1,800 palabras sobre la keyword principal: \"${$json.keyword_seleccionada}\"\n\nEl articulo debe leerse como si lo hubiera escrito un experto humano en cultura esoterica hispana — NO como contenido generado por IA.\n\nCONTEXTO DEL CLIENTE:\n- Nombre: Don Jacinto Nahual\n- Sitio: donjacintonahual.com\n- Servicios: brujo, curandero, limpias espirituales, amarres de amor, tarot, rituales, trabajos de proteccion\n- Audiencia: hispanos en USA (Los Angeles, Houston, Chicago, Miami, Nueva York)\n- Tono: respetuoso, autoritativo, calido, profundamente conocedor, sin sensacionalismo\n\nDATOS DE LA KEYWORD:\n- Keyword principal: ${$json.keyword_seleccionada}\n- Volumen mensual: ${$json.volumen}\n- Dificultad: ${$json.dificultad}\n\nREQUISITOS DEL ARTICULO:\n\n1. LONGITUD\nMinimo 1,800 palabras de contenido real (sin contar frontmatter ni schema).\n\n2. ESTRUCTURA\n- Frontmatter Astro.js completo (ver formato abajo, incluyendo alt_text)\n- H1 con la keyword principal\n- Primer parrafo: respuesta directa con la keyword principal en las primeras 60 palabras\n- 6-8 secciones H2 que cubran sub-temas relacionados\n- H3 dentro de los H2 cuando aplique\n- FAQ al final con minimo 6 preguntas y respuestas\n- Conclusion con CTA hacia los servicios de Don Jacinto\n- Bloque de JSON-LD Schema FAQ al final del archivo (ver formato abajo)\n\n3. SEO\n- Keyword principal en H1, primer parrafo, ultimo parrafo, y minimo 10 veces naturalmente en el cuerpo\n- Keywords secundarias relacionadas con el nicho esoterico (curanderismo, santeria, brujeria tradicional, limpias, rituales, amarres, proteccion espiritual)\n- Mencion de las ciudades target (Los Angeles, Houston, Chicago, Miami, Nueva York)\n\n4. E-E-A-T (EXPERIENCIA, EXPERTISE, AUTORIDAD, CONFIANZA)\nEsto es critico. El articulo debe transmitir autoridad autentica:\n- Mencionar los 30+ años de practica de Don Jacinto\n- Referir a la tradicion familiar de cuatro generaciones en Oaxaca\n- Mencionar que ha ayudado a miles de personas de la comunidad hispana en Estados Unidos\n- Referenciar tradiciones autenticas: curanderismo mexicano, santeria cubana, brujeria tradicional, trabajos con San Miguel Arcangel, Santa Muerte (cuando aplique), limpias con huevo, ruda, copal, cuarzos\n- Usar terminologia correcta del mundo esoterico hispano (no inventar palabras)\n- Demostrar conocimiento profundo mencionando procesos reales: las fases de la luna, dias propicios, elementos tradicionales\n\n5. TONO Y CALIDAD (CRITICO — el articulo no debe sonar a IA)\n- Parrafos cortos de maximo 3-4 lineas cada uno\n- Usar lenguaje natural de la comunidad hispana en USA (spanglish ocasional permitido: aparte de eso, regular que bueno, es lo que hay, etc.)\n- Incluir 2-3 historias cortas anonimas de situaciones tipicas que viven los clientes (sin inventar testimonios especificos con nombres)\n- Variar la longitud de oraciones — mezclar frases cortas con frases medianas\n- Incluir modismos regionales mexicanos cuando sea natural\n- Escribir en primera persona (\"yo\", \"en mi experiencia\", \"he visto\", \"atendi\") — es Don Jacinto quien escribe\n- Evitar frases tipicas de IA: \"en el mundo de hoy\", \"sin duda alguna\", \"es importante destacar\", \"en conclusion\"\n- Evitar listas demasiado perfectas con bullets iguales — alternar formatos\n\n6. INTERNAL LINKS\nIncluir de forma natural 2-3 enlaces internos a otras paginas del sitio donjacintonahual.com con esta sintaxis markdown:\n- [texto descriptivo](/servicios/[nombre-servicio])  — por ejemplo /servicios/amarres-de-amor\n- [texto descriptivo](/ciudades/[nombre-ciudad])      — por ejemplo /ciudades/los-angeles\n- [texto descriptivo](/blog/[otro-articulo])          — enlace a otro articulo relacionado\n\nElegir enlaces que sean contextualmente relevantes al tema del articulo.\n\n7. IMAGENES\nSugerir en el cuerpo del articulo 2-3 puntos donde insertar imagenes, usando este formato:\n\n\\`\\`\\`\n<!-- IMAGEN: [descripcion-breve-slug] | ALT: [texto alt SEO optimizado con keyword o variante] -->\n\\`\\`\\`\n\nColocar estos comentarios en puntos logicos: despues de H2, en transiciones importantes.\n\n8. CONTENIDO\n- Real y especifico, sin placeholders tipo [aqui va X]\n- Educativo y respetuoso\n- Sin promesas medicas (no decir \"cura\" ni \"sana\" enfermedades reales)\n- Sin promesas legales\n- Sin palabras tipo \"garantizado al 100%\" ni \"funciona siempre\"\n- Respetuoso con las creencias y tradiciones\n\n9. CTA FINAL\n- Invitar a contactar a Don Jacinto Nahual para una consulta confidencial\n- Mencionar telefono / WhatsApp para contacto inmediato\n- Recordar que cada caso es unico y requiere evaluacion personal\n\nFORMATO DE FRONTMATTER ASTRO.JS (incluir EXACTAMENTE asi al inicio):\n\n---\ntitle: \"[titulo SEO con keyword - max 60 caracteres]\"\ndescription: \"[meta description con keyword - max 155 caracteres]\"\npubDate: \"${$json.fecha}\"\nauthor: \"Don Jacinto Nahual\"\nimage: \"/blog/${$json.slug}.jpg\"\nalt_text: \"[alt text SEO de la imagen principal, incluyendo keyword]\"\ntags: [\"[tag1]\", \"[tag2]\", \"[tag3]\", \"[tag4]\", \"[tag5]\"]\nslug: \"${$json.slug}\"\n---\n\n[Aqui empieza el articulo con H1, intro, contenido, FAQ, conclusion]\n\nFORMATO DEL BLOQUE SCHEMA FAQ JSON-LD (incluir al final del archivo, despues de la conclusion):\n\n<script type=\"application/ld+json\">\n{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"FAQPage\",\n  \"mainEntity\": [\n    {\n      \"@type\": \"Question\",\n      \"name\": \"[Pregunta 1 textual del FAQ del articulo]\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"[Respuesta 1 textual del articulo]\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"[Pregunta 2 textual del FAQ del articulo]\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"[Respuesta 2 textual del articulo]\"\n      }\n    }\n  ]\n}\n</script>\n\nIncluir en el schema TODAS las preguntas del FAQ del articulo (minimo 6).\n\nIMPORTANTE: devuelve UNICAMENTE el contenido del archivo .md completo, empezando con --- del frontmatter y terminando con el </script> del schema FAQ. No agregues explicaciones, comentarios, ni texto adicional fuera del archivo.`}]}) }}",
         "options": {
-          "maxTokensToSample": 8000,
-          "temperature": 0.7
+          "timeout": 180000
         }
       },
       "id": "claude-articulo",
       "name": "Claude - Escribir Articulo",
-      "type": "@n8n/n8n-nodes-langchain.anthropic",
-      "typeVersion": 1.3,
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
       "position": [
         1180,
         300
       ],
       "credentials": {
-        "anthropicApi": {
-          "id": "ANTHROPIC_CREDENTIAL_ID",
-          "name": "Anthropic Claude"
+        "httpHeaderAuth": {
+          "id": "lNoaGe4mmKeabat6",
+          "name": "Anthropic API Key"
         }
       }
     },
     {
       "parameters": {
         "mode": "runOnceForEachItem",
-        "jsCode": "// Combinar el articulo generado con metadata del workflow\nconst articulo = $input.item.json.message?.content?.[0]?.text || $input.item.json.text || $input.item.json.content || '';\n\n// Recuperar datos del nodo anterior\nconst metadata = $('Seleccionar Mejor Keyword').item.json;\n\n// Validar que el articulo tiene frontmatter\nif (!articulo.startsWith('---')) {\n  throw new Error('El articulo generado no tiene frontmatter valido');\n}\n\n// Validar longitud minima\nif (articulo.length < 5000) {\n  throw new Error(`Articulo muy corto: ${articulo.length} caracteres (minimo 5000)`);\n}\n\nreturn {\n  json: {\n    ...metadata,\n    contenido_articulo: articulo,\n    contenido_base64: Buffer.from(articulo).toString('base64'),\n    longitud_caracteres: articulo.length,\n    commit_message: `blog: articulo SEO - ${metadata.keyword_seleccionada}`,\n    ruta_archivo: `src/content/blog/${metadata.nombre_archivo}`\n  }\n};"
+        "jsCode": "// Combinar el articulo generado con metadata del workflow\nconst articulo = $input.item.json.content?.[0]?.text || $input.item.json.message?.content?.[0]?.text || $input.item.json.text || (typeof $input.item.json.content === 'string' ? $input.item.json.content : '') || '';\n\n// Recuperar datos del nodo anterior\nconst metadata = $('Seleccionar Mejor Keyword').item.json;\n\n// Validar que el articulo tiene frontmatter\nif (!articulo.startsWith('---')) {\n  throw new Error('El articulo generado no tiene frontmatter valido');\n}\n\n// Validar longitud minima\nif (articulo.length < 5000) {\n  throw new Error(`Articulo muy corto: ${articulo.length} caracteres (minimo 5000)`);\n}\n\nreturn {\n  json: {\n    ...metadata,\n    contenido_articulo: articulo,\n    contenido_base64: Buffer.from(articulo).toString('base64'),\n    longitud_caracteres: articulo.length,\n    commit_message: `blog: articulo SEO - ${metadata.keyword_seleccionada}`,\n    ruta_archivo: `src/content/blog/${metadata.nombre_archivo}`\n  }\n};"
       },
       "id": "preparar-archivo",
       "name": "Preparar Archivo para GitHub",
@@ -160,8 +161,8 @@
       ],
       "credentials": {
         "githubApi": {
-          "id": "GITHUB_CREDENTIAL_ID",
-          "name": "GitHub AddendoGrowthPartner"
+          "id": "BLtCJndDdFHyiUz4",
+          "name": "GitHub API"
         }
       }
     },
@@ -170,7 +171,7 @@
         "method": "POST",
         "url": "https://indexing.googleapis.com/v3/urlNotifications:publish",
         "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "googleApi",
+        "nodeCredentialType": "googleOAuth2Api",
         "sendBody": true,
         "specifyBody": "json",
         "jsonBody": "={\n  \"url\": \"{{ $('Preparar Archivo para GitHub').item.json.url_articulo }}\",\n  \"type\": \"URL_UPDATED\"\n}",
@@ -187,9 +188,9 @@
         300
       ],
       "credentials": {
-        "googleApi": {
-          "id": "GOOGLE_INDEXING_CREDENTIAL_ID",
-          "name": "Google Indexing API"
+        "googleOAuth2Api": {
+          "id": "Tk0M3WJ3EiEG9vhX",
+          "name": "GOOGLE INDEXING API"
         }
       }
     },
@@ -211,8 +212,8 @@
       ],
       "credentials": {
         "gmailOAuth2": {
-          "id": "GMAIL_CREDENTIAL_ID",
-          "name": "Gmail Addendo"
+          "id": "rD8DDJhSiG1dpOwO",
+          "name": "Gmail API"
         }
       }
     }
@@ -307,34 +308,12 @@
       ]
     }
   },
-  "active": false,
   "settings": {
     "executionOrder": "v1",
     "saveManualExecutions": true,
     "callerPolicy": "workflowsFromSameOwner",
     "errorWorkflow": "",
-    "timezone": "America/New_York"
-  },
-  "versionId": "1",
-  "meta": {
-    "instanceId": "addendo-n8n",
-    "client": "don-jacinto-nahual",
-    "purpose": "blog-automation-seo",
-    "schedule": "daily-6am-est",
-    "agent": "growth-content-specialist + seo + copywriting"
-  },
-  "tags": [
-    {
-      "name": "addendo"
-    },
-    {
-      "name": "blog-automation"
-    },
-    {
-      "name": "don-jacinto-nahual"
-    },
-    {
-      "name": "seo"
-    }
-  ]
+    "timezone": "America/New_York",
+    "availableInMCP": false
+  }
 }
