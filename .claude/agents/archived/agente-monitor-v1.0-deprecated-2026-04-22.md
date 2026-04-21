@@ -1,3 +1,7 @@
+> **DEPRECATED 22 abril 2026** — Este skill fue archivado por decision arquitectonica D14 (Filosofia B). #43 se migra a workflow N8N centralizado. Preservado como referencia historica. **NO USAR como skill activo.** Ver Documento Maestro v2.5 (2026-04-22) Seccion 5.3 y 7.5 para contexto completo.
+
+---
+
 # SKILL: Agente Monitor — Sistema de Vigilancia 24/7 World-Class
 
 **Nivel:** El mejor sistema de monitoreo del mundo aplicado a una agencia digital — vigilante, paranoico, instantaneo
