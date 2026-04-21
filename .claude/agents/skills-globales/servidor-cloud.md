@@ -130,6 +130,31 @@ Implicancia: #25 NO diseña pipelines, NO hace migraciones multi-cloud, NO redac
 Por qué: Interpretación C (Orquestación con Fronteras Absolutas). Otros agentes NO pueden ejercer estos verbos sobre infra viva. Evita solapamiento destructivo.
 Implicancia: Si #43 agente-monitor detecta CPU 95% → escala a #25 para ADMINISTRAR (no intenta reparar él mismo).
 
+**Trazabilidad de decisión D2 — divergencia vs propuesta CEO original:**
+
+La propuesta original del CEO José Raúl Ramírez (21 abril 2026, sesión arquitectónica) planteaba 4 verbos: OPERAR / MANTENER / RESPALDAR / AUTO-HEALING-INFRA.
+
+Durante la nivelación se aplicó taxonomía SRE moderna (estándar Google SRE, Netflix, AWS Well-Architected Framework) que divide las disciplinas Cloud Engineering en 4 dimensiones funcionales distintas: Administer / Observe / Optimize / Self-heal. Esto produjo los verbos finales ADMINISTRAR / OBSERVAR / AUTO-HEALING-INFRA / OPTIMIZAR.
+
+Equivalencia semántica:
+
+| Propuesta CEO original | Verbo final aplicado | Relación semántica |
+|---|---|---|
+| OPERAR | ADMINISTRAR | Equivalente — ADMINISTRAR es término más preciso para "ejecutar comandos sobre infra viva" |
+| MANTENER | (distribuido en ADMINISTRAR + OBSERVAR) | MANTENER es actividad continua, no verbo exclusivo canónico. Sus acciones operativas (updates OS/SSL, rotación credenciales operacionales) se ejercen vía ADMINISTRAR. Sus acciones de vigilancia (detectar parches pendientes, ver estado SSL) se ejercen vía OBSERVAR. |
+| RESPALDAR | (dominio intacto en FASE 7, verbo absorbido en ADMINISTRAR + OPTIMIZAR) | RESPALDAR se preservó como DOMINIO completo en FASE 7 Backups 3-2-1 (íntegra). Como verbo exclusivo se absorbió: ejecutar backups es ADMINISTRAR (snapshot, rsync); optimizar retención y tier es OPTIMIZAR. |
+| AUTO-HEALING-INFRA | AUTO-HEALING-INFRA | Idéntico — preservado literal para deslinde con AUTORREPARAR-WORKFLOWS de #50. |
+| (nuevo) | OBSERVAR | Añadido — recolectar métricas, logs, estado. En propuesta original estaba implícito en MANTENER. |
+| (nuevo) | OPTIMIZAR | Añadido — right-sizing, eliminación recursos huérfanos, caching, cost optimization. En propuesta original no tenía verbo explícito pese a estar en FASE 9 Costos. |
+
+**Justificación arquitectónica del cambio:** la taxonomía SRE moderna (4D: Administer / Observe / Optimize / Self-heal) es el estándar de la industria para roles Cloud Engineer. Provee deslindes más limpios que verbos tradicionales, alinea el skill con referencia Google SRE + AWS Well-Architected, y habilita métricas de madurez operacional comparables con empresas cloud-native.
+
+**Cobertura operacional:** ninguna capacidad de la propuesta CEO original se perdió. MANTENER y RESPALDAR siguen ejerciéndose dentro del skill — como actividades/dominios, no como verbos canónicos. Ver FASE 3 (mantenimiento operacional), FASE 6 (mantenimiento de seguridad), FASE 7 (dominio RESPALDAR completo) y las 25 Mandamientos (acciones específicas).
+
+**Deslinde con #50 preservado:** el verbo AUTO-HEALING-INFRA (con guión) se mantiene literal exactamente para evitar ambigüedad con AUTORREPARAR-WORKFLOWS de #50 (PERFECTO PURO v1.1.1). Ver Frontera F14 + línea L88 del skill + Decisión D3.
+
+**Validación de decisión:** el CEO autorizó esta divergencia como addendum menor post-nivelación el 21 abril 2026, tras verificación objetiva que confirmó equivalencia funcional + superioridad técnica de la taxonomía SRE vs la propuesta original.
+
 **D3 — AUTO-HEALING-INFRA con guión es deliberado.**
 Por qué: Distinguir inequívocamente del AUTORREPARAR-WORKFLOWS del skill #50. Un lector que vea ambas palabras sabe instantáneamente que son dominios distintos (infra vs workflow lógico).
 Implicancia: NUNCA renombrar a AUTORREPARAR, AUTOREPAIR, SELF-HEALING-INFRA ni variantes. El guión es parte del identificador canónico.
@@ -2983,6 +3008,8 @@ Registro canónico de cambios al skill. Formato: **vX.Y.Z (YYYY-MM-DD) — descr
 ### v1.1.0 (2026-04-21) — Nivelación World-Class v1.1
 
 **Contexto:** Auditoría de v1.0 arrojó 35.5/110. Sesión 2 con CEO cerró decisiones arquitecturales D1-D6 (21 abril 2026). Este release implementa las 20 mejoras priorizadas.
+
+**Addendum post-nivelación (21 abril 2026):** documentada trazabilidad de divergencia verbos exclusivos CEO propuesta vs aplicación SRE moderna. Ver Decisión D2 sección final.
 
 **Cambios estructurales:**
 - CAMBIO 1 — Header nuevo con rol canónico **Cloud Engineer Puro** (supera "Administrador de Infraestructura" genérico de v1.0)
