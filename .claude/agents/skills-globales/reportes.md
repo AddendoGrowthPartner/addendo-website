@@ -744,12 +744,14 @@ REPORTE 3: Top creatividades
 
 ```
 1. Acceso al MCC de Addendo: 424-957-3841
-2. Developer Token: njnh3UyX0kvCjWRVmsG-Jg
+2. Developer Token: {{GOOGLE_ADS_DEVELOPER_TOKEN}}
 3. OAuth 2.0 setup en Google Cloud Console
 4. Generar refresh token
 5. Configurar nodo HTTP en N8N con headers correctos
 6. Endpoint: https://googleads.googleapis.com/v15/customers/{customer_id}/googleAds:search
 ```
+
+> **Nota:** Token almacenado en variable de entorno. Rotado 20 abril 2026. Nuevo token pendiente de instalacion por CEO.
 
 **Metricas clave (GAQL query):**
 

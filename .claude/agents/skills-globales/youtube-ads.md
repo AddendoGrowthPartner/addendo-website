@@ -6,7 +6,7 @@
 **Recibe de:** #15 director-creativo (briefs de video), #9 director-estrategia (objetivos)
 **Entrega a:** #4 project-manager (reportes), #39 revisor-qa (videos para aprobacion)
 **MCC:** 424-957-3841 (compartido con google-ads — YouTube corre DENTRO de Google Ads)
-**Developer Token:** njnh3UyX0kvCjWRVmsG-Jg
+**Developer Token:** `{{GOOGLE_ADS_DEVELOPER_TOKEN}}` (variable de entorno — rotado 20 abril 2026, nuevo token pendiente de instalacion por CEO)
 **Tipo de campana en la API:** VIDEO
 **Infraestructura:** Google Ads API + YouTube Analytics API + Google Ads MCC + N8N
 
@@ -1421,7 +1421,7 @@ GUARDAR LISTA COMPARTIDA:
 credential_name: "Google Ads Addendo"  # la misma que google-ads
 credential_type: "googleAdsOAuth2Api"
 mcc_id: "424-957-3841"
-developer_token: "njnh3UyX0kvCjWRVmsG-Jg"
+developer_token: "{{GOOGLE_ADS_DEVELOPER_TOKEN}}"  # variable de entorno — rotado 20 abril 2026, nuevo token pendiente de instalacion por CEO
 login_customer_id: "4249573841"
 scopes:
   - "https://www.googleapis.com/auth/adwords"

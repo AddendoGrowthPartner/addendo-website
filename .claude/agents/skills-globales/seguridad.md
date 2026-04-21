@@ -264,7 +264,8 @@ META BUSINESS MANAGER
 
 GOOGLE ADS MCC
   MCC ID: 424-957-3841
-  Developer Token: njnh3UyX0kvCjWRVmsG-Jg
+  Developer Token: {{GOOGLE_ADS_DEVELOPER_TOKEN}}
+  (Nota: Token almacenado en variable de entorno. Rotado 20 abril 2026. Nuevo token pendiente de instalacion por CEO.)
   
   REQUERIMIENTOS:
   ✅ MFA OBLIGATORIO
