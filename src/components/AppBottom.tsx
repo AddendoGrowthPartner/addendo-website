@@ -14,9 +14,9 @@ const LazyFallback = <div className="py-20" />;
 // Bottom half of the page, rendered after the static Process / Infrastructure /
 // WhyAddendo Astro islands. Has its own I18nProvider; cross-island sync
 // happens through the 'addendo-lang-change' CustomEvent handled inside it.
-export default function AppBottom() {
+export default function AppBottom({ lang = 'es' }: { lang?: 'es' | 'en' }) {
   return (
-    <I18nProvider>
+    <I18nProvider initialLang={lang}>
       <Suspense fallback={LazyFallback}>
         <Testimonials />
       </Suspense>

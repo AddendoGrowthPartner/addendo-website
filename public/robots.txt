@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /pulse
+Disallow: /api/
 
-Sitemap: https://addendo.io/sitemap.xml
+Sitemap: https://addendo.io/sitemap-index.xml

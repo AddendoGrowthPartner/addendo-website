@@ -14,6 +14,10 @@ interface Props {
   heroWidth?: number;      // default 1200
   heroHeight?: number;     // default 800
   slug: string;
+  lang?: 'es' | 'en';      // default 'es' — determina cuál par title/desc usar
+  alternates?: { es: string; en: string };
+  author?: { type: 'Person' | 'Organization'; name: string; url?: string };
+  tzOffset?: string;       // e.g. '-04:00' (EDT), '-05:00' (EST)
 }
 
 const {
@@ -29,29 +33,53 @@ const {
   heroWidth = 1200,
   heroHeight = 800,
   slug,
+  lang = 'es',
+  alternates,
+  author = { type: 'Organization', name: 'Addendo Growth Partner', url: 'https://addendo.io' },
+  tzOffset = '-04:00',
 } = Astro.props;
+
+const isoDate = `${date}T00:00:00${tzOffset}`;
+const schemaAuthor = author.url
+  ? { "@type": author.type, "name": author.name, "url": author.url }
+  : { "@type": author.type, "name": author.name };
 
 const SITE = 'https://addendo.io';
 
-const canonical = `${SITE}/blog/${slug}`;
+const path = lang === 'en' ? `/en/blog/${slug}/` : `/blog/${slug}`;
+const canonical = `${SITE}${path}`;
 const ogImage = heroImg.startsWith('http') ? heroImg : `${SITE}${heroImg}`;
-const metaTitleEs = `${titleEs} | Addendo`;
-const metaTitleEn = `${titleEn} | Addendo`;
+
+const title = lang === 'en' ? titleEn : titleEs;
+const description = lang === 'en' ? descEn : descEs;
+const metaTitle = `${title} | Addendo`;
 
 const monthsEs = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
 const monthsEn = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 const [yyyy, mm] = date.split('-');
 const monthIdx = parseInt(mm, 10) - 1;
-const monthYearEs = `${monthsEs[monthIdx][0].toUpperCase()}${monthsEs[monthIdx].slice(1)} ${yyyy}`;
-const monthYearEn = `${monthsEn[monthIdx]} ${yyyy}`;
+const monthYear = lang === 'en'
+  ? `${monthsEn[monthIdx]} ${yyyy}`
+  : `${monthsEs[monthIdx][0].toUpperCase()}${monthsEs[monthIdx].slice(1)} ${yyyy}`;
+
+const backLabel = lang === 'en' ? 'Back to home' : 'Volver al inicio';
+const readLabel = lang === 'en' ? `${readTime} min read` : `${readTime} min de lectura`;
+const ctaText = lang === 'en'
+  ? 'Ready to automate your marketing with AI?'
+  : '¿Listo para automatizar tu marketing con IA?';
+const ctaBtn = lang === 'en' ? 'Schedule your free call' : 'Agenda tu llamada gratuita';
+const allArticlesLabel = lang === 'en' ? 'View all articles' : 'Ver todos los artículos';
+const allArticlesHref = lang === 'en' ? '/en/blog/' : '/blog';
 ---
 
 <Layout
-  title={metaTitleEs}
-  description={descEs}
+  title={metaTitle}
+  description={description}
   ogImage={ogImage}
   canonical={canonical}
   preloadImage={heroImg}
+  lang={lang}
+  alternates={alternates}
 >
   <article class="blog-post">
     <!-- Hero -->
@@ -67,32 +95,22 @@ const monthYearEn = `${monthsEn[monthIdx]} ${yyyy}`;
       />
       <div class="blog-hero-overlay"></div>
       <div class="blog-hero-inner">
-        <a href="/" class="blog-back" aria-label="Volver al inicio / Back to home">
+        <a href={lang === 'en' ? '/en/' : '/'} class="blog-back" aria-label={backLabel}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
             <line x1="19" y1="12" x2="5" y2="12"></line>
             <polyline points="12 19 5 12 12 5"></polyline>
           </svg>
-          <span data-lang-es>Volver al inicio</span>
-          <span data-lang-en>Back to home</span>
+          <span>{backLabel}</span>
         </a>
 
         <span class="blog-category">{category}</span>
 
-        <h1 class="blog-title">
-          <span data-lang-es>{titleEs}</span>
-          <span data-lang-en>{titleEn}</span>
-        </h1>
+        <h1 class="blog-title">{title}</h1>
 
         <div class="blog-meta">
-          <time datetime={date}>
-            <span data-lang-es>{monthYearEs}</span>
-            <span data-lang-en>{monthYearEn}</span>
-          </time>
+          <time datetime={date}>{monthYear}</time>
           <span class="blog-meta-sep" aria-hidden="true">•</span>
-          <span>
-            <span data-lang-es>{readTime} min de lectura</span>
-            <span data-lang-en>{readTime} min read</span>
-          </span>
+          <span>{readLabel}</span>
         </div>
       </div>
     </header>
@@ -102,13 +120,9 @@ const monthYearEn = `${monthsEn[monthIdx]} ${yyyy}`;
 
       <!-- CTA estándar -->
       <aside class="blog-cta">
-        <p class="blog-cta-text">
-          <span data-lang-es>¿Listo para automatizar tu marketing con IA?</span>
-          <span data-lang-en>Ready to automate your marketing with AI?</span>
-        </p>
-        <a href="https://addendo.io/#contacto" class="btn-gold text-base md:text-lg">
-          <span data-lang-es>Agenda tu llamada gratuita</span>
-          <span data-lang-en>Schedule your free call</span>
+        <p class="blog-cta-text">{ctaText}</p>
+        <a href={lang === 'en' ? '/en/#contacto' : '/#contacto'} class="btn-gold text-base md:text-lg">
+          <span>{ctaBtn}</span>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
             <line x1="5" y1="12" x2="19" y2="12"></line>
             <polyline points="12 5 19 12 12 19"></polyline>
@@ -117,8 +131,8 @@ const monthYearEn = `${monthsEn[monthIdx]} ${yyyy}`;
       </aside>
 
       <div style="text-align:center; margin-top: 2rem;">
-        <a href="/blog" style="color: #C9A84C; text-decoration: none; font-size: 0.9rem; border: 1px solid rgba(201,168,76,0.3); padding: 0.75rem 1.5rem; border-radius: 9999px;">
-          &larr; <span data-lang-es>Ver todos los artículos</span><span data-lang-en>View all articles</span>
+        <a href={allArticlesHref} style="color: #C9A84C; text-decoration: none; font-size: 0.9rem; border: 1px solid rgba(201,168,76,0.3); padding: 0.75rem 1.5rem; border-radius: 9999px;">
+          &larr; {allArticlesLabel}
         </a>
       </div>
     </div>
@@ -128,13 +142,12 @@ const monthYearEn = `${monthsEn[monthIdx]} ${yyyy}`;
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": titleEs,
-    "alternativeHeadline": titleEn,
-    "description": descEs,
+    "headline": title,
+    "description": description,
     "image": ogImage,
-    "datePublished": date,
-    "dateModified": date,
-    "author": { "@type": "Organization", "name": "Addendo Growth Partner", "url": SITE },
+    "datePublished": isoDate,
+    "dateModified": isoDate,
+    "author": schemaAuthor,
     "publisher": {
       "@type": "Organization",
       "name": "Addendo Growth Partner",
@@ -142,6 +155,6 @@ const monthYearEn = `${monthsEn[monthIdx]} ${yyyy}`;
     },
     "mainEntityOfPage": { "@type": "WebPage", "@id": canonical },
     "articleSection": category,
-    "inLanguage": ["es", "en"]
+    "inLanguage": lang
   })} />
 </Layout>

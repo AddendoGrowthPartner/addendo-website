@@ -13,28 +13,20 @@ interface I18nCtx {
 
 const I18nContext = createContext<I18nCtx>({ t: es, lang: 'es', setLang: () => {} });
 
-export function I18nProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>('es');
+interface I18nProviderProps {
+  children: ReactNode;
+  initialLang?: Lang;
+}
 
-  useEffect(() => {
-    // Resolve initial language — storage wins, otherwise navigator lang.
-    const stored = localStorage.getItem('addendo-lang') as Lang | null;
-    let detected: Lang;
-    if (stored && (stored === 'es' || stored === 'en')) {
-      detected = stored;
-    } else {
-      const browserLang = (navigator.language || '').toLowerCase();
-      detected = browserLang.startsWith('es') ? 'es' : 'en';
-      localStorage.setItem('addendo-lang', detected);
-    }
-    setLangState(detected);
-    // Propagate to static .astro islands that listen for this event.
-    document.documentElement.setAttribute('data-lang', detected);
-    window.dispatchEvent(new CustomEvent('addendo-lang-change', { detail: detected }));
-  }, []);
+export function I18nProvider({ children, initialLang = 'es' }: I18nProviderProps) {
+  // Initial state comes from the Astro-provided prop so SSR and first client
+  // render agree (no hydration mismatch). The source of truth for language is
+  // the URL path (/en/* vs everything else), which Astro resolves at build
+  // time and passes down.
+  const [lang, setLangState] = useState<Lang>(initialLang);
 
-  // Keep multiple I18nProvider instances (one per React island) in sync: when
-  // one island triggers a language change, the others update their state too.
+  // Cross-island sync: if any I18nProvider dispatches a language change (e.g.
+  // a widget that toggles inline without navigation), keep the others aligned.
   useEffect(() => {
     const handler = (e: Event) => {
       const detail = (e as CustomEvent).detail;
@@ -46,7 +38,6 @@ export function I18nProvider({ children }: { children: ReactNode }) {
 
   const setLang = (l: Lang) => {
     setLangState(l);
-    localStorage.setItem('addendo-lang', l);
     window.dispatchEvent(new CustomEvent('addendo-lang-change', { detail: l }));
   };
 

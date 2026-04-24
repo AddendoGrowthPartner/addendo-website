@@ -1,0 +1,79 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+  title="Working with a Third Party | Addendo Growth Partner"
+  description="Disclosure about how Addendo Growth Partner manages Google Ads campaigns on behalf of its clients as an authorized third-party agency."
+  lang="en"
+  alternates={{ es: '/working-with-a-third-party', en: '/en/working-with-a-third-party' }}
+>
+  <div style="background: #080F24; min-height: 100vh; padding: 8rem 1rem 4rem;">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <a href="/en/" style="color: #C9A84C; font-size: 0.875rem; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 2rem;">
+        &larr; Back to Home
+      </a>
+
+      <h1 style="font-family: 'Fraunces', serif; font-size: 2.5rem; font-weight: 300; color: #C9A84C; margin-bottom: 0.5rem;">Working with a Third Party</h1>
+      <p style="color: rgba(255,255,255,0.35); font-size: 0.875rem; margin-bottom: 3rem;">Last updated: April 7, 2026</p>
+      <div class="legal-content">
+        <h2>1. Who manages your Google Ads?</h2>
+        <p>Addendo Growth Partner (Addendo LLC), located at 3403 NW 82nd Ave STE 101A, Doral, FL 33122, USA, manages Google Ads campaigns on behalf of its clients as an authorized third-party agency.</p>
+
+        <h2>2. What does this mean for you?</h2>
+        <p>When you hire Addendo as your marketing partner, you authorize Addendo LLC to:</p>
+        <ul>
+          <li>Create, manage, and optimize Google Ads campaigns on your behalf.</li>
+          <li>Access your Google Ads account data for reporting and optimization purposes.</li>
+          <li>Make campaign adjustments to maximize performance and ROI.</li>
+          <li>Use the Google Ads API to automate campaign management and reporting.</li>
+        </ul>
+
+        <h2>3. Your rights and controls</h2>
+        <ul>
+          <li>You retain full ownership of your Google Ads account at all times.</li>
+          <li>You can revoke access to Addendo at any time through your Google Ads account settings.</li>
+          <li>All campaign data and performance reports are shared with you regularly.</li>
+          <li>Addendo operates in compliance with Google Ads API Terms of Service and Third-Party Policy.</li>
+        </ul>
+
+        <h2>4. Google Ads API Usage</h2>
+        <p>Addendo uses the Google Ads API to build and maintain proprietary tools that automate campaign reporting, keyword research, and campaign optimization for our clients. This API access is used exclusively to serve our clients' advertising needs.</p>
+
+        <h2>5. MCC and Specific Google Ads API Functions</h2>
+        <p>Addendo manages its clients' Google Ads accounts through its Google Ads Manager Account (My Client Center, MCC):</p>
+        <p><strong>MCC ID:</strong> <code>424-957-3841</code></p>
+        <p>Through the Google Ads API, Addendo performs the following specific functions for each client linked to the MCC:</p>
+        <h3>Campaign creation and structuring</h3>
+        <p>We create Search, Display, Performance Max, Shopping and YouTube campaigns programmatically via the API: configuring objectives, bidding types, geographic locations, schedules, audiences, responsive ads, and ad-group structures aligned with each client's strategy.</p>
+        <h3>Keyword research</h3>
+        <p>We use the API's <code>KeywordPlanIdeaService</code> and <code>KeywordPlanService</code> to identify relevant terms, estimate search volume, competition and cost-per-click, and build optimized keyword groups for each client — including negative keywords to reduce wasted spend.</p>
+        <h3>Automated performance reporting</h3>
+        <p>We use <code>GoogleAdsService.SearchStream</code> to extract metrics for impressions, clicks, CTR, conversions, cost per acquisition and attributable revenue. This data feeds real-time dashboards and automated reports delivered to each client on a recurring basis.</p>
+        <h3>Budget management and optimization</h3>
+        <p>Via <code>CampaignBudgetService</code> and <code>BiddingStrategyService</code>, we adjust daily budgets, redistribute spend across campaigns based on performance, and apply automated bidding strategies (Target ROAS, Maximize Conversions, Target CPA) to maximize return on ad spend.</p>
+        <p>All of these operations are executed in strict compliance with the <a href="https://developers.google.com/google-ads/api/docs/policies" target="_blank" rel="noopener noreferrer">Google Ads API Policy</a> and the Third-Party Terms of Service. MCC access requires explicit client authorization and may be revoked at any time.</p>
+
+        <h2>6. Contact</h2>
+        <p>For questions about how we manage your Google Ads campaigns:</p>
+        <p>Email: <a href="mailto:admin@addendo.io">admin@addendo.io</a><br />Website: <a href="https://addendo.io">addendo.io</a></p>
+
+        <h2>7. Compliance</h2>
+        <p>This disclosure is provided in compliance with Google Ads API Third-Party Policy and Google's "Working with a Third Party" requirements.</p>
+        <p>Last updated: April 7, 2026.</p>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .legal-content h2 { font-family: 'Inter', sans-serif; font-size: 1.25rem; font-weight: 600; color: rgba(255,255,255,0.85); margin-top: 2.5rem; margin-bottom: 0.75rem; }
+  .legal-content h3 { font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 500; color: rgba(255,255,255,0.7); margin-top: 1.5rem; margin-bottom: 0.5rem; }
+  .legal-content p { color: rgba(255,255,255,0.45); font-size: 0.9375rem; line-height: 1.75; margin-bottom: 1rem; }
+  .legal-content ul { list-style: disc; padding-left: 1.5rem; margin-bottom: 1rem; }
+  .legal-content li { color: rgba(255,255,255,0.45); font-size: 0.9375rem; line-height: 1.75; margin-bottom: 0.25rem; }
+  .legal-content a { color: #C9A84C; text-decoration: none; transition: color 0.2s; }
+  .legal-content a:hover { color: #D4B96A; }
+  .legal-content strong { color: rgba(255,255,255,0.65); }
+  .legal-content code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; font-size: 0.875em; color: #C9A84C; background: rgba(201,168,76,0.08); padding: 0.125rem 0.375rem; border-radius: 4px; }
+</style>

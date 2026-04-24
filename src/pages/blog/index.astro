@@ -48,7 +48,12 @@ const posts = [
 ];
 ---
 
-<Layout title={title} description={description} canonical="https://addendo.io/blog">
+<Layout
+  title={title}
+  description={description}
+  lang="es"
+  alternates={{ es: '/blog', en: '/en/blog/' }}
+>
   <main style="background: #080F24; min-height: 100vh; padding-top: 6rem;">
     <!-- Header -->
     <section style="padding: 4rem 1.5rem 2rem; text-align: center; max-width: 800px; margin: 0 auto;">

@@ -17,9 +17,9 @@ const LazyFallback = <div className="py-20" />;
 
 // Top half of the page, up to Services. Anything after Services is either
 // the static Process.astro island or AppBottom.tsx.
-export default function AppTop() {
+export default function AppTop({ lang = 'es' }: { lang?: 'es' | 'en' }) {
   return (
-    <I18nProvider>
+    <I18nProvider initialLang={lang}>
       <Navbar />
       <Hero />
       <HowItWorks />

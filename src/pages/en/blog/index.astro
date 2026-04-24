@@ -1,0 +1,161 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+
+const title = 'Blog | Addendo Growth Partner';
+const description = 'Marketing automation, AI-driven growth, and performance marketing insights for ambitious small and mid-market businesses.';
+
+const posts: Array<{
+  title: string;
+  image: string;
+  category: string;
+  date: string;
+  excerpt: string;
+  url: string;
+}> = [
+  {
+    title: 'The Complete Guide to 24/7 Marketing Automation for Small Businesses in 2026',
+    image: 'https://res.cloudinary.com/dokzw376u/image/fetch/f_auto,q_auto,w_1200/https%3A%2F%2Fimages.unsplash.com%2Fphoto-1551288049-bebda4e38f71%3Fauto%3Dformat%26fit%3Dcrop%26w%3D1200%26h%3D627',
+    category: 'Marketing Automation',
+    date: 'April 2026',
+    excerpt: 'How 24/7 marketing automation captures leads, qualifies buyers, and converts while you sleep. A 90-day plan built for small and mid-market businesses in the US, Canada, UK, and Australia.',
+    url: '/en/blog/complete-guide-24-7-marketing-automation-small-businesses/',
+  },
+];
+---
+
+<Layout
+  title={title}
+  description={description}
+  lang="en"
+  alternates={{ es: '/blog', en: '/en/blog/' }}
+>
+  <main style="background: #080F24; min-height: 100vh; padding-top: 6rem;">
+    <section style="padding: 4rem 1.5rem 2rem; text-align: center; max-width: 800px; margin: 0 auto;">
+      <span style="display: inline-block; font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #C9A84C; border: 1px solid rgba(201,168,76,0.3); border-radius: 9999px; padding: 0.4rem 1.2rem; margin-bottom: 1.5rem;">
+        &bull; BLOG
+      </span>
+      <h1 style="font-family: 'Fraunces', serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 400; color: white; line-height: 1.2; margin: 0 0 1rem;">
+        Strategies that transform businesses
+      </h1>
+      <p style="font-family: 'Inter', sans-serif; font-size: 1.1rem; color: rgba(255,255,255,0.55); line-height: 1.7; max-width: 640px; margin: 0 auto;">
+        Insights, trends and case studies to grow your business with marketing and artificial intelligence.
+      </p>
+    </section>
+
+    <section style="max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem 5rem;">
+      {posts.length === 0 ? (
+        <p style="text-align: center; color: rgba(255,255,255,0.4); font-family: 'Inter', sans-serif; font-size: 1rem;">New articles coming soon.</p>
+      ) : (
+        <div class="blog-grid">
+          {posts.map((post) => (
+            <a href={post.url} class="blog-card">
+              <div class="blog-card-img">
+                <img src={post.image} alt={post.title} width="800" height="400" loading="lazy" decoding="async" />
+                <div class="blog-card-img-overlay" />
+              </div>
+              <div class="blog-card-body">
+                <span class="blog-card-badge">{post.category}</span>
+                <h2 class="blog-card-title">{post.title}</h2>
+                <p class="blog-card-excerpt">{post.excerpt}</p>
+                <div class="blog-card-footer">
+                  <span class="blog-card-date">{post.date}</span>
+                  <span class="blog-card-cta">Read article &rarr;</span>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      )}
+    </section>
+  </main>
+
+  <style>
+    .blog-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    @media (min-width: 768px) {
+      .blog-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    .blog-card {
+      display: block;
+      border-radius: 1rem;
+      overflow: hidden;
+      border: 1px solid rgba(201,168,76,0.15);
+      background: rgba(26,26,46,0.6);
+      backdrop-filter: blur(16px);
+      text-decoration: none;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+    .blog-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(201,168,76,0.4);
+    }
+    .blog-card-img {
+      position: relative;
+      height: 12rem;
+      overflow: hidden;
+    }
+    .blog-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+    .blog-card:hover .blog-card-img img {
+      transform: scale(1.05);
+    }
+    .blog-card-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(26,26,46,0.8), transparent);
+    }
+    .blog-card-body {
+      padding: 1.5rem;
+    }
+    .blog-card-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #C9A84C;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.2);
+      margin-bottom: 1rem;
+    }
+    .blog-card-title {
+      font-family: 'Fraunces', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: white;
+      line-height: 1.35;
+      margin: 0 0 0.75rem;
+    }
+    .blog-card-excerpt {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.6;
+      margin: 0 0 1rem;
+    }
+    .blog-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .blog-card-date {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.3);
+    }
+    .blog-card-cta {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #C9A84C;
+    }
+  </style>
+</Layout>

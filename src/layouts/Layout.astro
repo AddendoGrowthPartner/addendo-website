@@ -7,6 +7,8 @@ interface Props {
   ogImage?: string;
   canonical?: string;
   preloadImage?: string;
+  lang?: 'es' | 'en';
+  alternates?: { es: string; en: string };
 }
 
 const siteUrl = 'https://addendo.io';
@@ -14,39 +16,60 @@ const defaultOgImage = 'https://res.cloudinary.com/dokzw376u/image/upload/f_auto
 const defaultPreloadImage = 'https://res.cloudinary.com/dokzw376u/image/fetch/f_auto,q_auto,w_1200/https://images.unsplash.com/photo-1460925895917-afdab827c52f';
 
 const {
-  title = 'Addendo | Tu sistema completo de crecimiento y ventas',
-  description = 'Addendo es el sistema completo que convierte tu negocio en una máquina de ventas — presencia digital, campañas, contenido, reputación y clientes nuevos cada semana.',
+  title,
+  description,
   ogImage = defaultOgImage,
-  canonical = siteUrl,
+  canonical,
   preloadImage = defaultPreloadImage,
+  lang = 'es',
+  alternates,
 } = Astro.props;
+
+const currentUrl = new URL(Astro.url.pathname, siteUrl).toString();
+const resolvedCanonical = canonical ?? currentUrl;
+
+const defaultTitleEs = 'Addendo | Tu sistema completo de crecimiento y ventas';
+const defaultTitleEn = 'Addendo | Your Complete Growth and Sales System';
+const defaultDescEs = 'Addendo es el sistema completo que convierte tu negocio en una máquina de ventas — presencia digital, campañas, contenido, reputación y clientes nuevos cada semana.';
+const defaultDescEn = 'Addendo is the complete system that turns your business into a sales machine — digital presence, campaigns, content, reputation, and new customers every week.';
+
+const resolvedTitle = title ?? (lang === 'en' ? defaultTitleEn : defaultTitleEs);
+const resolvedDescription = description ?? (lang === 'en' ? defaultDescEn : defaultDescEs);
+const ogLocale = lang === 'en' ? 'en_US' : 'es_US';
+
+const alternateEs = alternates?.es ? new URL(alternates.es, siteUrl).toString() : null;
+const alternateEn = alternates?.en ? new URL(alternates.en, siteUrl).toString() : null;
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={lang} data-lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
 
     <!-- SEO -->
-    <title>{title}</title>
-    <meta name="description" content={description} />
+    <title>{resolvedTitle}</title>
+    <meta name="description" content={resolvedDescription} />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href={canonical} />
+    <link rel="canonical" href={resolvedCanonical} />
+
+    {alternateEs && <link rel="alternate" hreflang="es" href={alternateEs} />}
+    {alternateEn && <link rel="alternate" hreflang="en" href={alternateEn} />}
+    {alternateEs && <link rel="alternate" hreflang="x-default" href={alternateEs} />}
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={canonical} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:url" content={resolvedCanonical} />
+    <meta property="og:title" content={resolvedTitle} />
+    <meta property="og:description" content={resolvedDescription} />
     <meta property="og:image" content={ogImage} />
-    <meta property="og:locale" content="es_US" />
+    <meta property="og:locale" content={ogLocale} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:title" content={resolvedTitle} />
+    <meta name="twitter:description" content={resolvedDescription} />
     <meta name="twitter:image" content={ogImage} />
 
     <!-- Schema.org -->
@@ -56,7 +79,7 @@ const {
       "name": "Addendo Growth Partner",
       "url": siteUrl,
       "logo": ogImage,
-      "description": description,
+      "description": resolvedDescription,
       "areaServed": "US",
       "serviceType": ["Digital Marketing", "Sales Growth", "Web Development", "SEO", "Advertising"],
       "contactPoint": {
@@ -116,38 +139,6 @@ const {
         t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
       })(window, document, "clarity", "script", "w6865bxodj");
-    </script>
-    <!--
-      Global language resolver: runs synchronously before body paint so static
-      .astro content (bilingual sections using data-lang-es / data-lang-en)
-      renders in the correct language from frame 1. React islands keep using
-      the I18nContext, and both sides stay in sync via the
-      'addendo-lang-change' CustomEvent dispatched by I18nProvider.
-    -->
-    <script is:inline>
-      (function () {
-        function resolve() {
-          try {
-            var params = new URLSearchParams(window.location.search);
-            var fromUrl = params.get('lang');
-            if (fromUrl === 'es' || fromUrl === 'en') {
-              localStorage.setItem('addendo-lang', fromUrl);
-              return fromUrl;
-            }
-            var stored = localStorage.getItem('addendo-lang');
-            if (stored === 'es' || stored === 'en') return stored;
-            var browser = (navigator.language || '').toLowerCase();
-            return browser.indexOf('en') === 0 ? 'en' : 'es';
-          } catch (e) {
-            return 'es';
-          }
-        }
-        function apply(l) { document.documentElement.setAttribute('data-lang', l); }
-        apply(resolve());
-        window.addEventListener('addendo-lang-change', function (e) {
-          apply((e && e.detail) || resolve());
-        });
-      })();
     </script>
   </head>
   <body>

@@ -8,11 +8,11 @@ import WhyAddendo from '../components/WhyAddendo.astro';
 import AppBottom from '../components/AppBottom';
 ---
 
-<Layout>
-  <AppTop client:load />
+<Layout lang="es" alternates={{ es: '/', en: '/en/' }}>
+  <AppTop client:load lang="es" />
   <Pulse />
   <Process />
   <Infrastructure />
   <WhyAddendo />
-  <AppBottom client:visible />
+  <AppBottom client:visible lang="es" />
 </Layout>

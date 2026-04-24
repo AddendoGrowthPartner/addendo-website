@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
+import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import vercel from '@astrojs/vercel';
 
@@ -11,7 +12,19 @@ export default defineConfig({
     webAnalytics: { enabled: false },
     maxDuration: 60,
   }),
-  integrations: [react()],
+  integrations: [
+    react(),
+    sitemap({
+      i18n: {
+        defaultLocale: 'es',
+        locales: {
+          es: 'es-US',
+          en: 'en-US',
+        },
+      },
+      filter: (page) => !page.includes('/pulse'),
+    }),
+  ],
   vite: {
     plugins: [tailwindcss()],
   },
