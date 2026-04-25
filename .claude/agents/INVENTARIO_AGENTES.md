@@ -22,6 +22,21 @@
 
 ---
 
+## Convención de carpetas
+
+El sistema Addendo Agency OS organiza los skills `.md` en 3 carpetas con propósitos mutuamente excluyentes:
+
+| Carpeta | Propósito | Cantidad actual |
+|---------|-----------|-----------------|
+| `.claude/agents/skills-globales/` | Agentes canónicos numerados (#1-#54). Son los que ejecutan trabajo productivo. | 53 |
+| `.claude/agents/_test/` | Skills experimentales y de validación arquitectónica. NO son agentes canónicos. NO se invocan desde workflows productivos. | 1 |
+| `.claude/agents/archived/` | Skills que fueron canónicos pero fueron deprecados por decisión arquitectónica (ej: #43 agente-monitor migrado a workflow N8N en D14/D15). | 1 |
+
+**Skills experimentales conocidos:**
+- `_test/test-saludo.md` — skill mínimo creado en Sesión 2 (24-25 abril 2026) para validar que Claude Code CLI lee skills del filesystem como system_prompt. Validado empíricamente en workflow MLG4B67xXI8WH7Mp. NO usar en producción.
+
+---
+
 ## Tabla 1 — PERFECTO PURO VERIFICABLE (3)
 
 Auditoría objetiva externa ejecutada post-nivelación.
