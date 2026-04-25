@@ -34,3 +34,4 @@ pnpm-debug.log*
 
 # Backups locales generados por Claude Code (no commitear)
 *.backup-*
+*.bak-*
