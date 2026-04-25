@@ -1,0 +1,106 @@
+{
+  "name": "TEST-Sesion2-CB-Redis-CC-AWS",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "test-sesion2-cb-cc-aws",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger-s2",
+      "name": "Webhook Sesion 2",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [200, 300],
+      "webhookId": "test-sesion2-cb-cc-aws-webhook"
+    },
+    {
+      "parameters": {
+        "authentication": "privateKey",
+        "resource": "command",
+        "command": "=bash -ic 'claude -p \"Lee el skill /home/ubuntu/addendo-website/.claude/agents/skills-globales/test-saludo.md y usalo como guia para saludar en espanol a {{ $json.body.name }}. Se breve, maximo 2 oraciones.\" --bare --max-budget-usd 0.05 --output-format json --no-session-persistence < /dev/null'"
+      },
+      "id": "ssh-claude-code-aws",
+      "name": "SSH Claude Code AWS",
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [460, 300],
+      "credentials": {
+        "sshPrivateKey": {
+          "id": "LrawZQkbyyn4o6qu",
+          "name": "Addendo SSH AWS Production"
+        }
+      },
+      "onError": "continueErrorOutput",
+      "retryOnFail": false
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "// Skill #50 v1.1.1 - Mandamiento #15: logs estructurados con context\n// Validar exitCode + parsear stdout JSON de Claude Code CLI\nconst sshOutput = $input.first().json;\nconst traceId = `s2-cb-cc-${Date.now()}-${Math.random().toString(36).substr(2, 8)}`;\nconst workflowId = $workflow.id;\nconst timestampIso = new Date().toISOString();\n\n// Validacion defensiva exitCode (skill #50 Mandamiento error handling)\nconst exitCode = sshOutput.exitCode !== undefined ? sshOutput.exitCode : sshOutput.code;\nif (exitCode !== undefined && exitCode !== 0) {\n  console.log(JSON.stringify({\n    level: 'ERROR',\n    event: 'ssh_command_failed',\n    trace_id: traceId,\n    workflow_id: workflowId,\n    timestamp: timestampIso,\n    exit_code: exitCode,\n    stderr_preview: (sshOutput.stderr || '').slice(0, 500)\n  }));\n  throw new Error(`SSH command failed (exit ${exitCode}): ${(sshOutput.stderr || 'no stderr').slice(0, 300)}`);\n}\n\nconst stdout = (sshOutput.stdout || '').trim();\nif (!stdout) {\n  throw new Error('SSH stdout vacio - Claude Code CLI no produjo output');\n}\n\nlet claudePayload;\ntry {\n  claudePayload = JSON.parse(stdout);\n} catch (err) {\n  throw new Error(`Failed to parse Claude Code stdout as JSON: ${err.message}. Raw stdout (first 500 chars): ${stdout.slice(0, 500)}`);\n}\n\nconst metrics = {\n  cost_usd: claudePayload.total_cost_usd || 0,\n  latency_ms: claudePayload.duration_ms || 0,\n  tokens_input: claudePayload.usage?.input_tokens || 0,\n  tokens_output: claudePayload.usage?.output_tokens || 0\n};\n\nconsole.log(JSON.stringify({\n  level: 'INFO',\n  event: 'claude_code_aws_invocation_ok',\n  trace_id: traceId,\n  workflow_id: workflowId,\n  timestamp: timestampIso,\n  metrics: metrics\n}));\n\nreturn [{\n  json: {\n    status: 'success',\n    test_name: 'TEST-Sesion2-CB-Redis-CC-AWS',\n    claude_code_response: claudePayload.result || claudePayload.response || '',\n    metrics: metrics,\n    timestamp: timestampIso,\n    trace_id: traceId\n  }\n}];"
+      },
+      "id": "code-parse-metrics",
+      "name": "Parse Metrics + Log",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [720, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "id": "respond-success-s2",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [980, 300]
+    }
+  ],
+  "connections": {
+    "Webhook Sesion 2": {
+      "main": [
+        [
+          {
+            "node": "SSH Claude Code AWS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SSH Claude Code AWS": {
+      "main": [
+        [
+          {
+            "node": "Parse Metrics + Log",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Metrics + Log": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveDataSuccessExecution": "all",
+    "saveExecutionProgress": true,
+    "saveManualExecutions": true,
+    "timezone": "America/New_York"
+  }
+}
