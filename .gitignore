@@ -30,3 +30,7 @@ pnpm-debug.log*
 
 # Claude Code - configuración local personal (no compartir)
 .claude/settings.local.json
+.vercel
+
+# Backups locales generados por Claude Code (no commitear)
+*.backup-*
