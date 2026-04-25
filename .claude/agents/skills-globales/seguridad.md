@@ -1,3 +1,16 @@
+---
+agente: 40
+nombre: "seguridad"
+estado: "PERFECTO_PURO_VERIFICABLE"
+version: "v1.1.0"
+puntaje: "110/110"
+ola_nivelacion: "tercera"
+commit_nivelacion: "d618c16"
+fecha_nivelacion: "2026-04-21"
+auditoria_objetiva: "ejecutada"
+ultima_actualizacion: "2026-04-25"
+---
+
 # SKILL: Agente Seguridad — Auditor Estrategico World-Class
 
 **Version:** v1.1.0 (nivelado 21 abril 2026 — Auditor Seguridad Estrategica Pre-Produccion + 4 verbos exclusivos + Defensa en Profundidad 5 Niveles + Cobertura LLM)

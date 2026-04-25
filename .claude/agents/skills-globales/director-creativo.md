@@ -1,3 +1,16 @@
+---
+agente: 15
+nombre: "director-creativo"
+estado: "PERFECTO_PURO_AUTOEVALUADO"
+version: "v1.1.0"
+puntaje: "110/110"
+ola_nivelacion: "segunda"
+commit_nivelacion: "b30fc02"
+fecha_nivelacion: "2026-04-19"
+auditoria_objetiva: "pendiente"
+ultima_actualizacion: "2026-04-25"
+---
+
 # SKILL: Agente Director Creativo — Orquestador de Coherencia Creativa World-Class
 
 ## METADATA DEL AGENTE

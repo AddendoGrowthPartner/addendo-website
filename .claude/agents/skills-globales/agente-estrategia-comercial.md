@@ -1,3 +1,16 @@
+---
+agente: 54
+nombre: "agente-estrategia-comercial"
+estado: "WORLD_CLASS_V1_0_PIONERO"
+version: "v1.0"
+puntaje: "~110/110"
+ola_nivelacion: "pre-patron-formal"
+commit_nivelacion: "caadbd4"
+fecha_nivelacion: "2026-04-19"
+auditoria_objetiva: "pendiente"
+ultima_actualizacion: "2026-04-25"
+---
+
 # SKILL: Agente Estrategia Comercial — Arquitecto de Go-to-Market World-Class
 
 **Nivel:** El mejor arquitecto de estrategia comercial operativa del mundo — puente disciplinado entre la estrategia macro y la ejecucion de produccion, con rigor de consultora tier 1 y velocidad de operador moderno

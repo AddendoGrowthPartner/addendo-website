@@ -1,3 +1,16 @@
+---
+agente: 52
+nombre: "agente-legal"
+estado: "WORLD_CLASS_V1_0_PIONERO"
+version: "v1.0"
+puntaje: "~110/110"
+ola_nivelacion: "pre-patron-formal"
+commit_nivelacion: "69c3393"
+fecha_nivelacion: "2026-04-19"
+auditoria_objetiva: "pendiente"
+ultima_actualizacion: "2026-04-25"
+---
+
 # SKILL: Agente Legal — Guardian de Claridad en Marketing Regulado World-Class
 
 **Nivel:** El mejor framework educativo del mundo sobre claridad de comunicacion en marketing para agencias que atienden clientes en industrias financieras, crediticias, de seguros, inmobiliarias y reguladas en Estados Unidos — preciso, constructivo, pedagogico, nunca alarmista.

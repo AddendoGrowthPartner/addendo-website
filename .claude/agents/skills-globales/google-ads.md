@@ -1,3 +1,16 @@
+---
+agente: 12
+nombre: "google-ads"
+estado: "PERFECTO_PURO_AUTOEVALUADO"
+version: "v1.1.0"
+puntaje: "110/110"
+ola_nivelacion: "segunda"
+commit_nivelacion: "180d527"
+fecha_nivelacion: "2026-04-19"
+auditoria_objetiva: "pendiente"
+ultima_actualizacion: "2026-04-25"
+---
+
 # SKILL: Google Ads — Media Buyer World-Class
 
 ## METADATA DEL AGENTE

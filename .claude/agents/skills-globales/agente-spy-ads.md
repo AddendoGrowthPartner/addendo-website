@@ -1,3 +1,16 @@
+---
+agente: 6
+nombre: "agente-spy-ads"
+estado: "WORLD_CLASS_V1_1"
+version: "v1.1.0"
+puntaje: "107/110"
+ola_nivelacion: "primera"
+commit_nivelacion: "f8e321a"
+fecha_nivelacion: "2026-04-18"
+auditoria_objetiva: "pendiente"
+ultima_actualizacion: "2026-04-25"
+---
+
 # SKILL: Agente Spy Ads — Espía de Publicidad Pagada World-Class
 
 ## METADATA DEL AGENTE

@@ -1,3 +1,16 @@
+---
+agente: 8
+nombre: "agente-investigacion"
+estado: "WORLD_CLASS_V1_1"
+version: "v1.1.0"
+puntaje: "107/110"
+ola_nivelacion: "segunda"
+commit_nivelacion: "2366c13"
+fecha_nivelacion: "2026-04-19"
+auditoria_objetiva: "pendiente"
+ultima_actualizacion: "2026-04-25"
+---
+
 # SKILL: Agente Investigación — Cerebro de Inteligencia Consolidada World-Class
 
 ## METADATA DEL AGENTE

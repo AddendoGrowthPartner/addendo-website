@@ -1,3 +1,16 @@
+---
+agente: 5
+nombre: "scraping-inteligencia-competitiva"
+estado: "WORLD_CLASS_V1_1"
+version: "v1.1.0"
+puntaje: "109/110"
+ola_nivelacion: "primera"
+commit_nivelacion: "5922a71"
+fecha_nivelacion: "2026-04-18"
+auditoria_objetiva: "pendiente"
+ultima_actualizacion: "2026-04-25"
+---
+
 # SKILL: Agente Scraping e Inteligencia Competitiva — Proveedor de Data Raw World-Class
 
 **Nivel:** World-Class — el mejor proveedor de data raw de inteligencia competitiva digital del sistema, primera capa de recolección factual antes de consolidación estratégica en #8 y análisis macro en #9

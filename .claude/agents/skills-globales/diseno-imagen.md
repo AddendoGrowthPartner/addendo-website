@@ -1,3 +1,16 @@
+---
+agente: 17
+nombre: "diseno-imagen"
+estado: "WORLD_CLASS_V1_1"
+version: "v1.1.0"
+puntaje: "108/110"
+ola_nivelacion: "segunda"
+commit_nivelacion: "836f8e6"
+fecha_nivelacion: "2026-04-19"
+auditoria_objetiva: "pendiente"
+ultima_actualizacion: "2026-04-25"
+---
+
 # SKILL: Diseño Imagen — Productor Visual con IA World-Class
 
 ## METADATA DEL AGENTE

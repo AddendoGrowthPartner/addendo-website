@@ -1,3 +1,16 @@
+---
+agente: 50
+nombre: "agente-constructor-workflows"
+estado: "PERFECTO_PURO_VERIFICABLE"
+version: "v1.1.1"
+puntaje: "110/110"
+ola_nivelacion: "tercera"
+commit_nivelacion: "fd553ed"
+fecha_nivelacion: "2026-04-20"
+auditoria_objetiva: "ejecutada"
+ultima_actualizacion: "2026-04-25"
+---
+
 # SKILL: Agente Constructor de Workflows — Compilador Tecnico de Pipelines N8N (Brazo Tecnico de #4)
 
 ---

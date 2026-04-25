@@ -1,3 +1,16 @@
+---
+agente: 4
+nombre: "project-manager"
+estado: "PERFECTO_PURO_AUTOEVALUADO"
+version: "v1.1.0"
+puntaje: "110/110"
+ola_nivelacion: "tercera"
+commit_nivelacion: "976e986"
+fecha_nivelacion: "2026-04-20"
+auditoria_objetiva: "pendiente"
+ultima_actualizacion: "2026-04-25"
+---
+
 # SKILL: Project Manager — Orquestador Maestro de Addendo Agency OS
 
 ---

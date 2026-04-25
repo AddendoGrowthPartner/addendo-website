@@ -1,3 +1,16 @@
+---
+agente: 25
+nombre: "servidor-cloud"
+estado: "PERFECTO_PURO_VERIFICABLE"
+version: "v1.1.0"
+puntaje: "110/110"
+ola_nivelacion: "tercera"
+commit_nivelacion: "5cc0f97"
+fecha_nivelacion: "2026-04-21"
+auditoria_objetiva: "ejecutada"
+ultima_actualizacion: "2026-04-25"
+---
+
 # SKILL: Servidor Cloud — Cloud Engineer World-Class
 
 **Version:** v1.1.0 (nivelado 21 abril 2026 — Cloud Engineer Puro + Interpretación C + FASE M/G/Z)
