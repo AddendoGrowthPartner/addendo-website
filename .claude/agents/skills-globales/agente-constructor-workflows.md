@@ -6041,7 +6041,7 @@ Registro estructurado de versiones del skill #50 agente-constructor-workflows. C
 
 **Puntaje World-Class v1.1 (auditoria objetiva post-v1.1.1):** 110/110 PERFECTO PURO verificable por tercero (no auto-evaluado).
 
-**Commit Mac:** pendiente al momento de redactar este changelog (se actualizara en L5555 del Cierre Canonico post-commit).
+**Commit Mac:** `fd553ed`
 
 ---
 
