@@ -1,0 +1,136 @@
+{
+  "agente": "creditbridge",
+  "version": "v1.0",
+  "fecha_creacion": "2026-04-25",
+  "categoria_producto": "sistema_educacion_financiera",
+  "tagline": {
+    "es_principal": "Aprende a dominar tu crédito en USA, paso a paso.",
+    "es_diferenciador": "No reparamos tu crédito. Te enseñamos cómo se construye.",
+    "en_principal": "Master your US credit, step by step.",
+    "en_diferenciador": "We don't repair your credit. We teach you how it's built."
+  },
+  "diferenciador_estrategico": {
+    "es": "CreditBridge es el sistema diseñado para que entiendas y tomes control de tu crédito en USA. No reparamos. No prometemos. Te damos el conocimiento estructurado para que tú construyas el crédito que mereces.",
+    "en": "CreditBridge is the system built to help you understand and take control of your US credit. We don't repair. We don't make promises. We give you the structured knowledge to build the credit you deserve."
+  },
+  "pain_points": [
+    {
+      "id": "invisible",
+      "es": "Soy invisible para el sistema crediticio",
+      "en": "I'm invisible to the credit system",
+      "trigger_hispano": "inmigrante sin historial USA",
+      "trigger_anglo": "thin file, joven, divorciado, recién independizado"
+    },
+    {
+      "id": "sin_explicacion",
+      "es": "Nadie me explica cómo funciona realmente",
+      "en": "Nobody explains how it really works",
+      "trigger_hispano": "en mi idioma cultural",
+      "trigger_anglo": "without financial jargon"
+    },
+    {
+      "id": "estafado",
+      "es": "Las empresas de credit repair me han estafado",
+      "en": "Credit repair companies have scammed me",
+      "trigger_universal": "Lexington Law, Credit Saint, promesas falsas"
+    }
+  ],
+  "tiers": {
+    "esencial": {
+      "nombre_es": "Esencial",
+      "nombre_en": "Essential",
+      "incluye": "acceso_sistema_completo + comunidad + herramientas",
+      "precio_publico_visible": false
+    },
+    "avanzado": {
+      "nombre_es": "Avanzado",
+      "nombre_en": "Advanced",
+      "incluye": "esencial + sesiones_grupales_vivo + qa_semanal",
+      "precio_publico_visible": false
+    },
+    "privado": {
+      "nombre_es": "Privado",
+      "nombre_en": "Private",
+      "incluye": "avanzado + mentoria_1a1 + revision_personalizada",
+      "precio_publico_visible": false
+    }
+  },
+  "vocabulario": {
+    "permitido_es": ["sistema", "método", "marco", "conocimiento", "construir", "tomar control", "miembros", "módulos", "sesiones", "herramientas"],
+    "permitido_en": ["system", "method", "framework", "knowledge", "build", "take control", "members", "modules", "sessions", "tools"],
+    "vetado_es": ["academia", "curso", "estudiar", "lecciones", "estudiantes", "reparar", "garantizamos", "subimos score", "eliminamos negativos", "negociamos deuda"],
+    "vetado_en": ["academy", "course", "study", "lessons", "students", "repair", "guarantee", "raise your score", "remove negatives", "negotiate debt"]
+  },
+  "audiencia": {
+    "primaria_fase_1": "hispano_usa_25_50",
+    "secundaria_dia_1": "anglo_usa_25_50",
+    "expansion_futura": "latam_diaspora_global",
+    "principio": "bilingue_paralelo_no_secuencial"
+  },
+  "compliance_lenguaje": {
+    "modo": "educativo_no_reparador",
+    "no_promete_resultados": true,
+    "no_contacta_bureaus": true,
+    "no_negocia_deuda": true,
+    "tono": "profesor_experto_que_comparte_conocimiento_aplicable"
+  },
+  "visual": {
+    "paleta": {
+      "azul_primario": "#0F2A47",
+      "dorado_secundario": "#D4A24C",
+      "verde_acento": "#7FC4A3",
+      "crema_fondo": "#FAF7F0",
+      "carbon_texto": "#1A1A1A"
+    },
+    "tipografia": {
+      "display": "Fraunces",
+      "body": "Inter",
+      "principio": "editorial_premium_no_corporate"
+    },
+    "estandar_calidad": "1B_aspiracional",
+    "benchmarks": ["stripe.com", "linear.app", "wealthfront.com"],
+    "lighthouse_target_mobile": 95,
+    "fotografia": "diversa_no_etnica_personas_reales_no_stock_generico"
+  },
+  "logo": {
+    "concepto": "puente_arquitectonico_minimalista",
+    "metafora": "donde_estas_donde_quieres_estar",
+    "wordmark": "CreditBridge",
+    "tipografia_wordmark": "Fraunces_Bold",
+    "version_cromatica": "dorado_sobre_azul_profundo"
+  },
+  "dominio": {
+    "primario": "creditbridge.us",
+    "estado": "pendiente_registrar",
+    "registrar_recomendado": "Cloudflare_o_Hostinger"
+  },
+  "infraestructura": {
+    "stack": "astro_6_tailwind_v4_typescript",
+    "hosting": "vercel_pro",
+    "repo": "AddendoGrowthPartner/creditbridge",
+    "local": "/Users/Mac/creditbridge",
+    "i18n": {
+      "default_fallback": "en",
+      "auto_detect": "navigator_language",
+      "toggle_visible": true,
+      "url_structure": "/en/ y /es/ con slugs nativos por idioma"
+    }
+  },
+  "arquitectura_legal": {
+    "estado_actual": "LLC_simple",
+    "trigger_refactor": "ARR_1M_USD_o_inversor_institucional",
+    "deuda_arquitectonica_consciente": true,
+    "doc_referencia": "Credit_Bridge_Operator_Manual.pdf"
+  },
+  "tesis_negocio": {
+    "horizonte": "5_anios",
+    "exit_target": "50M_USD",
+    "modelo_revenue": "tiers_recurring_subscription",
+    "tam_proyectado": "15_a_20_billones_USD"
+  },
+  "trust_signals_v1": {
+    "permitido_dia_1": ["construido_por_expertos_addendo", "tagline_diferenciador_anti_repair"],
+    "esperar_para_v2": ["testimonios", "metricas", "press_logos"],
+    "principio": "honestidad_sobre_velocidad"
+  }
+}
