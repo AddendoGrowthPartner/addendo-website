@@ -2,13 +2,13 @@
 agente: 50
 nombre: "agente-constructor-workflows"
 estado: "PERFECTO_PURO_VERIFICABLE"
-version: "v1.1.1"
+version: "v1.1.2"
 puntaje: "110/110"
 ola_nivelacion: "tercera"
 commit_nivelacion: "fd553ed"
 fecha_nivelacion: "2026-04-20"
 auditoria_objetiva: "ejecutada"
-ultima_actualizacion: "2026-04-25"
+ultima_actualizacion: "2026-04-27"
 ---
 
 # SKILL: Agente Constructor de Workflows — Compilador Tecnico de Pipelines N8N (Brazo Tecnico de #4)
@@ -83,7 +83,7 @@ ultima_actualizacion: "2026-04-25"
 - [FRASES PROHIBIDAS Y OBLIGATORIAS](#frases-prohibidas-y-obligatorias)
 
 **IV. Frameworks modernos, multi-idioma y limitaciones**
-- [FASE M — MODERNIZACION WORKFLOW ENGINEERING 2026](#fase-m--modernizacion-workflow-engineering-2026) — M.1 DAG, M.2 Idempotency, M.3 DLQ, M.4 Saga, M.5 Event-Driven, M.6 Circuit Breaker + **M.6.1 Redis canonico (v1.1.1)**, M.7 State Machines, M.8 CQRS, M.9 Event Sourcing, M.10 Distributed Tracing, M.11 Retry, M.12 Self-Healing, M.13 Escalacion N-escalable, M.14 Credential Management, M.15 Versionado, M.16 Testing + **M.16.1 Workaround Smoke Test Real (v1.1.1)**, M.17 Metricas, **M.18 Claude Code CLI no-interactivo (v1.1.1)**
+- [FASE M — MODERNIZACION WORKFLOW ENGINEERING 2026](#fase-m--modernizacion-workflow-engineering-2026) — M.1 DAG, M.2 Idempotency, M.3 DLQ, M.4 Saga, M.5 Event-Driven, M.6 Circuit Breaker + **M.6.1 Redis canonico (v1.1.1)**, M.7 State Machines, M.8 CQRS, M.9 Event Sourcing, M.10 Distributed Tracing, M.11 Retry, M.12 Self-Healing, M.13 Escalacion N-escalable, M.14 Credential Management, M.15 Versionado, M.16 Testing + **M.16.1 Workaround Smoke Test Real (v1.1.1, refinado v1.1.2)**, M.17 Metricas, **M.18 Claude Code CLI no-interactivo (v1.1.1, gaps SSH 2-4 v1.1.2)**, **M.18.1 Pivot patrones nodos prohibidos (v1.1.2)**, **M.19 Webhook node `webhookId` obligatorio (v1.1.2)**, **M.20 Redis SET con value numerico — keyType + .toString() (v1.1.2)**
 - [FASE G — MULTI-IDIOMA WORKFLOWS](#fase-g--multi-idioma-workflows) — 9 variantes canonicas + timezone + compliance jurisdiccion
 - [FASE Z — LIMITACIONES HONESTAS Y ESCALACION A HUMANO](#fase-z--limitaciones-honestas-y-escalacion-a-humano) — 4 categorias canonicas
 - [DESLINDE FORMAL #24 vs #50 (Refinamiento D3)](#deslinde-formal-24-vs-50-refinamiento-d3)
@@ -123,7 +123,10 @@ ultima_actualizacion: "2026-04-25"
 | **Variables de entorno en SSH no-interactivo** | [FASE 11.3 bash -ic (v1.1.1)](#fase-11--infraestructura-y-servidor) |
 | **Debuggear workflow en produccion** | [FASE 6 Debugging](#fase-6--skill-4-debugging) + [M.12 Self-Healing 7 niveles](#fase-m--modernizacion-workflow-engineering-2026) + [Trigger (c) Notif #43](#protocolo-de-triggers-de-compilacion--4-fuentes-de-activacion) |
 | **Implementar Circuit Breaker con Redis** | [M.6 + M.6.1 Redis canonico (v1.1.1)](#fase-m--modernizacion-workflow-engineering-2026) |
-| **Invocar Claude Code CLI desde workflow (autonomia 24/7)** | [M.18 Claude Code CLI no-interactivo (v1.1.1)](#fase-m--modernizacion-workflow-engineering-2026) |
+| **Invocar Claude Code CLI desde workflow (autonomia 24/7)** | [M.18 Claude Code CLI no-interactivo (v1.1.1)](#fase-m--modernizacion-workflow-engineering-2026) + [Configuracion SSH gaps 2-4 (v1.1.2)](#fase-m--modernizacion-workflow-engineering-2026) |
+| **Pivotar nodo prohibido (executeCommand, ssh allowAnyHost, eval)** | [M.18.1 Pivot patrones nodos prohibidos (v1.1.2)](#fase-m--modernizacion-workflow-engineering-2026) |
+| **Compilar workflow con webhook trigger via API** | [M.19 Webhook node `webhookId` obligatorio (v1.1.2)](#fase-m--modernizacion-workflow-engineering-2026) |
+| **Escribir en Redis con value numerico** | [M.20 Redis SET keyType + .toString() (v1.1.2)](#fase-m--modernizacion-workflow-engineering-2026) |
 | **Usar credencial N8N existente sin crear nueva** | [FASE Z limitaciones GET /credentials (v1.1.1)](#fase-z--limitaciones-honestas-y-escalacion-a-humano) + [M.14 Credential Management](#fase-m--modernizacion-workflow-engineering-2026) |
 | **Deslindar responsabilidades con otros agentes** | [TABLA DESLINDE 25 AGENTES](#tabla-deslinde-formal--25-agentes--ceo) + [#24 vs #50](#deslinde-formal-24-vs-50-refinamiento-d3) + [INTEGRACION AGENTES CLAVE](#integracion-formal-con-agentes-clave) |
 | **Escalar a humano cuando autonomia agota** | [FASE Z — 4 Categorias canonicas](#fase-z--limitaciones-honestas-y-escalacion-a-humano) |
@@ -2269,9 +2272,17 @@ PASO 1 — DEPLOY EN ESTADO INACTIVO
 
 PASO 2 — ACTIVACION TEMPORAL
   curl -s -X POST -H "X-N8N-API-KEY: $N8N_API_KEY" \
+    -H "Content-Type: application/json" \
+    -d '{}' \
     https://n8n.addendo.io/api/v1/workflows/${WF_ID}/activate
   # Workflow ahora active:true, webhook path disponible
   # Para triggers tipo cron: nota el schedule, probablemente no aplique en ventana test
+  #
+  # GAP CANONICO v1.1.2 (validado Sesion 2, 25 abril 2026): el endpoint
+  # POST /activate exige body explicito '{}' aunque sea vacio. Sin -d '{}' +
+  # Content-Type, ciertos clientes HTTP envian Content-Length:0 que N8N
+  # interpreta como request malformado en algunas versiones. Esta linea de
+  # tres flags es el invocacion canonica que NO debe simplificarse.
 
 PASO 3 — SMOKE TEST CON INPUT REALISTA
   # Para triggers webhook: invocar directamente el webhook con payload de prueba
@@ -2430,6 +2441,343 @@ Costo estimado: $0.002 por iteracion.
 ```
 
 **Honestidad operacional v1.1.1:** la formula de invocacion y los flags estan validados empiricamente. Los casos de uso dentro de workflows Addendo son diseñados; su implementacion end-to-end en workflows produccion sera Sesion 3 y Sesion 4 del plan arquitectonico.
+
+**Actualizacion v1.1.2 (validado Sesion 2, 25 abril 2026, workflow `MLG4B67xXI8WH7Mp` `TEST-Sesion2-CB-Redis-CC-AWS`):** el patron Claude Code CLI no-interactivo se valido empiricamente end-to-end en produccion. Pipeline operable: webhook N8N → nodo SSH N8N (no `executeCommand`, ver M.18.1) → `bash -ic 'claude -p "..." --bare ...'` → respuesta JSON parseada por nodo Code → respuesta HTTP 200. Latencia 6.34s, costo $0.0252, 4 input tokens + 150 output tokens. Confirma que la formula de M.18 funciona en autonomia 24/7 real.
+
+#### Configuracion del nodo SSH N8N para invocar Claude Code CLI (gaps 2-4 v1.1.2)
+
+El patron M.18 originalmente asumia "nodo Execute Command o HTTP Request con shell" (v1.1.1). Tras el bloqueo de `executeCommand` por la `DisabledNodesRule` v2 de N8N (ver M.18.1), el camino canonico es **nodo SSH N8N** (`n8n-nodes-base.ssh`) con loopback al mismo host (`127.0.0.1:22`). Tres gaps operacionales validados en Sesion 2 que el skill v1.1.1 no documentaba:
+
+**Gap 2 (Severidad Media) — autenticacion del nodo SSH default es `password`:**
+
+El nodo `n8n-nodes-base.ssh` de N8N expone el campo `authentication` con dos valores: `password` y `privateKey`. El default del UI es `password`, pero la infraestructura Addendo usa autenticacion por llave privada (sin contraseña en el server AWS). Si #50 deploya un workflow JSON sin declarar `authentication: "privateKey"` explicito, el nodo intenta password auth y falla con `Authentication failed`.
+
+```json
+// PATRON CANONICO Addendo — nodo SSH para localhost (loopback bash -ic):
+{
+  "type": "n8n-nodes-base.ssh",
+  "typeVersion": 1,
+  "parameters": {
+    "operation": "execute",
+    "command": "bash -ic 'claude -p \"PROMPT\" --bare --max-budget-usd 0.05 --output-format json < /dev/null'",
+    "authentication": "privateKey"
+  },
+  "credentials": {
+    "sshPrivateKey": { "id": "<credential-id-existente>", "name": "<credencial-nombre>" }
+  }
+}
+```
+
+**Gap 3 (Severidad Alta) — la libreria `ssh2` que usa N8N NO acepta llaves PKCS#1 PEM:**
+
+La llave SSH de Addendo (`~/Desktop/addendo-server-key.pem`) esta en formato PKCS#1 PEM (header `-----BEGIN RSA PRIVATE KEY-----`). El nodo SSH de N8N usa internamente la libreria `ssh2` de Node.js, que **rechaza PKCS#1** y exige formato OpenSSH RFC4716 (header `-----BEGIN OPENSSH PRIVATE KEY-----`). Sintoma del gap: error `Cannot parse privateKey` al ejecutar el nodo, aun con la llave correcta.
+
+**Conversion canonica PKCS#1 → OpenSSH RFC4716:**
+
+```bash
+# PASO 1: copiar la llave a un workspace seguro y darle permisos editables
+cp ~/Desktop/addendo-server-key.pem /tmp/addendo-key-converted.pem
+chmod 600 /tmp/addendo-key-converted.pem   # (gap 4 — ver abajo)
+
+# PASO 2: convertir in-place a OpenSSH RFC4716
+ssh-keygen -p -m RFC4716 -f /tmp/addendo-key-converted.pem -P "" -N ""
+# Flags: -p cambia formato, -m RFC4716 destino, -P "" passphrase actual vacia,
+#        -N "" nueva passphrase vacia (mantener sin passphrase)
+
+# PASO 3: verificar header convertido
+head -1 /tmp/addendo-key-converted.pem
+# Debe imprimir: -----BEGIN OPENSSH PRIVATE KEY-----
+
+# PASO 4: cargar el contenido en credencial N8N tipo "SSH" (sshPrivateKey)
+# via UI o via API admin (D9 escalacion CEO si crea credencial nueva)
+```
+
+**Gap 4 (Severidad Baja) — `ssh-keygen -p` requiere chmod 600 si la llave fuente esta en 400:**
+
+Las llaves SSH de produccion suelen tener permisos `400` (read-only owner) por defecto de seguridad. El comando `ssh-keygen -p` necesita escribir el archivo (modificar in-place), por lo que falla con `Permission denied` si la llave es 400. Solucion: copiar a un workspace temporal + `chmod 600` antes de convertir (paso 1 arriba). **NUNCA** modificar permisos de la llave fuente en produccion — siempre operar sobre copia temporal y borrar al terminar.
+
+```bash
+# Cleanup obligatorio post-uso de la llave temporal:
+shred -u /tmp/addendo-key-converted.pem 2>/dev/null || rm -f /tmp/addendo-key-converted.pem
+```
+
+**Resumen ejecutivo gaps 2-4:** para que un workflow N8N pueda invocar Claude Code CLI via SSH a localhost (patron M.18 canonico), la cadena de configuracion correcta es:
+1. Credencial N8N tipo `sshPrivateKey` cargada con la llave en formato OpenSSH RFC4716 (no PKCS#1)
+2. Nodo SSH con `authentication: "privateKey"` explicito en el JSON deployado (no asumir UI default)
+3. Llave convertida via copia temporal con `chmod 600`, no in-place sobre la llave de produccion
+
+### M.18.1 Pivot patrones nodos prohibidos (gap arquitectonico v1.1.2)
+
+**Contexto operacional descubierto Sesion 3 (27 abril 2026, workflow `iCvHhSkTWiRNrlNe` Cost Guard v1):** N8N v2 introduce la `DisabledNodesRule` (archivo `/usr/lib/node_modules/n8n/dist/modules/breaking-changes/rules/v2/disabled-nodes.rule.js`) que deshabilita por default ciertos nodos por riesgo de ejecucion arbitraria. Reactivarlos requiere variable de entorno `NODES_EXCLUDE=[]` en el proceso N8N — modificacion de configuracion del servidor que viola la **Decision 9 (D9) inviolable** del skill #50: #50 no modifica config del servidor sin autorizacion explicita CEO. La decision arquitectonica subyacente del CEO es coherente: **no permitir ejecucion arbitraria de shell desde workflows** porque amplia drasticamente la superficie de ataque (un workflow comprometido podria ejecutar cualquier comando).
+
+#### M.18.1.1 Lista canonica de nodos prohibidos en workflows Addendo
+
+| Nodo | Tipo (`n8n-nodes-base.X`) | Razon prohibicion | Fuente del bloqueo |
+|------|---------------------------|-------------------|---------------------|
+| Execute Command | `executeCommand` | Ejecucion arbitraria shell en host N8N | DisabledNodesRule v2 (default disabled) |
+| Local File Trigger | `localFileTrigger` | Lectura arbitraria del filesystem del host | DisabledNodesRule v2 (default disabled) |
+| SSH con `host: <user input>` | `ssh` con expresion en host | Pivot de ataque a hosts internos arbitrarios | Politica Addendo — host debe ser literal |
+| SSH con `allowAnyHost: true` | `ssh` con `allowAnyHost: true` | Acepta cualquier fingerprint, abre MITM | Politica Addendo — fingerprint pinning obligatorio |
+| Code con `eval(input)` | `code` con `eval()` o `Function()` sobre data externa | Inyeccion de codigo desde request | Politica Addendo — sanitizacion obligatoria |
+| Code con `child_process` | `code` que importa `child_process` | Equivalente funcional a executeCommand | Politica Addendo — equivalencia semantica |
+| HTTP Request con `url: <user input>` | `httpRequest` con expresion sin validacion en URL | SSRF a metadata services AWS, hosts internos | Politica Addendo — URL allow-list obligatoria |
+
+**Regla de decision para #50:** si el motor de compilacion considera incluir un nodo de la tabla, **debe pivotar a un patron canonico equivalente sin ese nodo** (siguiente sub-seccion). Si no existe pivot viable, escalar al CEO via #4 (D9) con propuesta tecnica + analisis de impacto + alternativas evaluadas.
+
+#### M.18.1.2 Pivots canonicos por nodo prohibido
+
+**Para `executeCommand` invocando Claude Code CLI:**
+→ Pivot canonico: nodo SSH N8N a `127.0.0.1:22` con `bash -ic 'claude -p "..." --bare ...'` (ver M.18 + gaps 2-4). Validado Sesion 2.
+
+**Para `executeCommand` invocando Redis (caso Cost Guard v1):**
+→ Pivot canonico: nodo `n8n-nodes-base.redis` v1 nativo con patron **GET → calcular en nodo Code → SET con TTL**. Aplicado en Cost Guard v1 (workflow `iCvHhSkTWiRNrlNe`, commit `c697be2`).
+
+**Caveat de atomicidad del pivot Redis:** el patron GET → calc → SET **NO es atomico**. Si dos invocaciones concurrentes leen el mismo valor antes de que la primera escriba, se pierde un incremento (race condition clasica read-modify-write). Para Cost Guard v1 (piloto Sesion 3 con un solo daemon Claude Code single-threaded) la perdida de atomicidad es teorica. Para escenarios de mayor concurrencia, las **4 opciones canonicas v1.1 a v1.2** son:
+
+| Opcion | Mecanismo atomicidad | Trade-off | Cuando aplicar |
+|--------|----------------------|-----------|----------------|
+| **A. Lua script via EVAL** | Atomicidad nativa Redis (Lua corre serialmente en el server) | Requiere comando `EVAL` en nodo Redis (verificar exposicion), o desplegar script via `SCRIPT LOAD` desde otro path | Cuando concurrencia >2 callers/seg y la operacion cabe en un script Lua simple |
+| **B. INCRBYFLOAT via SSH credential** | Atomicidad nativa Redis (`INCRBYFLOAT` es atomico) + bypass de `executeCommand` via nodo SSH | Requiere credencial SSH a localhost (D9 escalacion CEO) + overhead bash spawn ~100-200ms | Cuando ya existe credencial SSH para Claude Code CLI (M.18) y se reutiliza |
+| **C. WATCH/MULTI/EXEC pattern** | Optimistic locking Redis nativo: `WATCH key` + `MULTI` + `SET` + `EXEC`; reintentar si `EXEC` retorna nil (conflicto) | Requiere comandos `WATCH`/`MULTI`/`EXEC` en nodo Redis (no expuestos en v1) o nodo Code con cliente ioredis (requiere `NODE_FUNCTION_ALLOW_BUILTIN`) | Cuando ninguna de las anteriores es viable y se acepta retry-loop |
+| **D. Distributed lock con SET NX EX** | `SET lock:key value NX EX 5` antes de la operacion, `DEL lock:key` despues. Mientras el lock existe, otros callers esperan o fallan | Latencia anadida (espera del lock) + riesgo de deadlock si el holder muere antes del DEL (mitigar con TTL corto) | Casos donde el caller puede tolerar latencia y necesita exclusion mutua estricta |
+
+**Regla de decision atomicidad:** mientras el sistema Addendo opere con un solo daemon Claude Code productivo (Sesion 4 en adelante), el patron GET → calc → SET es suficiente y se prefiere por simplicidad. Cuando se demuestre empiricamente que ≥2 callers concurrentes producen drift de costo medible, escalar al CEO con la propuesta de migracion (preferentemente Opcion B si ya hay credencial SSH, sino Opcion A).
+
+**Para `code` con `child_process`:**
+→ Pivot canonico: refactorizar la operacion shell como llamada a un workflow auxiliar via HTTP Request (subworkflow N8N) que use SSH node a localhost con un comando especifico literal. Asi el comando vive como configuracion de un nodo (auditable, inmutable post-deploy) y no como string dinamico.
+
+**Para `httpRequest` con URL dinamica:**
+→ Pivot canonico: agregar nodo Code previo que valide la URL contra una allow-list literal del workflow (ej: `["https://api.anthropic.com", "https://api.openai.com"]`). Si la URL no esta en la lista, error 403 explicito y log estructurado.
+
+#### M.18.1.3 Como detectar si un nodo esta prohibido antes de compilar
+
+Pre-validacion en Bloque 3 (compilacion) del Protocolo 8 Bloques. Antes de generar el JSON final, ejecutar este check:
+
+```javascript
+function validateNoProhibitedNodes(workflowJson) {
+  const PROHIBITED_TYPES = new Set([
+    'n8n-nodes-base.executeCommand',
+    'n8n-nodes-base.localFileTrigger',
+  ]);
+  const PROHIBITED_PATTERNS = [
+    { node: 'ssh', field: 'parameters.host', regex: /^\{\{.*\}\}/, msg: 'SSH host debe ser literal, no expresion' },
+    { node: 'ssh', field: 'parameters.options.allowAnyHost', value: true, msg: 'SSH allowAnyHost prohibido (MITM)' },
+    { node: 'code', field: 'parameters.jsCode', regex: /\beval\s*\(|\bnew\s+Function\s*\(/, msg: 'eval/Function constructor prohibido' },
+    { node: 'code', field: 'parameters.jsCode', regex: /require\(['"]child_process['"]\)/, msg: 'child_process prohibido' },
+  ];
+  const issues = [];
+  for (const node of workflowJson.nodes) {
+    if (PROHIBITED_TYPES.has(node.type)) {
+      issues.push(`CRITICAL: nodo '${node.name}' tipo prohibido: ${node.type}`);
+    }
+    for (const p of PROHIBITED_PATTERNS) {
+      if (!node.type.endsWith(p.node)) continue;
+      const val = p.field.split('.').reduce((acc, k) => acc?.[k], node);
+      if (p.regex && typeof val === 'string' && p.regex.test(val)) {
+        issues.push(`CRITICAL: nodo '${node.name}' patron prohibido — ${p.msg}`);
+      }
+      if (p.value !== undefined && val === p.value) {
+        issues.push(`CRITICAL: nodo '${node.name}' configuracion prohibida — ${p.msg}`);
+      }
+    }
+  }
+  return issues;
+}
+```
+
+Integrar en M.16 Nivel 1 Syntax Check (extension de la funcion `validateWorkflowJSON`). Workflow con cualquier issue CRITICAL no pasa Nivel 1, no se deploya, no se activa.
+
+### M.19 Webhook node — campo `webhookId` obligatorio en JSON deployado via API (v1.1.2)
+
+**Contexto operacional descubierto Sesion 3 (27 abril 2026, workflow `iCvHhSkTWiRNrlNe` Cost Guard v1):** al deployar un workflow con webhook trigger via API (`POST /api/v1/workflows`) sin incluir el campo `webhookId` en el nodo Webhook, N8N v2 lo registra en su tabla `webhook_entity` con un path scoped: `<workflowId>/webhook/<path>` en lugar del path "limpio" `<path>`. Resultado: invocaciones a `https://n8n.addendo.io/webhook/<path>` retornan HTTP 404 con `"The requested webhook \"POST <path>\" is not registered"`, aun con el workflow `active: true` y `triggerCount: 1`.
+
+#### M.19.1 Sintoma y diagnostico canonico
+
+**Sintoma:** workflow desplegado y activado correctamente via API, pero el webhook no responde:
+```bash
+curl -X POST https://n8n.addendo.io/webhook/<path-del-json>
+# {"code":404,"message":"The requested webhook \"POST <path-del-json>\" is not registered."}
+```
+
+**Diagnostico canonico — consultar la tabla `webhook_entity` directamente:**
+```bash
+ssh -i ~/Desktop/addendo-server-key.pem ubuntu@18.233.117.68 \
+  "sqlite3 /home/ubuntu/.n8n/database.sqlite \
+   'SELECT webhookPath, method, workflowId, node FROM webhook_entity WHERE workflowId=\"<WID>\"'"
+```
+
+Si el `webhookPath` retornado es `<workflowId>/webhook/<path>` (con prefijo del workflow id), el bug esta confirmado: falta el campo `webhookId` en el JSON. Si el `webhookPath` es solo `<path>` (limpio), el problema es otro (posible deactivate-activate cycle requerido tras un PUT).
+
+#### M.19.2 Patron canonico — `webhookId` con slug deterministico
+
+```json
+// PATRON CANONICO Addendo — nodo Webhook para deploy via API:
+{
+  "type": "n8n-nodes-base.webhook",
+  "typeVersion": 2.1,
+  "parameters": {
+    "httpMethod": "POST",
+    "path": "cost-guard-v1",
+    "responseMode": "responseNode",
+    "options": {}
+  },
+  "id": "1a000000-0000-4000-8000-000000000001",
+  "name": "Webhook",
+  "webhookId": "cost-guard-v1-webhook"
+}
+```
+
+Reglas para el `webhookId`:
+- Slug deterministico (ej: `<path>-webhook` o `<workflow-name>-trigger`), **no** UUID generado al azar
+- Unico globalmente en la instancia N8N (colision = re-registro o conflicto en activacion)
+- Mismo `webhookId` entre versiones del mismo workflow (preserva URL estable cuando se hace PUT)
+
+#### M.19.3 Comparativa correcta vs incorrecta
+
+```jsonc
+// INCORRECTO — webhookId ausente, registra path scoped:
+{
+  "type": "n8n-nodes-base.webhook",
+  "typeVersion": 2.1,
+  "parameters": { "path": "cost-guard-v1", ... },
+  "id": "...",
+  "name": "Webhook"
+  // ← falta webhookId, N8N v2 fallback al path scoped
+}
+
+// CORRECTO — webhookId explicito, registra path limpio:
+{
+  "type": "n8n-nodes-base.webhook",
+  "typeVersion": 2.1,
+  "parameters": { "path": "cost-guard-v1", ... },
+  "id": "...",
+  "name": "Webhook",
+  "webhookId": "cost-guard-v1-webhook"
+}
+```
+
+#### M.19.4 Recovery cuando el bug ya ocurrio en produccion
+
+Si un workflow ya esta deployado sin `webhookId` y registrado en path scoped, el fix es:
+1. Editar el JSON local agregando `webhookId`
+2. PUT al endpoint del workflow existente (no crear uno nuevo)
+3. Ciclo deactivate + activate forzado para que N8N re-registre el webhook desde el nuevo JSON
+4. Verificar la tabla `webhook_entity` post-activate
+
+```bash
+WID=<workflow-id-existente>
+# 1. PUT con JSON corregido
+scp -i KEY workflow-fixed.json HOST:/tmp/wf.json
+ssh -i KEY HOST "bash -ic 'curl -s -X PUT -H \"X-N8N-API-KEY: \$N8N_API_KEY\" \
+  -H \"Content-Type: application/json\" --data-binary @/tmp/wf.json \
+  https://n8n.addendo.io/api/v1/workflows/${WID}'"
+
+# 2. Deactivate + reactivate
+ssh -i KEY HOST "bash -ic '
+  curl -s -X POST -H \"X-N8N-API-KEY: \$N8N_API_KEY\" -d \"{}\" -H \"Content-Type: application/json\" \
+    https://n8n.addendo.io/api/v1/workflows/${WID}/deactivate
+  sleep 1
+  curl -s -X POST -H \"X-N8N-API-KEY: \$N8N_API_KEY\" -d \"{}\" -H \"Content-Type: application/json\" \
+    https://n8n.addendo.io/api/v1/workflows/${WID}/activate
+'"
+
+# 3. Verificar registro limpio
+ssh -i KEY HOST "sqlite3 /home/ubuntu/.n8n/database.sqlite \
+  'SELECT webhookPath FROM webhook_entity WHERE workflowId=\"${WID}\"'"
+# Esperado: <path-limpio>, NO <WID>/webhook/<path>
+```
+
+**Regla canonica v1.1.2:** todo nodo `n8n-nodes-base.webhook` que #50 incluya en un JSON deployado via API debe llevar `webhookId` con slug deterministico. Validar en M.16 Nivel 1 Syntax Check con esta extension:
+
+```javascript
+// Extension Nivel 1 — webhook nodes deben tener webhookId
+for (const node of workflow.nodes) {
+  if (node.type === 'n8n-nodes-base.webhook' && !node.webhookId) {
+    checks.push(`CRITICAL: nodo Webhook '${node.name}' sin webhookId — registrara path scoped`);
+  }
+}
+```
+
+### M.20 Redis SET con value de expresion numerica — `keyType` + `.toString()` obligatorios (v1.1.2)
+
+**Contexto operacional descubierto Sesion 3 (27 abril 2026, Cost Guard v1):** el nodo nativo `n8n-nodes-base.redis` v1 con `operation: "set"` tiene logica de auto-deteccion del tipo del valor. Cuando el campo `value` es una expresion N8N que retorna un numero (`={{ $json.new_total_usd }}` con `new_total_usd: 0.5`), la auto-deteccion **falla silenciosamente** y emite el error `Could not identify the type to set. Please set it manually!`. El nodo no escribe en Redis, pero (con `onError: continueErrorOutput`) el flujo continua por la rama de error sin que el usuario sepa la causa raiz.
+
+#### M.20.1 Sintoma y causa raiz
+
+**Sintoma en logs:** error string literal `"Could not identify the type to set. Please set it manually!"` en el output del nodo Redis SET (visible solo si se inspecciona la ejecucion via `GET /api/v1/executions/{id}?includeData=true`).
+
+**Causa raiz:** la auto-deteccion del campo `keyType` del nodo Redis depende de la inspeccion del literal del valor. Con string literal funciona (`value: "hello"` → keyType:"string"). Con expresion N8N que retorna un tipo no-string (`={{ 0.5 }}` o `={{ true }}`), la inspeccion ocurre antes de la evaluacion de la expresion y no detecta el tipo correctamente.
+
+#### M.20.2 Patron canonico — `keyType` + `.toString()`
+
+```json
+// PATRON CANONICO Addendo — Redis SET con value numerico desde expresion:
+{
+  "type": "n8n-nodes-base.redis",
+  "typeVersion": 1,
+  "parameters": {
+    "operation": "set",
+    "key": "={{ $json.key }}",
+    "value": "={{ $json.new_total_usd.toString() }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 3600
+  },
+  "credentials": {
+    "redis": { "id": "<credential-id>", "name": "Addendo Redis Local" }
+  }
+}
+```
+
+Dos cambios obligatorios respecto al patron incorrecto:
+1. `keyType: "string"` declarado explicito (no confiar en auto-deteccion)
+2. Coercion `.toString()` en la expresion del valor (asegura que la expresion siempre devuelve string al render time)
+
+#### M.20.3 Comparativa correcta vs incorrecta
+
+```jsonc
+// INCORRECTO — value es expresion que retorna numero, falta keyType:
+{
+  "operation": "set",
+  "key": "={{ $json.key }}",
+  "value": "={{ $json.new_total_usd }}",      // ← number, auto-deteccion falla
+  "expire": true,
+  "ttl": 3600
+}
+// Error: "Could not identify the type to set. Please set it manually!"
+
+// CORRECTO — keyType explicito + value coerced a string:
+{
+  "operation": "set",
+  "key": "={{ $json.key }}",
+  "value": "={{ $json.new_total_usd.toString() }}",
+  "keyType": "string",
+  "expire": true,
+  "ttl": 3600
+}
+```
+
+#### M.20.4 Regla canonica para todos los nodos Redis SET de #50
+
+Validacion Nivel 1 Syntax Check extendida:
+
+```javascript
+// Extension Nivel 1 — Redis SET con value expresion debe tener keyType
+for (const node of workflow.nodes) {
+  if (node.type !== 'n8n-nodes-base.redis') continue;
+  if (node.parameters?.operation !== 'set') continue;
+  const val = node.parameters?.value;
+  const isExpr = typeof val === 'string' && val.startsWith('={{');
+  if (isExpr && !node.parameters?.keyType) {
+    checks.push(`WARNING: nodo Redis SET '${node.name}' usa expresion sin keyType — riesgo auto-deteccion`);
+  }
+  if (isExpr && val.includes('.toString()') === false && !val.includes('String(')) {
+    checks.push(`WARNING: nodo Redis SET '${node.name}' expresion sin coercion .toString()`);
+  }
+}
+```
+
+**Aplica simetricamente a operaciones de Redis con value tipado:** SET, INCR (con value implicito), HSET (con field/value pares). Para GET, DELETE, KEYS, TTL no aplica (no hay value de escritura).
 
 ---
 
@@ -3067,7 +3415,7 @@ Protocolo emergencia:
 - Workflows con >500 nodos tienen performance degradation (recomendar splitting)
 - Schema validation pre-import limitada (hay que activar + ejecutar para detectar errores)
 - Credentials API tiene rate limit de ~50 req/min
-- **GET /credentials puede devolver null o array vacio segun scope del API token** (validado 20 abril 2026): el endpoint `GET /api/v1/credentials` retorno `null` con el token admin@addendo.io actual. El scope requerido para listar credentials aparentemente es mas restrictivo que el de workflows. **Workaround canonico — introspeccion indirecta desde workflows existentes:**
+- **GET /credentials depende del scope del API token** (validado 20 abril 2026, refinado 25 abril 2026 — Sesion 2 Cost Bridge Redis): la primera prueba (20 abril) con un token de scope reducido retorno `null`. La segunda prueba (25 abril) con el token admin completo de admin@addendo.io devolvio el array de credenciales correctamente. La leccion canonica: el endpoint **funciona si el token tiene scope admin**, no si tiene scope read-only sobre workflows unicamente. Cuando #50 opera con un token desconocido, debe asumir el peor caso (puede retornar null) y aplicar el workaround de introspeccion indirecta como fallback. **Workaround canonico — introspeccion indirecta desde workflows existentes (siempre disponible incluso con scope minimo):**
   ```bash
   # 1. Listar workflows (endpoint que SI funciona con scope default):
   curl -s -H "X-N8N-API-KEY: $N8N_API_KEY" \
@@ -6018,6 +6366,68 @@ Cuando opera bien, #50 es invisible: los workflows corren, los clientes reciben 
 
 Registro estructurado de versiones del skill #50 agente-constructor-workflows. Cada entrada declara version + fecha + autor + tipo + cambios + motivacion + puntaje World-Class auditado.
 
+### v1.1.2 — 2026-04-27
+
+**Version:** v1.1.2
+**Fecha:** 2026-04-27
+**Autor:** Sistema Addendo (CEO Jose Raul Ramirez + Claude Code)
+**Tipo:** Refactor patch — cierre 8 gaps acumulados Sesion 2 (5) + Sesion 3 Cost Guard v1 (3)
+**Commits referenciados:** `dfaf6d8` (Sesion 2 cierre Gate CEO), `c697be2` (Cost Guard v1 LIVE)
+
+**Cambios aplicados (8 gaps cerrados):**
+
+1. **Gap 1 (Baja) — FASE Z aclaracion `GET /credentials` y scope del token:** la afirmacion v1.1.1 ("retorna null") era parcial. Refinado: el endpoint funciona si el token tiene scope admin (validado 25 abril Sesion 2 con token admin@addendo.io completo), retorna null/array vacio si el scope es read-only sobre workflows. Workaround de introspeccion indirecta se mantiene como fallback siempre disponible cuando el scope sea desconocido.
+
+2. **Gap 2 (Media) — M.18 nodo SSH default authentication:** documentado que el nodo `n8n-nodes-base.ssh` expone `authentication` con default `password` en UI; #50 debe declarar `authentication: "privateKey"` explicito en el JSON deployado, sino el nodo falla con `Authentication failed`.
+
+3. **Gap 3 (Alta) — M.18 conversion PKCS#1 → OpenSSH RFC4716:** documentado que la libreria `ssh2` que usa N8N rechaza PKCS#1 PEM (`-----BEGIN RSA PRIVATE KEY-----`). Pattern canonico de conversion: copia temporal + `chmod 600` + `ssh-keygen -p -m RFC4716 -f /tmp/key -P "" -N ""` + cleanup con `shred -u`.
+
+4. **Gap 4 (Baja) — M.18 chmod 600 antes de ssh-keygen -p:** documentado que `ssh-keygen -p` requiere permisos de escritura sobre la llave; las llaves de produccion suelen ser 400 (read-only). Solucion canonica: nunca modificar la llave fuente, operar siempre sobre copia temporal.
+
+5. **Gap 5 (Baja) — M.16.1 paso 2 activate API requiere body `{}`:** documentado que `POST /api/v1/workflows/{id}/activate` exige body explicito `-d '{}'` + `Content-Type: application/json`. Sin estos flags, ciertos clientes HTTP envian Content-Length:0 que N8N interpreta como request malformado en algunas versiones.
+
+6. **Gap 6 (Media) — M.19 NUEVA — Webhook node `webhookId` obligatorio:** sintoma (HTTP 404 con path "limpio"), causa raiz (N8N v2 fallback registra como `<workflowId>/webhook/<path>` cuando `webhookId` ausente), patron canonico (slug deterministico `<path>-webhook` o `<workflow-name>-trigger`), comparativa correcto vs incorrecto, recovery procedure cuando el bug ya ocurrio en produccion (PUT con JSON corregido + ciclo deactivate/activate + verificar tabla `webhook_entity`), validacion Nivel 1 extendida.
+
+7. **Gap 7 (Media) — M.20 NUEVA — Redis SET con value numerico:** sintoma (error `Could not identify the type to set. Please set it manually!`), causa raiz (auto-deteccion del `keyType` falla con expresiones N8N que retornan no-string), patron canonico (`keyType: "string"` declarado + coercion `.toString()` en la expresion del valor), comparativa correcto vs incorrecto, validacion Nivel 1 extendida.
+
+8. **Gap 8 (Arquitectonico) — M.18.1 NUEVA — Pivot patrones nodos prohibidos:** N8N v2 introduce `DisabledNodesRule` que deshabilita por default `executeCommand` y `localFileTrigger`. Reactivar viola D9 (modificacion de config sin autorizacion CEO). Documentado: tabla canonica de 7 nodos prohibidos con razon + fuente del bloqueo, pivots canonicos por nodo (Claude Code CLI → SSH a localhost, Redis INCRBYFLOAT → GET-calc-SET, etc.), caveat de atomicidad del pivot Redis con 4 opciones canonicas v1.2 (Lua EVAL, INCRBYFLOAT via SSH credential, WATCH/MULTI/EXEC, distributed lock SET NX EX), pre-validacion en Bloque 3 con funcion `validateNoProhibitedNodes`.
+
+**Indice navegable + tabla de uso rapido:** actualizada para reflejar M.18.1, M.19, M.20 nuevas y los gaps SSH 2-4 dentro de M.18. Cierre Canonico: referencias `v1.1.1` → `v1.1.2`, mandamientos canonicos `v1.1.2` (sin cambios estructurales en los 25 mandamientos).
+
+**Motivacion:**
+
+- **Sesion 2 Cost Bridge Redis** (25 abril 2026, workflow `MLG4B67xXI8WH7Mp`) valido empiricamente el patron M.18 Claude Code CLI no-interactivo end-to-end y detecto los 5 gaps 1-5 que el skill v1.1.1 no documentaba.
+- **Sesion 3 Cost Guard v1** (27 abril 2026, workflow `iCvHhSkTWiRNrlNe`) descubrio dos bugs operacionales (gaps 6-7) y un blocker arquitectonico (gap 8) durante el deploy de un workflow de 15 nodos con webhook + Redis intensivo.
+- **D9 inviolable** se reafirma: ante el bloqueo de `executeCommand`, #50 NO escala automaticamente al CEO para habilitarlo; pivota a patron equivalente y documenta el caveat (atomicidad). El backlog v1.2 con 4 opciones queda explicito para que el CEO decida cuando el daemon escale.
+- **Patron de evolucion del skill consolidado:** cada sesion de implementacion productiva genera gaps que se cierran en la siguiente version patch. v1.1.1 cerro 5 gaps de Sesion 1 (TEST-50-saludo); v1.1.2 cierra 5 de Sesion 2 + 3 de Sesion 3.
+
+**Auto-evaluacion honesta v1.1.2 contra checklist 110 puntos World-Class:**
+
+| Categoria | Puntos | Justificacion |
+|-----------|--------|---------------|
+| A1 Identificacion (titulo/version/fecha/autor estructurado) | 4/4 | Frontmatter actualizado v1.1.2 + 2026-04-27, Cierre Canonico coherente |
+| A2 Posicion en sistema (capa, deslindes, agentes vecinos) | 4/4 | Sin cambio respecto a v1.1.1 |
+| A3 Mision unica + 4 verbos exclusivos | 4/4 | COMPILAR/DESPLEGAR/VERSIONAR/AUTORREPARAR intactos |
+| A4 14 fronteras absolutas con escalacion | 4/4 | Sin cambio |
+| A5 Indice navegable | 4/4 | Actualizado con M.18.1, M.19, M.20 nuevas y gaps SSH en M.18 |
+| B1-B4 Framework universalidad | 16/16 | Sin cambio |
+| C1-C4 Disciplina operativa (sesgos, 8 bloques, frases) | 16/16 | Sin cambio |
+| D1-D5 FASE M (modernizacion engineering) | 19/20 | M.18.1/M.19/M.20 son sub-secciones canonicas; pierde 1 punto porque la validacion Nivel 1 extendida con `validateNoProhibitedNodes` y `validateWebhookId` y `validateRedisSetKeyType` se documenta como pseudocodigo pero NO se integra todavia en el JSON validator de M.16 Nivel 1 (que esta como funcion JavaScript canonica desde v1.1.0). El refactor v1.1.3 consolidara las 4 validaciones en una sola funcion `validateWorkflowJSON` ampliada. |
+| E1 FASE G multi-idioma | 4/4 | Sin cambio |
+| E2 FASE Z limitaciones honestas | 4/4 | Refinado gap 1 sin perder honestidad |
+| E3 Diseñado vs probado (empirico) | 3/3 | Reforzado: gaps 1-5 validados Sesion 2, gaps 6-7 validados Sesion 3, gap 8 con 4 opciones evaluadas mas el patron pivot ya aplicado en produccion |
+| E4 Limitaciones del agente | 4/4 | Sin cambio |
+| F1-F4 Biblioteca + integracion + cierre | 16/16 | Sin cambio |
+| G1 CHANGELOG estructurado | 4/4 | Esta entrada v1.1.2 sigue formato canonico |
+
+**Puntaje total auto-evaluado v1.1.2:** **109/110**.
+
+**Por que NO 110/110 (honestidad sostenida):** la categoria D5 pierde 1 punto porque la funcion `validateWorkflowJSON` canonica de M.16 Nivel 1 (presente desde v1.1.0) no incorpora todavia las extensiones de validacion documentadas en M.18.1.3, M.19.4 y M.20.4. Las extensiones existen como pseudocodigo en sus respectivas sub-secciones, pero no estan unificadas en una funcion ejecutable. Consolidarlas es trabajo de v1.1.3 (refactor patch siguiente). Inflar el puntaje a 110/110 sin haber consolidado violaria la regla "auto-evaluacion no declarativa, debe sostenerse".
+
+**Commit Mac:** (pendiente — se completa en este mismo refactor)
+
+---
+
 ### v1.1.1 — 2026-04-20
 
 **Version:** v1.1.1
@@ -6118,16 +6528,16 @@ Nueva version del skill debe agregar entrada al TOPE de este changelog (formato 
 **Agente:** #50 agente-constructor-workflows
 **Nombre completo:** Compilador Tecnico de Pipelines N8N (Brazo Tecnico de #4)
 **Capa:** 07 — Infraestructura Tecnica (Workflow Compilation)
-**Version:** World-Class v1.1.1 (estandar del sistema: World-Class v1.1)
-**Nivelacion:** 2026-04-20 (tercera ola — 3er agente) — Refactor patch v1.1.1 aplicado el mismo dia tras primera prueba real
-**Changelog:** ver seccion CHANGELOG DE VERSIONES (historial v1.1.0 → v1.1.1)
+**Version:** World-Class v1.1.2 (estandar del sistema: World-Class v1.1)
+**Nivelacion:** 2026-04-20 (tercera ola — 3er agente) — Refactor patch v1.1.1 aplicado el mismo dia tras primera prueba real; refactor patch v1.1.2 aplicado 27 abril tras Sesion 2 + Cost Guard v1
+**Changelog:** ver seccion CHANGELOG DE VERSIONES (historial v1.1.0 → v1.1.1 → v1.1.2)
 **Sistema:** Addendo Agency OS
 **Patron:** Interpretacion C Orquestacion con Fronteras Absolutas
 **Upstream primario:** #4 project-manager (pipeline-spec handoff canonico)
 **Downstream primario:** N8N instancia AWS + Git repository + #4 handoff
 **Verbos exclusivos:** COMPILAR, DESPLEGAR, VERSIONAR, AUTORREPARAR
 **Fronteras absolutas:** 14 (documentadas con agente responsable + protocolo escalacion)
-**Mandamientos:** 25 canonicos v1.1.1 (5 clusters × 5 mandamientos)
+**Mandamientos:** 25 canonicos v1.1.2 (5 clusters × 5 mandamientos — sin cambios estructurales respecto a v1.1.1)
 **Decisiones CEO aplicadas:** 13 (D1-D13) + 3 parametros (P1 25 Mandamientos, P2 target lineas, P3 8 chunks)
 **Coherencia verificada:** 0 contradicciones con 18 agentes World-Class v1.1 ya nivelados (PASO 2.5 confirmado)
 
