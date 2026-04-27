@@ -1,0 +1,44 @@
+{
+  "name": "TEST-Cost-Guard-v1-caller",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "cost-guard-caller-test",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "1b000000-0000-4000-8000-000000000001",
+      "name": "Caller Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [0, 0],
+      "webhookId": "cost-guard-caller-test-webhook"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://n8n.addendo.io/webhook/cost-guard-v1",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"mode\": \"check\",\n  \"workflow_id\": \"caller-test-nivel3\"\n}",
+        "options": {
+          "timeout": 10000
+        }
+      },
+      "id": "1b000000-0000-4000-8000-000000000002",
+      "name": "Call Cost Guard",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [240, 0]
+    }
+  ],
+  "connections": {
+    "Caller Webhook": {
+      "main": [[{ "node": "Call Cost Guard", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
