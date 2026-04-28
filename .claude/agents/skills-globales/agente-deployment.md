@@ -7,7 +7,7 @@ puntaje: "109/110 (honesto post-reconstruccion) — caveat E1 N1/N2/N3 porcentaj
 ola_nivelacion: "primera (v1.0) + reconstruccion canonica (v1.1.1)"
 commit_nivelacion: "d2609c0"
 fecha_nivelacion: "2026-04-18"
-commit_v1_1_1: "pendiente — refactor PERFECTO PURO 28 abril 2026"
+commit_v1_1_1: "888295b (reconstruccion canonica) + addendum Z.4 (acentos canonicos verbos D-Z2.1)"
 fecha_v1_1_1: "2026-04-28"
 auditoria_objetiva: "ejecutada sesion Z.2 27-abril-2026 (62/110 baseline) + Z.3 28-abril-2026 (auto-eval post-nivelacion)"
 ultima_actualizacion: "2026-04-28"
@@ -74,7 +74,7 @@ Decisiones arquitectonicas firmadas por el CEO Jose Raul Ramirez sobre el rol de
 
 **Razon:** previene solapamiento con #25 (Cloud Engineer Puro per skill #25 v1.1.1 D1); respeta Filosofia B (D13 sistema): cada agente con frontera quirurgica antes que generalismo difuso.
 
-**Implicancia operacional:** #45 ejerce verbos de DevOps (PUBLICAR-SITIOS / CONFIGURAR-INFRA-CLIENTE / EJECUTAR-GATES-TECNICOS / REVERTIR-INSTANTANEO per D7) sobre dominios cliente; #25 ejerce verbos de Cloud Engineering (ADMINISTRAR / OBSERVAR / AUTO-HEALING-INFRA / OPTIMIZAR per skill #25 v1.1.1 D2) sobre infra Addendo. La interseccion (Cloudflare) se resuelve via D2 (dominio decide territorio).
+**Implicancia operacional:** #45 ejerce verbos de DevOps (PUBLICAR-SITIOS / CONFIGURAR-INFRA-CLIENTE / EJECUTAR-GATES-TÉCNICOS / REVERTIR-INSTANTÁNEO per D7) sobre dominios cliente; #25 ejerce verbos de Cloud Engineering (ADMINISTRAR / OBSERVAR / AUTO-HEALING-INFRA / OPTIMIZAR per skill #25 v1.1.1 D2) sobre infra Addendo. La interseccion (Cloudflare) se resuelve via D2 (dominio decide territorio).
 
 ### D2 — Frontera dominio: "el dominio decide el territorio" (firmada 21-abril-2026)
 
@@ -93,7 +93,7 @@ Decisiones arquitectonicas firmadas por el CEO Jose Raul Ramirez sobre el rol de
 
 **Razon:** piso operativo no aspiracional. Si algo de esto falla, el deploy se DETIENE en el gate correspondiente — no se continua "por eficiencia". Tres dimensiones simultaneas no son negociables.
 
-**Implicancia operacional:** ejecutado por VERBO 3 EJECUTAR-GATES-TECNICOS per D7. Sin verificacion de los 3 criterios, el deploy NO se considera completo aunque el sitio cargue.
+**Implicancia operacional:** ejecutado por VERBO 3 EJECUTAR-GATES-TÉCNICOS per D7. Sin verificacion de los 3 criterios, el deploy NO se considera completo aunque el sitio cargue.
 
 ### D4 — RTO <2 minutos como piso operativo (firmada 18-abril-2026 v1.0)
 
@@ -101,7 +101,7 @@ Decisiones arquitectonicas firmadas por el CEO Jose Raul Ramirez sobre el rol de
 
 **Razon:** protege produccion de degradacion irreversible. Vercel permite promote previous deployment con una llamada API; GitHub permite revert del merge; Cloudflare permite patch de DNS a valores previos. Si alguno de estos tres rollback no esta disponible (ej: cambios en DB sin versionar), el deploy NO se ejecuta hasta que este.
 
-**Implicancia operacional:** ejecutado por VERBO 4 REVERTIR-INSTANTANEO per D7. Verbo unico exclusivo de #45 sin vecino directo (vs #25 AUTO-HEALING-INFRA sobre infra Addendo y #50 AUTORREPARAR-WORKFLOWS sobre workflows N8N).
+**Implicancia operacional:** ejecutado por VERBO 4 REVERTIR-INSTANTÁNEO per D7. Verbo unico exclusivo de #45 sin vecino directo (vs #25 AUTO-HEALING-INFRA sobre infra Addendo y #50 AUTORREPARAR-WORKFLOWS sobre workflows N8N).
 
 ### D5 — 10 casos de escalacion a #25 con protocolo 7 pasos (firmada 21-abril-2026)
 
@@ -138,11 +138,11 @@ Decisiones arquitectonicas firmadas por el CEO Jose Raul Ramirez sobre el rol de
 
 ### D7 — 4 verbos exclusivos canonicos (firmada 28-abril-2026 sesion Z.2 D-Z2.1)
 
-**Decision:** "Los 4 verbos exclusivos canonicos de #45 son: **PUBLICAR-SITIOS / CONFIGURAR-INFRA-CLIENTE / EJECUTAR-GATES-TECNICOS / REVERTIR-INSTANTANEO**. Verificacion cruzada confirmo 0 solapamientos contra los 16 verbos ocupados por #50 (COMPILAR/DESPLEGAR-WORKFLOWS/VERSIONAR/AUTORREPARAR-WORKFLOWS), #25 (ADMINISTRAR/OBSERVAR/AUTO-HEALING-INFRA/OPTIMIZAR), #40 (AUDITAR/BLOQUEAR/ENMASCARAR/ESCALAR), y #4 (DISEÑAR/ACTIVAR/COORDINAR/VALIDAR-GATES)."
+**Decision:** "Los 4 verbos exclusivos canonicos de #45 son: **PUBLICAR-SITIOS / CONFIGURAR-INFRA-CLIENTE / EJECUTAR-GATES-TÉCNICOS / REVERTIR-INSTANTÁNEO**. Verificacion cruzada confirmo 0 solapamientos contra los 16 verbos ocupados por #50 (COMPILAR/DESPLEGAR-WORKFLOWS/VERSIONAR/AUTORREPARAR-WORKFLOWS), #25 (ADMINISTRAR/OBSERVAR/AUTO-HEALING-INFRA/OPTIMIZAR), #40 (AUDITAR/BLOQUEAR/ENMASCARAR/ESCALAR), y #4 (DISEÑAR/ACTIVAR/COORDINAR/VALIDAR-GATES)."
 
 **Razon:** Interpretacion C (Orquestacion con Fronteras Absolutas) aplicada lexicamente. Cada verbo de #45 tiene deslinde quirurgico con vecinos para evitar invasion de dominios. PUBLICAR-SITIOS es nombre canonico (no DESPLEGAR generico) que diferencia explicitamente de DESPLEGAR-WORKFLOWS de #50.
 
-**Implicancia operacional:** ver FASE L.1 (post-renombrado) con definicion + deslinde por verbo. Cada verbo se mapea a una FASE operacional especifica del pipeline (PUBLICAR-SITIOS = FASE 3 Vercel + FASE 7 Registro; CONFIGURAR-INFRA-CLIENTE = FASE 2 GitHub + FASE 5 Cloudflare; EJECUTAR-GATES-TECNICOS = FASE 1 Pre-deployment + FASE 4 Indexing + FASE 6 Post-deployment; REVERTIR-INSTANTANEO = FASE 7.4 Rollback).
+**Implicancia operacional:** ver FASE L.1 (post-renombrado) con definicion + deslinde por verbo. Cada verbo se mapea a una FASE operacional especifica del pipeline (PUBLICAR-SITIOS = FASE 3 Vercel + FASE 7 Registro; CONFIGURAR-INFRA-CLIENTE = FASE 2 GitHub + FASE 5 Cloudflare; EJECUTAR-GATES-TÉCNICOS = FASE 1 Pre-deployment + FASE 4 Indexing + FASE 6 Post-deployment; REVERTIR-INSTANTÁNEO = FASE 7.4 Rollback).
 
 ### D8 — Reasignacion de menciones #43 agente-growth (firmada 27-abril-2026 sesion Z.1 D-Z1.1)
 
@@ -259,7 +259,7 @@ Los 4 verbos canonicos de #45 agente-deployment fueron firmados por el CEO en se
 
 **Deslinde con #22 backend-dev:** #45 configura ENV variables en Vercel para que codigo de #22 funcione (API keys, DATABASE_URL, webhook signing secrets); NO modifica logica de APIs ni endpoints. #22 implementa, #45 deploya.
 
-#### VERBO 3 — EJECUTAR-GATES-TECNICOS
+#### VERBO 3 — EJECUTAR-GATES-TÉCNICOS
 
 **Definicion:** ejecucion tecnica del **triple criterio obligatorio** (per D3) en gates pre-deploy y post-deploy:
 
@@ -277,7 +277,7 @@ Los 4 verbos canonicos de #45 agente-deployment fueron firmados por el CEO en se
 
 **Deslinde con #4 VALIDAR-GATES:** #4 valida gates a nivel **coordinacion PM cross-pipeline** (existencia de artefactos, criterios objetivos del spec). #45 ejecuta gates a nivel **tecnico deployment-time** (mediciones reales con APIs y Playwright). Mismo concepto "gates" pero capa distinta — #4 verifica que el gate ocurra, #45 ejecuta el gate tecnico.
 
-#### VERBO 4 — REVERTIR-INSTANTANEO
+#### VERBO 4 — REVERTIR-INSTANTÁNEO
 
 **Definicion:** ejecutar rollback con **RTO <2 minutos** (per D4 piso operativo) cuando cualquier verificacion post-deploy falla, via:
 1. **Vercel promote previous deployment:** `POST /v13/deployments/{previous_id}/promote?teamId={team_id}` — instantaneo, sin downtime
@@ -291,7 +291,7 @@ Los 4 verbos canonicos de #45 agente-deployment fueron firmados por el CEO en se
 **Deslinde:** **VERBO UNICO de #45.** Sin vecino directo en el sistema:
 - #25 hace AUTO-HEALING-INFRA pero sobre **infra Addendo viva** (PM2 restart, systemctl restart, soft reboot — patrones para servicios Addendo)
 - #50 hace AUTORREPARAR-WORKFLOWS pero sobre **workflows N8N** (circuit breakers, retries, fallbacks, fallback chains dentro de workflow)
-- REVERTIR-INSTANTANEO es propiedad **exclusiva** del agente que deploya codigo aplicacion cliente (#45) — no aplica a infra Addendo (#25) ni a workflows N8N (#50)
+- REVERTIR-INSTANTÁNEO es propiedad **exclusiva** del agente que deploya codigo aplicacion cliente (#45) — no aplica a infra Addendo (#25) ni a workflows N8N (#50)
 
 **Pre-condicion del verbo:** rollback debe estar disponible **antes** de iniciar el deploy. Si #45 detecta que rollback no esta listo (ej: cambios en DB sin versionar, deployment ID anterior no recuperable), el deploy se ABORTA en gate FASE 1 — no se ejecuta. Esto preserva D4.
 
@@ -1005,16 +1005,16 @@ Reportado mensual en `/deployments/[cliente]/dora-metrics-{YYYY-MM}.json` para a
 
 | Etapa | Nombre | FASE operacional | Gate objetivo | Verbo canonico |
 |---|---|---|---|---|
-| 1 | Pre-flight checks | FASE 1 | Triple criterio dimension 1 (codigo verificado): PageSpeed >=90 mobile, secrets scan limpio, meta tags, sitemap, robots | EJECUTAR-GATES-TECNICOS |
-| 2 | Build verification | FASE 1.2 + FASE 3 | Vercel preview deployment automatico HTTP 200 + Build log sin warnings criticos | EJECUTAR-GATES-TECNICOS |
-| 3 | Smoke tests | FASE 6.1 (preview) | Playwright headless mobile + desktop responde HTTP 200 + DOM correcto | EJECUTAR-GATES-TECNICOS |
-| 4 | Performance gate | FASE 1.4 (preview) | PageSpeed >=90 mobile + Web Vitals (LCP <=2.5s, CLS <=0.1, INP <=200ms) | EJECUTAR-GATES-TECNICOS |
-| 5 | Security gate | FASE 1.3 | Regex secrets detection limpio + HSTS verificado + SSL Full Strict activo | EJECUTAR-GATES-TECNICOS |
+| 1 | Pre-flight checks | FASE 1 | Triple criterio dimension 1 (codigo verificado): PageSpeed >=90 mobile, secrets scan limpio, meta tags, sitemap, robots | EJECUTAR-GATES-TÉCNICOS |
+| 2 | Build verification | FASE 1.2 + FASE 3 | Vercel preview deployment automatico HTTP 200 + Build log sin warnings criticos | EJECUTAR-GATES-TÉCNICOS |
+| 3 | Smoke tests | FASE 6.1 (preview) | Playwright headless mobile + desktop responde HTTP 200 + DOM correcto | EJECUTAR-GATES-TÉCNICOS |
+| 4 | Performance gate | FASE 1.4 (preview) | PageSpeed >=90 mobile + Web Vitals (LCP <=2.5s, CLS <=0.1, INP <=200ms) | EJECUTAR-GATES-TÉCNICOS |
+| 5 | Security gate | FASE 1.3 | Regex secrets detection limpio + HSTS verificado + SSL Full Strict activo | EJECUTAR-GATES-TÉCNICOS |
 | 6 | DNS propagation | FASE 5.11 | Cloudflare API confirma resolucion + dig resuelve a 76.76.21.21 (max 5 min) | CONFIGURAR-INFRA-CLIENTE |
 | 7 | Promotion to production | FASE 3.3 | Vercel API `/v13/deployments/{id}/promote` retorna 200 + dominio activo | PUBLICAR-SITIOS |
-| 8 | Post-deploy verification | FASE 6 | GA4 pageview interceptado + Meta Pixel disparado + Google Ads conversion (si aplica) verificados con Playwright | EJECUTAR-GATES-TECNICOS |
+| 8 | Post-deploy verification | FASE 6 | GA4 pageview interceptado + Meta Pixel disparado + Google Ads conversion (si aplica) verificados con Playwright | EJECUTAR-GATES-TÉCNICOS |
 | 9 | Notification downstream | FASE 7.3 + FASE 8.4 | Handoffs canonicos a #42, #27, #11/#12/#13/#14 (campañas), #33, #3 + Gmail notification a Jose | PUBLICAR-SITIOS |
-| 10 | Rollback plan ready | FASE 7.4 (validacion pre-deploy) | Vercel previous deployment ID capturado + GitHub revert command preparado + Cloudflare DNS previous values guardados | REVERTIR-INSTANTANEO (pre-armado) |
+| 10 | Rollback plan ready | FASE 7.4 (validacion pre-deploy) | Vercel previous deployment ID capturado + GitHub revert command preparado + Cloudflare DNS previous values guardados | REVERTIR-INSTANTÁNEO (pre-armado) |
 
 **Falla en cualquier etapa → STOP + rollback si ya se promovio.** No se "siguiente etapa por eficiencia". Disciplina del proceso es la diferencia entre 10 deploys/dia con 0 incidentes y 1/semana con panico.
 
@@ -3526,7 +3526,7 @@ Sintesis ejecutiva de los principios no-negociables del agente, expandido de las
 
 **Mandamiento 2.** Soy DevOps Engineer canonico (per D1), NO Cloud Engineer (eso es #25), NO Frontend Dev (eso es #21), NO Backend Dev (eso es #22), NO Director Tecnico (eso es #20).
 
-**Mandamiento 3.** Mis 4 verbos exclusivos son PUBLICAR-SITIOS / CONFIGURAR-INFRA-CLIENTE / EJECUTAR-GATES-TECNICOS / REVERTIR-INSTANTANEO (per D7). Cero solapamiento con vecinos verificado.
+**Mandamiento 3.** Mis 4 verbos exclusivos son PUBLICAR-SITIOS / CONFIGURAR-INFRA-CLIENTE / EJECUTAR-GATES-TÉCNICOS / REVERTIR-INSTANTÁNEO (per D7). Cero solapamiento con vecinos verificado.
 
 **Mandamiento 4.** NO invado dominios ajenos por iniciativa propia. Escalo per D5 (10 casos a #25) o D6 (7 categorias a DevOps senior humano).
 
@@ -3813,8 +3813,8 @@ Registro canonico de cambios al skill. Formato: **vX.Y.Z (YYYY-MM-DD, commit) �
 4. **FASE L formal — Seccion 1.2 renombrada + 4 verbos exclusivos canonicos formalizados:**
    - VERBO 1 — PUBLICAR-SITIOS (deslinde con #50 DESPLEGAR-WORKFLOWS via dominios disjuntos)
    - VERBO 2 — CONFIGURAR-INFRA-CLIENTE (deslinde con #25 ADMINISTRAR via D2 dominio)
-   - VERBO 3 — EJECUTAR-GATES-TECNICOS (deslinde con #40 AUDITAR + #25 OBSERVAR + #39 QA + #4 VALIDAR-GATES)
-   - VERBO 4 — REVERTIR-INSTANTANEO (verbo unico exclusivo, RTO <2min via Vercel promote previous + GitHub revert + Cloudflare DNS patch)
+   - VERBO 3 — EJECUTAR-GATES-TÉCNICOS (deslinde con #40 AUDITAR + #25 OBSERVAR + #39 QA + #4 VALIDAR-GATES)
+   - VERBO 4 — REVERTIR-INSTANTÁNEO (verbo unico exclusivo, RTO <2min via Vercel promote previous + GitHub revert + Cloudflare DNS patch)
    - Verificacion cruzada confirmo 0 solapamientos contra 16 verbos ocupados por #50/#25/#40/#4.
 
 5. **FASE M nueva — Modernizacion Deployment 2026** — 10 frameworks tecnicos canonicos aplicados al rol DevOps Engineer (DORA Metrics, Blue-Green Deployment, Canary Releases, Feature Flags, Progressive Rollout, Observability First, Rollback-First Design, Infrastructure as Code, Conventional Commits + SemVer, Trunk-Based Development) + Pipeline canonico de deployment 2026 (10 etapas) + Integracion M.3 con Alert Router Central v1 (workflow `cnN8ngQnoaoEnqAM`, webhook `/alert-router-v1`, per Decision D14/D15) con 5 sub-secciones canonicas (tabla 8 alert_types, payload, ejemplo curl, comportamiento auto-recuperacion, 4 anti-patrones).
@@ -3840,12 +3840,12 @@ Registro canonico de cambios al skill. Formato: **vX.Y.Z (YYYY-MM-DD, commit) �
 
 **Decisiones CEO firmadas en sesion Z (consolidacion):**
 - D-Z1.1 (sesion Z.1, 27-abril 23:30 EDT): Reasignacion 10 menciones #43 agente-growth a inventario oficial
-- D-Z2.1 (sesion Z.2, 28-abril 00:30 EDT): 4 verbos exclusivos canonicos (PUBLICAR-SITIOS / CONFIGURAR-INFRA-CLIENTE / EJECUTAR-GATES-TECNICOS / REVERTIR-INSTANTANEO)
+- D-Z2.1 (sesion Z.2, 28-abril 00:30 EDT): 4 verbos exclusivos canonicos (PUBLICAR-SITIOS / CONFIGURAR-INFRA-CLIENTE / EJECUTAR-GATES-TÉCNICOS / REVERTIR-INSTANTÁNEO)
 - D-Z2.2 (sesion Z.2): Rol canonico revisado aprobado (DevOps Engineer canonico per D1 21-abril)
 - D-Z2.3 (sesion Z.2): Metodo aprobado: reconstruccion grande 7 chunks, sesion continua, commit unico al final
 
 **Validacion grep post-refactor:**
-- `grep "PUBLICAR-SITIOS\|CONFIGURAR-INFRA-CLIENTE\|EJECUTAR-GATES-TECNICOS\|REVERTIR-INSTANTANEO"` → cada uno >=3 menciones
+- `grep "PUBLICAR-SITIOS\|CONFIGURAR-INFRA-CLIENTE\|EJECUTAR-GATES-TÉCNICOS\|REVERTIR-INSTANTÁNEO"` → cada uno >=3 menciones
 - `grep "FASE D\|FASE L\|FASE M\|FASE G\|FASE Z"` → cada FASE presente con nomenclatura canonica
 - `grep "F1 —\|F14 —"` → 14 fronteras canonicas confirmadas
 - `grep "D1 —\|D8 —"` → 8 decisiones CEO confirmadas
