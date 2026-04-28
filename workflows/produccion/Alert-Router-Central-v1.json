@@ -1,0 +1,553 @@
+{
+  "name": "Addendo — Alert Router Central v1",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "alert-router-v1",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "ar0-0000-0000-0000-000000000001",
+      "name": "Webhook Alert Router",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        400
+      ],
+      "webhookId": "alert-router-v1-webhook"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Etapa 1+2: validar body, enmascarar credenciales, computar hash, determinar ceo_escalated preliminar.\n// Output un solo item con _route in {invalid, valid}.\nconst raw = $input.first().json;\nconst body = (raw && typeof raw === 'object' && raw.body && typeof raw.body === 'object') ? raw.body : raw;\n\nconst VALID_ALERT_TYPES = new Set([\n  'credential_exposed', 'infra_critical', 'cost_warning', 'cost_blocked',\n  'workflow_failed', 'analytics_anomaly', 'system_health'\n]);\nconst VALID_SEVERITIES = new Set(['P0', 'P1', 'P2', 'P3']);\n\nconst errors = [];\nif (!body || typeof body !== 'object') errors.push('body must be a JSON object');\nconst alert_type = body && body.alert_type;\nconst severity = body && body.severity;\nconst source_skill = body && body.source_skill;\nconst trace_id = body && body.trace_id;\nconst payload = body && body.payload;\nconst timestamp = (body && body.timestamp) || new Date().toISOString();\n\nif (!VALID_ALERT_TYPES.has(alert_type)) errors.push(\"alert_type invalid (one of \" + [...VALID_ALERT_TYPES].join(',') + \")\");\nif (!VALID_SEVERITIES.has(severity)) errors.push(\"severity must be P0|P1|P2|P3\");\nif (typeof trace_id !== 'string' || trace_id.trim() === '') errors.push('trace_id required (non-empty string)');\nif (!payload || typeof payload !== 'object') errors.push('payload required (object)');\nif (payload && (typeof payload.title !== 'string' || payload.title.trim() === '')) errors.push('payload.title required');\nif (payload && (typeof payload.description !== 'string' || payload.description.trim() === '')) errors.push('payload.description required');\n\nif (errors.length > 0) {\n  return [{ json: { _route: 'invalid', _status: 400, error: 'validation_failed', details: errors, trace_id: trace_id || null } }];\n}\n\n// Enmascaramiento — patrones canonicos skill #40 L.4.\n// Orden: mas especificos primero, mas amplios despues.\nconst PATTERNS = [\n  { name: 'aws_access_key',   re: /AKIA[0-9A-Z]{16}/g,                                                replacement: 'AKIA****REDACTED****' },\n  { name: 'anthropic_api',    re: /sk-ant-api03-[A-Za-z0-9_-]+/g,                                    replacement: 'sk-ant-api03-****REDACTED****' },\n  { name: 'openai_api',       re: /sk-(proj-)?[A-Za-z0-9_-]{40,}/g,                                  replacement: 'sk-****REDACTED****' },\n  { name: 'github_classic',   re: /gh[ps]_[A-Za-z0-9]{36,}/g,                                        replacement: 'gh****REDACTED-GITHUB****' },\n  { name: 'github_fine',      re: /github_pat_[A-Za-z0-9_]{82}/g,                                    replacement: 'github_pat_****REDACTED****' },\n  { name: 'google_oauth',     re: /1\\/\\/[A-Za-z0-9_-]{40,}/g,                                        replacement: '1//****REDACTED-GOOGLE****' },\n  { name: 'bearer_jwt',       re: /Bearer\\s+eyJ[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]+/g,    replacement: 'Bearer ****REDACTED-JWT****' },\n  { name: 'credit_card',      re: /\\b\\d{4}[\\s-]?\\d{4}[\\s-]?\\d{4}[\\s-]?(\\d{4})\\b/g,                  replacement: '****-****-****-$1' },\n  { name: 'aws_secret_40',    re: /[A-Za-z0-9\\/+=]{40}/g,                                            replacement: '****REDACTED-AWS-SECRET****' },\n  { name: 'token_generic_50', re: /[A-Za-z0-9_-]{50,}/g,                                             replacement: '****REDACTED-TOKEN****', contextual: true }\n];\n\nlet masked_count = 0;\nconst masked_breakdown = {};\n\nfunction maskString(input, contextLabel) {\n  if (typeof input !== 'string') return input;\n  let out = input;\n  for (const p of PATTERNS) {\n    if (p.contextual) {\n      const ctx = (contextLabel || '').toLowerCase();\n      const inputLower = out.toLowerCase();\n      const hasCtx = /\\b(token|key|secret|password|api[_-]?key|auth)/i.test(ctx) || /\\b(token|key|secret|password|api[_-]?key|auth)/i.test(inputLower);\n      if (!hasCtx) continue;\n    }\n    let count = 0;\n    out = out.replace(p.re, (match, ...rest) => {\n      count++;\n      if (typeof p.replacement === 'string' && p.replacement.includes('$1')) {\n        return p.replacement.replace('$1', rest[0] || '');\n      }\n      return p.replacement;\n    });\n    if (count > 0) {\n      masked_count += count;\n      masked_breakdown[p.name] = (masked_breakdown[p.name] || 0) + count;\n    }\n  }\n  return out;\n}\n\nfunction maskDeep(value, contextKey) {\n  if (typeof value === 'string') return maskString(value, contextKey);\n  if (Array.isArray(value)) return value.map((v, i) => maskDeep(v, contextKey + '[' + i + ']'));\n  if (value && typeof value === 'object') {\n    const out = {};\n    for (const k of Object.keys(value)) out[k] = maskDeep(value[k], k);\n    return out;\n  }\n  return value;\n}\n\nconst payload_masked = {\n  title: maskString(payload.title, 'title'),\n  description: maskString(payload.description, 'description'),\n  context: maskDeep(payload.context || {}, 'context')\n};\n\n// Hash trace = FNV-1a 64-bit (n8n Code node bloquea 'crypto' module — dedup no requiere cripto-fuerza).\n// Misma propiedad: same input → same 16-hex output. Colision-resistente suficiente para dedup en ventana 30min.\nconst hashInput = String(alert_type) + '|' + String(source_skill || '') + '|' + String(payload.title) + '|' + String(payload.description);\nfunction fnv1a64Hex(str) {\n  // FNV-1a 64-bit using BigInt\n  const FNV_OFFSET = 0xcbf29ce484222325n;\n  const FNV_PRIME = 0x100000001b3n;\n  const MASK = 0xffffffffffffffffn;\n  let h = FNV_OFFSET;\n  for (let i = 0; i < str.length; i++) {\n    h = h ^ BigInt(str.charCodeAt(i));\n    h = (h * FNV_PRIME) & MASK;\n  }\n  return h.toString(16).padStart(16, '0');\n}\nconst hash_trace = fnv1a64Hex(hashInput);\n\n// Determinar ceo_escalated preliminar (Y.1 routing map).\nconst ctx = (payload && payload.context) || {};\nlet ceo_escalated = false;\nswitch (alert_type) {\n  case 'credential_exposed':\n    ceo_escalated = !!ctx.requires_ceo_escalation; break;\n  case 'infra_critical':\n    ceo_escalated = true; break; // re-evaluado tras self-heal placeholder (siempre falla hoy)\n  case 'cost_warning':\n  case 'cost_blocked':\n    ceo_escalated = !!ctx.requires_ceo_escalation; break;\n  case 'workflow_failed':\n    ceo_escalated = (Number(ctx.client_affected_days) || 0) >= 1; break;\n  case 'analytics_anomaly':\n    ceo_escalated = !!ctx.severe_impact; break;\n  case 'system_health':\n    ceo_escalated = !!ctx.unresolvable_by_pm; break;\n}\n\n// Log estructurado pm2 si masked_count > 0.\nif (masked_count > 0) {\n  console.log(\"COST_GUARD_ALERT level:WARN type:CREDENTIAL_DETECTED_IN_ALERT trace_id:\" + trace_id + \" masked_count:\" + masked_count + \" breakdown:\" + JSON.stringify(masked_breakdown));\n}\n\n// Inbox payload Redis (lo que el #4 PM consumira).\nconst now_iso = new Date().toISOString();\nconst inbox_payload = {\n  trace_id: trace_id,\n  alert_type: alert_type,\n  severity: severity,\n  source_skill: source_skill || null,\n  timestamp: timestamp,\n  received_at: now_iso,\n  ceo_escalated: ceo_escalated, // re-actualizado despues si infra_critical\n  deduplicated: false,\n  masked_count: masked_count,\n  masked_breakdown: masked_breakdown,\n  payload: payload_masked,\n  inbox_path_redis: 'agent:4:inbox:' + trace_id\n};\n\nreturn [{\n  json: {\n    _route: 'valid',\n    trace_id: trace_id,\n    alert_type: alert_type,\n    severity: severity,\n    source_skill: source_skill || null,\n    timestamp: timestamp,\n    hash_trace: hash_trace,\n    cooldown_key: 'alert:cooldown:' + hash_trace,\n    inbox_key: 'agent:4:inbox:' + trace_id,\n    ceo_escalated: ceo_escalated,\n    masked_count: masked_count,\n    masked_breakdown: masked_breakdown,\n    payload_masked: payload_masked,\n    inbox_payload: inbox_payload,\n    inbox_payload_json: JSON.stringify(inbox_payload)\n  }\n}];"
+      },
+      "id": "ar0-0000-0000-0000-000000000002",
+      "name": "Validate Mask Hash",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "cond-0003",
+              "leftValue": "={{ $json._route }}",
+              "rightValue": "invalid",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "ar0-0000-0000-0000-000000000003",
+      "name": "IF invalid?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        480,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { error: $json.error, details: $json.details, trace_id: $json.trace_id } }}",
+        "options": {
+          "responseCode": 400
+        }
+      },
+      "id": "ar0-0000-0000-0000-000000000004",
+      "name": "Respond 400",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        720,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "key": "={{ $json.cooldown_key }}",
+        "options": {}
+      },
+      "id": "ar0-0000-0000-0000-000000000005",
+      "name": "Redis GET cooldown",
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        720,
+        600
+      ],
+      "credentials": {
+        "redis": {
+          "id": "ffoEKrHDBuMeDB0h",
+          "name": "Addendo Redis Local"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Etapa 3 fail-closed: Redis GET fallo. Por invariante: NO escalar al CEO con flujo descontrolado.\n// Tratamos como deduplicado defensivo: log + respuesta 200 con fail_closed:true.\nconst meta = $('Validate Mask Hash').first().json;\nconst err = $input.first().json;\nconst errMsg = (err && (err.error || err.message)) ? (err.error || err.message) : JSON.stringify(err);\nconsole.log(\"ALERT_ROUTER_REDIS_FAIL_CLOSED trace_id:\" + meta.trace_id + \" error:\" + String(errMsg));\n\nreturn [{\n  json: Object.assign({}, meta, {\n    _route: 'fail_closed',\n    _status: 200,\n    response_body: {\n      deduplicated: true,\n      fail_closed: true,\n      reason: 'redis_unreachable_failed_closed_per_invariant_2',\n      trace_id: meta.trace_id,\n      alert_type: meta.alert_type,\n      ceo_escalated: false,\n      credential_masked_count: meta.masked_count,\n      pm_inbox_key: null,\n      telegram_sent: false,\n      email_sent: false\n    }\n  })\n}];"
+      },
+      "id": "ar0-0000-0000-0000-000000000006",
+      "name": "Code Fail-Closed",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        960,
+        800
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json.response_body }}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "id": "ar0-0000-0000-0000-000000000007",
+      "name": "Respond 200 Fail-Closed",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        1200,
+        800
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Etapa 3: Inspeccionar output del Redis GET cooldown.\n// Si hay valor previo → _route = deduplicated. Si vacio → _route = fresh.\nconst meta = $('Validate Mask Hash').first().json;\nconst input = $input.first().json;\n\n// El nodo Redis GET retorna un objeto cuya propiedad coincide con la key (o un alias).\nlet rawValue = null;\nif (input && typeof input === 'object') {\n  for (const k of Object.keys(input)) {\n    if (input[k] !== undefined && input[k] !== null && input[k] !== '') {\n      rawValue = input[k];\n      break;\n    }\n  }\n}\n\nif (rawValue !== null && rawValue !== undefined && rawValue !== '') {\n  console.log(\"ALERT_DEDUPED type:\" + meta.alert_type + \" trace_id:\" + meta.trace_id + \" original_trace_id:\" + String(rawValue));\n  return [{\n    json: Object.assign({}, meta, {\n      _route: 'deduplicated',\n      _status: 200,\n      original_trace_id: String(rawValue),\n      current_trace_id: meta.trace_id,\n      response_body: {\n        deduplicated: true,\n        original_trace_id: String(rawValue),\n        current_trace_id: meta.trace_id,\n        alert_type: meta.alert_type,\n        trace_id: meta.trace_id,\n        ceo_escalated: false,\n        credential_masked_count: meta.masked_count,\n        pm_inbox_key: null,\n        telegram_sent: false,\n        email_sent: false\n      }\n    })\n  }];\n}\n\nreturn [{ json: Object.assign({}, meta, { _route: 'fresh' }) }];"
+      },
+      "id": "ar0-0000-0000-0000-000000000008",
+      "name": "Code Check Dedup",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        960,
+        600
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "cond-0009",
+              "leftValue": "={{ $json._route }}",
+              "rightValue": "deduplicated",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "ar0-0000-0000-0000-000000000009",
+      "name": "IF deduplicated?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1200,
+        600
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json.response_body }}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "id": "ar0-0000-0000-0000-000000000010",
+      "name": "Respond 200 Dedup",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        1440,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{ $json.cooldown_key }}",
+        "options": {},
+        "value": "={{ $json.trace_id.toString() }}",
+        "keyType": "string",
+        "expire": true,
+        "ttl": 1800
+      },
+      "id": "ar0-0000-0000-0000-000000000011",
+      "name": "Redis SET cooldown",
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        1440,
+        800
+      ],
+      "credentials": {
+        "redis": {
+          "id": "ffoEKrHDBuMeDB0h",
+          "name": "Addendo Redis Local"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Etapa 4 case infra_critical: invocar Self-Heal Validator (placeholder Y.6.1).\n// TODO Y.6.1: construir workflow Self-Heal Validator con HTTP 200 check + smoke test workflow blog-don-jacinto.\n// Hoy: simular siempre {recovered: false} → escalar al CEO.\nconst meta = $input.first().json;\nif (meta.alert_type !== 'infra_critical') {\n  // Pass-through para alert_types que no requieren self-heal.\n  return [{ json: meta }];\n}\n\nconst self_heal_result = { recovered: false, placeholder: true, note: 'Self-Heal Validator workflow Y.6.1 pendiente — siempre escala hasta construirlo' };\nconsole.log(\"INFRA_SELF_HEAL_PLACEHOLDER trace_id:\" + meta.trace_id + \" result:false\");\n\n// Forzar ceo_escalated=true para infra_critical hasta que Y.6.1 exista.\nconst updated = Object.assign({}, meta, {\n  ceo_escalated: true,\n  self_heal_attempted: true,\n  self_heal_recovered: false,\n  inbox_payload: Object.assign({}, meta.inbox_payload, { ceo_escalated: true, self_heal_attempted: true, self_heal_recovered: false })\n});\nupdated.inbox_payload_json = JSON.stringify(updated.inbox_payload);\nreturn [{ json: updated }];"
+      },
+      "id": "ar0-0000-0000-0000-000000000012",
+      "name": "Code Self-Heal Placeholder",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1680,
+        800
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{ $json.inbox_key }}",
+        "options": {},
+        "value": "={{ $json.inbox_payload_json.toString() }}",
+        "keyType": "string",
+        "expire": true,
+        "ttl": 604800
+      },
+      "id": "ar0-0000-0000-0000-000000000013",
+      "name": "Redis SET inbox PM4",
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        1920,
+        800
+      ],
+      "credentials": {
+        "redis": {
+          "id": "ffoEKrHDBuMeDB0h",
+          "name": "Addendo Redis Local"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "cond-0014",
+              "leftValue": "={{ $json.ceo_escalated.toString() }}",
+              "rightValue": "true",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "ar0-0000-0000-0000-000000000014",
+      "name": "IF ceo_escalated?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2160,
+        800
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "send",
+        "sendTo": "admin@addendo.io",
+        "subject": "=🚨 [ADDENDO] {{ $json.severity }} — {{ $json.alert_type }} — trace {{ $json.trace_id }}",
+        "emailType": "text",
+        "message": "=ALERTA ESCALADA AL CEO\nTrace ID: {{ $json.trace_id }}\nSeverity: {{ $json.severity }}\nTipo: {{ $json.alert_type }}\nSkill emisor: {{ $json.source_skill }}\nTimestamp UTC: {{ $json.timestamp }}\n\nTITULO:\n{{ $json.payload_masked.title }}\n\nDESCRIPCION (credenciales enmascaradas):\n{{ $json.payload_masked.description }}\n\nCONTEXTO:\n{{ JSON.stringify($json.payload_masked.context) }}\n\nMasked credentials count: {{ $json.masked_count }}\nMasked breakdown: {{ JSON.stringify($json.masked_breakdown) }}\n\nAccion requerida del CEO:\nLeer bandeja Redis #4 PM en clave: {{ $json.inbox_key }}\n(comando: redis-cli GET '{{ $json.inbox_key }}')\n\n— Addendo Agency OS Alert Router Central v1",
+        "options": {}
+      },
+      "id": "ar0-0000-0000-0000-000000000015",
+      "name": "Gmail Escalate CEO",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        2400,
+        600
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "rD8DDJhSiG1dpOwO",
+          "name": "Gmail API"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Etapa final: construir respuesta HTTP 200 al skill emisor.\n// Refetch del meta del nodo Self-Heal Placeholder porque cuando Gmail dispara su output\n// reemplaza el contexto (Gmail devuelve message id, no el meta original).\nconst meta = $('Code Self-Heal Placeholder').first().json;\nreturn [{\n  json: {\n    _status: 200,\n    response_body: {\n      received: true,\n      trace_id: meta.trace_id,\n      alert_type: meta.alert_type,\n      deduplicated: false,\n      credential_masked_count: meta.masked_count,\n      ceo_escalated: meta.ceo_escalated,\n      pm_inbox_key: meta.inbox_key,\n      telegram_sent: false,\n      email_sent: !!meta.ceo_escalated\n    }\n  }\n}];"
+      },
+      "id": "ar0-0000-0000-0000-000000000016",
+      "name": "Code Build Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2640,
+        800
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json.response_body }}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "id": "ar0-0000-0000-0000-000000000017",
+      "name": "Respond 200 Success",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        2880,
+        800
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.telegram.org/bot/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={ \"chat_id\": \"PENDIENTE_CHAT_ID\", \"text\": \"PLACEHOLDER\" }",
+        "options": {
+          "timeout": 10000
+        }
+      },
+      "id": "ar0-0000-0000-0000-000000000018",
+      "name": "Telegram CEO (DISABLED placeholder)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2400,
+        400
+      ],
+      "disabled": true,
+      "notes": "TODO TELEGRAM BOT — pendiente crear en BotFather. Cuando exista, conectar desde IF ceo_escalated? rama true en paralelo a Gmail. Backlog inmediato declarado en CHANGELOG."
+    }
+  ],
+  "connections": {
+    "Webhook Alert Router": {
+      "main": [
+        [
+          {
+            "node": "Validate Mask Hash",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Mask Hash": {
+      "main": [
+        [
+          {
+            "node": "IF invalid?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF invalid?": {
+      "main": [
+        [
+          {
+            "node": "Respond 400",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Redis GET cooldown",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis GET cooldown": {
+      "main": [
+        [
+          {
+            "node": "Code Check Dedup",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code Fail-Closed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code Fail-Closed": {
+      "main": [
+        [
+          {
+            "node": "Respond 200 Fail-Closed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code Check Dedup": {
+      "main": [
+        [
+          {
+            "node": "IF deduplicated?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF deduplicated?": {
+      "main": [
+        [
+          {
+            "node": "Respond 200 Dedup",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Redis SET cooldown",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis SET cooldown": {
+      "main": [
+        [
+          {
+            "node": "Code Self-Heal Placeholder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code Self-Heal Placeholder": {
+      "main": [
+        [
+          {
+            "node": "Redis SET inbox PM4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis SET inbox PM4": {
+      "main": [
+        [
+          {
+            "node": "IF ceo_escalated?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF ceo_escalated?": {
+      "main": [
+        [
+          {
+            "node": "Gmail Escalate CEO",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code Build Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail Escalate CEO": {
+      "main": [
+        [
+          {
+            "node": "Code Build Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code Build Response": {
+      "main": [
+        [
+          {
+            "node": "Respond 200 Success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "saveExecutionProgress": true,
+    "saveDataErrorExecution": "all",
+    "saveDataSuccessExecution": "all",
+    "timezone": "America/New_York"
+  }
+}

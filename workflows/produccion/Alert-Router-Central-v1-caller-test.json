@@ -1,0 +1,55 @@
+{
+  "name": "Addendo — Alert Router Caller Test v1",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "ct0-0000-0000-0000-000000000001",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://n8n.addendo.io/webhook/alert-router-v1",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"alert_type\": \"cost_warning\",\n  \"severity\": \"P2\",\n  \"source_skill\": \"#42\",\n  \"trace_id\": \"caller-test-{{ Date.now() }}\",\n  \"payload\": {\n    \"title\": \"Caller test: cost ramp\",\n    \"description\": \"Test invocation from caller-test workflow at {{ $now }}\",\n    \"context\": { \"requires_ceo_escalation\": false, \"current_usd\": 1.42 }\n  },\n  \"timestamp\": \"{{ $now.toISO() }}\"\n}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "ct0-0000-0000-0000-000000000002",
+      "name": "POST Alert Router",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        240,
+        0
+      ]
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "POST Alert Router",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "timezone": "America/New_York"
+  }
+}
