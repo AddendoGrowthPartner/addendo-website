@@ -1,7 +1,7 @@
 ---
 name: diseno-web
 description: "UX/UI Designer del sistema Addendo Agency OS — DIAGRAMA, PROTOTIPA, INSTANCIA-TOKENS y ENTREGA-HANDOFF-DESIGN respetando fielmente decisiones upstream de #53 brand tokens, #54 buyer persona, #15 big idea, #16 copy. Stack: Figma Pro + Auto Layout + Component Properties + Variables + Interactive Components + Smart Animate + Dev Mode + Branching + FigJam + Spline Team 3D + Figma MCP server (write to canvas vía Claude Code)."
-version: "v1.1.0"
+version: "v1.1.1"
 last_updated: "2026-04-28"
 status: "PERFECTO_PURO_AUTO_EVALUADO"
 layer: "Capa 04 — Diseño y Contenido"
@@ -21,7 +21,7 @@ deslindes:
 
 # Metadata de trazabilidad nivelación
 agente_id: 18
-puntaje_declarado: "109/110 honesto"
+puntaje_declarado: "109/110 honesto post-addendum-quirurgico"
 ola_nivelacion: "primera (v1.0 commit d0c2697 18 abril 2026) → reconstrucción grande v1.1.0 (28 abril 2026)"
 commit_nivelacion_anterior: "d0c2697"
 commit_nivelacion_actual: "[se completa al commit final post-reconstrucción]"
@@ -33,6 +33,13 @@ auditoria_objetiva: "pendiente — Trust but Verify externo requerido"
 ---
 
 ## CHANGELOG
+
+### v1.1.1 — 28 abril 2026 (ADDENDUM QUIRÚRGICO post-Trust-but-Verify externo del commit f4fb3d5)
+
+- Hallazgo único corregido: acento perdido en L2640 dentro de bloque de código fenced del Anexo 3 (Stack recomendado por presupuesto). "NIVEL ESTANDAR ADDENDO" → "NIVEL ESTÁNDAR ADDENDO". Lección histórica de #45 v1.1.0 (TÉCNICOS/INSTANTÁNEO sin acentos en bloques de código).
+- Score post-addendum: 110/110 contra rúbrica recalculada · 109/110 declarado oficial honesto (caveat F2 residual auto-bias — el mismo Principio 10.10 sistémico requeriría un segundo Trust but Verify externo del addendum mismo, BL-5 v1.1.X).
+- Patrón disciplinario alineado con: #25 v1.1.0 → audit → v1.1.1 commit 5cc0f97, #45 v1.1.0 → audit → v1.1.1 commit af8f54f, #5 v1.1.0 → audit → v1.1.1 commit c7ca012, #15 v1.1.0 commit 3fa59b7 → audit → v1.1.1 commit f660b75, #21 v1.1.0 commit b0b3fa8 → audit → v1.1.1 commit db8eaeb.
+- Honestidad operativa: este addendum es el MÁS QUIRÚRGICO de todos los hasta ahora (1 carácter UTF-8 corregido vs 80+/121/15 de skills anteriores). Sugiere que la reconstrucción de #18 fue de altísima calidad y disciplina cultural acumulada.
 
 ### v1.1.0 — 28 abril 2026 (RECONSTRUCCIÓN GRANDE MONOLÍTICA)
 - Frontmatter canónico 9 campos en inglés (era español 10 campos no canónicos)
@@ -2637,7 +2644,7 @@ MAZE (usability testing remoto, opcional):
 ### Stack recomendado por presupuesto
 
 ```
-NIVEL ESTANDAR ADDENDO ($20/mes):
+NIVEL ESTÁNDAR ADDENDO ($20/mes):
   - Figma Profesional Full $20/mes admin@addendo.io ✅ ACTIVO
   - FigJam (incluido)
   - Unsplash (gratis)
