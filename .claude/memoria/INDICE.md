@@ -124,7 +124,7 @@ Cada cambio en este repo = commit con mensaje descriptivo. Trazabilidad completa
 
 | Métrica | Valor |
 |---|---|
-| Lecciones arquitectónicas documentadas | 8 |
+| Lecciones arquitectónicas documentadas | 8 + 1 deuda abierta (DA-1) |
 | Lecciones de proceso | 3 |
 | Lecciones editoriales | 3 |
 | Lecciones técnicas | 4 |

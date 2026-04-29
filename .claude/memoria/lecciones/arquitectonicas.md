@@ -266,3 +266,118 @@ Lecciones identificadas pero aún no documentadas (capturar en próximos ciclos)
 - **P11.X (pendiente):** Patrón de "lección heredada" — cómo una lección de un skill se transfiere a los siguientes via prompts canónicos parametrizados
 - **P11.X (pendiente):** Disciplina de placeholders `{cliente_demo_*}` vs hardcoding de clientes reales en ejemplos
 - **P11.X (pendiente):** Patrón cluster M1-M25 en 5 grupos para mandamientos canónicos
+
+---
+
+# 🚨 DEUDA ARQUITECTÓNICA ABIERTA
+
+## DA-1 — Posible solapamiento destructivo entre #24 n8n-automatización y #50 agente-constructor-workflows
+
+**Estado:** DEUDA ARQUITECTÓNICA ABIERTA — pendiente decisión CEO
+**Origen:** Pregunta arquitectónica del CEO José, 29 abril 2026 ~23:30 EDT, sesión nocturna post-despliegue Capa 1 Sistema Aprendizaje Constante.
+**Detector:** CEO catch arquitectónico (consistente con patrón P11.2)
+**Confianza:** ALTA — solapamiento detectable por declaración formal de ambos skills.
+**Aplicabilidad:** Decisión bloquea cualquier futura nivelación de #24.
+
+### Contexto del catch CEO
+
+Antes de arrancar nivelación nocturna de los 4 World-Class v1.1 restantes (#6, #17, #8, #9), el CEO preguntó: *"tenemos un agente 24 N8N automatización que tiene de diferente al agente 50 constructor de workflows"*. Esta pregunta destapó posible solapamiento destructivo similar al que llevó a archivar #43 agente-monitor (D14/D15 22 abril).
+
+### Declaraciones formales de los dos skills
+
+**#24 — n8n-automatización (versión v1.0, NO nivelado):**
+
+> *"Integrador central. Diseña y construye TODOS los workflows de N8N que conectan sistemas. Todo lo que necesite conectar dos sistemas pasa por este agente."*
+
+Herramientas declaradas: N8N self-hosted + 30+ APIs externas (GHL, Meta Ads, Google Ads, TikTok, Stripe, Cloudflare, Anthropic, OpenAI, Google Workspace, etc.)
+
+Estado: v1.0 original. Sin verbos canónicos firmados. Sin nivelación.
+
+**#50 — agente-constructor-workflows (PERFECTO PURO VERIFICABLE v1.1.1, commit fd553ed, 20 abril 2026):**
+
+Verbos canónicos firmados por CEO:
+- COMPILAR — convertir intención en workflow ejecutable
+- DESPLEGAR-WORKFLOWS — publicar workflow a producción N8N
+- VERSIONAR — control de versiones de workflows
+- AUTORREPARAR-WORKFLOWS — auto-healing cuando workflow falla
+
+Rol canónico: Workflow Engineer N8N.
+
+### Evidencia del solapamiento
+
+Los 4 verbos canónicos de #50 cubren completamente lo que la declaración v1.0 de #24 dice hacer:
+
+| Función declarada de #24 | Verbo de #50 que la cubre |
+|---|---|
+| "diseña... workflows N8N" | COMPILAR |
+| "construye... workflows N8N" | COMPILAR + DESPLEGAR-WORKFLOWS |
+| "conectar dos sistemas" | COMPILAR (las integraciones son parte del workflow) |
+| (mantenimiento implícito) | VERSIONAR + AUTORREPARAR-WORKFLOWS |
+
+Sin distinción arquitectónica documentada en Doc Maestros que justifique mantener ambos.
+
+### Caveats honestos
+
+1. NO se puede confirmar si existe en algún documento más reciente una distinción arquitectónica formal entre #24 y #50 que justifique mantener ambos.
+2. NO se puede confirmar si el archivo del skill #24 todavía existe en el directorio activo o si ya fue archivado sin documentar en Doc Maestro.
+3. Lo único confirmable: los verbos canónicos de #50 cubren TODO lo que la declaración v1.0 de #24 dice hacer.
+
+### Posible distinción fina (HIPÓTESIS, no confirmado)
+
+Una interpretación posible pero NO formalizada en ningún Doc Maestro citable:
+
+| Dimensión | #24 (hipótesis) | #50 (verificado) |
+|---|---|---|
+| Foco | Integrador de APIs externas (mantener conectividad de credenciales con servicios externos) | Constructor de workflows N8N (lógica de orquestación) |
+| Verbos | (sin firmar) | COMPILAR / DESPLEGAR-WORKFLOWS / VERSIONAR / AUTORREPARAR-WORKFLOWS |
+| Output | (sin definir) | Workflow N8N versionado en producción |
+
+Esta distinción es inferencia, NO decisión CEO firmada. Si se arranca a nivelar #24 sin decisión firmada del CEO, choca con el mismo problema arquitectónico de #43 (solapamiento sin valor diferencial neto).
+
+### Aplicación de Filosofía B (D13, 22 abril 2026)
+
+D13 establece como principio fundacional:
+
+> *"¿Caso ambiguo? → default a workflow N8N (más barato + predecible); promover a agente solo con evidencia empírica."*
+
+Aplicada al caso #24 vs #50: ES un caso ambiguo. Sin evidencia empírica de que #24 hace algo distinto y necesario que #50 NO hace, la regla por default es **archivar #24** (mismo razonamiento que llevó a archivar #43).
+
+### Tres opciones para resolver
+
+**Opción A — Archivar #24 (sigue patrón de #43)**
+Si en la práctica #50 ya cubre todo lo que #24 hacía, archivar #24 a `.claude/agents/archived/n8n-automatizacion-v1.0-deprecated-YYYY-MM-DD.md` con nota DEPRECATED. Sistema queda en 52 agentes activos.
+
+**Opción B — Definir frontera formal entre #24 y #50**
+Si hay distinción real (ej: #24 = gestor de credenciales/integraciones externas, #50 = constructor de workflows N8N), formalizar en sesión arquitectónica con verbos canónicos exclusivos para cada uno. Requiere decisión CEO firmada en Doc Maestro.
+
+**Opción C — Diferir decisión, mantener status quo**
+Dejar #24 v1.0 sin nivelar hasta que aparezca caso de uso real que distinga claramente las dos funciones. Riesgo: deuda arquitectónica permanece abierta y bloquea claridad del sistema.
+
+### Aplicación operativa
+
+1. NO nivelar #24 hasta resolver decisión arquitectónica primero. Si se nivela sin decisión, se replica error que generó archivamiento de #43 (esfuerzo en vano).
+2. Antes de cualquier sesión de nivelación que toque #24, leer esta deuda arquitectónica y pedir decisión CEO firmada.
+3. Documentar la decisión final como D-X.X en próximo Doc Maestro cuando se resuelva.
+4. Si la decisión es Opción A (archivar), seguir patrón de D14/D15:
+   - Mover archivo a `archived/` con nota DEPRECATED
+   - Documentar archivamiento en Doc Maestro
+   - Actualizar inventario de agentes activos (53 → 52)
+5. Si la decisión es Opción B (definir frontera), abrir sesión dedicada para firmar verbos canónicos exclusivos de cada uno.
+
+### Caveats de la lección
+
+- Esta deuda NO bloquea operación actual del sistema — #50 está PERFECTO PURO VERIFICABLE y cubre la función operativa.
+- Esta deuda SÍ bloquea futura nivelación de #24 sin riesgo de esfuerzo perdido.
+- Resolver no es urgente — es deuda arquitectónica que requiere análisis dedicado, NO decisión apurada.
+
+### Patrón sistémico que esta deuda confirma
+
+Esta es la **segunda vez** que el catch arquitectónico del CEO sobre solapamientos potenciales detecta deuda real en el sistema (la primera fue #43 → D14/D15 22 abril). Confirma operacionalmente la lección P11.2 (catch CEO sobre tamaño/función anómala detecta pérdida silenciosa o solapamiento destructivo).
+
+**Patrón candidato a documentar como nueva lección arquitectónica P11.X:** *"Cualquier nuevo agente o skill propuesto debe verificar cruzado contra catálogo completo de agentes existentes ANTES de firmar verbos canónicos. Filosofía B (D13) aplica como filtro preventivo, no solo reactivo."*
+
+### Estado de resolución
+
+⏳ **PENDIENTE** — abierta 29 abril 2026 ~23:30 EDT.
+
+Próxima revisión: cuando se cierren los 4 ciclos de nivelación nocturna (#6, #17, #8, #9) en sesión arquitectónica dedicada de ~30 min específica para resolver Opción A/B/C.
