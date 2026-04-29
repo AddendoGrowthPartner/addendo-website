@@ -1,7 +1,7 @@
 ---
 name: frontend-dev
 description: "Frontend Developer del sistema Addendo Agency OS — IMPLEMENTA, INGIERE, AFINA-PERFORMANCE y ENTREGA-BUILD respetando fielmente decisiones upstream de #18 UI/UX, #16 copy, #17 assets, #53 brand, #52 compliance. Stack: Astro 6 + Tailwind v4 + TypeScript strict + Vercel Pro."
-version: "v1.1.0"
+version: "v1.1.1"
 last_updated: "2026-04-28"
 status: "PERFECTO_PURO_AUTO_EVALUADO"
 layer: "Capa 05 — Sistemas"
@@ -21,7 +21,7 @@ deslindes:
 
 # Metadata de trazabilidad nivelación
 agente_id: 21
-puntaje_declarado: "109/110 honesto post-reconstrucción (auditoría externa Trust but Verify pendiente)"
+puntaje_declarado: "109/110 honesto post-addendum-quirurgico"
 ola_nivelacion: "segunda (v1.0 commits eff1557+75c9dc4) → reconstrucción grande v1.1.0 (28 abril 2026)"
 commit_nivelacion_anterior: "eff1557+75c9dc4"
 commit_nivelacion_actual: "[se completa al commit final post-reconstrucción]"
@@ -29,6 +29,15 @@ auditoria_objetiva: "pendiente — Trust but Verify externo requerido en sesión
 ---
 
 ## CHANGELOG
+
+### v1.1.1 — 28 abril 2026 (ADDENDUM QUIRÚRGICO post-Trust-but-Verify externo del commit b0b3fa8)
+
+- **Hallazgo 1 corregido:** colisión recursiva H3 — subsecciones `### M.1` a `### M.15` dentro de MÓDULO Z.4 renombradas a `### Z.4.1` a `### Z.4.15` para resolver colisión con `### M.1`, `### M.2`, `### M.3` de FASE M canónica (Componentes Obligatorios / Páginas Dinámicas / Optimización de Imágenes). Cross-refs internas actualizadas (`ver M.9` → `ver Z.4.9`, `detalle en M.9` → `detalle en Z.4.9` en sección compliance WCAG). La Decisión D7 v1.1.0 había resuelto la colisión a nivel H2 (`## FASE M Mapeo` vs `## MÓDULO Z.4 Modernización`) pero faltaba aplicar el principio recursivamente a nivel H3. Coherencia recursiva del estándar D/L/M/G/Z restaurada. **Mismo patrón aplicado en #15 v1.1.1 commit `f660b75` (Hallazgo 2 del addendum #15).**
+- **Hallazgo 2 corregido:** orden FASES reordenado de D→L→**G→M**→Z (incorrecto) a **D→L→M→G→Z** secuencial canónico. Razón lógica: la FASE G (Generación de Calidad y Performance) requiere componentes implementados de FASE M (Mapeo de Componentes e Implementación) antes de poder validarse — no se puede medir Core Web Vitals de componentes que aún no existen. Operación: intercambio quirúrgico de los bloques `## FASE G` (353 líneas) y `## FASE M` (715 líneas) preservando todo contenido sustantivo. Conteo total H3: 159 antes / 159 después = cero pérdida verificada. Hallazgo nuevo no presente en precedentes #5/#15/#25/#45.
+- **Hallazgos informativos** (HC-3 título sección 1.2 desactualizado "11 agentes" / HC-4 placeholder `commit_nivelacion_actual` / HC-5 keyspaces `frontend:*` fuera de convención `agent:21:*`) movidos a backlog v1.2 — no bloqueantes (mismo precedente que #5 v1.1.1 con `scrape:*` y #15 v1.1.1 con `creative:*`).
+- **Score post-addendum:** 110/110 contra rúbrica recalculada · **109/110 declarado oficial honesto** (caveat F2 residual auto-bias hasta segundo Trust but Verify externo del addendum mismo, BL-5b v1.1.X).
+- **Frontmatter actualizado:** `version: "v1.1.1"`, `puntaje_declarado: "109/110 honesto post-addendum-quirurgico"`.
+- **Disciplina cultural:** mismo precedente de continuidad audit→fix aplicado en #25 commit `5cc0f97`, #45 commit `af8f54f`, #5 commit `c7ca012`, #15 commit `f660b75`. La continuidad de pestaña post-Trust-but-Verify preserva contexto del auditor para corrección quirúrgica precisa.
 
 ### v1.1.0 — 28 abril 2026 (RECONSTRUCCIÓN GRANDE MONOLÍTICA)
 
@@ -1922,359 +1931,6 @@ Sitemap: https://{{dominio_cliente}}/sitemap-index.xml
 
 ---
 
-## FASE G — GENERACIÓN DE CALIDAD Y PERFORMANCE
-
-(Anteriormente FASE 4 + FASE 5 + FASE 10 + checklists Performance/Compliance/Testing — consolidadas en FASE G en v1.1.0 per Decisión D7. Esta fase establece performance matemática auditable (Core Web Vitals como umbrales no-negociables), SEO técnico desde día 1, calidad de código y testing automatizado. Verbo dominante de la fase: **AFINAR-PERFORMANCE** — performance es matemática, no arte. Sin esta fase exitosa, NO se entrega build.)
-
-### G.1 — RENDIMIENTO (reglas no negociables)
-
-### 4.1 Métricas objetivo
-
-```
-OBJETIVOS MINIMOS:
-  PageSpeed mobile:      >= 90 (objetivo: 99+)
-  PageSpeed desktop:     >= 95 (objetivo: 100)
-  LCP:                   < 2.5s  (objetivo: < 1.5s)
-  CLS:                   = 0     (objetivo: exacto 0)
-  INP:                   < 200ms (objetivo: < 100ms)
-  FCP:                   < 1.8s  (objetivo: < 1.0s)
-  TTFB:                  < 800ms (objetivo: < 400ms)
-  TBT:                   < 200ms (objetivo: < 50ms)
-  Speed Index:           < 3.4s  (objetivo: < 2.0s)
-  Tamano total (gzipped): < 500KB (objetivo: < 300KB)
-  JS total (gzipped):    < 200KB (objetivo: < 100KB)
-  CSS total (gzipped):   < 50KB  (objetivo: < 20KB)
-```
-
-### 4.2 Reglas de imágenes
-
-```astro
----
-// Componente Image obligatorio — NUNCA usar <img> plano
-import { Image, Picture } from 'astro:assets';
-import heroMobile from '../assets/hero-mobile.jpg';
-import heroDesktop from '../assets/hero-desktop.jpg';
----
-
-<!-- HERO: siempre con Picture + responsive -->
-<Picture
-  src={heroDesktop}
-  alt="Plomero de emergencia en Houston trabajando en una fuga"
-  widths={[400, 800, 1200, 1600]}
-  sizes="(max-width: 768px) 100vw, 80vw"
-  formats={['avif', 'webp']}
-  fallbackFormat="webp"
-  loading="eager"
-  fetchpriority="high"
-  decoding="sync"
-  width={1200}
-  height={600}
-  quality={85}
-  class="w-full h-auto"
-/>
-
-<!-- IMÁGENES NO-HERO: lazy loading obligatorio -->
-<Image
-  src={serviceImage}
-  alt="Deteccion de fugas con camara endoscopica"
-  widths={[400, 800]}
-  sizes="(max-width: 768px) 100vw, 50vw"
-  format="webp"
-  loading="lazy"
-  decoding="async"
-  width={800}
-  height={450}
-  quality={80}
-  class="rounded-lg"
-/>
-```
-
-**Reglas absolutas de imágenes:**
-
-```
-[ ] Siempre usar Image o Picture de astro:assets (nunca <img> plano en producción)
-[ ] Width y height explicitos SIEMPRE (previene CLS)
-[ ] loading="eager" + fetchpriority="high" SOLO para imagen hero LCP
-[ ] loading="lazy" en TODAS las demas imágenes
-[ ] Formato: AVIF con fallback a WebP
-[ ] Quality: 85 para hero, 80 para resto
-[ ] srcset con multiples resoluciones via widths
-[ ] sizes apropiado para responsive
-[ ] Alt text descriptivo con keyword cuando aplica
-[ ] Hero mobile separado del hero desktop
-[ ] Peso objetivo: hero < 50KB mobile, < 100KB desktop, resto < 30KB cada una
-```
-
-### 4.3 Reglas de JavaScript
-
-```
-[ ] Astro por default es cero-JS — aprovechar
-[ ] Usar islands (client:load, client:idle, client:visible) SOLO cuando sea interactivo
-[ ] GSAP: import solo los plugins usados, NO importar todo el paquete
-[ ] Scripts de terceros via Partytown (tracking, analytics)
-[ ] Scripts propios con defer o type="module"
-[ ] NUNCA <script> sin async o defer en <head>
-[ ] NUNCA console.log en producción
-[ ] NUNCA alert, confirm o prompt
-```
-
-**Import selectivo de GSAP:**
-
-```javascript
-// [MAL] Importa todo GSAP (180KB)
-import gsap from 'gsap';
-import { ScrollTrigger, SplitText, DrawSVG } from 'gsap/all';
-
-// [BIEN] Importa solo lo necesario (60KB)
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-gsap.registerPlugin(ScrollTrigger);
-```
-
-**Client directives de Astro:**
-
-```astro
-<!-- Carga inmediata (usar solo si es critico) -->
-<Counter client:load />
-
-<!-- Carga cuando el navegador este idle -->
-<Carousel client:idle />
-
-<!-- Carga cuando entra al viewport (RECOMENDADO) -->
-<Gallery client:visible />
-
-<!-- Solo en media query -->
-<MobileMenu client:media="(max-width: 768px)" />
-
-<!-- Solo si el usuario lo activa -->
-<ChatWidget client:only="react" />
-```
-
-### 4.4 Critical CSS inline
-
-```
-REGLA: Critical CSS <= 14KB inline en <head>
-  - Reset básico
-  - Variables CSS del tema
-  - Layout del above-the-fold
-  - Tipografia base
-  - Hero section
-  
-CSS NO critico: cargar async (via Tailwind build)
-```
-
-### 4.5 Font loading strategy
-
-```
-ESTRATEGIA: font-display: optional
-  - Si la fuente carga en < 100ms -> usar
-  - Si no -> usar system font permanentemente (esta página)
-  - CLS garantizado = 0
-
-ALTERNATIVA: font-display: swap
-  - Usa system font primero
-  - Cambia a custom cuando cargue
-  - Puede causar CLS si las métricas no coinciden
-
-NUNCA USAR:
-  font-display: block  (bloquea render)
-  font-display: auto   (default del browser)
-```
-
-### 4.6 Resource hints
-
-```html
-<!-- Preload imagen hero (obligatorio) -->
-<link rel="preload" as="image" href="/images/hero.webp" />
-
-<!-- Preload fuentes criticas -->
-<link rel="preload" href="/fonts/regular.woff2" as="font" type="font/woff2" crossorigin />
-
-<!-- DNS prefetch para dominios externos -->
-<link rel="dns-prefetch" href="https://res.cloudinary.com" />
-
-<!-- Preconnect para recursos criticos (DNS + TCP + TLS) -->
-<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
-
-<!-- Prefetch para páginas probables -->
-<link rel="prefetch" href="/contacto" />
-```
-
----
-
-### G.2 — SEO TÉCNICO
-
-### 5.1 Meta tags obligatorios por página
-
-```astro
----
-// En cada página individual, pasar al Layout:
-import Layout from '../layouts/Layout.astro';
-
-const title = "Plomero Emergencia Houston 24/7 | Addendo"; // <= 60 chars
-const description = "Plomeros disponibles 24/7 en Houston. Llegamos en 45 min. Sin cargo extra por emergencia. Llama ahora: (555) 123-4567."; // 140-155 chars
----
-
-<Layout
-  title={title}
-  description={description}
-  image="/images/og/plomero-houston.webp"
-  schema={localBusinessSchema}
-  type="website"
->
-  <!-- contenido -->
-</Layout>
-```
-
-### 5.2 Schema LocalBusiness
-
-```typescript
-// src/lib/schemas.ts
-
-export function localBusinessSchema(cliente: ClienteData) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "@id": `${cliente.url}#business`,
-    "name": cliente.nombre,
-    "image": `${cliente.url}/images/og/default.webp`,
-    "logo": `${cliente.url}/images/logo.webp`,
-    "url": cliente.url,
-    "telephone": cliente.telefono,
-    "email": cliente.email,
-    "priceRange": cliente.priceRange,
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": cliente.dirección.calle,
-      "addressLocality": cliente.dirección.ciudad,
-      "addressRegion": cliente.dirección.estado,
-      "postalCode": cliente.dirección.cp,
-      "addressCountry": cliente.dirección.pais
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": cliente.geo.lat,
-      "longitude": cliente.geo.lng
-    },
-    "openingHoursSpecification": cliente.horarios.map(h => ({
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": h.dias,
-      "opens": h.abre,
-      "closes": h.cierra
-    })),
-    "areaServed": cliente.ciudadesAtendidas.map(c => ({
-      "@type": "City",
-      "name": c
-    })),
-    "aggregateRating": cliente.rating ? {
-      "@type": "AggregateRating",
-      "ratingValue": cliente.rating.valor,
-      "reviewCount": cliente.rating.cantidad
-    } : undefined,
-    "sameAs": [
-      cliente.social.facebook,
-      cliente.social.instagram,
-      cliente.social.linkedin
-    ].filter(Boolean)
-  };
-}
-```
-
-### 5.3 Schema FAQPage
-
-```typescript
-export function faqSchema(preguntas: Array<{pregunta: string, respuesta: string}>) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": preguntas.map(p => ({
-      "@type": "Question",
-      "name": p.pregunta,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": p.respuesta
-      }
-    }))
-  };
-}
-```
-
-### 5.4 Schema BlogPosting
-
-```typescript
-export function articleSchema(post: BlogPost, cliente: ClienteData) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "headline": post.title,
-    "description": post.description,
-    "image": {
-      "@type": "ImageObject",
-      "url": `${cliente.url}${post.image.src}`,
-      "width": 1200,
-      "height": 630
-    },
-    "author": {
-      "@type": "Person",
-      "name": post.author,
-      "url": `${cliente.url}/about`
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": cliente.nombre,
-      "logo": {
-        "@type": "ImageObject",
-        "url": `${cliente.url}/images/logo.webp`
-      }
-    },
-    "datePublished": post.pubDate.toISOString(),
-    "dateModified": (post.updatedDate || post.pubDate).toISOString(),
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": `${cliente.url}/blog/${post.slug}`
-    },
-    "keywords": [post.keyword, ...post.lsiKeywords].join(", "),
-    "wordCount": post.wordCount
-  };
-}
-```
-
-### 5.5 Schema Service
-
-```typescript
-export function serviceSchema(servicio: ServicioData, cliente: ClienteData) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "serviceType": servicio.nombre,
-    "name": `${servicio.nombre} en ${cliente.dirección.ciudad}`,
-    "description": servicio.descripción,
-    "provider": {
-      "@type": "LocalBusiness",
-      "@id": `${cliente.url}#business`,
-      "name": cliente.nombre
-    },
-    "areaServed": {
-      "@type": "City",
-      "name": cliente.dirección.ciudad
-    },
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": servicio.nombre,
-      "itemListElement": servicio.subServicios.map(sub => ({
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": sub
-        }
-      }))
-    }
-  };
-}
-```
-
----
-
 ## FASE M — MAPEO DE COMPONENTES E IMPLEMENTACIÓN
 
 (Anteriormente FASE 6 + FASE 7 + FASE 8 — consolidadas en FASE M en v1.1.0 per Decisión D7. Esta fase consolida los **componentes obligatorios** Astro, las **páginas dinámicas** con Content Collections + schemas Zod, y la **optimización de imágenes** con Sharp + WebP/AVIF + responsive widths. Verbo dominante de la fase: **IMPLEMENTAR** — convertir Figma + copy + assets a `.astro` componentes. **REGLA:** Cada componente respeta fielmente Figma de #18; cero reinterpretación.)
@@ -2990,6 +2646,359 @@ export function cld(publicId: string, options: {
 
 ---
 
+## FASE G — GENERACIÓN DE CALIDAD Y PERFORMANCE
+
+(Anteriormente FASE 4 + FASE 5 + FASE 10 + checklists Performance/Compliance/Testing — consolidadas en FASE G en v1.1.0 per Decisión D7. Esta fase establece performance matemática auditable (Core Web Vitals como umbrales no-negociables), SEO técnico desde día 1, calidad de código y testing automatizado. Verbo dominante de la fase: **AFINAR-PERFORMANCE** — performance es matemática, no arte. Sin esta fase exitosa, NO se entrega build.)
+
+### G.1 — RENDIMIENTO (reglas no negociables)
+
+### 4.1 Métricas objetivo
+
+```
+OBJETIVOS MINIMOS:
+  PageSpeed mobile:      >= 90 (objetivo: 99+)
+  PageSpeed desktop:     >= 95 (objetivo: 100)
+  LCP:                   < 2.5s  (objetivo: < 1.5s)
+  CLS:                   = 0     (objetivo: exacto 0)
+  INP:                   < 200ms (objetivo: < 100ms)
+  FCP:                   < 1.8s  (objetivo: < 1.0s)
+  TTFB:                  < 800ms (objetivo: < 400ms)
+  TBT:                   < 200ms (objetivo: < 50ms)
+  Speed Index:           < 3.4s  (objetivo: < 2.0s)
+  Tamano total (gzipped): < 500KB (objetivo: < 300KB)
+  JS total (gzipped):    < 200KB (objetivo: < 100KB)
+  CSS total (gzipped):   < 50KB  (objetivo: < 20KB)
+```
+
+### 4.2 Reglas de imágenes
+
+```astro
+---
+// Componente Image obligatorio — NUNCA usar <img> plano
+import { Image, Picture } from 'astro:assets';
+import heroMobile from '../assets/hero-mobile.jpg';
+import heroDesktop from '../assets/hero-desktop.jpg';
+---
+
+<!-- HERO: siempre con Picture + responsive -->
+<Picture
+  src={heroDesktop}
+  alt="Plomero de emergencia en Houston trabajando en una fuga"
+  widths={[400, 800, 1200, 1600]}
+  sizes="(max-width: 768px) 100vw, 80vw"
+  formats={['avif', 'webp']}
+  fallbackFormat="webp"
+  loading="eager"
+  fetchpriority="high"
+  decoding="sync"
+  width={1200}
+  height={600}
+  quality={85}
+  class="w-full h-auto"
+/>
+
+<!-- IMÁGENES NO-HERO: lazy loading obligatorio -->
+<Image
+  src={serviceImage}
+  alt="Deteccion de fugas con camara endoscopica"
+  widths={[400, 800]}
+  sizes="(max-width: 768px) 100vw, 50vw"
+  format="webp"
+  loading="lazy"
+  decoding="async"
+  width={800}
+  height={450}
+  quality={80}
+  class="rounded-lg"
+/>
+```
+
+**Reglas absolutas de imágenes:**
+
+```
+[ ] Siempre usar Image o Picture de astro:assets (nunca <img> plano en producción)
+[ ] Width y height explicitos SIEMPRE (previene CLS)
+[ ] loading="eager" + fetchpriority="high" SOLO para imagen hero LCP
+[ ] loading="lazy" en TODAS las demas imágenes
+[ ] Formato: AVIF con fallback a WebP
+[ ] Quality: 85 para hero, 80 para resto
+[ ] srcset con multiples resoluciones via widths
+[ ] sizes apropiado para responsive
+[ ] Alt text descriptivo con keyword cuando aplica
+[ ] Hero mobile separado del hero desktop
+[ ] Peso objetivo: hero < 50KB mobile, < 100KB desktop, resto < 30KB cada una
+```
+
+### 4.3 Reglas de JavaScript
+
+```
+[ ] Astro por default es cero-JS — aprovechar
+[ ] Usar islands (client:load, client:idle, client:visible) SOLO cuando sea interactivo
+[ ] GSAP: import solo los plugins usados, NO importar todo el paquete
+[ ] Scripts de terceros via Partytown (tracking, analytics)
+[ ] Scripts propios con defer o type="module"
+[ ] NUNCA <script> sin async o defer en <head>
+[ ] NUNCA console.log en producción
+[ ] NUNCA alert, confirm o prompt
+```
+
+**Import selectivo de GSAP:**
+
+```javascript
+// [MAL] Importa todo GSAP (180KB)
+import gsap from 'gsap';
+import { ScrollTrigger, SplitText, DrawSVG } from 'gsap/all';
+
+// [BIEN] Importa solo lo necesario (60KB)
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
+```
+
+**Client directives de Astro:**
+
+```astro
+<!-- Carga inmediata (usar solo si es critico) -->
+<Counter client:load />
+
+<!-- Carga cuando el navegador este idle -->
+<Carousel client:idle />
+
+<!-- Carga cuando entra al viewport (RECOMENDADO) -->
+<Gallery client:visible />
+
+<!-- Solo en media query -->
+<MobileMenu client:media="(max-width: 768px)" />
+
+<!-- Solo si el usuario lo activa -->
+<ChatWidget client:only="react" />
+```
+
+### 4.4 Critical CSS inline
+
+```
+REGLA: Critical CSS <= 14KB inline en <head>
+  - Reset básico
+  - Variables CSS del tema
+  - Layout del above-the-fold
+  - Tipografia base
+  - Hero section
+  
+CSS NO critico: cargar async (via Tailwind build)
+```
+
+### 4.5 Font loading strategy
+
+```
+ESTRATEGIA: font-display: optional
+  - Si la fuente carga en < 100ms -> usar
+  - Si no -> usar system font permanentemente (esta página)
+  - CLS garantizado = 0
+
+ALTERNATIVA: font-display: swap
+  - Usa system font primero
+  - Cambia a custom cuando cargue
+  - Puede causar CLS si las métricas no coinciden
+
+NUNCA USAR:
+  font-display: block  (bloquea render)
+  font-display: auto   (default del browser)
+```
+
+### 4.6 Resource hints
+
+```html
+<!-- Preload imagen hero (obligatorio) -->
+<link rel="preload" as="image" href="/images/hero.webp" />
+
+<!-- Preload fuentes criticas -->
+<link rel="preload" href="/fonts/regular.woff2" as="font" type="font/woff2" crossorigin />
+
+<!-- DNS prefetch para dominios externos -->
+<link rel="dns-prefetch" href="https://res.cloudinary.com" />
+
+<!-- Preconnect para recursos criticos (DNS + TCP + TLS) -->
+<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+
+<!-- Prefetch para páginas probables -->
+<link rel="prefetch" href="/contacto" />
+```
+
+---
+
+### G.2 — SEO TÉCNICO
+
+### 5.1 Meta tags obligatorios por página
+
+```astro
+---
+// En cada página individual, pasar al Layout:
+import Layout from '../layouts/Layout.astro';
+
+const title = "Plomero Emergencia Houston 24/7 | Addendo"; // <= 60 chars
+const description = "Plomeros disponibles 24/7 en Houston. Llegamos en 45 min. Sin cargo extra por emergencia. Llama ahora: (555) 123-4567."; // 140-155 chars
+---
+
+<Layout
+  title={title}
+  description={description}
+  image="/images/og/plomero-houston.webp"
+  schema={localBusinessSchema}
+  type="website"
+>
+  <!-- contenido -->
+</Layout>
+```
+
+### 5.2 Schema LocalBusiness
+
+```typescript
+// src/lib/schemas.ts
+
+export function localBusinessSchema(cliente: ClienteData) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": `${cliente.url}#business`,
+    "name": cliente.nombre,
+    "image": `${cliente.url}/images/og/default.webp`,
+    "logo": `${cliente.url}/images/logo.webp`,
+    "url": cliente.url,
+    "telephone": cliente.telefono,
+    "email": cliente.email,
+    "priceRange": cliente.priceRange,
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": cliente.dirección.calle,
+      "addressLocality": cliente.dirección.ciudad,
+      "addressRegion": cliente.dirección.estado,
+      "postalCode": cliente.dirección.cp,
+      "addressCountry": cliente.dirección.pais
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": cliente.geo.lat,
+      "longitude": cliente.geo.lng
+    },
+    "openingHoursSpecification": cliente.horarios.map(h => ({
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": h.dias,
+      "opens": h.abre,
+      "closes": h.cierra
+    })),
+    "areaServed": cliente.ciudadesAtendidas.map(c => ({
+      "@type": "City",
+      "name": c
+    })),
+    "aggregateRating": cliente.rating ? {
+      "@type": "AggregateRating",
+      "ratingValue": cliente.rating.valor,
+      "reviewCount": cliente.rating.cantidad
+    } : undefined,
+    "sameAs": [
+      cliente.social.facebook,
+      cliente.social.instagram,
+      cliente.social.linkedin
+    ].filter(Boolean)
+  };
+}
+```
+
+### 5.3 Schema FAQPage
+
+```typescript
+export function faqSchema(preguntas: Array<{pregunta: string, respuesta: string}>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": preguntas.map(p => ({
+      "@type": "Question",
+      "name": p.pregunta,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": p.respuesta
+      }
+    }))
+  };
+}
+```
+
+### 5.4 Schema BlogPosting
+
+```typescript
+export function articleSchema(post: BlogPost, cliente: ClienteData) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "description": post.description,
+    "image": {
+      "@type": "ImageObject",
+      "url": `${cliente.url}${post.image.src}`,
+      "width": 1200,
+      "height": 630
+    },
+    "author": {
+      "@type": "Person",
+      "name": post.author,
+      "url": `${cliente.url}/about`
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": cliente.nombre,
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${cliente.url}/images/logo.webp`
+      }
+    },
+    "datePublished": post.pubDate.toISOString(),
+    "dateModified": (post.updatedDate || post.pubDate).toISOString(),
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `${cliente.url}/blog/${post.slug}`
+    },
+    "keywords": [post.keyword, ...post.lsiKeywords].join(", "),
+    "wordCount": post.wordCount
+  };
+}
+```
+
+### 5.5 Schema Service
+
+```typescript
+export function serviceSchema(servicio: ServicioData, cliente: ClienteData) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": servicio.nombre,
+    "name": `${servicio.nombre} en ${cliente.dirección.ciudad}`,
+    "description": servicio.descripción,
+    "provider": {
+      "@type": "LocalBusiness",
+      "@id": `${cliente.url}#business`,
+      "name": cliente.nombre
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": cliente.dirección.ciudad
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": servicio.nombre,
+      "itemListElement": servicio.subServicios.map(sub => ({
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": sub
+        }
+      }))
+    }
+  };
+}
+```
+
+---
+
 ## FASE Z — CIERRE Y ENTREGA
 
 (Anteriormente FASE 9 + sección G Multi-Idioma + sección Z Limitaciones — consolidadas en FASE Z en v1.1.0 per Decisión D7. Subdividida en Z.1 conexión con ecosistema Addendo, Z.2 calidad de código, Z.3 handoffs (incluyendo handoff a #25 servidor-cloud), Z.4 (módulo transversal de modernización 2026 — ver MÓDULO Z.4 más abajo), Z.5 limitaciones honestas + 14 fronteras F1-F14 + 12 escenarios de escalación. Verbo dominante de la fase: **ENTREGAR-BUILD** — producir build limpio en `/websites/[cliente]/` listo para que #45 ejecute deploy.)
@@ -3353,7 +3362,7 @@ CHECKLIST ACCESIBILIDAD:
 
 *Esta fase documenta las 10 áreas técnicas donde el frontend web evolucionó 2022-2026 y donde un frontend developer World-Class debe operar con competencia. El developer mediocre sigue pensando en 2020 (jQuery residual, Next.js como default, WCAG 2.1 genérico, sin Cookie Consent, sin RUM). El World-Class domina la stack 2026.*
 
-### M.1 — View Transitions API
+### Z.4.1 — View Transitions API
 
 La View Transitions API permite transiciones animadas entre páginas en multi-page sites (SPA-like UX sin SPA complexity). Astro 4+ lo soporta nativamente vía `<ViewTransitions />` en Layout.
 
@@ -3406,7 +3415,7 @@ import { ClientRouter } from 'astro:transitions';
 3. Testing obligatorio: Safari desktop + iOS Safari behavior
 4. Fallback graceful: si browser no soporta, navegación estándar funciona
 
-### M.2 — React Server Components via Astro Islands
+### Z.4.2 — React Server Components via Astro Islands
 
 Astro implementa islands architecture — SSR estático por default + hydration selectiva solo donde interactividad. React Server Components (RSC) son un concepto análogo; en el ecosistema Addendo, Astro islands es el patrón canónico.
 
@@ -3444,7 +3453,7 @@ Astro implementa islands architecture — SSR estático por default + hydration 
 - **Prefer `client:visible`** sobre `client:load`
 - **Audit bundle:** `pnpm astro build -- --verbose` + `rollup-visualizer` para detectar islands innecesarias
 
-### M.3 — PWA + Service Workers
+### Z.4.3 — PWA + Service Workers
 
 Progressive Web Apps permiten experiencia app-like en web: install prompt, offline support, push notifications, home screen icon. Astro soporta PWA vía `@vite-pwa/astro` plugin.
 
@@ -3514,7 +3523,7 @@ export default defineConfig({
 - Chrome DevTools > Application > Service Workers + Manifest
 - Lighthouse PWA audit (target ≥90)
 
-### M.4 — Security Headers
+### Z.4.4 — Security Headers
 
 Headers HTTP que protegen contra XSS, clickjacking, MITM, data leaks. Obligatorios en 2026 para todo site producción.
 
@@ -3578,7 +3587,7 @@ add_header Content-Security-Policy "default-src 'self'; ..." always;
 - https://observatory.mozilla.org (target A+ rating)
 - Lighthouse Best Practices (target 100)
 
-### M.5 — Cookie Consent Técnico + CMP Integration
+### Z.4.5 — Cookie Consent Técnico + CMP Integration
 
 Cookie consent ya no es opcional — EU GDPR, California CCPA, Brazil LGPD, México LFPDPPP, todos requieren consent explícito antes de tracking non-essential. CMP (Consent Management Platform) integration es obligatorio post-2024.
 
@@ -3644,7 +3653,7 @@ fbq('dataProcessingOptions', []);
 7. Implementar data deletion request form accesible desde privacy policy
 8. Testing con Chrome DevTools > Application > Cookies (verificar no set antes de consent)
 
-### M.6 — RUM (Real User Monitoring) + Web Vitals
+### Z.4.6 — RUM (Real User Monitoring) + Web Vitals
 
 Lighthouse es lab data (simulación). RUM es field data (usuarios reales). Google usa field data de CrUX (Chrome User Experience Report) para rankings. Medir Web Vitals en producción es obligatorio.
 
@@ -3721,7 +3730,7 @@ pnpm add @vercel/speed-insights
 - CLS p75 >0.1 → investigar
 - INP p75 >200ms → investigar
 
-### M.7 — Testing (Vitest + Playwright)
+### Z.4.7 — Testing (Vitest + Playwright)
 
 Testing es no-negociable en 2026. Mínimo viable: unit tests con Vitest + e2e tests con Playwright + a11y tests con @axe-core/playwright.
 
@@ -3833,7 +3842,7 @@ jobs:
 }
 ```
 
-### M.8 — CMS Integrations
+### Z.4.8 — CMS Integrations
 
 Content Collections de Astro es el default Addendo para content marketing. Cuando el cliente necesita editorial workflow más robusto, integrar CMS externo.
 
@@ -3888,7 +3897,7 @@ export async function getBlogPosts() {
 
 **Escalación a Web Developer humano senior** si: multi-tenant CMS, integración con headless commerce complejo, migración de >10k entries.
 
-### M.9 — WCAG 2.2 AA specifics
+### Z.4.9 — WCAG 2.2 AA specifics
 
 WCAG 2.1 AA fue el estándar por años. WCAG 2.2 (published octubre 2023) añade 9 nuevos success criteria. Para 2026 es el estándar obligatorio.
 
@@ -3975,7 +3984,7 @@ WCAG 2.1 AA fue el estándar por años. WCAG 2.2 (published octubre 2023) añade
 - **VoiceOver** (Mac) / **NVDA** (Windows free) / **JAWS** (Windows enterprise) — screen reader real testing
 - **Lighthouse Accessibility audit** (target 100)
 
-### M.10 — Bundle Analysis + Performance Budgets
+### Z.4.10 — Bundle Analysis + Performance Budgets
 
 Sin audit de bundle, performance se degrada silenciosamente. Bundle analysis identifica JavaScript innecesario, libraries pesadas, código duplicado.
 
@@ -4071,7 +4080,7 @@ if (totalJsSize > MAX_JS_GZIP) {
 
 ---
 
-### M.11 — Cloudflare Stream para videos embebidos (stack oficial Addendo)
+### Z.4.11 — Cloudflare Stream para videos embebidos (stack oficial Addendo)
 
 Plataforma oficial Addendo para videos embebidos SIN YouTube embed. Uso urgente para sitios que requieren videos educativos, testimoniales, tour products, cursos online sin branding externo ni tracking de Google.
 
@@ -4242,7 +4251,7 @@ stream.addEventListener('play', () => {
 });
 ```
 
-### M.12 — Cloudflare Pages como deploy target (stack original Addendo)
+### Z.4.12 — Cloudflare Pages como deploy target (stack original Addendo)
 
 Cloudflare Pages es el stack de deploy ORIGINAL Addendo antes de migración parcial a Vercel. Sigue siendo opción canónica para sitios donde budget cero o integración con ecosistema Cloudflare (Workers, R2, D1, Stream) sea prioritaria.
 
@@ -4347,7 +4356,7 @@ export default defineConfig({
 - Preview deploys en branches: `git push origin feature-x` → URL preview única
 - Rollback: Cloudflare Dashboard > Pages > Deployments > Rollback to previous
 
-### M.13 — Cloudflare Turnstile (CAPTCHA alternativo)
+### Z.4.13 — Cloudflare Turnstile (CAPTCHA alternativo)
 
 **Qué es Turnstile:**
 Alternativa a hCaptcha/reCAPTCHA sin puzzles visuales molestos. Verifica humanos vs bots en background sin fricción usuario. 95% de usuarios pasan invisiblemente.
@@ -4438,7 +4447,7 @@ async function verifyTurnstile(token, ip) {
 2. Coordinar con #22 backend-dev (o N8N webhook) validación server-side
 3. Si Turnstile falla, mostrar error user-friendly + opción retry
 
-### M.14 — Cloudflare Images (alternativa a Cloudinary)
+### Z.4.14 — Cloudflare Images (alternativa a Cloudinary)
 
 **Qué es Cloudflare Images:**
 Optimización automática de imágenes con edge delivery. Alternativa económica a Cloudinary con integración nativa al ecosistema Cloudflare.
@@ -4508,7 +4517,7 @@ const imageUrl = `https://imagedelivery.net/${cloudflareAccountHash}/${imageId}/
 - Cliente existente con Cloudinary → mantener Cloudinary (no migrar sin razón operativa)
 - Addendo default actual: Cloudinary (cloud `dokzw376u`)
 
-### M.15 — Handoff a #25 servidor-cloud (Cloudflare DNS/CDN/WAF/R2/D1/DNSSEC/Email Security)
+### Z.4.15 — Handoff a #25 servidor-cloud (Cloudflare DNS/CDN/WAF/R2/D1/DNSSEC/Email Security)
 
 **Principio de delimitación no-negociable:**
 
@@ -5414,9 +5423,9 @@ Documentar:
 
 ### C.V.7 — WCAG 2.2 AA (Universal — aplica a TODOS los verticals)
 
-Este NO es un vertical regulado sino un estándar universal obligatorio para accessibility. Aplicable a TODOS los sitios Addendo. Ver FASE M.9 para criterios específicos WCAG 2.2 AA.
+Este NO es un vertical regulado sino un estándar universal obligatorio para accessibility. Aplicable a TODOS los sitios Addendo. Ver MÓDULO Z.4.9 para criterios específicos WCAG 2.2 AA.
 
-**Implementación técnica #21 (resumen — detalle en M.9):**
+**Implementación técnica #21 (resumen — detalle en Z.4.9):**
 
 - Semantic HTML correcto
 - ARIA solo cuando necesario
