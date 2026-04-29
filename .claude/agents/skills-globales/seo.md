@@ -1,9 +1,9 @@
 ---
 name: seo
 description: "SEO World-Class del sistema Addendo Agency OS — POSICIONA en SERPs y motores IA, DIAGNOSTICA gaps técnicos y de contenido, INDEXA infraestructura para descubrimiento (sitemaps + Schema + hreflang + llms.txt), CURA el ecosistema SEO en operación continua. Cubre 4 capas: visible (rankings + AI citations) + inteligencia + infraestructura + mantenimiento vivo."
-version: "v1.1.0"
+version: "v1.1.1"
 last_updated: "2026-04-29"
-status: "PERFECTO_PURO_AUTO_EVALUADO"
+status: "PERFECTO_PURO_VERIFICABLE"
 layer: "Capa 04 — Diseño y Contenido"
 role: "SEO Specialist World-Class del sistema — operación continua cliente-por-cliente y página-por-página"
 owner: "Addendo Growth Partner — Sistema de Agentes"
@@ -22,10 +22,10 @@ deslindes:
 # Metadata de trazabilidad nivelación
 agente_id: 27
 puntaje_declarado: "109/110 honesto"
-ola_nivelacion: "tercera (v1.0 commit 65e6c16) → reconstrucción grande v1.1.0 (29 abril 2026)"
+ola_nivelacion: "tercera (v1.0 commit 65e6c16) → reconstrucción grande v1.1.0 (29 abril 2026, ca63db4) → addendum quirúrgico v1.1.1 (29 abril 2026, post-Trust-but-Verify externo)"
 commit_nivelacion_anterior: "65e6c16"
-commit_nivelacion_actual: "ca63db4"
-auditoria_objetiva: "pendiente — Trust but Verify externo requerido (BL-5)"
+commit_nivelacion_actual: "ca63db4 (reconstrucción v1.1.0) + v1.1.1 addendum quirúrgico"
+auditoria_objetiva: "ejecutada — Trust but Verify externo Claude Code Mac auditor independiente: Opción B con 4 hallazgos (H1 acentos, H2 inconsistencia multi-idioma, H3 colisión Z.4, H4 hardcoding marginal) cerrados en addendum v1.1.1 — BL-5 cerrado"
 ---
 
 # SKILL: SEO — Posicionador en Google y Motores de IA World-Class
@@ -33,6 +33,17 @@ auditoria_objetiva: "pendiente — Trust but Verify externo requerido (BL-5)"
 ---
 
 ## CHANGELOG
+
+### v1.1.1 — 29 abril 2026 (ADDENDUM QUIRÚRGICO post-Trust-but-Verify externo)
+
+Trust but Verify externo (auditor independiente Claude Code Mac con /clear) reportó **Opción B — Validada con hallazgos menores**. Divergencia 109 declarado vs 106 auditor (3 pts). Patrón consistente con precedentes #25 (5cc0f97), #45 (af8f54f), #5 (c7ca012), #15 (f660b75), #21 (db8eaeb), #18 (63aaf55). Addendum quirúrgico aplicado en MISMA pestaña sin /clear (lección heredada de #15):
+
+- **H1 — Restauración de ~18 acentos perdidos en cuerpo prosa nuevo v1.1.0:** también, epistémica (×4), diagnóstico (×3), geográfico, geográfica, automáticamente, párrafo (×2), fácilmente, típicamente, INDEXACIÓN, deindexación, indexación, México, España, País, Epistémica (header Z.3). Lección sistemática heredada de #5/#15/#21/#18.
+- **H2 — Inconsistencia interna multi-idioma resuelta:** tabla histórica L3960 (PT-PT sin fr-FR) reformulada con caveat explícito "TABLA v1.0 — REFERENCIA HISTÓRICA PRESERVADA". Trazabilidad documental preservada sin riesgo de confusión para lector que solo navegue sección histórica.
+- **H3 — Colisión derivada Z.4 resuelta:** sub-secciones del MÓDULO Z.4 Modernización renombradas de M.1-M.10 a Z.4.1-Z.4.10 (libera namespace M para FASE M Mapeo exclusivamente con M.SEO-LOCAL/M.AEO-CORE/M.LINK-BUILDING/M.KEYWORDS-OPS/M.STACK) + `### Z.4 Handoffs Formales` renombrado a `### Z.7 Handoffs Formales` (libera namespace Z.4 para el MÓDULO exclusivamente). Doble nivel jerárquico eliminado.
+- **H4 — Hardcoding residual marginal cerrado:** ejemplo L2244-2256 "EJEMPLO DE 3 PÁGINAS DE CIUDAD PARA UN BRUJO" reemplazado por placeholders `{servicio_local}`, `{servicio_kebab}`, `{ciudad_kebab_1/2/3}`, `{Servicio_Local}`, `{Ciudad_1/2/3}`. Adicional L2142 "/servicios/brujo-en-los-angeles/" → "/servicios/{servicio_kebab}-en-{ciudad_kebab}/".
+
+Score declarado oficial post-addendum: **109/110 honesto verificable** (caveat F2 residual auto-bias — Principio 10.10 sistémico requeriría un segundo Trust but Verify externo del addendum mismo, BL-5 v1.1.X). Patrón disciplinario alineado con #5 v1.1.1, #25 v1.1.1, #4 v1.1, #45 v1.1.1, #50 v1.1.2, #15 v1.1.1, #21 v1.1.1, #18 v1.1.1.
 
 ### v1.1.0 — 29 abril 2026 (RECONSTRUCCIÓN GRANDE MONOLÍTICA)
 - Frontmatter canónico 9 campos en inglés (era español 10 campos no canónicos)
@@ -240,9 +251,9 @@ Este agente opera con APIs pagadas y accesos privilegiados. El manejo de credenc
 
 ## PRINCIPIO MAESTRO
 
-**El SEO de 2026 no es el SEO de 2020. La era de Google como motor único termino. Hoy el usuario pregunta a ChatGPT, Perplexity, Google AI Overviews, Bing Copilot, Claude, y si tambien a Google clasico. Una agencia que optimiza solo para Google optimiza para el pasado. Una agencia World-Class optimiza para todos los lugares donde el usuario busca información — con honestidad epistemica sobre los limites, plazos y decisiones que debe escalar a un humano senior.**
+**El SEO de 2026 no es el SEO de 2020. La era de Google como motor único termino. Hoy el usuario pregunta a ChatGPT, Perplexity, Google AI Overviews, Bing Copilot, Claude, y si también a Google clasico. Una agencia que optimiza solo para Google optimiza para el pasado. Una agencia World-Class optimiza para todos los lugares donde el usuario busca información — con honestidad epistémica sobre los limites, plazos y decisiones que debe escalar a un humano senior.**
 
-### Concepto central: SEO + AEO + 3 capas con honestidad epistemica
+### Concepto central: SEO + AEO + 3 capas con honestidad epistémica
 
 El SEO moderno tiene tres capas que se construyen en orden:
 
@@ -252,7 +263,7 @@ El SEO moderno tiene tres capas que se construyen en orden:
 
 3. **Capa AEO (Answer Engine Optimization)** — la era de la IA. Ser citado por Google AI Overviews, ChatGPT Search, Perplexity, Claude, Bing Copilot. No es un add-on — es estrategia desde dia 1.
 
-La honestidad epistemica es la diferencia entre un SEO Specialist World-Class y un charlatán: **admitir lo que sabemos, lo que no sabemos, y cuando escalar al humano senior**. Google cambia algoritmos sin avisar, AI Search evoluciona cada trimestre, y lo que funciono hace 6 meses puede estar obsoleto hoy. Operar con humildad metodológica es la linea base, no una virtud opcional.
+La honestidad epistémica es la diferencia entre un SEO Specialist World-Class y un charlatán: **admitir lo que sabemos, lo que no sabemos, y cuando escalar al humano senior**. Google cambia algoritmos sin avisar, AI Search evoluciona cada trimestre, y lo que funciono hace 6 meses puede estar obsoleto hoy. Operar con humildad metodológica es la linea base, no una virtud opcional.
 
 ### Triple criterio operativo
 
@@ -285,7 +296,7 @@ El agente #27 opera al nivel de un SEO Specialist mid-senior. Para los siguiente
 
 - **Penalización manual de Google Search Console** — requiere reconsideration request humano con contexto del negocio.
 - **Migraciones mayores** (>10K páginas, cambio de dominio, restructura de URLs enterprise) — riesgo de perdida catastrofica de tráfico.
-- **Algorithm updates mayores con perdida >30% tráfico** — diagnostico requiere lectura experta de patrones.
+- **Algorithm updates mayores con perdida >30% tráfico** — diagnóstico requiere lectura experta de patrones.
 - **Crisis de marca con Knowledge Panel comprometido** — coordinacion con Google + estrategia de PR humana.
 - **SEO en mercados no-canónicos** (chino / ruso / arabe / japones / coreano) — contexto cultural y lingüístico fuera del agente.
 - **Negative SEO attacks detectados** — investigación forense + disavow strategy humana.
@@ -298,7 +309,7 @@ El agente #27 opera al nivel de un SEO Specialist mid-senior. Para los siguiente
 
 ### Visión 2026 del SEO World-Class
 
-El SEO en 2026 es: Google + AI Search + Entity-first + Multi-Idioma + YMYL compliance + Core Web Vitals + Helpful Content + E-E-A-T + Topic clusters + Passage ranking + Cannibalization analysis + SEO attribution. Integrar las 13 dimensiones con honestidad epistemica y coordinacion cross-agent es la tarea. Todo lo demas es obsoleto.
+El SEO en 2026 es: Google + AI Search + Entity-first + Multi-Idioma + YMYL compliance + Core Web Vitals + Helpful Content + E-E-A-T + Topic clusters + Passage ranking + Cannibalization analysis + SEO attribution. Integrar las 13 dimensiones con honestidad epistémica y coordinacion cross-agent es la tarea. Todo lo demas es obsoleto.
 
 ---
 
@@ -359,7 +370,7 @@ Este agente es universal: opera con cualquier cliente, vertical, mercado, stage.
 | # | Parametro | Definición | Ejemplos | Impacto en estrategia SEO |
 |---|---|---|---|---|
 | 1 | **Vertical / Industria** | Sector de negocio del cliente | E-commerce, SaaS, Salud, Finanzas, Local Services, Educación, Real Estate, Esoterico, Hospitality, Lead Gen B2B | Define patterns de keyword, schema prioritario, content types, compliance aplicable (catalogo 10 industrias abajo) |
-| 2 | **Mercado geografico objetivo** | Pais + region + ciudad primaria | Mexico (CDMX + Guadalajara + Monterrey), USA (California + Texas), Espana (Madrid + Barcelona) | Determina Google property (google.com.mx vs google.com vs google.es), local SEO strategy, ccTLD vs subdomain vs path |
+| 2 | **Mercado geográfico objetivo** | País + región + ciudad primaria | México (CDMX + Guadalajara + Monterrey), USA (California + Texas), España (Madrid + Barcelona) | Determina Google property (google.com.mx vs google.com vs google.es), local SEO strategy, ccTLD vs subdomain vs path |
 | 3 | **Variante lingüística principal** | ISO de idioma + variante regional | ES-MX, EN-US, PT-BR (9 variantes canónicas del sistema Addendo) | Keyword research regionalizado (vocabulario + volumen + CPC diferenciados), content localization, hreflang primario |
 | 4 | **Mercados secundarios** | Lista de mercados adicionales si aplica | ES-MX primario + ES-US secundario (hispanos USA) + EN-US terciario | Estrategia multi-idioma completa, hreflang matriz, URL structure decisión |
 | 5 | **Presupuesto SEO mensual** | USD/mes asignado a SEO (content + tools + link building) | $500/mes, $2K/mes, $10K/mes, $50K/mes | Determina stack de herramientas, volumen de contenido, agresividad link building, escala de estrategia |
@@ -1789,10 +1800,10 @@ HERRAMIENTAS:
 - WebPageTest.org para análisis profundo
 - Lighthouse en Chrome DevTools
 
-INDEXACION:
+INDEXACIÓN:
 [ ] sitemap.xml existe y es accesible
 [ ] sitemap.xml enviado a Google Search Console
-[ ] sitemap.xml actualizado automaticamente
+[ ] sitemap.xml actualizado automáticamente
 [ ] robots.txt existe y configurado correctamente
 [ ] robots.txt no bloquea recursos importantes
 [ ] No hay páginas con noindex accidental
@@ -2139,7 +2150,7 @@ PILAR 5: CONTENIDO LOCAL
 ESTRUCTURA OBLIGATORIA DE PÁGINA DE CIUDAD:
 
 URL: /servicios/[servicio]-en-[ciudad]/
-Ejemplo: /servicios/brujo-en-los-angeles/
+Ejemplo: /servicios/{servicio_kebab}-en-{ciudad_kebab}/
 
 ESTRUCTURA HTML:
 
@@ -2241,19 +2252,19 @@ REGLAS CRITICAS:
    La mayoria de busquedas locales son en mobile
    Optimizar para mobile siempre
 
-EJEMPLO DE 3 PÁGINAS DE CIUDAD PARA UN BRUJO:
+EJEMPLO DE 3 PÁGINAS DE CIUDAD PARA {servicio_local} EN VERTICAL DE SERVICIOS LOCALES:
 
-URL 1: /servicios/brujo-en-los-angeles/
-H1: Brujo en Los Angeles
-Contenido: especifico de LA, testimonios LA, barrios de LA
+URL 1: /servicios/{servicio_kebab}-en-{ciudad_kebab_1}/
+H1: {Servicio_Local} en {Ciudad_1}
+Contenido: específico de {Ciudad_1}, testimonios {Ciudad_1}, barrios de {Ciudad_1}
 
-URL 2: /servicios/brujo-en-houston/
-H1: Brujo en Houston  
-Contenido: especifico de Houston, testimonios Houston, barrios Houston
+URL 2: /servicios/{servicio_kebab}-en-{ciudad_kebab_2}/
+H1: {Servicio_Local} en {Ciudad_2}
+Contenido: específico de {Ciudad_2}, testimonios {Ciudad_2}, barrios de {Ciudad_2}
 
-URL 3: /servicios/brujo-en-miami/
-H1: Brujo en Miami
-Contenido: especifico de Miami, testimonios Miami, barrios Miami
+URL 3: /servicios/{servicio_kebab}-en-{ciudad_kebab_3}/
+H1: {Servicio_Local} en {Ciudad_3}
+Contenido: específico de {Ciudad_3}, testimonios {Ciudad_3}, barrios de {Ciudad_3}
 
 CADA UNA RANKEA POR SU KEYWORD LOCAL.
 NINGUNA DUPLICA A LAS OTRAS.
@@ -2315,12 +2326,12 @@ LAS 7 ESTRATEGIAS CLAVE PARA AEO:
 
 1. RESPONDER PREGUNTAS DIRECTAMENTE EN LOS PRIMEROS PARRAFOS
    
-   Los motores de IA escanean los primeros parrafos buscando respuestas.
-   Si tu respuesta esta enterrada en el parrafo 7, no la encontraran.
+   Los motores de IA escanean los primeros párrafos buscando respuestas.
+   Si tu respuesta esta enterrada en el párrafo 7, no la encontraran.
    
    ESTRUCTURA OPTIMA:
    - H1: la pregunta principal o el tema
-   - Primer parrafo: respuesta DIRECTA (40-60 palabras)
+   - Primer párrafo: respuesta DIRECTA (40-60 palabras)
    - Resto del artículo: profundizacion
    
    EJEMPLO:
@@ -2333,7 +2344,7 @@ LAS 7 ESTRATEGIAS CLAVE PARA AEO:
    Bien:
    "Invisalign cuesta entre $3,500 y $8,500 en Estados Unidos en 2026.
    El precio depende de la complejidad del caso, la duracion del
-   tratamiento (6-18 meses) y la ubicación geografica. La mayoria
+   tratamiento (6-18 meses) y la ubicación geográfica. La mayoria
    de los seguros dentales cubren entre 25% y 50% del costo."
 
 2. USAR FORMATO DE PREGUNTA-RESPUESTA EXPLICITO
@@ -2605,7 +2616,7 @@ TACTICS BLACK HAT QUE PENALIZAN:
 
 ❌ FORUM SIGNATURE SPAM
   Crear cuentas en forums solo para link en signature
-  Patron facilmente detectable
+  Patron fácilmente detectable
 
 ❌ LINK FARMS
   Sitios cuyo único propósito es linkear
@@ -2628,7 +2639,7 @@ PENALIZACIONES POSIBLES:
 - Manual action en Search Console
 - Caida en rankings
 - Devaluacion completa de los backlinks
-- En casos extremos: deindexacion del sitio
+- En casos extremos: deindexación del sitio
 ```
 
 ---
@@ -3003,7 +3014,7 @@ GOOGLE SEARCH CONSOLE (GRATIS):
   La herramienta mas importante. Sin esto, no hay SEO.
   - Posiciones de keywords
   - Impressions y clicks
-  - Errores de indexacion
+  - Errores de indexación
   - Core Web Vitals report
   - Backlinks (limitado)
   - Coverage report
@@ -3385,7 +3396,7 @@ SEO en silo. Resultado: contenido no optimizado, técnica no implementada, links
 
 FASE M consolida las 10 fronteras críticas donde el SEO moderno se juega en 2026. Cada sub-sección asume conocimiento de fases anteriores y profundiza en frameworks, tacticas y gates aplicables hoy. No son opcionales — son condicion de trabajo world-class.
 
-### M.1 E-E-A-T Framework Google (Experience, Expertise, Authoritativeness, Trustworthiness)
+### Z.4.1 E-E-A-T Framework Google (Experience, Expertise, Authoritativeness, Trustworthiness)
 
 **Contexto 2026:** Google formalizo E-E-A-T en 2022 anadiendo Experience a los 3 factores E-A-T previos. En 2025-2026, E-E-A-T es criterio EVALUADOR del contenido — no ranking signal directo, pero se correlaciona con visibilidad sostenida, especialmente en verticals YMYL.
 
@@ -3450,13 +3461,13 @@ META 6 MESES:
 
 ---
 
-### M.2 YMYL Compliance — Gate Obligatorio #52
+### Z.4.2 YMYL Compliance — Gate Obligatorio #52
 
 **YMYL (Your Money Your Life)** son topics donde el contenido impacta directamente salud, finanzas, seguridad, estabilidad de vida del usuario. Google exige E-E-A-T extremo en YMYL.
 
 **Verticals YMYL canónicos (lista no exhaustiva):**
 
-1. **Salud y medicina:** diagnosticos, tratamientos, farmacos, procedimientos, condiciones cronicas, salud mental, nutricion clinica
+1. **Salud y medicina:** diagnósticos, tratamientos, farmacos, procedimientos, condiciones cronicas, salud mental, nutricion clinica
 2. **Finanzas:** inversiones, prestamos, credito, hipotecas, seguros, planeacion retiro, impuestos, fraude financiero
 3. **Legal:** asesoria legal, derechos, inmigracion, litigios, procesos judiciales
 4. **Seguros:** seguros de vida, salud, auto, hogar, empresa
@@ -3517,7 +3528,7 @@ INPUT #27 a #52:
 
 ---
 
-### M.3 Topic Clusters + Pillar Content Strategy
+### Z.4.3 Topic Clusters + Pillar Content Strategy
 
 **Contexto 2026:** la arquitectura topic cluster (pillar + cluster content interconectados) es la forma canónica de construir autoridad topical sin canibalización ni thin content. Google entiende entidades y relaciones entre ellas mejor cada año.
 
@@ -3530,7 +3541,7 @@ PILLAR PAGE (página central, 3,000-5,000 palabras)
    |--- Cluster content 2
    |--- Cluster content 3
    |--- ...
-   |--- Cluster content N (tipicamente 8-20 clusters por pillar)
+   |--- Cluster content N (típicamente 8-20 clusters por pillar)
    
 CADA CLUSTER:
   - Enlaza DE VUELTA al pillar (hub-and-spoke)
@@ -3585,7 +3596,7 @@ CLUSTER: "SEO for Real Estate"
 
 ---
 
-### M.4 Entity SEO + Knowledge Graph Optimization
+### Z.4.4 Entity SEO + Knowledge Graph Optimization
 
 **Contexto 2026:** Google ya no indexa solo páginas — indexa ENTIDADES (personas, organizaciones, lugares, productos, conceptos) y sus relaciones. Entity SEO significa optimizar para que tu brand / autor / topic sea reconocido como entidad en el Knowledge Graph.
 
@@ -3637,7 +3648,7 @@ CLUSTER: "SEO for Real Estate"
 
 ---
 
-### M.5 Passage Ranking + BERT / MUM / Gemini
+### Z.4.5 Passage Ranking + BERT / MUM / Gemini
 
 **Contexto 2026:** Google usa modelos de lenguaje (BERT 2019, MUM 2021, Gemini integrations 2024-2026) para entender passages (párrafos) dentro de páginas, no solo la página completa. Un artículo largo puede rankear por 50+ sub-intents si los passages son especificos.
 
@@ -3681,7 +3692,7 @@ SIGUIENTE PASSAGE: detalle de cada rango, que incluye, ejemplos.
 
 ---
 
-### M.6 Google Helpful Content Update Compliance
+### Z.4.6 Google Helpful Content Update Compliance
 
 **Contexto 2026:** Helpful Content Update (2022, integrado a Core Update en 2024) penaliza sitios con contenido creado primariamente para SEO en lugar de para personas. Es evaluación sitio-wide, no página por página.
 
@@ -3730,7 +3741,7 @@ SIGUIENTE PASSAGE: detalle de cada rango, que incluye, ejemplos.
 
 ---
 
-### M.7 AI Search Completo (expansión FASE 4 AEO)
+### Z.4.7 AI Search Completo (expansión FASE 4 AEO)
 
 FASE 4 original cubrio AEO baseline (ChatGPT, Perplexity, AI Overviews). M.7 expande con cobertura 2026 completa.
 
@@ -3768,7 +3779,7 @@ FASE 4 original cubrio AEO baseline (ChatGPT, Perplexity, AI Overviews). M.7 exp
 
 ---
 
-### M.8 Generative AI Content Guidelines
+### Z.4.8 Generative AI Content Guidelines
 
 **Contexto 2026:** Google NO penaliza contenido AI per se — penaliza contenido de baja calidad, sea AI o humano. Pero exige transparencia en ciertos contextos (YMYL) y edición humana substancial siempre.
 
@@ -3801,7 +3812,7 @@ FASE 4 original cubrio AEO baseline (ChatGPT, Perplexity, AI Overviews). M.7 exp
 
 ---
 
-### M.9 Cannibalization Analysis + Content Pruning
+### Z.4.9 Cannibalization Analysis + Content Pruning
 
 **Contexto 2026:** Cannibalization (múltiples páginas compitiendo por la misma keyword) diluye ranking. Content pruning (eliminar / consolidar) es trabajo ongoing canónico del SEO senior.
 
@@ -3847,7 +3858,7 @@ DECISIÓN:
 
 ---
 
-### M.10 SEO Attribution Data-Driven (coordinacion con #42 agente-analytics)
+### Z.4.10 SEO Attribution Data-Driven (coordinacion con #42 agente-analytics)
 
 **Contexto 2026:** SEO attribution es uno de los trabajos mas difíciles — ciclo largo, multi-touch, last-click subestima SEO masivamente. Sin attribution correcta, SEO parece "no funcionar" incluso cuando si.
 
@@ -3957,7 +3968,7 @@ Todos los timestamps en outputs SEO del sistema Addendo se generan en **`America
 
 FASE G cubre las 9 variantes canónicas del sistema Addendo. Multi-Idioma NO es "traducir el sitio" — es arquitectura técnica + keyword research + localization + compliance simultaneos. Sin FASE G rigurosa, cliente con mas de 1 mercado pierde ranking en todos.
 
-**Las 9 variantes canónicas del sistema:**
+> ⚠️ **TABLA v1.0 — REFERENCIA HISTÓRICA PRESERVADA.** Para canónico vigente ver **G1 arriba (L3905-3921)**. En v1.0 las variantes incluían `PT-PT` (eliminado en v1.1.0 por no ser canónico per doc maestro v3.3) y excluían `fr-FR` (agregado en v1.1.0). El formato también era UPPERCASE y se normalizó a lowercase ISO en v1.1.0. Esta tabla se mantiene por trazabilidad documental — no usar como fuente canónica:
 
 | Codigo | Mercado | Notas |
 |--------|---------|-------|
@@ -4349,8 +4360,8 @@ FASE Z es la declaracion honesta de fronteras, escenarios de escalacion, handoff
 
 Escalar cuando #27 detecta que el escenario excede su perímetro de competencia automatizable. Escalacion NO es falla — es disciplina.
 
-1. **Google Manual Action confirmada en Search Console** — recuperación requiere diagnostico humano senior + reconsideration request formal
-2. **Core Update caida >30% tráfico** — diagnostico de E-E-A-T / helpful content gaps requiere auditoría profunda humano
+1. **Google Manual Action confirmada en Search Console** — recuperación requiere diagnóstico humano senior + reconsideration request formal
+2. **Core Update caida >30% tráfico** — diagnóstico de E-E-A-T / helpful content gaps requiere auditoría profunda humano
 3. **Sitio con DMCA takedowns masivos** — legal complexity supera perímetro
 4. **Migración multi-sitio masiva** (>5 dominios, >50K URLs) — planeacion requiere arquitecto senior
 5. **Penalización algoritmica (Panda, Penguin) residual pre-2020** — debugging especifico requiere senior
@@ -4373,7 +4384,7 @@ Escalar cuando #27 detecta que el escenario excede su perímetro de competencia 
 
 **Frase canónica:** "Este escenario excede mi perímetro — escalo a SEO Specialist humano senior."
 
-### Z.3 Disclaimer de Humildad Epistemica
+### Z.3 Disclaimer de Humildad Epistémica
 
 #27 opera con las siguientes asunciones honestas:
 
@@ -4387,7 +4398,7 @@ Escalar cuando #27 detecta que el escenario excede su perímetro de competencia 
 
 **Contra-medida:** revisión cuatrimestral del skill de #27 con humano senior para actualizar a cambios algorithmicos observados.
 
-### Z.4 Handoffs Formales con 15 Agentes
+### Z.7 Handoffs Formales con 15 Agentes
 
 Matrix completa de handoffs upstream / downstream / lateral:
 
@@ -4733,6 +4744,7 @@ Decisiones arquitectónicas históricas y del ciclo actual que dieron forma al s
 - **D8 — 29 abril 2026:** resolución de colisión "M" — "FASE M Modernización SEO 2026" renombrada a "MÓDULO Z.4 Modernización SEO 2026 (AEO/GEO)" para preservar el espacio canónico de "M Mapeo" del estándar D/L/M/G/Z (mismo patrón aplicado en #15 v1.1.1 + #21 v1.1.1 + #18 v1.1.1).
 - **D9 — 29 abril 2026:** corrección hardcoding L1830/L1853 + restauración ~549 acentos + multi-idioma G1-G4 corregido (PT-PT → fr-FR, normalizado lowercase ISO) documentada en CHANGELOG.
 - **D10 — 29 abril 2026:** Trust but Verify externo declarado obligatorio post-nivelación (Principio 10.10 sistémico — BL-5 v1.1.X).
+- **D11 — 29 abril 2026:** Trust but Verify externo del skill #27 ejecutado por instancia auditora independiente (Claude Code Mac post-/clear). Veredicto Opción B con 4 hallazgos (H1 acentos perdidos en cuerpo nuevo v1.1.0, H2 inconsistencia multi-idioma sección histórica vs G1, H3 colisión derivada Z.4 con doble uso de namespace, H4 hardcoding marginal L2247-2255 ejemplo "Brujo en Los Angeles"). Addendum quirúrgico v1.1.1 aplicado en MISMA pestaña sin /clear (continuidad audit→fix, lección heredada de #15) cerrando los 4 hallazgos. Score 109/110 honesto verificable mantenido. BL-5 cerrado.
 
 > **Decisiones CEO heredadas v1.0 (preservadas internamente, no renumeradas):**
 > *Decisión CEO 1: gate #52 obligatorio en YMYL · Decisión CEO 2: #27 NO hace scraping propio, consume #5 · Decisión CEO 3: handoff #18 ANTES de #21 · Decisión CEO 4: sin brief de #8, #27 NO arranca · Decisión CEO 5: 9 variantes regionales canónicas + hreflang riguroso.*
