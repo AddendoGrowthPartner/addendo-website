@@ -1,9 +1,9 @@
 ---
 name: copywriting-seo
 description: "Copywriter SEO World-Class del sistema Addendo Agency OS — REDACTA copy persuasivo cumpliendo triple criterio simultáneo (intent SEO + embudo + semántica), TRANSCREA variantes nativas cross-idioma (NO traducción literal), PULE iterativamente intra-skill pre-handoff, DESPACHA al downstream específico. Cubre 4 capas: producción + adaptación + optimización iterativa + handoff disciplinado."
-version: "v1.1.0"
+version: "v1.1.1"
 last_updated: "2026-04-29"
-status: "PERFECTO_PURO_AUTO_EVALUADO"
+status: "PERFECTO_PURO_VERIFICABLE"
 layer: "Capa 04 — Diseño y Contenido"
 role: "Copywriter SEO World-Class del sistema — operación cliente-por-cliente, pieza-por-pieza, idioma-por-idioma"
 owner: "Addendo Growth Partner — Sistema de Agentes"
@@ -22,11 +22,11 @@ deslindes:
 
 # Metadata de trazabilidad nivelación
 agente_id: 16
-puntaje_declarado: "109/110 honesto (caveat F2 auto-bias declarado)"
-ola_nivelacion: "primera (v1.0 commit b9d5a3d) → reconstrucción grande v1.1.0 (29 abril 2026)"
-commit_nivelacion_anterior: "b9d5a3d"
-commit_nivelacion_actual: "[se completa al commit final]"
-auditoria_objetiva: "pendiente — Trust but Verify externo requerido (BL-5)"
+puntaje_declarado: "109/110 honesto verificable (caveat F2 residual auto-bias del addendum mismo)"
+ola_nivelacion: "primera (v1.0 commit b9d5a3d) → reconstrucción grande v1.1.0 (commit 8ae0eff) → addendum recuperatorio v1.1.1 post-Trust-but-Verify externo (29 abril 2026)"
+commit_nivelacion_anterior: "b9d5a3d (v1.0) + 8ae0eff (v1.1.0 reconstrucción)"
+commit_nivelacion_actual: "8ae0eff (reconstrucción) + addendum-recuperatorio-v1.1.1 (hash pendiente backfill post-commit)"
+auditoria_objetiva: "ejecutada — Trust but Verify externo (instancia auditora independiente Claude Code Mac con /clear) reportó Opción B con 3 hallazgos cerrados por addendum recuperatorio v1.1.1; Principio 10.10 sistémico requeriría 2do TbV del addendum mismo (BL-5 v1.1.X residual)"
 ---
 
 # SKILL: Agente Copywriting SEO — Arquitecto de Copy Convertidor World-Class
@@ -34,6 +34,25 @@ auditoria_objetiva: "pendiente — Trust but Verify externo requerido (BL-5)"
 ---
 
 ## CHANGELOG
+
+### v1.1.1 — 29 abril 2026 (ADDENDUM RECUPERATORIO post-Trust-but-Verify externo)
+
+Trust but Verify externo (auditor independiente Claude Code Mac con /clear) reportó Opción B — Validada con hallazgos. CEO firmó Opción A (Full Restore) sobre Opción B (BL formal). Patrón consistente con precedentes #25 (5cc0f97), #45 (af8f54f), #5 (c7ca012), #15 (f660b75), #21 (db8eaeb), #18 (63aaf55), #27 (4ae818a). Addendum recuperatorio aplicado:
+
+- **H1 (CRÍTICO) — Full Restore del catálogo nativo cross-variante × vertical perdido en v1.1.0**:
+  - Restaurados ~37 hooks nativos por variante regional (8 variantes preservadas bit-perfect del v1.0: es-MX, es-ES, es-AR, es-CO, es-CL, en-US, en-UK, pt-BR + fr-FR producida nativa de cero para los 10 verticales V1-V10).
+  - Restaurados ~37 CTAs nativos por variante regional (mismo patrón: 8 variantes preservadas bit-perfect + fr-FR nativa).
+  - Restauradas 20 preguntas retóricas nativas por idioma raíz (5 ES + 5 EN + 5 PT preservadas bit-perfect del v1.0 + 5 FR producidas nativas).
+  - Restaurados 13 objection handlings nativos por idioma (10 v1.0 preservados bit-perfect: 4 "es muy caro" + 3 "no confío" + 3 "no tengo tiempo" en ES-MX/ES-ES/EN-US/PT-BR + 3 FR producidos nativos).
+  - Total elementos restaurados: ~107 elementos del catálogo nativo (vs 18 en v1.1.0). El catálogo es **vocabulario INTERNO consultado por el agente cuando TRANSCREA**, NO output al cliente. Documentado explícitamente como anexo referencial al inicio de la sección.
+  - Variantes ES-US y PT-PT del v1.0 ELIMINADAS (no canónicas — sus elementos no se restauran, coherente con corrección Multi-Idioma de v1.1.0).
+- **H2 (formal A5) — frontmatter L26** `commit_nivelacion_actual` placeholder rellenado con trazabilidad real del addendum recuperatorio (`8ae0eff (reconstrucción) + addendum-recuperatorio-v1.1.1`).
+- **H3 (informativo) — discrepancia MD5 v1.0 documentada**: prompt original de la reconstrucción declaraba `0abfd7745b6d62b7a9d541bc4659572c`; cómputo independiente desde commit `b9d5a3d` arroja `ba1c32b05cd5da9f487823553ece2c42`. Sin acción correctiva en archivo — telemetría honesta registrada.
+- **Status frontmatter**: `PERFECTO_PURO_AUTO_EVALUADO` → `PERFECTO_PURO_VERIFICABLE`.
+
+**Lección sistémica capturada**: la declaración v1.1.0 L1842 "Hooks nativos por variante (preservado del v1.0 — adaptado a 9 variantes canónicas)" era engañosa, no técnicamente falsa pero materialmente incompleta. La palabra "preservado" implicaba conservación; la realidad era reducción 30→9. Trust but Verify externo detectó la inconsistencia. **CEO catch arquitectónico**: la pregunta sobre el caveat V1 de tamaño anómalo (2,069 líneas vs target 2,900-3,500) activó la auditoría profunda de preservación de contenido.
+
+**Score declarado oficial post-addendum**: 109/110 honesto verificable (caveat F2 residual auto-bias — Principio 10.10 sistémico requeriría un segundo Trust but Verify externo del addendum mismo, BL-5 v1.1.X residual). Patrón disciplinario alineado con #5 v1.1.1, #25 v1.1.1, #4 v1.1, #45 v1.1.1, #50 v1.1.2, #15 v1.1.1, #21 v1.1.1, #18 v1.1.1, #27 v1.1.1.
 
 ### v1.1.0 — 29 abril 2026 (RECONSTRUCCIÓN GRANDE MONOLÍTICA)
 
@@ -1839,37 +1858,199 @@ Reportes mensuales se generan en TZ del cliente como cortesía, pero baseline en
 | Sistema numérico | 1,234.56 | 1.234,56 | 1.234,56 | 1.234,56 | 1.234,56 | 1,234.56 | 1,234.56 | 1.234,56 | 1 234,56 |
 | Sistema medida | Métrico | Métrico | Métrico | Métrico | Métrico | Imperial | Imperial mix | Métrico | Métrico |
 
-### Hooks nativos por variante (preservado del v1.0 — adaptado a 9 variantes canónicas)
+### Catálogo nativo cross-variante × vertical (Full Restore v1.1.1)
 
-**`es-MX`** (crédito): "Si te negaron un crédito la semana pasada, probablemente no entiendes todavía qué está leyendo el banco cuando pide tu reporte."
+⚠️ **ESTE CATÁLOGO ES ANEXO REFERENCIAL — vocabulario INTERNO consultado por el agente cuando TRANSCREA, NO output al cliente.** Cada elemento es un ejemplo nativo (pensado y producido en la lengua local, NO traducción literal) de cadencia, idioms locales, prueba social regional, referencias culturales y compliance regional. El agente lo CONSULTA como referencia de tono al adaptar copy cross-idioma. Restaurado bit-perfect del v1.0 sección 1.8.2 (8 variantes canónicas preservadas: es-MX, es-ES, es-AR, es-CO, es-CL, en-US, en-UK, pt-BR) + fr-FR producida nativa nueva en v1.1.1. Las variantes ES-US y PT-PT del v1.0 fueron eliminadas (no canónicas).
 
-**`es-ES`** (SaaS): "Tu equipo pasa once horas a la semana conciliando datos entre hojas de cálculo. Al coste medio de esta empresa, son 34.000 euros anuales que se van en trabajo que podría automatizarse."
+#### Bloque A — Hooks nativos por variante regional × vertical
 
-**`es-AR`** (restaurante): "La empanada salteña de verdad se cierra con repulgue de 13 pliegues — no 12, no 14. Es una regla que viene de cuando las cocineras contaban los días entre sueldos."
+##### es-MX (México)
 
-**`es-CO`** (real estate): "En Chapinero Alto, el precio por metro cuadrado subió 38% en tres años. Pero en cuatro manzanas específicas, el precio se quedó estancado. Esta es la data que su agente inmobiliario probablemente no le mostró."
+1. **crédito:** "Si te negaron un crédito la semana pasada, probablemente no entiendes todavía qué está leyendo el banco cuando pide tu reporte."
+2. **educación infantil:** "Entre los 3 y los 6 años, el cerebro del niño duplica conexiones neurales y después las poda. Si esa ventana se pierde, se pierde para siempre."
 
-**`es-CL`** (salud): "Tres meses con cortisol alto le pueden envejecer el sistema inmunológico el equivalente a cinco años — y usted puede ni enterarse hasta que se enferma con cualquier virus cualquier martes."
+##### es-ES (España)
 
-**`en-US`** (SaaS): "Your team spends eleven hours a week reconciling data between spreadsheets. At a blended sixty-dollar-an-hour cost, that's thirty-four thousand a year per team of five."
+1. **SaaS:** "Tu equipo pasa once horas a la semana conciliando datos entre hojas de cálculo. Al coste medio de esta empresa, son 34.000 euros anuales que se van en trabajo que podría automatizarse."
+2. **esotérico/cultural:** "El ritual de la abuela con el romero antes de dormir no era superstición — era la versión popular de un protocolo antiinflamatorio que hoy la ciencia apenas empieza a documentar."
 
-**`en-UK`** (property): "Property prices in Clapham rose 42% in five years. But across four specific streets the numbers flattened. This is the data your estate agent probably didn't show you."
+##### es-AR (Argentina)
 
-**`pt-BR`** (crédito): "Se o banco negou seu crédito na semana passada, provavelmente você ainda não entende o que ele está lendo quando puxa seu SPC ou Serasa. A culpa não é sua — a maioria dos brasileiros nunca recebeu educação formal sobre crédito."
+1. **restaurante:** "La empanada salteña de verdad se cierra con repulgue de 13 pliegues — no 12, no 14. Es una regla que viene de cuando las cocineras contaban los días entre sueldos."
+2. **servicios locales:** "Son las once de la noche, la pérdida bajo la pileta no para, y cada minuto que pasa el piso de la cocina sufre más. Este artículo explica los tres pasos que tenés que hacer en los primeros diez minutos."
 
-**`fr-FR`** (santé): "Trois mois de cortisol élevé peuvent vieillir votre système immunitaire de l'équivalent de cinq ans — et vous pourriez ne vous en rendre compte qu'au prochain virus du mardi suivant."
+##### es-CO (Colombia)
 
-### CTAs nativos por variante
+1. **real estate:** "En Chapinero Alto, el precio por metro cuadrado subió 38% en tres años. Pero en cuatro manzanas específicas, el precio se quedó estancado. Esta es la data que su agente inmobiliario probablemente no le mostró."
+2. **e-commerce:** "Los 'cuchillos de chef profesional' del supermercado pierden filo en seis semanas — no porque el acero sea malo, sino porque no es acero."
 
-**`es-MX`**: "Agenda tu consulta inicial gratis — 30 minutos, sin compromiso, hablas directo con un asesor (no con un vendedor)."
-**`es-ES`**: "Empieza tu prueba gratis de 14 días — sin tarjeta, acceso completo, asistencia de migración incluida si vienes desde otra herramienta."
-**`es-AR`**: "Llamá al 11-4567-8900 — técnico en tu casa en menos de 45 minutos, o la visita no se cobra. Garantía escrita de 90 días."
-**`es-CO`**: "Reserva tu asesoría personalizada — 45 minutos con un asesor local que conoce la zona, antes de mostrarte propiedades."
-**`es-CL`**: "Pruébalo sin riesgo — 30 días de devolución completa, despacho gratis en todo Chile. Si no te convence, no preguntamos por qué."
-**`en-US`**: "Start your 14-day free trial — no credit card required, full feature access, migration assistance included."
-**`en-UK`**: "Book your free personalised consultation — 45 minutes with a local agent who knows the neighbourhood before showing you any property."
-**`pt-BR`**: "Agende sua consulta inicial gratuita — 30 minutos, sem compromisso, você fala direto com um especialista (não com um vendedor)."
-**`fr-FR`**: "Réservez votre consultation initiale gratuite — 30 minutes, sans engagement, vous parlez directement avec un expert (pas un commercial)."
+##### es-CL (Chile)
+
+1. **salud:** "Tres meses con cortisol alto le pueden envejecer el sistema inmunológico el equivalente a cinco años — y usted puede ni enterarse hasta que se enferma con cualquier virus cualquier martes."
+
+##### en-US (Estados Unidos)
+
+1. **SaaS:** "Your team spends eleven hours a week reconciling data between spreadsheets. At a blended sixty-dollar-an-hour cost, that's thirty-four thousand a year per team of five."
+2. **credit:** "If you were denied credit last week, you probably don't yet understand what your lender is actually reading when they pull your report. That's not your fault — most American adults never received formal credit education."
+3. **health/wellness:** "Three months of elevated cortisol can age your immune system the equivalent of five years. You might not notice until you catch any virus on any random Tuesday."
+4. **legal:** "If your accident happened less than 72 hours ago and you believe you were at fault, you may still recover damages in Florida. State law allows recovery up to 50% of your assigned liability."
+5. **D2C ecommerce:** "The 'professional chef knives' at big-box retailers lose their edge in six weeks. Not because the steel is bad — but because it isn't steel."
+6. **local services:** "It's eleven PM, the pipe under the kitchen sink ruptures, and water is already covering two square meters of floor. Every minute that passes the structural damage compounds — and the repair bill multiplies."
+7. **esoteric/spiritual:** "The egg-cleansing ritual as practiced in the Nahua tradition of Tlaxcala doesn't 'absorb' energy — it displaces it. The egg is the intermediary that allows lodged energetic content to find somewhere to go."
+
+##### en-UK (Reino Unido)
+
+1. **property:** "Property prices in Clapham rose 42% in five years. But across four specific streets the numbers flattened. This is the data your estate agent probably didn't show you."
+2. **early education:** "Between ages three and six, your child's brain doubles neural connections and then prunes the ones that go unused. Miss the window and it closes for good."
+3. **restaurant:** "Proper Neapolitan pizza requires San Marzano tomatoes grown on volcanic soil in a specific fourteen-kilometre strip south of Naples. Any dough-and-sauce outfit that claims 'authentic Napoletana' without the PDO certification is guessing."
+
+##### pt-BR (Brasil)
+
+1. **crédito:** "Se o banco negou seu crédito na semana passada, provavelmente você ainda não entende o que ele está lendo quando puxa seu SPC ou Serasa. A culpa não é sua — a maioria dos brasileiros nunca recebeu educação formal sobre crédito."
+2. **SaaS:** "Sua equipe gasta onze horas por semana conciliando dados entre planilhas. Ao custo médio desta empresa, são cento e quarenta mil reais por ano que se vão em trabalho que poderia ser automatizado."
+3. **restaurante:** "A feijoada carioca de verdade leva 48 horas de cozimento lento — não 8, não 12. É a regra que os mestres do Largo do Machado seguem desde os anos 60, e que explica por que no sábado às 13h a fila dá volta no quarteirão."
+4. **real estate:** "O metro quadrado em Vila Madalena subiu 37% em três anos. Mas em quatro quadras específicas o preço ficou estagnado. Esta é a data que seu corretor provavelmente não te mostrou."
+5. **serviços legais:** "Se o acidente foi há menos de 72 horas e você acha que a culpa foi sua, ainda pode recuperar indenização. A lei brasileira permite compensação proporcional mesmo com culpa concorrente — mas o prazo legal começa a correr agora."
+6. **educação infantil:** "Entre os 3 e os 6 anos, o cérebro da criança duplica conexões neurais e depois poda as que não foram usadas. Se essa janela se perde, se perde para sempre."
+7. **serviços locais:** "São onze da noite, o cano debaixo da pia estourou, e a água já cobre dois metros quadrados da cozinha. Cada minuto que passa o dano estrutural aumenta — e o custo do reparo multiplica."
+8. **esotérico/afro-brasileiro:** "A limpeza com ervas no banho de descarrego, como se faz na tradição afro-brasileira, não 'tira' a energia — ela oferece caminho. A erva é a mediadora que permite que o que está alojado no seu campo encontre para onde ir."
+
+##### fr-FR (Francia) — NUEVO v1.1.1
+
+1. **crédit:** "Si la banque vous a refusé un crédit la semaine dernière, vous ne comprenez probablement pas encore ce qu'elle lit dans votre dossier au moment de la décision. Ce n'est pas votre faute — la plupart des Français n'ont jamais reçu d'éducation financière formelle sur le scoring crédit."
+2. **santé:** "Trois mois de cortisol élevé peuvent vieillir votre système immunitaire de l'équivalent de cinq ans — et vous pourriez ne vous en rendre compte qu'au prochain virus du mardi suivant."
+3. **SaaS:** "Votre équipe passe onze heures par semaine à réconcilier des données entre tableurs. Au coût moyen chargé de cette entreprise, c'est 38 000 euros par an et par équipe de cinq qui partent dans un travail automatisable."
+4. **e-commerce:** "Les « couteaux de chef professionnels » vendus en grande surface perdent leur tranchant en six semaines. Pas parce que l'acier est mauvais — parce que ce n'est pas de l'acier, c'est un acier laminé sur âme bon marché."
+5. **immobilier:** "Dans le 11ème arrondissement, le prix au mètre carré a grimpé de 32% en trois ans. Mais dans quatre rues précises le marché s'est figé. C'est la donnée que votre agent immobilier ne vous a probablement pas montrée."
+6. **services juridiques:** "Si l'accident a eu lieu il y a moins de 72 heures et que vous pensez être en tort, vous pouvez encore obtenir une indemnisation en France. La loi Badinter permet une compensation même en cas de faute partagée — mais le délai légal court à partir de maintenant."
+7. **restaurant:** "La vraie blanquette de veau de mémé mijote au moins quatre heures à feu doux — pas 90 minutes au robot-cuiseur. C'est une règle que les chefs lyonnais respectent depuis le 19ème siècle, et c'est pour ça que le samedi midi la file s'allonge devant les bouchons authentiques."
+8. **éducation infantile:** "Entre 3 et 6 ans, le cerveau de l'enfant double ses connexions neuronales puis élague celles qui ne sont pas sollicitées. La pédagogie Montessori exploite précisément cette fenêtre de sur-production. Cet article explique, sans marketing, ce qui distingue un Montessori authentique d'un Montessori de marque."
+9. **ésotérique/spirituel:** "Le rituel du sel et de la sauge avant le coucher, tel qu'il se pratique dans la tradition occitane, ne « capte » pas l'énergie — il la déplace. Le sel est le médiateur qui permet à ce qui est logé dans votre champ énergétique de trouver où s'écouler. Cet article explique la cosmologie derrière le geste."
+10. **services locaux:** "Il est 23 heures, la fuite sous l'évier ne s'arrête pas, et chaque minute qui passe abîme un peu plus le parquet de la cuisine. Cet article explique les trois gestes à faire dans les dix premières minutes — avant même d'appeler le plombier."
+
+#### Bloque B — CTAs nativos por variante regional × vertical
+
+##### es-MX (México)
+
+1. **genérico alto contacto:** "Agenda tu consulta inicial gratis — 30 minutos, sin compromiso, hablas directo con un asesor (no con un vendedor)."
+2. **educación:** "Agenda una visita guiada con tu hijo — 60 minutos, conoces el aula, hablas con la maestra, tu hijo participa en una actividad real."
+
+##### es-ES (España)
+
+1. **SaaS trial:** "Empieza tu prueba gratis de 14 días — sin tarjeta, acceso completo, asistencia de migración incluida si vienes desde otra herramienta."
+2. **crédito:** "Reserva tu consulta educativa gratuita — 30 minutos con un asesor certificado, sin venta agresiva y sin promesas imposibles."
+
+##### es-AR (Argentina)
+
+1. **servicios locales urgentes:** "Llamá al 11-4567-8900 — técnico en tu casa en menos de 45 minutos, o la visita no se cobra. Garantía escrita de 90 días."
+2. **restaurantes:** "Reservá tu mesa en 3 clicks — confirmación inmediata, cancelación gratis hasta 2 horas antes."
+
+##### es-CO (Colombia)
+
+1. **real estate:** "Reserva tu asesoría personalizada — 45 minutos con un asesor local que conoce la zona, antes de mostrarte propiedades."
+2. **salud:** "Agenda tu valoración integrativa inicial — 60 minutos con un médico certificado, revisamos tu historial completo antes de sugerir algún plan."
+
+##### es-CL (Chile)
+
+1. **e-commerce:** "Pruébalo sin riesgo — 30 días de devolución completa, despacho gratis en todo Chile. Si no te convence, no preguntamos por qué."
+
+##### en-US (Estados Unidos)
+
+1. **SaaS trial:** "Start your 14-day free trial — no credit card required, full feature access, migration assistance included."
+2. **legal consult:** "Request your free initial consultation — 30 minutes, confidential, no fee discussion until we've evaluated your case."
+3. **local services:** "Call (555) 123-4567 — technician at your door in under 45 minutes, or the visit is free. 90-day written guarantee on all work."
+4. **D2C:** "Try it risk-free for 30 days — free shipping both ways, no questions asked if you return it."
+5. **credit education:** "Book your free educational consultation — 30 minutes, no sales pressure, no promises of overnight score miracles."
+6. **restaurant reservation:** "Reserve your table in under 60 seconds — instant confirmation, free cancellation up to 2 hours before."
+7. **B2B demo:** "Book a 20-minute live demo — we tailor it to your team's exact workflow, no generic slide decks."
+
+##### en-UK (Reino Unido)
+
+1. **property:** "Book your free personalised consultation — 45 minutes with a local agent who knows the neighbourhood before showing you any property."
+2. **health consult:** "Book your integrative initial assessment — 60 minutes with a board-certified practitioner, full intake before any plan is suggested."
+3. **early education:** "Schedule your guided visit — 60 minutes, meet the teacher, observe the classroom, your child participates in a real activity."
+
+##### pt-BR (Brasil)
+
+1. **genérico alto contacto:** "Agende sua consulta inicial gratuita — 30 minutos, sem compromisso, você fala direto com um especialista (não com um vendedor)."
+2. **SaaS trial:** "Comece seu trial gratuito de 14 dias — sem cartão de crédito, acesso completo, assistência de migração incluída."
+3. **imobiliário:** "Agende sua consultoria personalizada — 45 minutos com um corretor que conhece a região antes de mostrar propriedades."
+4. **e-commerce:** "Experimente sem risco — 30 dias para devolução total, frete grátis em todo o Brasil. Se não convencer, não perguntamos o motivo."
+5. **serviços legais:** "Solicite sua consulta inicial — 30 minutos gratuitos, confidencial. Avaliamos seu caso antes de falar de honorários."
+6. **crédito:** "Reserve sua consulta educativa gratuita — 30 minutos com um especialista certificado, sem vendas agressivas e sem promessas milagrosas."
+7. **restaurante:** "Reserve sua mesa em 3 clicks — confirmação imediata, cancelamento grátis até 2 horas antes."
+8. **saúde integrativa:** "Agende sua avaliação integrativa inicial — 60 minutos com um médico certificado, revisamos seu histórico antes de sugerir qualquer plano."
+
+##### fr-FR (Francia) — NUEVO v1.1.1
+
+1. **crédit:** "Réservez votre bilan éducatif gratuit — 30 minutes avec un conseiller certifié, sans vente agressive et sans promesse de score parfait en 30 jours."
+2. **santé:** "Réservez votre bilan intégratif initial — 60 minutes avec un médecin diplômé, revue complète de votre historique avant toute proposition de protocole."
+3. **SaaS trial:** "Commencez votre essai gratuit de 14 jours — sans carte bancaire, accès complet à toutes les fonctionnalités, assistance migration incluse si vous venez d'un autre outil."
+4. **e-commerce:** "Essayez sans risque pendant 30 jours — retour gratuit, livraison gratuite en France métropolitaine. Si ça ne vous convient pas, on ne vous demandera pas pourquoi."
+5. **immobilier:** "Réservez votre consultation personnalisée gratuite — 45 minutes avec un conseiller local qui connaît le quartier avant toute visite de bien."
+6. **services juridiques:** "Demandez votre première consultation gratuite — 30 minutes, confidentielle, sans engagement. Nous évaluons votre dossier avant toute discussion d'honoraires."
+7. **restaurant:** "Réservez votre table en 3 clics — confirmation immédiate, annulation gratuite jusqu'à 2 heures avant."
+8. **éducation infantile:** "Programmez votre visite guidée — 60 minutes, vous rencontrez l'éducatrice, observez la classe, votre enfant participe à une activité réelle."
+9. **ésotérique/spirituel:** "Réservez votre consultation — 90 minutes, en personne ou en visioconférence, débutant par une préparation rituelle et terminant par le travail adapté à votre cas."
+10. **services locaux:** "Appelez le 01 23 45 67 89 — technicien chez vous en moins de 45 minutes ou le déplacement est offert. Garantie écrite de 90 jours sur tous nos travaux."
+
+#### Bloque C — Preguntas retóricas nativas de enganche
+
+##### Idioma ES (aplicable a es-MX, es-ES, es-AR, es-CO, es-CL)
+
+1. "¿Cuánto te está costando realmente ese cuello de botella que ya normalizaste?"
+2. "¿Qué pasa si el problema no es lo que crees que es el problema?"
+3. "¿Te has detenido a contar cuántas veces has intentado lo mismo esperando un resultado distinto?"
+4. "¿Y si la decisión que vas a tomar hoy se pudiera tomar con datos en lugar de con corazonada?"
+5. "¿Cuánto vale para ti tener la respuesta correcta esta semana en lugar de en seis meses?"
+
+##### Idioma EN (aplicable a en-US y en-UK)
+
+1. "What's that bottleneck you've normalized actually costing you?"
+2. "What if the problem isn't what you think the problem is?"
+3. "How many times have you tried the same approach expecting a different result?"
+4. "What if today's decision could be made with data instead of gut?"
+5. "What's it worth to you to have the right answer this week instead of in six months?"
+
+##### Idioma PT (aplicable a pt-BR)
+
+1. "Quanto realmente está custando esse gargalo que você já normalizou?"
+2. "E se o problema não for o que você acha que é o problema?"
+3. "Quantas vezes você já tentou o mesmo esperando resultado diferente?"
+4. "E se a decisão de hoje pudesse ser tomada com dados em vez de com intuição?"
+5. "Quanto vale para você ter a resposta certa essa semana em vez de em seis meses?"
+
+##### Idioma FR (aplicable a fr-FR) — NUEVO v1.1.1
+
+1. "Combien vous coûte réellement ce goulet d'étranglement que vous avez fini par accepter ?"
+2. "Et si le problème n'était pas celui que vous croyez ?"
+3. "Combien de fois avez-vous tenté la même approche en espérant un résultat différent ?"
+4. "Et si la décision d'aujourd'hui pouvait être prise sur des données plutôt qu'à l'intuition ?"
+5. "Combien cela vaut-il pour vous d'avoir la bonne réponse cette semaine plutôt que dans six mois ?"
+
+#### Bloque D — Objection handlings nativos por idioma
+
+##### Objeción "es muy caro" / "it's expensive" / "é muito caro" / "c'est trop cher"
+
+- **es-MX:** "Entendemos. Antes de decidir si es caro o no, vale la pena compararlo contra lo que cuesta NO resolverlo: [dato concreto del costo de inacción]. Además tenemos planes desde [precio bajo] por mes."
+- **es-ES:** "Lo comprendemos. Antes de decidir si es caro o no, conviene compararlo con el coste de no resolverlo: [dato]. Y además tenemos opciones desde [precio bajo] al mes."
+- **en-US:** "Fair point. Before deciding whether it's expensive, it's worth comparing against the cost of not solving it: [concrete data]. We also have plans starting at [low price] per month."
+- **pt-BR:** "Entendemos. Antes de decidir se é caro, vale comparar com o custo de não resolver: [dado concreto]. Além disso, temos planos a partir de [preço baixo] por mês."
+- **fr-FR (NUEVO v1.1.1):** "C'est une question légitime. Avant de juger si c'est cher, comparez-le au coût de ne pas résoudre le problème : [donnée concrète du coût d'inaction]. De plus, nous avons des formules à partir de [prix bas] par mois."
+
+##### Objeción "no confío" / "I don't trust" / "não confio" / "je n'ai pas confiance"
+
+- **es-MX:** "Confiar sin pruebas sería ingenuo. Por eso operamos con [certificación verificable], llevamos [años] en el mercado con [número] clientes atendidos, y ofrecemos garantía escrita de [términos específicos]. Si aun así hay dudas, las resolvemos en una llamada de 15 minutos."
+- **en-US:** "Trusting without proof would be naive. That's why we operate with [verifiable certification], have [years] in business with [number] clients served, and offer a written guarantee covering [specific terms]. If doubts remain, we'll address them in a 15-minute call."
+- **pt-BR:** "Confiar sem prova seria ingenuidade. Por isso operamos com [certificação verificável], temos [anos] de mercado atendendo [número] clientes, e oferecemos garantia escrita cobrindo [termos específicos]. Se ainda ficarem dúvidas, resolvemos em uma ligação de 15 minutos."
+- **fr-FR (NUEVO v1.1.1):** "Faire confiance sans preuve serait imprudent. C'est pourquoi nous opérons avec [certification vérifiable], avons [années] d'expérience avec [nombre] clients servis, et offrons une garantie écrite couvrant [conditions spécifiques]. Si des doutes subsistent, nous les levons en un appel de 15 minutes."
+
+##### Objeción "no tengo tiempo" / "I don't have time" / "não tenho tempo" / "je n'ai pas le temps"
+
+- **es-MX:** "La primera consulta dura 30 minutos y puedes tomarla desde el teléfono. Después del diagnóstico, tú decides si invertir más tiempo o no. No pedimos más que ese bloque inicial."
+- **en-US:** "The initial consultation takes 30 minutes and can happen from your phone. After that diagnostic, you decide whether to invest more time. We don't ask for more than that opening block."
+- **pt-BR:** "A consulta inicial leva 30 minutos e pode ser feita do seu celular. Depois do diagnóstico, você decide se investe mais tempo. Não pedimos mais que esse bloco inicial."
+- **fr-FR (NUEVO v1.1.1):** "La première consultation dure 30 minutes et peut se faire depuis votre téléphone. Après ce diagnostic, vous décidez si vous voulez investir plus de temps. Nous ne demandons que ce créneau initial."
 
 ### Modo agnóstico para idiomas no-oficiales
 
@@ -1945,7 +2126,7 @@ Anual          → Re-REDACTAR top performers
 
 ---
 
-## DECISIONES CEO REGISTRADAS — D1-D10
+## DECISIONES CEO REGISTRADAS — D1-D13
 
 - **D1 — 18 abril 2026.** Skill nivelado v1.0 (commit `b9d5a3d`) — primera ola, auto-evaluado 108/110 SIN auditoría objetiva firmada (BL deuda histórica que el ciclo v1.1.0 corrige).
 - **D2 — 25 abril 2026.** Actualización menor (mtime FS = `2026-04-25 17:43:58`).
@@ -1957,6 +2138,9 @@ Anual          → Re-REDACTAR top performers
 - **D8 — 29 abril 2026.** AEO/GEO copy incorporado al ADN del skill — citation engineering en motores IA (ChatGPT, Perplexity, Claude, Gemini, AI Overviews) como parte de REDACTAR (estructura citation-extractable) y DESPACHAR (formato citation-friendly).
 - **D9 — 29 abril 2026.** Corrección de 5 hardcodings de clientes (L445 "Don Jacinto-style", L854 lista 3 clientes, L858-878 ejemplo CreditBridge, L886 frontmatter ejemplo) reemplazados por placeholders `{cliente_demo_*}`. Restauración de ~80 acentos perdidos en bloque legacy L995-L2295 (FASES 1-6 + REGLAS MAESTRAS).
 - **D10 — 29 abril 2026.** Trust but Verify externo declarado obligatorio post-nivelación (Principio 10.10 sistémico — BL-5 v1.1.X). Patrón disciplinario alineado con #5 v1.1.1, #25 v1.1.1, #4 v1.1, #45 v1.1.1, #50 v1.1.2, #15 v1.1.1, #21 v1.1.1, #18 v1.1.1, #27 v1.1.1.
+- **D11 — 29 abril 2026.** Trust but Verify externo del skill #16 ejecutado por instancia auditora independiente (Claude Code Mac con /clear, sin contexto previo de la reconstrucción). Veredicto Opción B con 3 hallazgos: H1 CRÍTICO pérdida silenciosa de catálogo nativo cross-variante × vertical (~66 elementos perdidos en v1.1.0 vs v1.0), H2 formal placeholder `commit_nivelacion_actual` no resuelto en frontmatter L26, H3 informativo discrepancia MD5 v1.0 declarado vs cómputo independiente. CEO catch arquitectónico identificó tamaño anómalo 2,069 vs target 2,900-3,500 — esa observación activó la auditoría profunda de preservación de contenido.
+- **D12 — 29 abril 2026.** CEO firmó Opción A (Full Restore) sobre Opción B (BL formal). Razón documentada: el catálogo nativo cross-variante × vertical era el activo distintivo del skill — sin él, el agente es genérico (un copywriter sin vocabulario regional contextual no puede TRANSCREAR con cadencia local). Restauración bit-perfect del v1.0 sección 1.8.2 (8 variantes preservadas) + producción nativa nueva de fr-FR para los 10 verticales V1-V10.
+- **D13 — 29 abril 2026.** Addendum recuperatorio aplicado en MISMA pestaña sin /clear (lección heredada de #15: continuidad audit→fix obligatoria). Cierre de los 3 hallazgos. Score 109/110 honesto verificable mantenido. Status `PERFECTO_PURO_AUTO_EVALUADO` → `PERFECTO_PURO_VERIFICABLE`. Caveat F2 residual: el addendum mismo no fue auditado externamente (Principio 10.10 sistémico requeriría 2do TbV — BL-5 v1.1.X residual).
 
 ---
 
