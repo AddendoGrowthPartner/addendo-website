@@ -25,7 +25,7 @@ agente_id: 16
 puntaje_declarado: "109/110 honesto verificable (caveat F2 residual auto-bias del addendum mismo)"
 ola_nivelacion: "primera (v1.0 commit b9d5a3d) → reconstrucción grande v1.1.0 (commit 8ae0eff) → addendum recuperatorio v1.1.1 post-Trust-but-Verify externo (29 abril 2026)"
 commit_nivelacion_anterior: "b9d5a3d (v1.0) + 8ae0eff (v1.1.0 reconstrucción)"
-commit_nivelacion_actual: "8ae0eff (reconstrucción) + addendum-recuperatorio-v1.1.1 (hash pendiente backfill post-commit)"
+commit_nivelacion_actual: "8ae0eff (reconstrucción) + be4fbd7 (addendum recuperatorio v1.1.1)"
 auditoria_objetiva: "ejecutada — Trust but Verify externo (instancia auditora independiente Claude Code Mac con /clear) reportó Opción B con 3 hallazgos cerrados por addendum recuperatorio v1.1.1; Principio 10.10 sistémico requeriría 2do TbV del addendum mismo (BL-5 v1.1.X residual)"
 ---
 
