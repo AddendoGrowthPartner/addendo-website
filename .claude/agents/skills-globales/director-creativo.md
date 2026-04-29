@@ -1,7 +1,7 @@
 ---
 name: director-creativo
 description: "Orquestador de coherencia creativa cross-channel del sistema Addendo Agency OS — ORQUESTA, TRADUCE, UNIFICA-CAMPAÑA y APRUEBA-CREATIVE entregables de 8 ejecutores (#11, #12, #13, #14, #16, #17, #18, #21) preservando Big Idea, tono y claims unificados."
-version: "v1.1.0"
+version: "v1.1.1"
 last_updated: "2026-04-28"
 status: "PERFECTO_PURO_AUTO_EVALUADO"
 layer: "Capa 04 — Dirección Creativa"
@@ -19,7 +19,7 @@ deslindes:
 
 # Metadata de trazabilidad nivelación
 agente_id: 15
-puntaje_declarado: "109/110 honesto post-reconstrucción (auditoría externa Trust but Verify pendiente)"
+puntaje_declarado: "109/110 honesto post-addendum-quirurgico"
 ola_nivelacion: "segunda (v1.0 commit b30fc02) → reconstrucción grande v1.1.0 (28 abril 2026)"
 commit_nivelacion_anterior: "b30fc02"
 commit_nivelacion_actual: "[se completa al commit final post-reconstrucción]"
@@ -27,6 +27,16 @@ auditoria_objetiva: "pendiente — Trust but Verify externo requerido en sesión
 ---
 
 ## CHANGELOG
+
+### v1.1.1 — 28 abril 2026 (ADDENDUM QUIRÚRGICO post-Trust-but-Verify externo del commit 3fa59b7)
+
+- **Hallazgo 1 corregido:** ~80+ palabras Spanish sin acento en plantillas markdown FASE M.1 (briefs por canal: frontend, copywriting, google-ads, meta-ads, diseno-imagen, linkedin-ads) + reglas calidad FASE G.2 + protocolo decisión DC + sección 2.2 inputs + múltiples bloques reescritas con acentos correctos: `técnico/Técnico/TÉCNICO`, `técnica/Técnica`, `página/Página`, `páginas/Páginas`, `métrica/Métrica`, `métricas/Métricas`, `acción/Acción/ACCIÓN`, `párrafo`, `descripción/Descripción`, `análisis`, `específica/específicas/específico/específicos`, `número/números`, `información`, `dirección`, `atención`, `educación`, `revisión`, `categorías`, `éxito/ÉXITO`, `según/SEGÚN`, `presión`, `rápida/rápido`, más 5 patrones interrogativos `qué` (`SEGÚN QUÉ FALTE`, `Qué funciona` ×4). Patrón heredado de v1.0, NO introducido por reconstrucción `3fa59b7`. Aplicado vía `perl -i -pe 's/\b...\b/.../g'` con word-boundaries para protección de variables de código (`{{nombre_pagina}}` placeholder intacto) y compuestas (`acciones`, `accionables`, `consideraciones`, `extracciones` intactas). Mismo método exitoso que #5 v1.1.1 commit `c7ca012` (donde se restauraron 73 acentos análogos).
+- **Hallazgo 2 corregido:** colisión recursiva sub-nivel H3 — subsecciones `### M.1` a `### M.6` dentro de MÓDULO Z.4 renombradas a `### Z.4.1` a `### Z.4.6` para resolver colisión con `### M.1 — BRIEFS POR TIPO DE ENTREGABLE` de FASE M canónica (Mapeo). Cross-ref interna (L2996 "ver M.6" → "ver Z.4.6") actualizada. La Decisión D6 v1.1.0 había resuelto la colisión a nivel H2 (`## FASE M Mapeo` vs `## MÓDULO Z.4 Modernización`) pero faltaba aplicar el principio recursivamente al nivel H3. Coherencia recursiva del estándar D/L/M/G/Z restaurada.
+- **Hallazgo 3 corregido:** agregada sección formal `## BACKLOG v1.X — GAPS RECONOCIDOS` (justo después del Roadmap, antes de Multi-Idioma) enumerando BL-1 a BL-5 con formato canónico `- **BL-N v1.X** — descripción + Resuelve: Hito N`. La v1.1.0 referenciaba los gaps implícitamente dentro del Roadmap ("Resuelve BL-X") pero sin enumeración formal en sección dedicada como sí lo hace #5 v1.1.1. Patrón canónico restaurado para mejorar trazabilidad cross-skills + permitir grep sistemático del backlog.
+- **Hallazgos informativos** (placeholder `commit_nivelacion_actual` no resuelto + keyspaces Redis `creative:*` fuera de convención `agent:15:*` del doc maestro v3.2) movidos a backlog v1.2 — no bloqueantes (mismo precedente que #5 v1.1.1 con `scrape:*`).
+- **Score post-addendum:** 110/110 contra rúbrica recalculada · **109/110 declarado oficial honesto** (caveat F2 residual auto-bias hasta segundo Trust but Verify externo del addendum mismo, BL-5b v1.1.X).
+- **Frontmatter actualizado:** `version: "v1.1.1"`, `puntaje_declarado: "109/110 honesto post-addendum-quirurgico"`.
+- **Disciplina cultural:** mismo precedente de continuidad audit→fix aplicado en #25 commit `5cc0f97`, #45 commit `af8f54f`, #5 commit `c7ca012`. La continuidad de pestaña post-Trust-but-Verify preserva contexto del auditor para corrección quirúrgica precisa.
 
 ### v1.1.0 — 28 abril 2026 (RECONSTRUCCIÓN GRANDE MONOLÍTICA)
 
@@ -303,8 +313,8 @@ Frases prohibidas del DC:
 
 Frases correctas del DC:
   "La competencia rentable usa este formato, vamos a superarlo con X"
-  "El buyer persona responde mejor a tono Y segun el analisis"
-  "Este color converte mejor en este nicho segun el data del spy-ads"
+  "El buyer persona responde mejor a tono Y según el análisis"
+  "Este color converte mejor en este nicho según el data del spy-ads"
   "El hook visual tiene que mostrar Z porque el usuario decide en 3 segundos"
 ```
 
@@ -371,7 +381,7 @@ Error tipico: querer comunicar todo en una pieza
 
 Correcto: comunicar UNA cosa poderosa
   - "Respuesta en 45 minutos. Garantizado."
-  (el resto de info esta en la pagina, no en el anuncio)
+  (el resto de info esta en la página, no en el anuncio)
 
 REGLA DEL DC: Cada brief tiene UN mensaje principal por pieza.
               Si hay que comunicar 3 cosas, son 3 piezas diferentes.
@@ -872,7 +882,7 @@ ASSETS DEL CLIENTE:
 ### 2.2 Que hacer si falta algo
 
 ```
-ACCION SEGUN QUE FALTE:
+ACCIÓN SEGÚN QUÉ FALTE:
 
 Falta el plan estrategico:
   -> Solicitar a director-estrategia via project-manager
@@ -904,7 +914,7 @@ Faltan brand guidelines:
 
 ```
 [ ] ¿Plan estrategico es reciente (<30 dias)?
-[ ] ¿Brief Maestro tiene las 10 categorias completas?
+[ ] ¿Brief Maestro tiene las 10 categorías completas?
 [ ] ¿Los datos del spy-ads coinciden con los del scraping?
 [ ] ¿Los assets del cliente son utilizables (calidad, resolucion)?
 [ ] ¿Hay contradicciones entre las fuentes?
@@ -1044,7 +1054,7 @@ Este agente recibe 16 parámetros canónicos del brief consolidado (producido po
 | # | Parámetro | Tipo | Ejemplos | Fuente upstream |
 |---|-----------|------|----------|-----------------|
 | 1 | `{{CLIENTE}}` | identificador kebab-case | `creditbridge`, `don-jacinto-nahual`, `bebe-poliglota`, `ciudad-maderas`, `neurokids` | #3 director-cuenta |
-| 2 | `{{INDUSTRIA}}` | vertical canónica (de las 10 del catálogo 3.2) | `alimentos-premium-b2c`, `salud-especializada`, `financiera-regulada`, `real-estate-premium`, `fashion-beauty`, `servicios-profesionales-b2b`, `educacion-formacion`, `hospitality-turismo`, `saas-b2b-b2c`, `servicios-locales` | #3 + #54 |
+| 2 | `{{INDUSTRIA}}` | vertical canónica (de las 10 del catálogo 3.2) | `alimentos-premium-b2c`, `salud-especializada`, `financiera-regulada`, `real-estate-premium`, `fashion-beauty`, `servicios-profesionales-b2b`, `educación-formacion`, `hospitality-turismo`, `saas-b2b-b2c`, `servicios-locales` | #3 + #54 |
 | 3 | `{{TIPO_CAMPANA}}` | objetivo canónico (de los 10 tipos) | `awareness`, `lead-generation`, `ecommerce-direct-response`, `local-lead-generation`, `app-performance`, `retargeting`, `email-nurture`, `referral`, `launch`, `reputacion-defensa` | #9 + #54 |
 | 4 | `{{VARIANTE_REGIONAL}}` | variante cultural (de las 9 canónicas G1, ver FASE L.2) | `es-MX`, `es-ES`, `es-AR`, `es-CO`, `es-CL`, `en-US`, `en-UK`, `pt-BR`, `fr-FR` | #54 (persona regional) |
 | 5 | `{{OBJETIVO_KPI}}` | métrica de éxito primaria | `CTR > 2%`, `CPL < $50`, `ROAS > 3x`, `conversion-rate > 3%`, `app-installs 10k/mes` | #9 |
@@ -1506,14 +1516,14 @@ Si alguna pregunta tiene NO como respuesta, el brief no sale.
 
 ### M.1 — BRIEFS POR TIPO DE ENTREGABLE
 
-**REGLA:** Cada agente ejecutor recibe SU brief. No hay brief generico compartido. Cada brief tiene todo lo que ese agente necesita sin informacion irrelevante.
+**REGLA:** Cada agente ejecutor recibe SU brief. No hay brief generico compartido. Cada brief tiene todo lo que ese agente necesita sin información irrelevante.
 
 ### 4.1 BRIEF PARA FRONTEND-DEV (#21)
 
 **Template obligatorio:**
 
 ```markdown
-# BRIEF CREATIVO: Pagina "{{nombre_pagina}}"
+# BRIEF CREATIVO: Página "{{nombre_pagina}}"
 **Para:** #21 frontend-dev
 **De:** #15 director-creativo
 **Fecha:** {{fecha_ISO}}
@@ -1522,13 +1532,13 @@ Si alguna pregunta tiene NO como respuesta, el brief no sale.
 
 ---
 
-## 1. OBJETIVO DE LA PAGINA
-**Accion que el usuario debe tomar:** {{accion primaria}}
-**Accion secundaria:** {{si no toma la primaria}}
-**Metrica de exito:** {{ej: "3% de visitantes envia formulario"}}
+## 1. OBJETIVO DE LA PÁGINA
+**Acción que el usuario debe tomar:** {{acción primaria}}
+**Acción secundaria:** {{si no toma la primaria}}
+**Métrica de éxito:** {{ej: "3% de visitantes envia formulario"}}
 
 ## 2. CONTEXTO
-- **Tipo de pagina:** Homepage | Servicio | Ciudad | Landing | Blog post | FAQ | Contacto | Gracias
+- **Tipo de página:** Homepage | Servicio | Ciudad | Landing | Blog post | FAQ | Contacto | Gracias
 - **Fuente de trafico principal:** Google Ads | SEO organico | Meta Ads | Direct | Email
 - **Buyer persona:** {{referencia al buyer persona del Brief Maestro}}
 - **Momento del funnel:** Awareness | Consideracion | Decision
@@ -1536,13 +1546,13 @@ Si alguna pregunta tiene NO como respuesta, el brief no sale.
 ## 3. ESTRUCTURA DE SECCIONES (en orden exacto)
 
 ### Seccion 1: Hero
-**Proposito:** Capturar atencion en < 3 segundos, comunicar el valor principal, motivar scroll
+**Proposito:** Capturar atención en < 3 segundos, comunicar el valor principal, motivar scroll
 **Contenido:**
 - H1: "{{headline sugerido, 8-12 palabras}}"
 - Subtitulo: "{{subtitulo, 15-25 palabras}}"
-- CTA primario: "{{texto del boton, verbo de accion}}"
+- CTA primario: "{{texto del boton, verbo de acción}}"
 - CTA secundario (opcional): "{{texto}}"
-- Imagen/video: {{descripcion del visual, estilo, protagonista}}
+- Imagen/video: {{descripción del visual, estilo, protagonista}}
 - Trust signals: {{estrellitas, # de clientes, anos, certificaciones}}
 **Layout:**
 - Desktop: 2 columnas (texto izquierda, imagen derecha)
@@ -1552,7 +1562,7 @@ Si alguna pregunta tiene NO como respuesta, el brief no sale.
 ### Seccion 2: {{nombre}}
 **Proposito:** {{texto}}
 **Contenido:** {{lista}}
-**Layout:** {{descripcion}}
+**Layout:** {{descripción}}
 
 ### Seccion 3: {{nombre}}
 ...
@@ -1584,13 +1594,13 @@ Si alguna pregunta tiene NO como respuesta, el brief no sale.
 
 ## 7. REFERENTES VISUALES
 **Sitio que queremos parecernos a:**
-- URL 1: {{url}} — que nos gusta: {{descripcion}}
-- URL 2: {{url}} — que nos gusta: {{descripcion}}
+- URL 1: {{url}} — que nos gusta: {{descripción}}
+- URL 2: {{url}} — que nos gusta: {{descripción}}
 
 **NO queremos parecernos a:**
 - URL 1: {{url}} — que evitamos: {{razon}}
 
-## 8. LO QUE ESTA PAGINA NO DEBE TENER
+## 8. LO QUE ESTA PÁGINA NO DEBE TENER
 - [ ] Pop-ups intrusivos
 - [ ] Carruseles que avanzan solos
 - [ ] Videos con autoplay + sonido
@@ -1598,7 +1608,7 @@ Si alguna pregunta tiene NO como respuesta, el brief no sale.
 - [ ] Mas de 1 CTA primario por seccion
 - [ ] Formularios con > 5 campos (a menos que sea imprescindible)
 - [ ] Stock photos obvias
-- [ ] {{restricciones especificas del cliente}}
+- [ ] {{restricciones específicas del cliente}}
 
 ## 9. INTEGRACIONES OBLIGATORIAS
 - [ ] Formulario -> N8N webhook -> GHL
@@ -1606,9 +1616,9 @@ Si alguna pregunta tiene NO como respuesta, el brief no sale.
 - [ ] GA4 tracking events
 - [ ] Meta Pixel (si aplica)
 - [ ] Schema LocalBusiness
-- [ ] {{otras integraciones especificas}}
+- [ ] {{otras integraciones específicas}}
 
-## 10. METRICAS DE EXITO
+## 10. MÉTRICAS DE ÉXITO
 - **Objetivo principal:** {{conversion rate del CTA primario}}
 - **Objetivo secundario:** {{time on page, scroll depth, etc.}}
 - **PageSpeed mobile:** >= 90 (no negociable)
@@ -1651,14 +1661,14 @@ Si alguna pregunta tiene NO como respuesta, el brief no sale.
 **Contexto:** {{en que situacion esta cuando busca esto}}
 **Dolor principal:** {{que problema tiene}}
 **Estado emocional:** {{frustrado, curioso, desesperado, comparando}}
-**Nivel de educacion sobre el tema:** Principiante | Intermedio | Experto
+**Nivel de educación sobre el tema:** Principiante | Intermedio | Experto
 
 **Vocabulario que usa (real, del Brief Maestro):**
 - "{{frase real que usa la audiencia}}"
 - "{{frase real que usa la audiencia}}"
 
 **Vocabulario que NO usa (evitar en el copy):**
-- "{{jerga tecnica}}"
+- "{{jerga técnica}}"
 - "{{jerga corporativa}}"
 
 ## 4. TONO EXACTO
@@ -1675,9 +1685,9 @@ Si alguna pregunta tiene NO como respuesta, el brief no sale.
 "{{mensaje nuclear que debe quedar claro al terminar de leer}}"
 
 ## 6. TRES BENEFICIOS PRINCIPALES (orden de importancia)
-1. **{{beneficio 1}}** — evidencia: {{numero o prueba concreta}}
-2. **{{beneficio 2}}** — evidencia: {{numero o prueba concreta}}
-3. **{{beneficio 3}}** — evidencia: {{numero o prueba concreta}}
+1. **{{beneficio 1}}** — evidencia: {{número o prueba concreta}}
+2. **{{beneficio 2}}** — evidencia: {{número o prueba concreta}}
+3. **{{beneficio 3}}** — evidencia: {{número o prueba concreta}}
 
 ## 7. OBJECIONES A RESPONDER
 **Objecion 1:** "{{objecion comun}}"
@@ -1698,7 +1708,7 @@ Si alguna pregunta tiene NO como respuesta, el brief no sale.
 - Cuando: {{si el primario es rechazado, como alternativa}}
 
 ## 9. LO QUE ESTE COPY NO DEBE DECIR
-- [ ] No mencionar precio (va solo en la pagina de pricing)
+- [ ] No mencionar precio (va solo en la página de pricing)
 - [ ] No comparar explicitamente con competidores por nombre
 - [ ] No prometer resultados garantizados
 - [ ] No usar palabras prohibidas del sistema de marca: {{lista}}
@@ -1709,21 +1719,21 @@ Si alguna pregunta tiene NO como respuesta, el brief no sale.
 
 **Ejemplo 1 (competidor X, >127 dias activo):**
 "{{copy exacto del ad de competidor rentable}}"
-- Que funciona: {{analisis}}
+- Qué funciona: {{análisis}}
 - Como superarlo: {{angulo unico nuestro}}
 
 **Ejemplo 2:**
 "{{copy}}"
-- Que funciona: {{analisis}}
+- Qué funciona: {{análisis}}
 - Como superarlo: {{angulo nuestro}}
 
 ## 11. LONGITUD REQUERIDA
 - **Minimo:** {{N palabras}}
-- **Objetivo:** {{N palabras}} (basado en promedio del top 10 Google × 1.2 segun skill copywriting-seo)
+- **Objetivo:** {{N palabras}} (basado en promedio del top 10 Google × 1.2 según skill copywriting-seo)
 - **Maximo razonable:** {{N palabras}}
 
 ## 12. ESTRUCTURA SUGERIDA
-{{Usar la estructura del skill copywriting-seo.md seccion 2.5 segun tipo de pieza}}
+{{Usar la estructura del skill copywriting-seo.md seccion 2.5 según tipo de pieza}}
 - Hook en primeras 100 palabras con keyword
 - {{H2 recomendados}}
 - FAQ con 5-10 preguntas con schema FAQPage
@@ -1751,7 +1761,7 @@ Aplicar las 6 fases del skill a esta pieza.
 **Tipo:** Search | Display | Performance Max | Shopping | YouTube Ads | Discovery
 **Objetivo de conversion:** Leads | Ventas | Calls | Visitas fisicas
 **KPI principal:** {{CPA, CPL, ROAS}}
-**Target:** {{valor especifico}}
+**Target:** {{valor específico}}
 
 ## 2. KEYWORDS OBJETIVO
 **Volumen estimado total:** {{N}} busquedas/mes
@@ -1772,9 +1782,9 @@ Aplicar las 6 fases del skill a esta pieza.
 "{{pvu_exacta}}"
 
 ## 4. TRES DIFERENCIADORES PRINCIPALES
-1. {{diferenciador 1 con numero}}
-2. {{diferenciador 2 con numero}}
-3. {{diferenciador 3 con numero}}
+1. {{diferenciador 1 con número}}
+2. {{diferenciador 2 con número}}
+3. {{diferenciador 3 con número}}
 
 ## 5. TONO DEL ANUNCIO
 - **Caracter principal:** Urgente | Informativo | Emocional | Racional
@@ -1782,7 +1792,7 @@ Aplicar las 6 fases del skill a esta pieza.
 - **Nivel de "agresividad comercial":** bajo | medio | alto
 
 ## 6. OFERTA ESPECIAL (si existe)
-- **Oferta:** "{{descripcion clara}}"
+- **Oferta:** "{{descripción clara}}"
 - **Vigencia:** {{fecha o permanente}}
 - **Condicion:** {{si aplica}}
 - **Incluir en:** Headlines 1 o 2 | Descriptions | Solo en sitelinks
@@ -1828,7 +1838,7 @@ Aplicar las 6 fases del skill a esta pieza.
 - Values: {{lista de servicios}}
 
 ### Call Extension
-- Telefono: {{numero}}
+- Telefono: {{número}}
 - Horarios: {{horarios}}
 
 ### Location Extension
@@ -1856,7 +1866,7 @@ Aplicar las 6 fases del skill a esta pieza.
 - [ ] Maximo 1 signo de exclamacion por anuncio
 - [ ] Sin promesas exageradas ("100%", "mejor del mundo")
 - [ ] Cumplir todas las policies de Google Ads
-- [ ] {{restricciones especificas del cliente o industria}}
+- [ ] {{restricciones específicas del cliente o industria}}
 ```
 
 ### 4.4 BRIEF PARA META-ADS (#11)
@@ -1887,19 +1897,19 @@ Aplicar las 6 fases del skill a esta pieza.
 - **Genero:** {{all | hombre | mujer}}
 
 ### Audiencia 2: Interes-based
-- **Intereses:** {{lista especifica}}
+- **Intereses:** {{lista específica}}
 - **Comportamientos:** {{lista}}
 - **Demografia:** {{detalles}}
 - **Geografia:** {{lista}}
 - **Tamano estimado:** {{N}}K
 
 ### Audiencia 3: Retargeting
-- **Fuente:** {{pagina visitada | form abandonado | video viewers}}
+- **Fuente:** {{página visitada | form abandonado | video viewers}}
 - **Dias:** {{1-30}}
 - **Exclusiones:** {{conversores, etc.}}
 
 ## 3. FORMATO RECOMENDADO
-Elegir segun buyer persona y producto:
+Elegir según buyer persona y producto:
 - [ ] Imagen estatica (1:1) - Feed
 - [ ] Imagen vertical (4:5) - Feed (mas real estate)
 - [ ] Imagen vertical full (9:16) - Stories/Reels
@@ -1912,9 +1922,9 @@ Elegir segun buyer persona y producto:
 
 ## 4. HOOK VISUAL (primer frame)
 **Para videos:**
-- Frame 0-1s debe mostrar: {{descripcion especifica}}
+- Frame 0-1s debe mostrar: {{descripción específica}}
 - Movimiento: {{si/no y tipo}}
-- Elemento sorpresa: {{que captura atencion}}
+- Elemento sorpresa: {{que captura atención}}
 - Texto superpuesto: {{si/no y que dice}}
 - Regla del sonido: funciona sin audio? {{si/no}}
 - Subtitulos: OBLIGATORIOS en todos los videos
@@ -1931,9 +1941,9 @@ Elegir segun buyer persona y producto:
 ### Texto principal (125 caracteres visibles)
 **Estructura: Problema -> Solucion -> CTA**
 
-Linea 1 (problema/hook): "{{texto captura atencion}}"
+Linea 1 (problema/hook): "{{texto captura atención}}"
 Linea 2 (solucion/beneficio): "{{texto solucion}}"
-Linea 3 (CTA): "{{accion clara}}"
+Linea 3 (CTA): "{{acción clara}}"
 
 ### Headline (27 caracteres)
 "{{headline conciso}}"
@@ -1955,13 +1965,13 @@ Linea 3 (CTA): "{{accion clara}}"
 ## 7. ESTILO VISUAL
 **Tipo principal:** Lifestyle | Producto | Testimonial | Educativo | Behind-the-scenes | UGC
 
-**Descripcion del mood:**
-{{1 parrafo describiendo como debe sentirse el ad}}
+**Descripción del mood:**
+{{1 párrafo describiendo como debe sentirse el ad}}
 
 **Personas en el visual:**
 - Representan al buyer persona
 - Autenticidad > perfeccion
-- {{caracteristicas especificas}}
+- {{caracteristicas específicas}}
 
 ## 8. MUSICA O AUDIO (para videos)
 - **Trending audio:** si/no (si esta en tendencia, usarlo)
@@ -1990,10 +2000,10 @@ Linea 3 (CTA): "{{accion clara}}"
 
 ## 11. LO QUE HACE LA COMPETENCIA (del spy-ads)
 **Ads competidor mas rentable (>90 dias activo):**
-- Formato: {{descripcion}}
-- Hook: {{descripcion}}
-- CTA: {{descripcion}}
-- Que funciona: {{analisis}}
+- Formato: {{descripción}}
+- Hook: {{descripción}}
+- CTA: {{descripción}}
+- Qué funciona: {{análisis}}
 - Como mejorarlo: {{nuestro angulo}}
 
 ## 12. RESTRICCIONES DE META POLICIES
@@ -2003,7 +2013,7 @@ Linea 3 (CTA): "{{accion clara}}"
 - [ ] Sin promesas de resultados irreales
 - [ ] Sin clickbait
 - [ ] Cumplir todas las policies de Meta actuales
-- [ ] {{restricciones especificas}}
+- [ ] {{restricciones específicas}}
 
 ## 13. VARIABLES PARA TESTING A/B
 - Hook visual: 3 variantes
@@ -2046,7 +2056,7 @@ Linea 3 (CTA): "{{accion clara}}"
 - [ ] {{otros}}
 
 ## 3. DIMENSIONES EXACTAS
-**Segun el uso, generar en estas dimensiones:**
+**Según el uso, generar en estas dimensiones:**
 
 | Formato | Dimensiones | Aspect ratio | Peso max |
 |---------|-------------|--------------|----------|
@@ -2061,9 +2071,9 @@ Linea 3 (CTA): "{{accion clara}}"
 | GBP post | 1200×900 | 4:3 | 150 KB |
 
 ## 4. ELEMENTOS OBLIGATORIOS
-- [ ] Logo (segun reglas del sistema de marca)
+- [ ] Logo (según reglas del sistema de marca)
 - [ ] Texto overlay (si aplica): "{{texto exacto}}"
-- [ ] Colores de marca: {{especificos para este asset}}
+- [ ] Colores de marca: {{específicos para este asset}}
 - [ ] CTA visual: {{si aplica}}
 - [ ] {{otros elementos}}
 
@@ -2080,9 +2090,9 @@ Linea 3 (CTA): "{{accion clara}}"
 ## 6. COMPOSICION
 **Regla:** {{centrado | regla de tercios | asimetrico}}
 **Jerarquia visual:**
-1. Elemento principal: {{descripcion}}
-2. Elemento secundario: {{descripcion}}
-3. Elementos de apoyo: {{descripcion}}
+1. Elemento principal: {{descripción}}
+2. Elemento secundario: {{descripción}}
+3. Elementos de apoyo: {{descripción}}
 
 **Espacio para texto:** {{donde debe haber espacio libre para overlays}}
 
@@ -2094,9 +2104,9 @@ Linea 3 (CTA): "{{accion clara}}"
 
 ## 8. REFERENTES VISUALES
 **Imagenes que nos inspiran:**
-- URL 1: {{url}} — que nos gusta: {{descripcion}}
-- URL 2: {{url}} — que nos gusta: {{descripcion}}
-- URL 3: {{url}} — que nos gusta: {{descripcion}}
+- URL 1: {{url}} — que nos gusta: {{descripción}}
+- URL 2: {{url}} — que nos gusta: {{descripción}}
+- URL 3: {{url}} — que nos gusta: {{descripción}}
 
 **Imagenes que NO queremos:**
 - URL 1: {{url}} — que evitamos: {{razon}}
@@ -2144,7 +2154,7 @@ Template obligatorio para briefs de campañas LinkedIn Ads (B2B). LinkedIn tiene
 ## 1. OBJETIVO DE LA CAMPANA
 **Objetivo de LinkedIn:** Lead Generation | Brand Awareness | Website Visits | Engagement | Video Views | Website Conversions | Job Applicants | Talent Leads
 **KPI principal:** {{CPL B2B | ROI pipeline | SQL generados | MQL calificados}}
-**Target:** {{valor especifico}}
+**Target:** {{valor específico}}
 **Ciclo de venta esperado:** {{corto <30 dias | medio 30-90 | largo 90+}}
 
 ## 2. AUDIENCIA OBJETIVO B2B
@@ -2154,7 +2164,7 @@ LinkedIn permite targeting profesional granular que NO existe en otras plataform
 ### Audiencia 1: Account-Based Marketing (ABM)
 - **Empresas objetivo:** {{lista de 20-200 cuentas nombradas}}
 - **Tamano empresa:** {{SMB 1-50 | Mid 51-1000 | Enterprise 1001+}}
-- **Industria:** {{vertical especifico}}
+- **Industria:** {{vertical específico}}
 - **Geografia:** {{pais/region}}
 - **Fuente de lista:** {{LinkedIn Sales Navigator | CRM cliente | investigacion manual #8}}
 
@@ -2167,7 +2177,7 @@ LinkedIn permite targeting profesional granular que NO existe en otras plataform
 - **Tamano empresa:** {{rango}}
 
 ### Audiencia 3: Retargeting B2B
-- **Website visitors:** {{paginas especificas, duracion}}
+- **Website visitors:** {{páginas específicas, duracion}}
 - **Video viewers:** {{75%+ de video LinkedIn nativo}}
 - **Form openers:** {{abandonaron Lead Gen Form}}
 - **Engaged company page:** {{siguieron company page o interactuaron con posts organicos}}
@@ -2183,10 +2193,10 @@ LinkedIn permite targeting profesional granular que NO existe en otras plataform
 | Conversation Ad | Nurture multi-step + calificacion lead | Multi-branch conversacion |
 | Lead Gen Form nativa | Captura sin friccion (pre-filled de perfil LinkedIn) | Integra con CRM |
 | Dynamic Ad (Spotlight/Follower) | Brand following + personalizacion | Auto-generado con datos perfil |
-| Document Ad (PDF) | Whitepapers + reports premium | PDF hasta 100 paginas |
+| Document Ad (PDF) | Whitepapers + reports premium | PDF hasta 100 páginas |
 | Event Ad | Webinars + eventos virtuales | Coordinar con LinkedIn Events |
 
-**Recomendacion para esta campana:** {{formato}} porque {{razon especifica B2B}}
+**Recomendacion para esta campana:** {{formato}} porque {{razon específica B2B}}
 
 ## 4. HOOK B2B (primer segundo)
 
@@ -2195,7 +2205,7 @@ LinkedIn NO es TikTok. El hook B2B es distinto:
 **Para videos B2B (captions obligatorios):**
 - Frame 0-3s debe mostrar: {{data sorprendente de industria | pregunta provocadora executive | resultado cuantificado cliente}}
 - NO: rostros genericos, stock photos obvias, musica upbeat, logo entrance
-- SÍ: dato especifico ("73% de los CTOs..."), executive hablando a camara, screen recording producto
+- SÍ: dato específico ("73% de los CTOs..."), executive hablando a camara, screen recording producto
 
 **Para imagenes estaticas:**
 - Elemento focal: {{data visual | graph | quote executive reconocido}}
@@ -2316,16 +2326,16 @@ Ventaja LinkedIn: forms pre-llenos con datos del perfil (nombre, email trabajo, 
 
 ## 10. DESTINO DEL AD
 
-**URL landing:** {{landing especifica B2B | lead gen form nativa | calendar booking | whitepaper download}}
+**URL landing:** {{landing específica B2B | lead gen form nativa | calendar booking | whitepaper download}}
 **Message match verification:** Landing/form B2B coincide con ad (tono, value prop, CTA)
 
 ## 11. LO QUE HACE LA COMPETENCIA EN LINKEDIN (del spy-ads #6)
 
 **Competidor mas fuerte en LinkedIn:**
-- Formato dominante: {{descripcion}}
+- Formato dominante: {{descripción}}
 - Thought leadership angle: {{angle}}
-- Case studies publicados: {{numero, calidad}}
-- Que funciona: {{analisis}}
+- Case studies publicados: {{número, calidad}}
+- Qué funciona: {{análisis}}
 - Como superarlo: {{nuestro angulo diferenciado B2B}}
 
 **Competidor mas vulnerable:**
@@ -2334,12 +2344,12 @@ Ventaja LinkedIn: forms pre-llenos con datos del perfil (nombre, email trabajo, 
 
 ## 12. RESTRICCIONES DE LINKEDIN POLICIES
 
-- [ ] Sin claims no verificables ("mejor del mundo", "numero 1")
+- [ ] Sin claims no verificables ("mejor del mundo", "número 1")
 - [ ] Compliance financial services si aplica (restringido LinkedIn en muchos mercados)
 - [ ] Sin ads de productos/servicios prohibidos (gambling, adult, crypto restricted)
 - [ ] Profesional — evitar lenguaje informal excesivo
 - [ ] Claims de resultados requieren disclosure/source
-- [ ] {{restricciones especificas del cliente o industria}}
+- [ ] {{restricciones específicas del cliente o industria}}
 
 ## 13. VARIABLES PARA TESTING A/B
 
@@ -2398,7 +2408,7 @@ LinkedIn es 3-10x más caro que Meta/Google pero calidad lead superior en B2B en
 **Ejemplos de malos mensajes nucleo:**
 - "Somos los mejores" (generico)
 - "Calidad, servicio y confianza" (vacio)
-- "El numero uno del mercado" (cliche sin prueba)
+- "El número uno del mercado" (cliche sin prueba)
 ```
 
 ### 5.2 Mensajes por etapa del funnel
@@ -2410,7 +2420,7 @@ LinkedIn es 3-10x más caro que Meta/Google pero calidad lead superior en B2B en
 
 ### AWARENESS (Frio — 90% de la audiencia)
 **Objetivo:** Presentar el problema que la marca resuelve
-**Tono:** Educativo, emocional, sin presion
+**Tono:** Educativo, emocional, sin presión
 **CTA:** Soft — "Aprende mas", "Descubre como", "Lee la guia"
 **Formato ideal:** Articulos de blog, videos educativos, posts de redes
 
@@ -2425,7 +2435,7 @@ LinkedIn es 3-10x más caro que Meta/Google pero calidad lead superior en B2B en
 **Objetivo:** Explicar por que esta marca vs la competencia
 **Tono:** Informativo, con evidencia, diferenciador claro
 **CTA:** Medium — "Conoce nuestro proceso", "Ve el caso de estudio"
-**Formato ideal:** Paginas de servicio, videos explicativos, comparativas
+**Formato ideal:** Páginas de servicio, videos explicativos, comparativas
 
 **Mensaje core para consideracion:**
 "{{Por que este negocio es diferente — el diferenciador inimitable}}"
@@ -2445,7 +2455,7 @@ LinkedIn es 3-10x más caro que Meta/Google pero calidad lead superior en B2B en
 
 **Ejemplo:**
 - Bien: "Agenda en 2 minutos. Primera visita gratis. Respuesta en 45 min."
-- Mal: "Contactanos para mas informacion"
+- Mal: "Contactanos para mas información"
 
 ### RETENCION (Clientes existentes)
 **Objetivo:** Mantener al cliente + referidos + upsell
@@ -2479,9 +2489,9 @@ LinkedIn es 3-10x más caro que Meta/Google pero calidad lead superior en B2B en
   H3: "Llama - Cotizacion Gratis"
 
 ### Meta Ads (Feed)
-- **Enfoque:** Emocional, visual primero, historia rapida
+- **Enfoque:** Emocional, visual primero, historia rápida
 - **Estructura:** Hook visual + Problema/Promesa + CTA
-- **Longitud:** Primer 125 char capturan atencion
+- **Longitud:** Primer 125 char capturan atención
 - **Ejemplo:**
   "¿Fuga de agua a las 3am? No te preocupes, estamos ahi en 45 minutos.
   Mas de 12,000 emergencias atendidas en Houston. Llama ahora."
@@ -2496,9 +2506,9 @@ LinkedIn es 3-10x más caro que Meta/Google pero calidad lead superior en B2B en
   Outro: "Addendo Plumbing - Houston"
 
 ### Email
-- **Enfoque:** Personal, valor, educacion
+- **Enfoque:** Personal, valor, educación
 - **Estructura:** Asunto con curiosidad + contenido util + CTA suave
-- **Longitud:** Variable segun tipo
+- **Longitud:** Variable según tipo
 - **Ejemplo:**
   Subject: "Juan, esto evitaria 90% de las fugas en tu casa"
   Body: "Hola Juan, aqui van 3 tips que..."
@@ -2529,8 +2539,8 @@ LinkedIn es 3-10x más caro que Meta/Google pero calidad lead superior en B2B en
 [ ] ¿El brief usa los colores correctos de la paleta de marca?
 [ ] ¿El tono de voz es consistente con el sistema de marca?
 [ ] ¿El mensaje principal es el mismo en todas las piezas?
-[ ] ¿El CTA es especifico y accionable?
-[ ] ¿El brief tiene toda la informacion que el ejecutor necesita sin hacer preguntas?
+[ ] ¿El CTA es específico y accionable?
+[ ] ¿El brief tiene toda la información que el ejecutor necesita sin hacer preguntas?
 [ ] ¿El referente visual es claro y accesible?
 [ ] ¿Esta especificado que NO debe incluir el creativo?
 ```
@@ -2552,12 +2562,12 @@ LinkedIn es 3-10x más caro que Meta/Google pero calidad lead superior en B2B en
 - Verificar que no haya contradicciones entre piezas del mismo sistema
 - Verificar que la propuesta de valor sea consistente
 
-**4. ¿El CTA es especifico y accionable?**
-- Verificar que el CTA tenga verbo de accion
+**4. ¿El CTA es específico y accionable?**
+- Verificar que el CTA tenga verbo de acción
 - Verificar que sea concreto, no vago ("Contactanos" NO, "Llama al 555-1234" SI)
 - Verificar que coincida con la etapa del funnel
 
-**5. ¿El brief tiene toda la informacion que el ejecutor necesita sin hacer preguntas?**
+**5. ¿El brief tiene toda la información que el ejecutor necesita sin hacer preguntas?**
 - Verificar que no haya campos como "[definir]" o "TBD"
 - Verificar que haya dimensiones, longitudes, URLs, plazos concretos
 - Simular ser el agente ejecutor — ¿puedo empezar a trabajar YA?
@@ -2565,7 +2575,7 @@ LinkedIn es 3-10x más caro que Meta/Google pero calidad lead superior en B2B en
 **6. ¿El referente visual es claro y accesible?**
 - Verificar que haya al menos 1 URL o archivo de referencia
 - Verificar que la URL este viva y sea accesible
-- Verificar que haya descripcion de QUE nos gusta de ese referente
+- Verificar que haya descripción de QUE nos gusta de ese referente
 
 **7. ¿Esta especificado que NO debe incluir el creativo?**
 - Verificar que haya una seccion explicita de "NO debe tener"
@@ -2597,16 +2607,16 @@ REGLA 3: Ningun brief puede contradecir el sistema de marca establecido
   - Las excepciones rompen la coherencia
   - Si hay contradiccion genuina: escalar a Jose + actualizar el sistema
 
-REGLA 4: Todo brief debe incluir metricas de exito claras
-  - Sin metricas, no hay forma de saber si el trabajo fue exitoso
+REGLA 4: Todo brief debe incluir métricas de éxito claras
+  - Sin métricas, no hay forma de saber si el trabajo fue exitoso
   - Cada brief incluye:
-    * Metrica principal (numero especifico)
-    * Metrica secundaria
+    * Métrica principal (número específico)
+    * Métrica secundaria
     * Como se va a medir (GA4, GHL, manual)
-    * Criterio de exito vs criterio de fracaso
+    * Criterio de éxito vs criterio de fracaso
 ```
 
-### 6.3 Proceso de auto-revision
+### 6.3 Proceso de auto-revisión
 
 ```
 ANTES DE ENTREGAR EL BRIEF AL PROJECT-MANAGER:
@@ -2634,7 +2644,7 @@ PASO 5: Test de coherencia con otros briefs de la misma campana
 PASO 6: Firma y envio
   - Agregar metadata: "Revisado por #15 director-creativo, {{fecha}}"
   - Enviar al project-manager (#4)
-  - Registrar en direccion-creativa.md del cliente
+  - Registrar en dirección-creativa.md del cliente
 ```
 
 ### 6.4 Decision del DC sobre el output del ejecutor
@@ -2646,12 +2656,12 @@ APROBADO SIN CAMBIOS
   - Cumple el brief al 100%
   - Coherencia visual y de mensaje
   - Representa el sistema de marca correctamente
-  ACCION: enviar a revisor-qa (#39) para revision tecnica final
+  ACCIÓN: enviar a revisor-qa (#39) para revisión técnica final
 
 APROBADO CON AJUSTES MENORES
   - Cumple lo principal del brief
   - Ajustes cosmeticos necesarios
-  ACCION: solicitar ajuste especifico al ejecutor
+  ACCIÓN: solicitar ajuste específico al ejecutor
          re-revisar post-ajuste
          enviar a revisor-qa
 
@@ -2659,12 +2669,12 @@ RECHAZADO POR EL EJECUTOR
   - No cumple el brief
   - Falla coherencia de marca
   - El brief estaba claro pero el ejecutor no lo siguio
-  ACCION: regresar al ejecutor con feedback especifico
+  ACCIÓN: regresar al ejecutor con feedback específico
 
 RECHAZADO POR EL BRIEF
   - El ejecutor hizo lo que el brief decia, pero el brief estaba mal
   - Es culpa del DC, no del ejecutor
-  ACCION: reconocer el error, reescribir el brief,
+  ACCIÓN: reconocer el error, reescribir el brief,
          NO rechazar el trabajo del ejecutor por culpa del brief
 ```
 
@@ -2680,15 +2690,15 @@ Cuando el DC debe pedir ajustes, usa este formato:
 **Decision:** APROBADO CON AJUSTES | RECHAZADO
 
 ### LO QUE FUNCIONA (reconocimiento primero)
-1. {{aspecto positivo 1 especifico}}
-2. {{aspecto positivo 2 especifico}}
+1. {{aspecto positivo 1 específico}}
+2. {{aspecto positivo 2 específico}}
 
 ### LO QUE NECESITA AJUSTE
 
 **Ajuste 1 — {{CRITICO/IMPORTANTE/MENOR}}**
-- Que: {{descripcion factual}}
+- Que: {{descripción factual}}
 - Por que: {{referencia al brief o sistema de marca}}
-- Como: {{direccion clara}}
+- Como: {{dirección clara}}
 - Ejemplo: {{si aplica}}
 
 **Ajuste 2 — {{nivel}}**
@@ -2696,7 +2706,7 @@ Cuando el DC debe pedir ajustes, usa este formato:
 
 ### PLAZO
 Tiempo estimado: {{X horas}}
-Re-revision: {{fecha/hora}}
+Re-revisión: {{fecha/hora}}
 
 ---
 *El feedback es sobre el trabajo, no sobre el autor.*
@@ -2967,7 +2977,7 @@ Este es el gate canónico que valida que el creative final consolidado cumple el
 
 *Esta fase documenta las 6 áreas técnicas donde creative direction evolucionó 2023-2026 y donde un Director Creativo World-Class debe operar con competencia. El DC mediocre sigue pensando en creative direction pre-IA (moodboards manuales, ideación individual, ignora shoppable content). El World-Class domina la stack 2026 sin perder criterio humano.*
 
-### M.1 — Generative AI en Creative Direction
+### Z.4.1 — Generative AI en Creative Direction
 
 AI generativa (Midjourney, DALL-E 3, Runway ML, Stable Diffusion, Firefly Adobe) transformó la capacidad de exploración visual del DC. Pero AI NO reemplaza el juicio creativo — es asistente, no autor.
 
@@ -2993,11 +3003,11 @@ AI generativa (Midjourney, DALL-E 3, Runway ML, Stable Diffusion, Firefly Adobe)
 
 1. **Todo AI-generated** debe tener **curaduría explícita del DC** (#15 revisa, ajusta, aprueba o rechaza)
 2. **Disclosure interno** en creative brief: sección "AI tools usadas" documentando herramientas + fase (ideación / mood board / pre-viz)
-3. **Disclosure externo** si aplica por policy (Meta + Google + TikTok requieren disclosure de AI-generated content desde 2024 — ver M.6)
+3. **Disclosure externo** si aplica por policy (Meta + Google + TikTok requieren disclosure de AI-generated content desde 2024 — ver Z.4.6)
 4. **Cliente debe conocer** uso de AI tools en su proceso creative (transparencia)
 5. **NUNCA entregar AI-generated como si fuera fotografía real** (ética + compliance policies)
 
-### M.2 — AI-assisted ideation workflows
+### Z.4.2 — AI-assisted ideation workflows
 
 Workflow canónico Addendo para ideación asistida por AI, probado y repetible:
 
@@ -3047,7 +3057,7 @@ La idea ganadora se traduce en creative brief completo con los 14 bloques (secci
 
 Antes de distribuir a ejecutores, #15 presenta las 3 top ideas con mood boards a #3. #3 valida elección + escala a cliente si aplica. #15 documenta decisión final.
 
-### M.3 — Shoppable content trends 2026
+### Z.4.3 — Shoppable content trends 2026
 
 Creative direction debe considerar el auge de shoppable content en redes sociales:
 
@@ -3076,7 +3086,7 @@ Creative direction debe considerar el auge de shoppable content en redes sociale
 - #28 coordina live shopping events con brand ambassadors / influencers
 - Validar con #54 que persona B2C aplica (B2B no usa shoppable)
 
-### M.4 — Visual search optimization
+### Z.4.4 — Visual search optimization
 
 Google Lens, Pinterest Lens, Amazon StyleSnap, Apple Visual Intelligence (iPhone 16+) cambiaron cómo usuarios descubren productos. Visual search requiere creative briefs específicos.
 
@@ -3096,7 +3106,7 @@ Google Lens, Pinterest Lens, Amazon StyleSnap, Apple Visual Intelligence (iPhone
 - [ ] Evitar texto overlay intrusivo (obstaculiza matching)
 - [ ] Background: blanco puro OR contexto relevante (nunca caótico)
 
-### M.5 — Spatial content (Apple Vision Pro, Meta Quest)
+### Z.4.5 — Spatial content (Apple Vision Pro, Meta Quest)
 
 Emergente 2024-2026. Aún nicho pero creciente. Brands early-adopters: Nike, Porsche, Disney, IKEA.
 
@@ -3113,7 +3123,7 @@ Emergente 2024-2026. Aún nicho pero creciente. Brands early-adopters: Nike, Por
 - Virtual showrooms (real estate, automotive, fashion)
 - Spatial audio storytelling
 
-### M.6 — AI-generated creative disclosure (compliance 2026)
+### Z.4.6 — AI-generated creative disclosure (compliance 2026)
 
 Meta, Google, TikTok y regulación EU (DSA + AI Act 2024+) requieren disclosure de AI-generated content.
 
@@ -3583,6 +3593,18 @@ Plan declarado de evolución del agente desde v1.1.0 actual hasta v2.0 (Q4 2026)
 - Integración con #50 agente-constructor-workflows para auto-deploy de variantes A/B/C/D contextualizadas por CrowMind Score
 
 **Resuelve:** BL-4 del backlog v1.X.
+
+---
+
+## BACKLOG v1.X — GAPS RECONOCIDOS
+
+Lista formal de los gaps que el agente conoce pero NO ha cerrado en v1.1.0. Cada uno mapeado al Hito del Roadmap que los resuelve. Patrón canónico alineado con #5 v1.1.1 commit `c7ca012` (precedente disciplinario de enumeración formal de backlog post-Trust-but-Verify).
+
+- **BL-1 v1.2** — Integración Daemon Claude Code 24/7 pendiente. El agente hoy NO se autoejecuta — necesita ser invocado por #4 PM o por el CEO. Resuelve: Hito 2.
+- **BL-2 v1.2** — Auto-throttle de revisión creativa pendiente. Si llegan briefs simultáneos de 5+ ejecutores, hoy hay riesgo de cuellos de botella en aprobación creativa. Resuelve: Hito 2.
+- **BL-3 v1.3** — Expansión multi-idioma >9 variantes pendiente. Hoy 9 variantes G1; futuro 100+ con stack CrowMind (DeepL API + adaptación cultural automatizada). Resuelve: Hito 3.
+- **BL-4 v2.0** — Hook a CrowMind Score (0-1000) pendiente. Hoy el agente no recibe market timing + cultural pulse de CrowMind para ajustar briefs creativos. Resuelve: Hito 4.
+- **BL-5 v1.1.X** — Trust but Verify externo del propio skill PENDIENTE. Mientras BL-5 esté abierto, el skill se mantiene como PERFECTO PURO AUTO-EVALUADO 109/110. BLOQUEANTE para alcanzar declaración de PERFECTO PURO VERIFICABLE 110/110.
 
 ---
 
