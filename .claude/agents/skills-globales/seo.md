@@ -24,7 +24,7 @@ agente_id: 27
 puntaje_declarado: "109/110 honesto"
 ola_nivelacion: "tercera (v1.0 commit 65e6c16) → reconstrucción grande v1.1.0 (29 abril 2026)"
 commit_nivelacion_anterior: "65e6c16"
-commit_nivelacion_actual: "[se completa al commit final]"
+commit_nivelacion_actual: "ca63db4"
 auditoria_objetiva: "pendiente — Trust but Verify externo requerido (BL-5)"
 ---
 
