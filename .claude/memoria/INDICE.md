@@ -131,7 +131,7 @@ Cada cambio en este repo = commit con mensaje descriptivo. Trazabilidad completa
 | Clientes con archivo | 8 (2 con datos, 6 templates) |
 | Verticales documentadas | 7 (1 con datos reales, 6 templates) |
 | Documentos de mercado | 5 (2 con contenido inicial, 3 templates) |
-| Ciclos de nivelación documentados | 2 (#27, #16) |
+| Ciclos de nivelación documentados | 3 (#27, #16, #6) |
 
 ---
 
