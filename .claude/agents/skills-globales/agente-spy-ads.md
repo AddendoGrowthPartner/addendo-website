@@ -7,7 +7,7 @@ puntaje_auto_evaluado: "104/110 honesto verificable post-TbV externo (audit inde
 ola_nivelacion: "segunda"
 commit_nivelacion_v1: "f8e321a"
 fecha_nivelacion_v1: "2026-04-18"
-commit_nivelacion_actual: "0cfaf73 (reconstrucción Paso 3) + [hash_addendum_pendiente] (addendum quirúrgico Paso 4)"
+commit_nivelacion_actual: "0cfaf73 (reconstrucción Paso 3) + c18792e (addendum quirúrgico Paso 4)"
 fecha_nivelacion_actual: "2026-04-29"
 ultima_actualizacion: "2026-04-29"
 auditoria_objetiva: "ejecutada — Trust but Verify externo Paso 4 (instancia independiente Claude Code Mac, 29 abril 2026): Opción B con 6 hallazgos (H1 sync frontmatter MAYOR, H2 backfill commit MAYOR, H3 consolidación INFORMATIVO sin acción, H4 granularidad procedural MENOR sin acción, H5 update rutinario, H6 promoción estado rutinario) — score honesto 104/110 declarado"
