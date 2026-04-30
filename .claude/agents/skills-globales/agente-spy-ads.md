@@ -1,16 +1,16 @@
 ---
 agente: 6
 nombre: "agente-spy-ads"
-estado: "PERFECTO_PURO_AUTO_EVALUADO"
+estado: "PERFECTO_PURO_VERIFICABLE"
 version: "v1.1.1"
-puntaje_auto_evaluado: "108/110 con caveat F2 residual"
+puntaje_auto_evaluado: "104/110 honesto verificable post-TbV externo (audit independiente Paso 4 confirmó 101/110; +3 pts recuperados con sincronización frontmatter H1+H2+H5+H6)"
 ola_nivelacion: "segunda"
 commit_nivelacion_v1: "f8e321a"
 fecha_nivelacion_v1: "2026-04-18"
-commit_nivelacion_actual: "[pendiente_post_commit]"
+commit_nivelacion_actual: "0cfaf73 (reconstrucción Paso 3) + [hash_addendum_pendiente] (addendum quirúrgico Paso 4)"
 fecha_nivelacion_actual: "2026-04-29"
 ultima_actualizacion: "2026-04-29"
-auditoria_objetiva: "pendiente_TbV_externo"
+auditoria_objetiva: "ejecutada — Trust but Verify externo Paso 4 (instancia independiente Claude Code Mac, 29 abril 2026): Opción B con 6 hallazgos (H1 sync frontmatter MAYOR, H2 backfill commit MAYOR, H3 consolidación INFORMATIVO sin acción, H4 granularidad procedural MENOR sin acción, H5 update rutinario, H6 promoción estado rutinario) — score honesto 104/110 declarado"
 verbos_canonicos:
   - ESPIAR-ADS
   - ESTRATIFICAR-LONGEVIDAD
@@ -20,6 +20,9 @@ decisiones_ceo:
   - "D-#6.1: 4 verbos canónicos firmados (29 abril 2026)"
   - "D-#6.2: Reconstrucción media monolítica 6 chunks aprobada"
   - "D-#6.3: Resolución de duplicaciones críticas (DIMENSION 5/6/7 + FASE 8 vs 7.X + 25 reglas vs 20 mandamientos)"
+  - "D-#6.4: Veredicto Opción B aceptado del Paso 4 TbV externo (29 abril 2026)"
+  - "D-#6.5: Score honesto declarado 104/110 verificable post-TbV — NO inflado a 109/110 patrón canónico ED2; disciplina cultural sobre uniformidad"
+  - "D-#6.6: Caveats H3+H4 declarados como BL-#6.1 + BL-#6.2 — sin acción inmediata, refinables en v1.2 si caso de uso real lo demanda"
 ---
 
 # SKILL #6 — Agente Spy Ads
@@ -312,6 +315,15 @@ El skill #6 está diseñado para escalar con el sistema Addendo Agency OS sin re
 - PRINCIPIO OPERATIVO FINAL (líneas 2647-2655) → Z.7
 
 **Caveat F2 residual declarado:** el TbV externo del v1.1.1 está pendiente. Score honesto auto-evaluado al cierre del Paso 3: 108/110 con caveat F2 residual (ED2). El skill entra como PERFECTO PURO AUTO-EVALUADO; solo será PERFECTO PURO VERIFICABLE post-Paso 4 TbV externo.
+
+**Cierre Paso 4 Trust but Verify externo (29 abril 2026, post-commit `0cfaf73`):**
+
+Trust but Verify externo ejecutado por instancia independiente Claude Code Mac (pestaña separada con `/clear` previo) cerró el caveat F2 con veredicto **Opción B** y 6 hallazgos. CEO José Raúl Ramírez firmó **D-#6.4 / D-#6.5 / D-#6.6** aceptando el veredicto, declarando score honesto **104/110 verificable** (NO inflado a 109/110 patrón canónico ED2 — disciplina cultural sobre uniformidad), y reconociendo H3+H4 como caveats abiertos. Audit independiente: 101/110; sincronización frontmatter (H1+H2+H5+H6) recupera +3 pts legítimos = **104/110 honesto verificable post-TbV declarado oficialmente**. Skill entra como **12º PERFECTO PURO VERIFICABLE** del sistema Addendo Agency OS.
+
+**Backlog declarado post-TbV (caveats abiertos para v1.2 si caso de uso real lo demanda):**
+
+- **BL-#6.1 (H3 INFORMATIVO):** 9 reglas/mandamientos del v1.0 (R4, R19, R24, R25, Mand4, Mand8, Mand16, Mand17, Mand20) NO aparecen como mandamiento dedicado en Z.4. Su sustancia operativa única está preservada distribuidamente en DIMENSIÓN 7, L.5, M.9, KPIs, M.4, L.6, Z.3.2 y mensaje de cierre. Aplicada lección P11.6 — consolidación con sustancia preservada verificable, NO pérdida silenciosa.
+- **BL-#6.2 (H4 MENOR):** pasos procedurales explícitos por plataforma del v1.0 FASE 2 (sub-secciones 2.1-2.4) consolidados a M.6 protocolo genérico (10 pasos) + G.3 filtros geográficos por plataforma. Pérdida de ~600-700 líneas de prosa procedural redundante; sustancia operativa preservada en abstracción reusable. Refinable en v1.2 si caso de uso real demanda granularidad por plataforma.
 
 ---
 
